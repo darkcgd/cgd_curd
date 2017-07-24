@@ -23,7 +23,9 @@
 	src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-<button type="button" class="btn btn-primary" id="btn_test">测试</button>
+
+<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+<!-- <button type="button" class="btn btn-primary" id="btn_test">测试</button> -->
 
 <!-- 员工修改的模态框 -->
 <div class="modal fade" id="empUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
