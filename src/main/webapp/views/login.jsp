@@ -53,7 +53,7 @@
 	</div>
 	<script type="text/javascript">
 	$("#btn_login").click(function(){
-		   window.location.href = "views/list.jsp";
+		   window.location.href = "views/main.jsp";
 		   window.event.returnValue=false;  
 	});
 	
