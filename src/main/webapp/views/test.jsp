@@ -69,14 +69,15 @@
 	        //ajax提交  
 	        $("#ajaxBtn").click(function() {  
 	            var params = $("#myform").serialize();  
-	            $.ajax( {  
+	            alert("successparams: " + params);  
+	            /* $.ajax( {  
 	                type : "POST",  
 	                url : "RegisterAction.action",  
 	                data : params,  
 	                success : function(msg) {  
 	                    alert("success: " + msg);  
 	                }  
-	            });  
+	            });   */
 	        })  
 	  
 	        //jQuery提交  
