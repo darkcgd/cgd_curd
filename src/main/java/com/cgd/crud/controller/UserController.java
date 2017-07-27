@@ -34,7 +34,7 @@ public class UserController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value="/regist",method=RequestMethod.POST)
+	@RequestMapping(value="/regist",method=RequestMethod.GET)
 	@ResponseBody
 	public Msg saveUser(@Valid User user,BindingResult result){
 		if(result.hasErrors()){
@@ -49,7 +49,8 @@ public class UserController {
 			return Msg.fail().add("errorFields", map);
 		}else{
 			userService.saveUser(user);
-			return Msg.success();
+			Msg success = Msg.success();
+			return success;
 		}
 		
 	}
