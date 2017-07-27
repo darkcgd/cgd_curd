@@ -32,17 +32,18 @@
 					id="formUserRegistOrLogin" onsubmit="return sumbit();">
 					<span class="heading">用户注册</span>
 					<div class="form-group">
+					<!-- placeholder="用户名(2-5位中文或者6-16位英文和数字的组合)" placeholder="密码"   placeholder="确认密码"-->
 						<input type="text" class="form-control" id="inputName" name="name"
-							placeholder="用户名(2-5位中文或者6-16位英文和数字的组合)"> <span
+							 value="dark_cgd"> <span
 							class="help-block"></span>
 					</div>
 					<div class="form-group help">
 						<input type="password" class="form-control" id="inputPassword"
-							name="pwd" placeholder="密码"> <span class="help-block"></span>
+							name="pwd" value="123456"> <span class="help-block"></span>
 					</div>
 					<div id="div_confirm_pwd" class="form-group help">
 						<input type="password" class="form-control" name="confirmpwd"
-							id="inputConfirmPassword" placeholder="确认密码"> <span
+							id="inputConfirmPassword"   value="123456"> <span
 							class="help-block"></span>
 					</div>
 					<div class="form-group">
@@ -109,14 +110,17 @@
         var params = $("#formUserRegistOrLogin").serialize();
         //alert(params);
       //2、发送ajax请求保存员工
-		$.ajax({
+		/*$.ajax({
 			url:"${APP_PATH}/regist",
 			type:"POST",
 			data:params,
 			success:function(result){
 				alert(result);
 			}
-		});
+		});*/
+		
+		window.location.href="imageTest.jsp";
+		window.event.returnValue=false;
         
        
     })  
