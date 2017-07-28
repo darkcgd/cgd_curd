@@ -1,5 +1,6 @@
 package com.cgd.crud.test;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.apache.ibatis.session.SqlSession;
@@ -9,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.cgd.crud.bean.Department;
 import com.cgd.crud.bean.Employee;
+import com.cgd.crud.bean.User;
+import com.cgd.crud.bean.UserExample;
 import com.cgd.crud.dao.DepartmentMapper;
 import com.cgd.crud.dao.EmployeeMapper;
+import com.cgd.crud.dao.UserMapper;
 
 /**
  * 测试dao层的工作
@@ -32,6 +35,9 @@ public class MapperTest {
 	
 	@Autowired
 	EmployeeMapper employeeMapper;
+
+	@Autowired
+	UserMapper userMapper;
 	
 	@Autowired
 	SqlSession sqlSession;
@@ -67,5 +73,22 @@ public class MapperTest {
 		System.out.println("批量完成");
 		
 	}
+	
+	//自定义条件来查询  
+    @Test  
+    public void testSelectByExample() {  
+        UserExample userExample=new UserExample();  
+        //通过Criteria构造查询条件  
+        UserExample.Criteria criteria=userExample.createCriteria();  
+        criteria.andNameEqualTo("dark_cgd_1").andPwdEqualTo("123456");  
+        //可能返回多条记录  
+        List<User> list=userMapper.selectByExample(userExample);  
+        for (int i = 0; i < list.size(); i++) {  
+        	User it=list.get(i);  
+            System.out.println(it.getId()+":"+it.getName());  
+        }  
+        System.out.println("查询结束");
+    }  
+
 
 }

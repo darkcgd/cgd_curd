@@ -16,12 +16,19 @@ public class Msg {
 	private String msg;
 	
 	//用户要返回给浏览器的数据
-	private Map<String, Object> extend = new HashMap<String, Object>();
+	private Map<String, Object> data = new HashMap<String, Object>();
 
 	public static Msg success(){
 		Msg result = new Msg();
 		result.setCode(100);
 		result.setMsg("处理成功！");
+		return result;
+	}
+
+	public static Msg success(String successMsg){
+		Msg result = new Msg();
+		result.setCode(100);
+		result.setMsg(successMsg);
 		return result;
 	}
 	
@@ -31,9 +38,16 @@ public class Msg {
 		result.setMsg("处理失败！");
 		return result;
 	}
+
+	public static Msg fail(String errorMsg){
+		Msg result = new Msg();
+		result.setCode(200);
+		result.setMsg(errorMsg);
+		return result;
+	}
 	
 	public Msg add(String key,Object value){
-		this.getExtend().put(key, value);
+		this.getData().put(key, value);
 		return this;
 	}
 	
@@ -53,13 +67,15 @@ public class Msg {
 		this.msg = msg;
 	}
 
-	public Map<String, Object> getExtend() {
-		return extend;
+	public Map<String, Object> getData() {
+		return data;
 	}
 
-	public void setExtend(Map<String, Object> extend) {
-		this.extend = extend;
+	public void setData(Map<String, Object> data) {
+		this.data = data;
 	}
+
+	
 	
 	
 }

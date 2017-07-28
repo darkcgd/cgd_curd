@@ -51,10 +51,12 @@
 							<input type="checkbox" value="None" id="checkbox1" name="check" />
 							<label for="checkbox1"></label>
 						</div>
-						<span class="text">Remember me</span>
+						<span class="text">记住我</span>
 						<button id="btn_login" type="submit" class="btn btn-primary">注册</button>
 					</div>
+					<span id="span_status" class="help-block"></span>
 				</form>
+					
 			</div>
 		</div>
 	</div>
@@ -74,62 +76,101 @@
 	
 	 //ajax提交  
     $("#btn_login").click(function() {  
-    	 $("#btn_login").blur(); //去除焦点 
-    	//1、拿到要校验的数据，使用正则表达式
-		var empName = $("#inputName").val();
-		var regName = /(^[a-zA-Z0-9_-]{6,16}$)|(^[\u2E80-\u9FFF]{2,5})/;
-		if(!regName.test(empName)){
-			//alert("用户名可以是2-5位中文或者6-16位英文和数字的组合");
-			show_validate_msg("#inputName", "error", "用户名需要是2-5位中文或者6-16位英文和数字的组合!");
-			return false;
-		}else{
-			show_validate_msg("#inputName", "success", "");
-		};
-		
-		//2.校验密码是否为空 是否一致
-		var inputPassword = $("#inputPassword").val();
-		var inputConfirmPassword = $("#inputConfirmPassword").val();
-		 if(inputPassword==null || inputPassword==""){  
-			 show_validate_msg("#inputPassword","error", "密码不能为空!");
-			 return false;
-		 }else{
-				show_validate_msg("#inputPassword", "success", "");
-			};
-		 if(inputConfirmPassword==null || inputConfirmPassword==""){  
-			 show_validate_msg("#inputConfirmPassword","error", "确认密码不能为空!");
-			 return false;
-		 }else{
-				show_validate_msg("#inputConfirmPassword", "success", "");
-			};
-			 if(inputPassword!=inputConfirmPassword){  
-				 show_validate_msg("#inputConfirmPassword","error", "两次密码不一致!");
-				 return false;
-			 }else{
-					show_validate_msg("#inputConfirmPassword", "success", "");
-				};
-        var params = $("#formUserRegistOrLogin").serialize();
-        //alert(params);
-      //2、发送ajax请求保存员工
-		$.ajax({
-			url:"${APP_PATH}/regist",
-			type:"GET",
-			data:params,
-			success:function(result){
-				alert(result);
-			}
-		});
-		
-		/* window.location.href="views/imageTest.jsp";
-		window.event.returnValue=false; */
-        
-       
+    	doRegist();
     })  
+    
+    
+    function doRegist() {
+			 $("#btn_login").blur(); //去除焦点 
+		    	//1、拿到要校验的数据，使用正则表达式
+				var empName = $("#inputName").val();
+				var regName = /(^[a-zA-Z0-9_-]{6,16}$)|(^[\u2E80-\u9FFF]{2,5})/;
+				if(!regName.test(empName)){
+					//alert("用户名可以是2-5位中文或者6-16位英文和数字的组合");
+					show_validate_msg("#inputName", "error", "用户名需要是2-5位中文或者6-16位英文和数字的组合!");
+					return false;
+				}else{
+					show_validate_msg("#inputName", "success", "");
+				};
+				
+				//2.校验密码是否为空 是否一致
+				var inputPassword = $("#inputPassword").val();
+				var inputConfirmPassword = $("#inputConfirmPassword").val();
+				 if(inputPassword==null || inputPassword==""){  
+					 show_validate_msg("#inputPassword","error", "密码不能为空!");
+					 return false;
+				 }else{
+						show_validate_msg("#inputPassword", "success", "");
+					};
+				 if(inputConfirmPassword==null || inputConfirmPassword==""){  
+					 show_validate_msg("#inputConfirmPassword","error", "确认密码不能为空!");
+					 return false;
+				 }else{
+						show_validate_msg("#inputConfirmPassword", "success", "");
+					};
+					 if(inputPassword!=inputConfirmPassword){  
+						 show_validate_msg("#inputConfirmPassword","error", "两次密码不一致!");
+						 return false;
+					 }else{
+							show_validate_msg("#inputConfirmPassword", "success", "");
+						};
+		        var params = $("#formUserRegistOrLogin").serialize();
+		        
+		        /**
+		        {
+    "code": 100,
+    "msg": "注册成功",
+    "data": {
+        "user_sex": null,
+        "user_email": null,
+        "user_id": 20,
+        "user_name": "dark_cgd",
+        "user_phone": null,
+        "user_token": null
+    }
+}
+		        */
+		        
+		      //2、发送ajax请求保存员工
+				$.ajax({
+					url:"${APP_PATH}/regist",
+					type:"GET",
+					data:params,
+					success:function(result){
+						var code=result.code;
+						if(code!=100){
+							$("#span_status").addClass("has-error");
+							$("#span_status").text(result.msg);
+						}else{
+							$("#span_status").addClass("has-success");
+							$("#span_status").text(result.msg);
+							request.getSession().setAttribute("userId", data.user_id);  
+							request.getSession().setAttribute("userName", data.user_name);  
+							//window.location.href="views/main.jsp";
+						}
+						/*
+						var msg=result.msg;
+						var data=result.data;
+						var userId=data.user_id;
+						var userName=data.user_name;
+						console.log("code:"+code+"\t"+"msg:"+msg+"\t"+"userId:"+userId+"\t"+"userName:"+userName+"\t");
+						*/
+					}
+				});
+		      
+				window.event.returnValue=false;
+		      
+				/* window.location.href="views/imageTest.jsp";
+				window.event.returnValue=false; */
+	}
     
     //显示校验结果的提示信息
 		function show_validate_msg(ele,status,msg){
 			//清除当前元素的校验状态
 			$(ele).parent().removeClass("has-success has-error");
 			$(ele).next("span").text("");
+			$("#span_status").removeClass("has-success has-error");
+			$("#span_status").text("");
 			if("success"==status){
 				$(ele).parent().addClass("has-success");
 				$(ele).next("span").text(msg);
