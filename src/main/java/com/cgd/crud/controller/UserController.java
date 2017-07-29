@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cgd.crud.bean.Employee;
@@ -27,7 +28,7 @@ public class UserController {
 	UserService userService;
 	
 	/**
-	 * 用户保存
+	 * 用户保存(注册)
 	 * 1、支持JSR303校验
 	 * 2、导入Hibernate-Validator
 	 * 
@@ -49,9 +50,59 @@ public class UserController {
 			return Msg.fail().add("errorFields", map);
 		}else{
 			userService.saveUser(user);
-			Msg success = Msg.success();
-			return success;
+			User userByName = userService.getUserByName(user.getName());
+			if(userByName!=null){
+					Msg msg = Msg.success("注册成功");
+					Map<String, Object> data = msg.getData();
+					data.put("user_id", userByName.getId());
+					data.put("user_name", userByName.getName());
+					data.put("user_token", userByName.getToken());
+					data.put("user_phone", userByName.getPhone());
+					data.put("user_sex", userByName.getSex());
+					data.put("user_email", userByName.getEmail());
+					return msg;
+			}else{
+				return Msg.fail("注册失败");
+			}
+		}
+	}
+	
+	/**
+	 * 用户登录(账号密码)
+	 * @param empName
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/login")
+	public Msg getUserByName(@RequestParam("name")String name,@RequestParam("pwd")String pwd){
+		//先判断用户名是否是合法的表达式;
+		String regx = "(^[a-zA-Z0-9_-]{6,16}$)|(^[\u2E80-\u9FFF]{2,5})";
+		if(!name.matches(regx)){
+			return Msg.fail().add("va_msg", "用户名必须是6-16位数字和字母的组合或者2-5位中文");
 		}
 		
+		//数据库用户名重复校验
+		User userByName = userService.getUserByName(name);
+		if(userByName!=null){
+			if(userByName.getPwd()!=null&&userByName.getPwd().equals(pwd)){
+				Msg msg = Msg.success("登录成功");
+				Map<String, Object> data = msg.getData();
+				data.put("user_id", userByName.getId());
+				data.put("user_name", userByName.getName());
+				data.put("user_token", userByName.getToken());
+				data.put("user_phone", userByName.getPhone());
+				data.put("user_sex", userByName.getSex());
+				data.put("user_email", userByName.getEmail());
+				return msg;
+			}else{
+				return Msg.fail("密码错误");
+			}
+		}else{
+			return Msg.fail("用户不存在");
+		}
 	}
+	
+	
+	
+	
 }
