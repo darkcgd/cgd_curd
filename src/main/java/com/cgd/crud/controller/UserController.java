@@ -60,6 +60,7 @@ public class UserController {
 					data.put("user_phone", userByName.getPhone());
 					data.put("user_sex", userByName.getSex());
 					data.put("user_email", userByName.getEmail());
+					System.out.println(userByName.getName()+"注册成功!");
 					return msg;
 			}else{
 				return Msg.fail("注册失败");

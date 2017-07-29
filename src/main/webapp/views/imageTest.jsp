@@ -14,8 +14,8 @@
 以/开始的相对路径，找资源，以服务器的路径为标准(http://localhost:3306)；需要加上项目名
 		http://localhost:3306/crud
  -->
-<script type="text/javascript"
-	src="${APP_PATH }/static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="${APP_PATH }/static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="${APP_PATH }/static/js/jquerysession.js"></script>
 <link
 	href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -149,7 +149,11 @@
 
 	</div>
 	<script type="text/javascript">
-		
+	  var userid = "<%=request.getParameter("userid")%>";  
+	  var username = "<%=request.getParameter("username")%>";  
+	  var useridSession = $.session.get('userId');
+	  var usernameSession = $.session.get('userName');
+	  alert(userid+":"+username+":"+useridSession+":"+usernameSession);
 	</script>
 
 </body>

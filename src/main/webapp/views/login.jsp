@@ -14,8 +14,8 @@
 以/开始的相对路径，找资源，以服务器的路径为标准(http://localhost:3306)；需要加上项目名
 		http://localhost:3306/crud
  -->
-<script type="text/javascript"
-	src="${APP_PATH }/static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="${APP_PATH }/static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="${APP_PATH }/static/js/jquerysession.js"></script>
 <link
 	href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -32,10 +32,9 @@
 					id="formUserRegistOrLogin" onsubmit="return sumbit();">
 					<span class="heading">用户注册</span>
 					<div class="form-group">
-					<!-- placeholder="用户名(2-5位中文或者6-16位英文和数字的组合)" placeholder="密码"   placeholder="确认密码"-->
+						<!-- placeholder="用户名(2-5位中文或者6-16位英文和数字的组合)" placeholder="密码"   placeholder="确认密码"-->
 						<input type="text" class="form-control" id="inputName" name="name"
-							 value="dark_cgd"> <span
-							class="help-block"></span>
+							value="dark_cgd"> <span class="help-block"></span>
 					</div>
 					<div class="form-group help">
 						<input type="password" class="form-control" id="inputPassword"
@@ -43,7 +42,7 @@
 					</div>
 					<div id="div_confirm_pwd" class="form-group help">
 						<input type="password" class="form-control" name="confirmpwd"
-							id="inputConfirmPassword"   value="123456"> <span
+							id="inputConfirmPassword" value="123456"> <span
 							class="help-block"></span>
 					</div>
 					<div class="form-group">
@@ -56,7 +55,7 @@
 					</div>
 					<span id="span_status" class="help-block"></span>
 				</form>
-					
+
 			</div>
 		</div>
 	</div>
@@ -144,15 +143,37 @@
 						}else{
 							$("#span_status").addClass("has-success");
 							$("#span_status").text(result.msg);
-							request.getSession().setAttribute("userId", data.user_id);  
-							request.getSession().setAttribute("userName", data.user_name);  
-							//window.location.href="views/main.jsp";
+							var msg=result.msg;
+							var data=result.data;
+							var userId=data.user_id;
+							var userName=data.user_name;
+							
+							/**
+							添加数据
+    $.session.set('key', 'value')
+
+删除数据
+    $.session.remove('key');
+
+获取数据
+    $.session.get('key');
+
+清除数据
+    $.session.clear();
+							*/
+							
+							//request.getSession().setAttribute("userId", data.user_id);  
+							//request.getSession().setAttribute("userName", data.user_name);  
+							
+							$.session.set('userId', data.user_id)
+							$.session.set('userName', data.user_name)
+							
+							 //window.location.href="views/imageTest.jsp?userid="+data.user_id+"&username="+data.user_name;
+							 window.location.href="views/imageTest.jsp";
+							//window.event.returnValue=false; 
+							
 						}
 						/*
-						var msg=result.msg;
-						var data=result.data;
-						var userId=data.user_id;
-						var userName=data.user_name;
 						console.log("code:"+code+"\t"+"msg:"+msg+"\t"+"userId:"+userId+"\t"+"userName:"+userName+"\t");
 						*/
 					}
@@ -160,8 +181,7 @@
 		      
 				window.event.returnValue=false;
 		      
-				/* window.location.href="views/imageTest.jsp";
-				window.event.returnValue=false; */
+				
 	}
     
     //显示校验结果的提示信息
