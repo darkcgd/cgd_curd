@@ -153,7 +153,7 @@
 	  var username = "<%=request.getParameter("username")%>";  
 	  var useridSession = $.session.get('userId');
 	  var usernameSession = $.session.get('userName');
-	  alert(userid+":"+username+":"+useridSession+":"+usernameSession);
+	  //alert(userid+":"+username+":"+useridSession+":"+usernameSession);
 	</script>
 
 </body>
