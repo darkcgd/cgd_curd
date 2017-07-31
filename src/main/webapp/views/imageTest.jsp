@@ -14,8 +14,10 @@
 以/开始的相对路径，找资源，以服务器的路径为标准(http://localhost:3306)；需要加上项目名
 		http://localhost:3306/crud
  -->
-<script type="text/javascript" src="${APP_PATH }/static/js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="${APP_PATH }/static/js/jquerysession.js"></script>
+<script type="text/javascript"
+	src="${APP_PATH }/static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript"
+	src="${APP_PATH }/static/js/jquerysession.js"></script>
 <link
 	href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -25,7 +27,82 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-default navbar-fixed-top">
+
+
+	<div class="container">
+		<div id="myCarousel" class="carousel slide pad_010 b_k"
+			data-ride="carousel">
+			<!-- 轮播（Carousel）指标 -->
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+			</ol>
+			<!-- 轮播（Carousel）项目 -->
+			<div class="carousel-inner bor_btm">
+				<div class="item active">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-1">周日</div>
+							<div class="col-md-1">周一</div>
+							<div class="col-md-1">周二</div>
+							<div class="col-md-1">周三</div>
+							<div class="col-md-1">周四</div>
+							<div class="col-md-1">周五</div>
+							<div class="col-md-1">周六</div>
+							<div class="col-md-1">周日</div>
+							<div class="col-md-1">周一</div>
+							<div class="col-md-1">周二</div>
+							<div class="col-md-1">周三</div>
+							<div class="col-md-1">周四</div>
+						</div>
+					</div>
+				</div>
+				<div class="item">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-1">周日</div>
+							<div class="col-md-1">周一</div>
+							<div class="col-md-1">周二</div>
+							<div class="col-md-1">周三</div>
+							<div class="col-md-1">周四</div>
+							<div class="col-md-1">周五</div>
+							<div class="col-md-1">周六</div>
+							<div class="col-md-1">周日</div>
+							<div class="col-md-1">周一</div>
+							<div class="col-md-1">周二</div>
+							<div class="col-md-1">周三</div>
+							<div class="col-md-1">周四</div>
+						</div>
+					</div>
+				</div>
+				<div class="item">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-1">周日</div>
+							<div class="col-md-1">周一</div>
+							<div class="col-md-1">周二</div>
+							<div class="col-md-1">周三</div>
+							<div class="col-md-1">周四</div>
+							<div class="col-md-1">周五</div>
+							<div class="col-md-1">周六</div>
+							<div class="col-md-1">周日</div>
+							<div class="col-md-1">周一</div>
+							<div class="col-md-1">周二</div>
+							<div class="col-md-1">周三</div>
+							<div class="col-md-1">周四</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 轮播（Carousel）导航 -->
+			<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+			<a class="carousel-control right" href="#myCarousel"
+				data-slide="next">&rsaquo;</a>
+		</div>
+	</div>
+
+	<!-- <nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
 		<button type="button" class="btn btn-default btn-lg">
 			<span class="glyphicon glyphicon-star" aria-hidden="true"></span> 收藏
@@ -37,7 +114,7 @@
 			<span class="glyphicon glyphicon-home" aria-hidden="true"></span> 首页
 		</button>
 	</div>
-	</nav>
+	</nav> -->
 
 	<div class="container" style="margin-top: 80px">
 		<div class="row">
@@ -147,14 +224,21 @@
 			</div>
 		</div>
 
+
+
+
+
 	</div>
 	<script type="text/javascript">
 	  var userid = "<%=request.getParameter("userid")%>";  
-	  var username = "<%=request.getParameter("username")%>";  
-	  var useridSession = $.session.get('userId');
-	  var usernameSession = $.session.get('userName');
-	  //alert(userid+":"+username+":"+useridSession+":"+usernameSession);
-	</script>
+	  var username = "<%=request.getParameter("username")%>";
+		var useridSession = $.session.get('userId');
+		var usernameSession = $.session.get('userName');
+		//alert(userid+":"+username+":"+useridSession+":"+usernameSession);
 
+		$(document).ready(function() {
+			$('#myCarousel').carousel();
+		});
+	</script>
 </body>
 </html>
