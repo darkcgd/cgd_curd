@@ -10,13 +10,33 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-07-23 23:52:07
+Date: 2017-07-30 21:09:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for tbl_dept
+-- Table structure for `qianggoubiao`
+-- ----------------------------
+DROP TABLE IF EXISTS `qianggoubiao`;
+CREATE TABLE `qianggoubiao` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `logo` varchar(255) DEFAULT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  `directe_url` varchar(255) DEFAULT NULL,
+  `is_invalid` char(255) DEFAULT NULL,
+  `create_user` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qianggoubiao
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tbl_dept`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_dept`;
 CREATE TABLE `tbl_dept` (
@@ -32,7 +52,7 @@ INSERT INTO `tbl_dept` VALUES ('1', '开发部');
 INSERT INTO `tbl_dept` VALUES ('2', '测试部');
 
 -- ----------------------------
--- Table structure for tbl_emp
+-- Table structure for `tbl_emp`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_emp`;
 CREATE TABLE `tbl_emp` (
@@ -43,7 +63,7 @@ CREATE TABLE `tbl_emp` (
   `d_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`emp_id`),
   KEY `fk_emp_dept` (`d_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1002 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=1004 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_emp
@@ -1049,3 +1069,42 @@ INSERT INTO `tbl_emp` VALUES ('998', 'df266996', 'M', 'df266996@cgd.com', '1');
 INSERT INTO `tbl_emp` VALUES ('999', '20ddb997', 'M', '20ddb997@cgd.com', '1');
 INSERT INTO `tbl_emp` VALUES ('1000', '51c17998', 'M', '51c17998@cgd.com', '1');
 INSERT INTO `tbl_emp` VALUES ('1001', '885a8999', 'M', '885a8999@cgd.com', '1');
+INSERT INTO `tbl_emp` VALUES ('1002', 'dark_cgd123', 'M', 'cgd@qq.com', '2');
+INSERT INTO `tbl_emp` VALUES ('1003', '123cgd', 'F', 'cgd@qq.com', '2');
+
+-- ----------------------------
+-- Table structure for `user`
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  `sex` char(1) DEFAULT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `pwd` varchar(255) DEFAULT NULL,
+  `token` varchar(255) DEFAULT NULL,
+  `token_create_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `user` VALUES ('29', 'dark_cgd', null, null, null, null, null, null, '123456', null, null);
+INSERT INTO `user` VALUES ('30', 'dark_cgd', null, null, null, null, null, null, '123456', null, null);
+INSERT INTO `user` VALUES ('31', 'dark_cgd', null, null, null, null, null, null, '123456', null, null);
+INSERT INTO `user` VALUES ('32', 'dark_cgd', null, null, null, null, null, null, '123456', null, null);
+INSERT INTO `user` VALUES ('33', 'dark_cgd', null, null, null, null, null, null, '123456', null, null);
+INSERT INTO `user` VALUES ('34', 'dark_cgd', null, null, null, null, null, null, '123456', null, null);
+INSERT INTO `user` VALUES ('35', 'dark_cgd', null, null, null, null, null, null, '123456', null, null);
+INSERT INTO `user` VALUES ('36', 'dark_cgd', null, null, null, null, null, null, '123456', null, null);
+INSERT INTO `user` VALUES ('37', 'dark_cgd', null, null, null, null, null, null, '123456', null, null);
+INSERT INTO `user` VALUES ('38', 'dark_cgd', null, null, null, null, null, null, '123456', null, null);
+INSERT INTO `user` VALUES ('39', 'dark_cgd', null, null, null, null, null, null, '123456', null, null);
+INSERT INTO `user` VALUES ('40', 'dark_cgd', null, null, null, null, null, null, '123456', null, null);
+INSERT INTO `user` VALUES ('41', 'dark_cgd', null, null, null, null, null, null, '123456', null, null);
+INSERT INTO `user` VALUES ('42', 'dark_cgd', null, null, null, null, null, null, '123456', null, null);
