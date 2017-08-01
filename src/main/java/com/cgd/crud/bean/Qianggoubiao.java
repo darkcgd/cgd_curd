@@ -2,11 +2,14 @@ package com.cgd.crud.bean;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Qianggoubiao {
     private Integer id;
 
     private String name;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")  
     private Date createTime;
 
     private String logo;
