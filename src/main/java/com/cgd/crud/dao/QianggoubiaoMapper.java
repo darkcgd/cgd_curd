@@ -10,7 +10,7 @@ public interface QianggoubiaoMapper {
 
     int deleteByExample(QianggoubiaoExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer qianggouId);
 
     int insert(Qianggoubiao record);
 
@@ -18,7 +18,7 @@ public interface QianggoubiaoMapper {
 
     List<Qianggoubiao> selectByExample(QianggoubiaoExample example);
 
-    Qianggoubiao selectByPrimaryKey(Integer id);
+    Qianggoubiao selectByPrimaryKey(Integer qianggouId);
 
     int updateByExampleSelective(@Param("record") Qianggoubiao record, @Param("example") QianggoubiaoExample example);
 
@@ -27,4 +27,6 @@ public interface QianggoubiaoMapper {
     int updateByPrimaryKeySelective(Qianggoubiao record);
 
     int updateByPrimaryKey(Qianggoubiao record);
+
+	List<Qianggoubiao> selectByExampleWithBrand(QianggoubiaoExample example);
 }

@@ -2,14 +2,11 @@ package com.cgd.crud.bean;
 
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 public class Qianggoubiao {
-    private Integer id;
+    private Integer qianggouId;
 
-    private String name;
+    private String qianngouName;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")  
     private Date createTime;
 
     private String logo;
@@ -22,20 +19,36 @@ public class Qianggoubiao {
 
     private String createUser;
 
-    public Integer getId() {
-        return id;
+    private String qianggoubiaoTime;
+
+    private Integer qianggouBrandId;
+
+    private Integer qianggouPlatformId;
+
+    private Brand brand;
+    
+    public Brand getBrand() {
+		return brand;
+	}
+
+	public void setBrand(Brand brand) {
+		this.brand = brand;
+	}
+
+	public Integer getQianggouId() {
+        return qianggouId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setQianggouId(Integer qianggouId) {
+        this.qianggouId = qianggouId;
     }
 
-    public String getName() {
-        return name;
+    public String getQianngouName() {
+        return qianngouName;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setQianngouName(String qianngouName) {
+        this.qianngouName = qianngouName == null ? null : qianngouName.trim();
     }
 
     public Date getCreateTime() {
@@ -84,5 +97,29 @@ public class Qianggoubiao {
 
     public void setCreateUser(String createUser) {
         this.createUser = createUser == null ? null : createUser.trim();
+    }
+
+    public String getQianggoubiaoTime() {
+        return qianggoubiaoTime;
+    }
+
+    public void setQianggoubiaoTime(String qianggoubiaoTime) {
+        this.qianggoubiaoTime = qianggoubiaoTime == null ? null : qianggoubiaoTime.trim();
+    }
+
+    public Integer getQianggouBrandId() {
+        return qianggouBrandId;
+    }
+
+    public void setQianggouBrandId(Integer qianggouBrandId) {
+        this.qianggouBrandId = qianggouBrandId;
+    }
+
+    public Integer getQianggouPlatformId() {
+        return qianggouPlatformId;
+    }
+
+    public void setQianggouPlatformId(Integer qianggouPlatformId) {
+        this.qianggouPlatformId = qianggouPlatformId;
     }
 }

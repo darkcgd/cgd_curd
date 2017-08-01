@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cgd.crud.bean.Qianggoubiao;
+import com.cgd.crud.bean.QianggoubiaoExample;
 import com.cgd.crud.bean.User;
 import com.cgd.crud.bean.UserExample;
 import com.cgd.crud.dao.QianggoubiaoMapper;
@@ -26,6 +27,19 @@ public class QianggoubiaoService {
 	public void saveQianggoubiao(Qianggoubiao data) {
 		data.setCreateTime(new Date());
 		mapper.insert(data);
+	}
+
+	public  List<Qianggoubiao> getInfo(String time, String brand, String platform) {
+		QianggoubiaoExample example=new QianggoubiaoExample();  
+        //通过Criteria构造查询条件  
+		QianggoubiaoExample.Criteria criteria=example.createCriteria();  
+        //criteria.andCreateTimeBetween(value1, value2); 
+		criteria.andQianggouBrandIdEqualTo(1);
+		
+		
+        //可能返回多条记录  
+        List<Qianggoubiao> selectByExampleWithBrand = mapper.selectByExampleWithBrand(example);
+        return selectByExampleWithBrand;
 	}
 
 	

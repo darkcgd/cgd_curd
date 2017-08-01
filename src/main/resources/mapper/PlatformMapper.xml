@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cgd.crud.dao.PlatformMapper">
+  <resultMap id="BaseResultMap" type="com.cgd.crud.bean.Platform">
+    <id column="platform_id" jdbcType="INTEGER" property="platformId" />
+    <result column="platform_name" jdbcType="VARCHAR" property="platformName" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    platform_id, platform_name, create_time, remark, logo
+  </sql>
+  <select id="selectByExample" parameterType="com.cgd.crud.bean.PlatformExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from platform
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from platform
+    where platform_id = #{platformId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from platform
+    where platform_id = #{platformId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cgd.crud.bean.PlatformExample">
+    delete from platform
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cgd.crud.bean.Platform">
+    insert into platform (platform_id, platform_name, create_time, 
+      remark, logo)
+    values (#{platformId,jdbcType=INTEGER}, #{platformName,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
+      #{remark,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cgd.crud.bean.Platform">
+    insert into platform
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="platformId != null">
+        platform_id,
+      </if>
+      <if test="platformName != null">
+        platform_name,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="logo != null">
+        logo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="platformId != null">
+        #{platformId,jdbcType=INTEGER},
+      </if>
+      <if test="platformName != null">
+        #{platformName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        #{logo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cgd.crud.bean.PlatformExample" resultType="java.lang.Long">
+    select count(*) from platform
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update platform
+    <set>
+      <if test="record.platformId != null">
+        platform_id = #{record.platformId,jdbcType=INTEGER},
+      </if>
+      <if test="record.platformName != null">
+        platform_name = #{record.platformName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=DATE},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logo != null">
+        logo = #{record.logo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update platform
+    set platform_id = #{record.platformId,jdbcType=INTEGER},
+      platform_name = #{record.platformName,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=DATE},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      logo = #{record.logo,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cgd.crud.bean.Platform">
+    update platform
+    <set>
+      <if test="platformName != null">
+        platform_name = #{platformName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where platform_id = #{platformId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cgd.crud.bean.Platform">
+    update platform
+    set platform_name = #{platformName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=DATE},
+      remark = #{remark,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR}
+    where platform_id = #{platformId,jdbcType=INTEGER}
+  </update>
+</mapper>

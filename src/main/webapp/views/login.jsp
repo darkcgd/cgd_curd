@@ -78,7 +78,7 @@
 		$(document).ready(function() {
 			var isLogin = $.session.get('isLogin');
 			if (isLogin) {
-				window.location.href = "main.jsp";
+				window.location.href = "views/main.jsp";
 				window.event.returnValue = false;
 			}
 		});
@@ -87,7 +87,7 @@
 		$("#btn_login").click(function() {
 			var isLogin = $.session.get('isLogin');
 			if (isLogin) {
-				window.location.href = "main.jsp";
+				window.location.href = "views/main.jsp";
 				window.event.returnValue = false;
 			} else {
 				if ($("#div_confirm_pwd").is(":hidden")) {
@@ -179,7 +179,7 @@
 						$.session.set('isLogin', true)
 
 						//window.location.href="views/imageTest.jsp?userid="+data.user_id+"&username="+data.user_name;
-						window.location.href = "main.jsp";
+						window.location.href = "views/main.jsp";
 						//window.event.returnValue=false; 
 
 					}
