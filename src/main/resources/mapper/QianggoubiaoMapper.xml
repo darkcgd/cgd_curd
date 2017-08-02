@@ -27,6 +27,11 @@
     	<id column="brand_id" property="brandId"/>
     	<result column="brand_name" property="brandName"/>
     </association>
+    <!-- 指定联合查询出的平台字段的封装 -->
+    <association property="platform" javaType="com.cgd.crud.bean.Platform">
+    	<id column="platform_id" property="platformId"/>
+    	<result column="platform_name" property="platformName"/>
+    </association>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -91,17 +96,18 @@
     qianggoubiao_time, qianggou_brand_id, qianggou_platform_id
   </sql>
   <sql id="WithBrand_Column_List">
-  	q.qianggou_id, q.qianngou_name, q.create_time, q.directe_url, q.qianggoubiao_time,b.brand_id,b.brand_name
+  	q.qianggou_id, q.qianngou_name, q.create_time, q.directe_url, q.qianggoubiao_time,
+  	b.brand_id,b.brand_name,p.platform_id,p.platform_name
   </sql>
-  <!-- 查询抢购表信息同时带品牌信息 -->
+  <!-- 查询抢购表信息同时带品牌,平台信息 -->
   <select id="selectByExampleWithBrand" resultMap="WithBrandResultMap">
 	   select
 	    <if test="distinct">
 	      distinct
 	    </if>
 	    <include refid="WithBrand_Column_List" />
-		FROM qianggoubiao q
-		left join brand b on q.`qianggou_brand_id`=b.`brand_id`
+		FROM qianggoubiao AS q,brand AS b,platform As p 
+		WHERE q.`qianggou_brand_id`=b.`brand_id` and q.`qianggou_platform_id`=p.`platform_id`
 	    <if test="_parameter != null">
 	      <include refid="Example_Where_Clause" />
 	    </if>

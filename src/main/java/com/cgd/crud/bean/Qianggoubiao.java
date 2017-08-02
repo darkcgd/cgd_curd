@@ -30,7 +30,17 @@ public class Qianggoubiao {
 
     private Brand brand;
     
-    public Brand getBrand() {
+    private Platform platform;
+    
+    public Platform getPlatform() {
+		return platform;
+	}
+
+	public void setPlatform(Platform platform) {
+		this.platform = platform;
+	}
+
+	public Brand getBrand() {
 		return brand;
 	}
 

@@ -85,14 +85,13 @@ public class QianggoubiaoController extends BaseController{
 			}
 			return Msg.fail().add("errorMsg", map);
 		}else{
-			List<Qianggoubiao> info = service.getInfo(qianggoubiao);
-			
 			// 这不是一个分页查询
 			// 引入PageHelper分页插件
 			// 在查询之前只需要调用，传入页码，以及每页的大小
 			PageHelper.startPage(pagerNumber, pagerSize);
 			// 使用pageInfo包装查询后的结果，只需要将pageInfo交给页面就行了。
 			// 封装了详细的分页信息,包括有我们查询出来的数据，传入连续显示的页数 new PageInfo(info, pagerSize)
+			List<Qianggoubiao> info = service.getInfo(qianggoubiao);
 			Msg msg = Msg.success("获取成功");
 			Map<String, Object> data = msg.getData();
 			handlerPageInfo(data,new PageInfo(info, pagerSize));
