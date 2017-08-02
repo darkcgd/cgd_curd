@@ -34,6 +34,9 @@ public class QianggoubiaoService {
 		if(data.getQianggouBrandId()!=null){
 			criteria.andQianggouBrandIdEqualTo(data.getQianggouBrandId());
 		}
+		if(data.getQianggouPlatformId()!=null){
+			criteria.andQianggouPlatformIdEqualTo(data.getQianggouPlatformId());
+		}
 		if(data.getCreateTime()!=null){
 			criteria.andCreateTimeBetween(data.getCreateTime(), AbDateUtil.tomorrow(data.getCreateTime()));
 		}

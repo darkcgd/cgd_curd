@@ -32,28 +32,50 @@
 			<div class="col-md-offset-3 col-md-6">
 				<form class="form-horizontal" id="formAddQianggoubiao">
 					<span class="heading">添加抢购信息</span>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">品牌</label>
+						<div class="col-sm-10">
+							<!-- 提交品牌id即可 -->
+							<select id="select_brand" class="form-control" name="qianggouBrandId"></select>
+						</div>
+						</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">平台</label>
+						<div class="col-sm-10">
+								<!-- 提交平台id即可 -->
+							<select id="select_platform" class="form-control" name="qianggouPlatformId"></select>
+						</div>
+						</div>
+					
 					<div class="form-group">
 						<label class="col-sm-2 control-label">名称</label>
 						<div class="col-sm-10">
-							<input type="text" name="name" class="form-control"
-								id="input_name" placeholder="抢购商品名称,例如小米"> <span
+							<input type="text" name="qianngouName" class="form-control"
+								id="input_name" placeholder="抢购商品名称,例如小米6（2499/2899）"> <span
 								class="help-block"></span>
 						</div>
+						</div>
+					<div class="form-group">
 						<label class="col-sm-2 control-label">时间</label>
 						<div class="col-sm-10">
-							<input type="text" name="qianggou_time" class="form-control"
+							<input type="text" name="qianggoubiaoTime" class="form-control"
 								id="input_time" placeholder="抢购时间,例如12:00"> <span
 								class="help-block"></span>
 						</div>
+						</div>
+					<div class="form-group">
 						<label class="col-sm-2 control-label">链接</label>
 						<div class="col-sm-10">
-							<input type="text" name="directeUrl" class="form-control"
-								id="input_url" placeholder="抢购商品链接,例如http:www//..."> <span
-								class="help-block"></span>
+								<textarea id="input_url" class="col-sm-12" rows="5" name="directeUrl" placeholder="抢购商品链接,例如http:www//..."></textarea>
+								<span class="help-block"></span>
+								
 						</div>
 					</div>
 					<div class="form-group">
-						 <button  id="btn_save" class="btn btn-lg btn-primary btn-block" type="submit">确定添加</button>  
+						<button id="btn_save" class="btn btn-lg btn-primary btn-block"
+							type="submit">确定添加</button>
 					</div>
 					<span id="span_status" class="help-block"></span>
 				</form>
@@ -62,6 +84,45 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+	
+	$(document).ready(function() {
+		getBrandInfo("#select_brand");
+		getPlatFormInfo("#select_platform");
+	});
+	
+	function getBrandInfo(ele) {
+		//清空之前下拉列表的值
+		$(ele).empty();
+		$.ajax({
+			url:"${APP_PATH}/brand/getAllBrandList",
+			type:"GET",
+			success:function(result){
+				//显示部门信息在下拉列表中
+				$.each(result.data.list,function(){
+					var optionEle = $("<option></option>").append(this.brandName).attr("value",this.brandId);
+					optionEle.appendTo(ele);
+				});
+			}
+		});
+	};
+	
+	function getPlatFormInfo(ele) {
+		//清空之前下拉列表的值
+		$(ele).empty();
+		$.ajax({
+			url:"${APP_PATH}/platform/getAllPlatformList",
+			type:"GET",
+			success:function(result){
+				//显示部门信息在下拉列表中
+				$.each(result.data.list,function(){
+					var optionEle = $("<option></option>").append(this.platformName).attr("value",this.platformId);
+					optionEle.appendTo(ele);
+				});
+			}
+		});
+	}
+	
+	
 		//ajax提交  
 		$("#btn_save").click(function() {
 			doAddQianggoubiao(); //添加抢购信息
@@ -109,8 +170,8 @@
 			}*/
 			;
 			var params = $("#formAddQianggoubiao").serialize();
-			
-			//2、发送ajax请求保存员工
+			alert(params);
+			//2、发送ajax请求保存抢购信息
 			$.ajax({
 				url : "${APP_PATH}/qianggoubiao/save",
 				type : "GET",

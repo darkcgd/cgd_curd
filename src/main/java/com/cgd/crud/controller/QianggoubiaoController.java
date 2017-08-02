@@ -22,10 +22,15 @@ import com.cgd.crud.bean.User;
 import com.cgd.crud.service.EmployeeService;
 import com.cgd.crud.service.QianggoubiaoService;
 import com.cgd.crud.service.UserService;
+import com.cgd.crud.util.Constant;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
+import base.BaseController;
 
 @Controller
 @RequestMapping("/qianggoubiao") 
-public class QianggoubiaoController {
+public class QianggoubiaoController extends BaseController{
 
 	@Autowired
 	QianggoubiaoService service;
@@ -65,7 +70,10 @@ public class QianggoubiaoController {
 	 */
 	@ResponseBody
 	@RequestMapping("/getInfo")
-	public Msg getInfo(@Valid Qianggoubiao qianggoubiao,BindingResult result){
+	public Msg getInfo(@Valid Qianggoubiao qianggoubiao,
+			@RequestParam(value = "pagerNumber", defaultValue = ""+Constant.DefaultPagerNumber) Integer pagerNumber,
+			@RequestParam(value = "pagerSize", defaultValue = ""+Constant.DefaultPagerSize) Integer pagerSize,
+			BindingResult result){
 		if(result.hasErrors()){
 			//校验失败，应该返回失败，在模态框中显示校验失败的错误信息
 			Map<String, Object> map = new HashMap<>();
@@ -75,11 +83,19 @@ public class QianggoubiaoController {
 				System.out.println("错误信息："+fieldError.getDefaultMessage());
 				map.put(fieldError.getField(), fieldError.getDefaultMessage());
 			}
-			return Msg.fail().add("errorFields", map);
+			return Msg.fail().add("errorMsg", map);
 		}else{
 			List<Qianggoubiao> info = service.getInfo(qianggoubiao);
+			
+			// 这不是一个分页查询
+			// 引入PageHelper分页插件
+			// 在查询之前只需要调用，传入页码，以及每页的大小
+			PageHelper.startPage(pagerNumber, pagerSize);
+			// 使用pageInfo包装查询后的结果，只需要将pageInfo交给页面就行了。
+			// 封装了详细的分页信息,包括有我们查询出来的数据，传入连续显示的页数 new PageInfo(info, pagerSize)
 			Msg msg = Msg.success("获取成功");
 			Map<String, Object> data = msg.getData();
+			handlerPageInfo(data,new PageInfo(info, pagerSize));
 			data.put("list", info);
 			return msg;
 		}
