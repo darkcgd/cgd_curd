@@ -77,7 +77,7 @@
 						<button id="btn_save" class="btn btn-lg btn-primary btn-block"
 							type="submit">确定添加</button>
 					</div>
-					<span id="span_status" class="help-block"></span>
+					<span id="span_status" style="color: green;"></span>
 				</form>
 
 			</div>
@@ -179,11 +179,11 @@
 				success : function(result) {
 					var code = result.code;
 					if (code != 100) {
-						$("#span_status").addClass("has-error");
+						$("#span_status").addClass("glyphicon glyphicon-remove");
 						$("#span_status").text(result.msg);
 						$.session.clear();
 					} else {
-						$("#span_status").addClass("has-success");
+						$("#span_status").addClass("glyphicon glyphicon-ok");
 						$("#span_status").text(result.msg);
 						var msg = result.msg;
 						var data = result.data;
@@ -200,15 +200,15 @@
 		//显示校验结果的提示信息
 		function show_validate_msg(ele, status, msg) {
 			//清除当前元素的校验状态
-			$(ele).parent().removeClass("has-success has-error");
+			$(ele).parent().removeClass("glyphicon glyphicon-ok glyphicon glyphicon-remove").removeAttr("style");;
 			$(ele).next("span").text("");
-			$("#span_status").removeClass("has-success has-error");
+			$("#span_status").removeClass("glyphicon glyphicon-ok glyphicon glyphicon-remove");
 			$("#span_status").text("");
 			if ("success" == status) {
-				$(ele).parent().addClass("has-success");
+				$(ele).parent().addClass("glyphicon glyphicon-ok");
 				$(ele).next("span").text(msg);
 			} else if ("error" == status) {
-				$(ele).parent().addClass("has-error");
+				$(ele).parent().addClass("glyphicon glyphicon-remove");
 				$(ele).next("span").text(msg);
 			}
 		}
