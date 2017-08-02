@@ -2,11 +2,14 @@ package com.cgd.crud.bean;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Qianggoubiao {
     private Integer qianggouId;
 
     private String qianngouName;
 
+    @DateTimeFormat( pattern = "yyyy-MM-dd hh:mm:ss" )
     private Date createTime;
 
     private String logo;
@@ -122,4 +125,20 @@ public class Qianggoubiao {
     public void setQianggouPlatformId(Integer qianggouPlatformId) {
         this.qianggouPlatformId = qianggouPlatformId;
     }
+
+	@Override
+	public String toString() {
+		return "Qianggoubiao [qianggouId=" + qianggouId + ", qianngouName=" + qianngouName + ", createTime="
+				+ createTime + ", logo=" + logo + ", remark=" + remark + ", directeUrl=" + directeUrl + ", isInvalid="
+				+ isInvalid + ", createUser=" + createUser + ", qianggoubiaoTime=" + qianggoubiaoTime
+				+ ", qianggouBrandId=" + qianggouBrandId + ", qianggouPlatformId=" + qianggouPlatformId + ", brand="
+				+ brand + ", getBrand()=" + getBrand() + ", getQianggouId()=" + getQianggouId() + ", getQianngouName()="
+				+ getQianngouName() + ", getCreateTime()=" + getCreateTime() + ", getLogo()=" + getLogo()
+				+ ", getRemark()=" + getRemark() + ", getDirecteUrl()=" + getDirecteUrl() + ", getIsInvalid()="
+				+ getIsInvalid() + ", getCreateUser()=" + getCreateUser() + ", getQianggoubiaoTime()="
+				+ getQianggoubiaoTime() + ", getQianggouBrandId()=" + getQianggouBrandId()
+				+ ", getQianggouPlatformId()=" + getQianggouPlatformId();
+	}
+    
+    
 }

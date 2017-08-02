@@ -623,5 +623,29 @@ public class AbDateUtil {
 			return milliseconds+"毫秒";
 		}
 	}
+	
+	/**
+	 * 返回昨天
+	 * @param today
+	 * @return
+	 */
+	 public static Date yesterday(Date today) {
+	 Calendar calendar = Calendar.getInstance();
+	 calendar.setTime(today);
+	 calendar.set(Calendar.DATE, calendar.get(Calendar.DATE) - 1);
+	 return calendar.getTime();
+	 }
+	 
+	 /**
+	 * 返回明天
+	 * @param today
+	 * @return
+	 */
+	 public static  Date tomorrow(Date today) {
+	 Calendar calendar = Calendar.getInstance();
+	 calendar.setTime(today);
+	 calendar.set(Calendar.DATE, calendar.get(Calendar.DATE) + 1);
+	 return calendar.getTime();
+	 }
 
 }

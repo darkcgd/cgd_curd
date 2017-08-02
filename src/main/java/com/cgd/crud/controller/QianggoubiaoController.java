@@ -56,6 +56,7 @@ public class QianggoubiaoController {
 	}
 	
 	/**
+	 * 参考 http://blog.csdn.net/whu_zcj/article/details/53506572
 	 * 获取抢购表信息(重要)
 	 * @param time 发布时间
 	 * @param brand 品牌
@@ -64,12 +65,25 @@ public class QianggoubiaoController {
 	 */
 	@ResponseBody
 	@RequestMapping("/getInfo")
-	public Msg getInfo(@RequestParam("time")String time,@RequestParam("brand")String brand,@RequestParam("platform")String platform){
-		List<Qianggoubiao> info = service.getInfo(time,brand,platform);
-		Msg msg = Msg.success("获取成功");
-		Map<String, Object> data = msg.getData();
-		data.put("list", info);
-		return msg;
+	public Msg getInfo(@Valid Qianggoubiao qianggoubiao,BindingResult result){
+		if(result.hasErrors()){
+			//校验失败，应该返回失败，在模态框中显示校验失败的错误信息
+			Map<String, Object> map = new HashMap<>();
+			List<FieldError> errors = result.getFieldErrors();
+			for (FieldError fieldError : errors) {
+				System.out.println("错误的字段名："+fieldError.getField());
+				System.out.println("错误信息："+fieldError.getDefaultMessage());
+				map.put(fieldError.getField(), fieldError.getDefaultMessage());
+			}
+			return Msg.fail().add("errorFields", map);
+		}else{
+			List<Qianggoubiao> info = service.getInfo(qianggoubiao);
+			Msg msg = Msg.success("获取成功");
+			Map<String, Object> data = msg.getData();
+			data.put("list", info);
+			return msg;
+		}
+		
 	}
 	
 }

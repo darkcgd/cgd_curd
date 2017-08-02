@@ -18,10 +18,7 @@
      <id column="qianggou_id" jdbcType="INTEGER" property="qianggouId" />
     <result column="qianngou_name" jdbcType="VARCHAR" property="qianngouName" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="directe_url" jdbcType="VARCHAR" property="directeUrl" />
-    <result column="is_invalid" jdbcType="CHAR" property="isInvalid" />
-    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
     <result column="qianggoubiao_time" jdbcType="VARCHAR" property="qianggoubiaoTime" />
     <result column="qianggou_brand_id" jdbcType="INTEGER" property="qianggouBrandId" />
     <result column="qianggou_platform_id" jdbcType="INTEGER" property="qianggouPlatformId" />
