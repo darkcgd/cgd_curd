@@ -295,6 +295,256 @@ public class QianggoubiaoExample {
             return (Criteria) this;
         }
 
+        public Criteria andDirecteUrlIsNull() {
+            addCriterion("directe_url is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDirecteUrlIsNotNull() {
+            addCriterion("directe_url is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDirecteUrlEqualTo(String value) {
+            addCriterion("directe_url =", value, "directeUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andDirecteUrlNotEqualTo(String value) {
+            addCriterion("directe_url <>", value, "directeUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andDirecteUrlGreaterThan(String value) {
+            addCriterion("directe_url >", value, "directeUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andDirecteUrlGreaterThanOrEqualTo(String value) {
+            addCriterion("directe_url >=", value, "directeUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andDirecteUrlLessThan(String value) {
+            addCriterion("directe_url <", value, "directeUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andDirecteUrlLessThanOrEqualTo(String value) {
+            addCriterion("directe_url <=", value, "directeUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andDirecteUrlLike(String value) {
+            addCriterion("directe_url like", value, "directeUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andDirecteUrlNotLike(String value) {
+            addCriterion("directe_url not like", value, "directeUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andDirecteUrlIn(List<String> values) {
+            addCriterion("directe_url in", values, "directeUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andDirecteUrlNotIn(List<String> values) {
+            addCriterion("directe_url not in", values, "directeUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andDirecteUrlBetween(String value1, String value2) {
+            addCriterion("directe_url between", value1, value2, "directeUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andDirecteUrlNotBetween(String value1, String value2) {
+            addCriterion("directe_url not between", value1, value2, "directeUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggoubiaoTimeIsNull() {
+            addCriterion("qianggoubiao_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggoubiaoTimeIsNotNull() {
+            addCriterion("qianggoubiao_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggoubiaoTimeEqualTo(Date value) {
+            addCriterion("qianggoubiao_time =", value, "qianggoubiaoTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggoubiaoTimeNotEqualTo(Date value) {
+            addCriterion("qianggoubiao_time <>", value, "qianggoubiaoTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggoubiaoTimeGreaterThan(Date value) {
+            addCriterion("qianggoubiao_time >", value, "qianggoubiaoTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggoubiaoTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("qianggoubiao_time >=", value, "qianggoubiaoTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggoubiaoTimeLessThan(Date value) {
+            addCriterion("qianggoubiao_time <", value, "qianggoubiaoTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggoubiaoTimeLessThanOrEqualTo(Date value) {
+            addCriterion("qianggoubiao_time <=", value, "qianggoubiaoTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggoubiaoTimeIn(List<Date> values) {
+            addCriterion("qianggoubiao_time in", values, "qianggoubiaoTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggoubiaoTimeNotIn(List<Date> values) {
+            addCriterion("qianggoubiao_time not in", values, "qianggoubiaoTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggoubiaoTimeBetween(Date value1, Date value2) {
+            addCriterion("qianggoubiao_time between", value1, value2, "qianggoubiaoTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggoubiaoTimeNotBetween(Date value1, Date value2) {
+            addCriterion("qianggoubiao_time not between", value1, value2, "qianggoubiaoTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggouBrandIdIsNull() {
+            addCriterion("qianggou_brand_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggouBrandIdIsNotNull() {
+            addCriterion("qianggou_brand_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggouBrandIdEqualTo(Integer value) {
+            addCriterion("qianggou_brand_id =", value, "qianggouBrandId");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggouBrandIdNotEqualTo(Integer value) {
+            addCriterion("qianggou_brand_id <>", value, "qianggouBrandId");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggouBrandIdGreaterThan(Integer value) {
+            addCriterion("qianggou_brand_id >", value, "qianggouBrandId");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggouBrandIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("qianggou_brand_id >=", value, "qianggouBrandId");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggouBrandIdLessThan(Integer value) {
+            addCriterion("qianggou_brand_id <", value, "qianggouBrandId");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggouBrandIdLessThanOrEqualTo(Integer value) {
+            addCriterion("qianggou_brand_id <=", value, "qianggouBrandId");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggouBrandIdIn(List<Integer> values) {
+            addCriterion("qianggou_brand_id in", values, "qianggouBrandId");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggouBrandIdNotIn(List<Integer> values) {
+            addCriterion("qianggou_brand_id not in", values, "qianggouBrandId");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggouBrandIdBetween(Integer value1, Integer value2) {
+            addCriterion("qianggou_brand_id between", value1, value2, "qianggouBrandId");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggouBrandIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("qianggou_brand_id not between", value1, value2, "qianggouBrandId");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggouPlatformIdIsNull() {
+            addCriterion("qianggou_platform_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggouPlatformIdIsNotNull() {
+            addCriterion("qianggou_platform_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggouPlatformIdEqualTo(Integer value) {
+            addCriterion("qianggou_platform_id =", value, "qianggouPlatformId");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggouPlatformIdNotEqualTo(Integer value) {
+            addCriterion("qianggou_platform_id <>", value, "qianggouPlatformId");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggouPlatformIdGreaterThan(Integer value) {
+            addCriterion("qianggou_platform_id >", value, "qianggouPlatformId");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggouPlatformIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("qianggou_platform_id >=", value, "qianggouPlatformId");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggouPlatformIdLessThan(Integer value) {
+            addCriterion("qianggou_platform_id <", value, "qianggouPlatformId");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggouPlatformIdLessThanOrEqualTo(Integer value) {
+            addCriterion("qianggou_platform_id <=", value, "qianggouPlatformId");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggouPlatformIdIn(List<Integer> values) {
+            addCriterion("qianggou_platform_id in", values, "qianggouPlatformId");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggouPlatformIdNotIn(List<Integer> values) {
+            addCriterion("qianggou_platform_id not in", values, "qianggouPlatformId");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggouPlatformIdBetween(Integer value1, Integer value2) {
+            addCriterion("qianggou_platform_id between", value1, value2, "qianggouPlatformId");
+            return (Criteria) this;
+        }
+
+        public Criteria andQianggouPlatformIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("qianggou_platform_id not between", value1, value2, "qianggouPlatformId");
+            return (Criteria) this;
+        }
+
         public Criteria andLogoIsNull() {
             addCriterion("logo is null");
             return (Criteria) this;
@@ -435,76 +685,6 @@ public class QianggoubiaoExample {
             return (Criteria) this;
         }
 
-        public Criteria andDirecteUrlIsNull() {
-            addCriterion("directe_url is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDirecteUrlIsNotNull() {
-            addCriterion("directe_url is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDirecteUrlEqualTo(String value) {
-            addCriterion("directe_url =", value, "directeUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andDirecteUrlNotEqualTo(String value) {
-            addCriterion("directe_url <>", value, "directeUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andDirecteUrlGreaterThan(String value) {
-            addCriterion("directe_url >", value, "directeUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andDirecteUrlGreaterThanOrEqualTo(String value) {
-            addCriterion("directe_url >=", value, "directeUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andDirecteUrlLessThan(String value) {
-            addCriterion("directe_url <", value, "directeUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andDirecteUrlLessThanOrEqualTo(String value) {
-            addCriterion("directe_url <=", value, "directeUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andDirecteUrlLike(String value) {
-            addCriterion("directe_url like", value, "directeUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andDirecteUrlNotLike(String value) {
-            addCriterion("directe_url not like", value, "directeUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andDirecteUrlIn(List<String> values) {
-            addCriterion("directe_url in", values, "directeUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andDirecteUrlNotIn(List<String> values) {
-            addCriterion("directe_url not in", values, "directeUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andDirecteUrlBetween(String value1, String value2) {
-            addCriterion("directe_url between", value1, value2, "directeUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andDirecteUrlNotBetween(String value1, String value2) {
-            addCriterion("directe_url not between", value1, value2, "directeUrl");
-            return (Criteria) this;
-        }
-
         public Criteria andIsInvalidIsNull() {
             addCriterion("is_invalid is null");
             return (Criteria) this;
@@ -642,196 +822,6 @@ public class QianggoubiaoExample {
 
         public Criteria andCreateUserNotBetween(String value1, String value2) {
             addCriterion("create_user not between", value1, value2, "createUser");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggoubiaoTimeIsNull() {
-            addCriterion("qianggoubiao_time is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggoubiaoTimeIsNotNull() {
-            addCriterion("qianggoubiao_time is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggoubiaoTimeEqualTo(String value) {
-            addCriterion("qianggoubiao_time =", value, "qianggoubiaoTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggoubiaoTimeNotEqualTo(String value) {
-            addCriterion("qianggoubiao_time <>", value, "qianggoubiaoTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggoubiaoTimeGreaterThan(String value) {
-            addCriterion("qianggoubiao_time >", value, "qianggoubiaoTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggoubiaoTimeGreaterThanOrEqualTo(String value) {
-            addCriterion("qianggoubiao_time >=", value, "qianggoubiaoTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggoubiaoTimeLessThan(String value) {
-            addCriterion("qianggoubiao_time <", value, "qianggoubiaoTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggoubiaoTimeLessThanOrEqualTo(String value) {
-            addCriterion("qianggoubiao_time <=", value, "qianggoubiaoTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggoubiaoTimeLike(String value) {
-            addCriterion("qianggoubiao_time like", value, "qianggoubiaoTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggoubiaoTimeNotLike(String value) {
-            addCriterion("qianggoubiao_time not like", value, "qianggoubiaoTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggoubiaoTimeIn(List<String> values) {
-            addCriterion("qianggoubiao_time in", values, "qianggoubiaoTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggoubiaoTimeNotIn(List<String> values) {
-            addCriterion("qianggoubiao_time not in", values, "qianggoubiaoTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggoubiaoTimeBetween(String value1, String value2) {
-            addCriterion("qianggoubiao_time between", value1, value2, "qianggoubiaoTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggoubiaoTimeNotBetween(String value1, String value2) {
-            addCriterion("qianggoubiao_time not between", value1, value2, "qianggoubiaoTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggouBrandIdIsNull() {
-            addCriterion("qianggou_brand_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggouBrandIdIsNotNull() {
-            addCriterion("qianggou_brand_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggouBrandIdEqualTo(Integer value) {
-            addCriterion("qianggou_brand_id =", value, "qianggouBrandId");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggouBrandIdNotEqualTo(Integer value) {
-            addCriterion("qianggou_brand_id <>", value, "qianggouBrandId");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggouBrandIdGreaterThan(Integer value) {
-            addCriterion("qianggou_brand_id >", value, "qianggouBrandId");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggouBrandIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("qianggou_brand_id >=", value, "qianggouBrandId");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggouBrandIdLessThan(Integer value) {
-            addCriterion("qianggou_brand_id <", value, "qianggouBrandId");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggouBrandIdLessThanOrEqualTo(Integer value) {
-            addCriterion("qianggou_brand_id <=", value, "qianggouBrandId");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggouBrandIdIn(List<Integer> values) {
-            addCriterion("qianggou_brand_id in", values, "qianggouBrandId");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggouBrandIdNotIn(List<Integer> values) {
-            addCriterion("qianggou_brand_id not in", values, "qianggouBrandId");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggouBrandIdBetween(Integer value1, Integer value2) {
-            addCriterion("qianggou_brand_id between", value1, value2, "qianggouBrandId");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggouBrandIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("qianggou_brand_id not between", value1, value2, "qianggouBrandId");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggouPlatformIdIsNull() {
-            addCriterion("qianggou_platform_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggouPlatformIdIsNotNull() {
-            addCriterion("qianggou_platform_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggouPlatformIdEqualTo(Integer value) {
-            addCriterion("qianggou_platform_id =", value, "qianggouPlatformId");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggouPlatformIdNotEqualTo(Integer value) {
-            addCriterion("qianggou_platform_id <>", value, "qianggouPlatformId");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggouPlatformIdGreaterThan(Integer value) {
-            addCriterion("qianggou_platform_id >", value, "qianggouPlatformId");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggouPlatformIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("qianggou_platform_id >=", value, "qianggouPlatformId");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggouPlatformIdLessThan(Integer value) {
-            addCriterion("qianggou_platform_id <", value, "qianggouPlatformId");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggouPlatformIdLessThanOrEqualTo(Integer value) {
-            addCriterion("qianggou_platform_id <=", value, "qianggouPlatformId");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggouPlatformIdIn(List<Integer> values) {
-            addCriterion("qianggou_platform_id in", values, "qianggouPlatformId");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggouPlatformIdNotIn(List<Integer> values) {
-            addCriterion("qianggou_platform_id not in", values, "qianggouPlatformId");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggouPlatformIdBetween(Integer value1, Integer value2) {
-            addCriterion("qianggou_platform_id between", value1, value2, "qianggouPlatformId");
-            return (Criteria) this;
-        }
-
-        public Criteria andQianggouPlatformIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("qianggou_platform_id not between", value1, value2, "qianggouPlatformId");
             return (Criteria) this;
         }
     }

@@ -48,7 +48,5 @@
 		<table tableName="brand" domainObjectName="Brand"></table>
 		<table tableName="platform" domainObjectName="Platform"></table>-->
 		<table tableName="qianggoubiao" domainObjectName="Qianggoubiao"></table>
-		<table tableName="brand" domainObjectName="Brand"></table>
-		<table tableName="platform" domainObjectName="Platform"></table>
 	</context>
 </generatorConfiguration>

@@ -5,32 +5,32 @@
     <id column="qianggou_id" jdbcType="INTEGER" property="qianggouId" />
     <result column="qianngou_name" jdbcType="VARCHAR" property="qianngouName" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="logo" jdbcType="VARCHAR" property="logo" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="directe_url" jdbcType="VARCHAR" property="directeUrl" />
-    <result column="is_invalid" jdbcType="CHAR" property="isInvalid" />
-    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
-    <result column="qianggoubiao_time" jdbcType="VARCHAR" property="qianggoubiaoTime" />
+    <result column="qianggoubiao_time" jdbcType="TIMESTAMP" property="qianggoubiaoTime" />
     <result column="qianggou_brand_id" jdbcType="INTEGER" property="qianggouBrandId" />
     <result column="qianggou_platform_id" jdbcType="INTEGER" property="qianggouPlatformId" />
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="is_invalid" jdbcType="CHAR" property="isInvalid" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
   </resultMap>
-  <resultMap type="com.cgd.crud.bean.Qianggoubiao" id="WithBrandResultMap">
+  <resultMap id="WithBrandResultMap" type="com.cgd.crud.bean.Qianggoubiao">
      <id column="qianggou_id" jdbcType="INTEGER" property="qianggouId" />
     <result column="qianngou_name" jdbcType="VARCHAR" property="qianngouName" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="directe_url" jdbcType="VARCHAR" property="directeUrl" />
-    <result column="qianggoubiao_time" jdbcType="VARCHAR" property="qianggoubiaoTime" />
+    <result column="qianggoubiao_time" jdbcType="TIMESTAMP" property="qianggoubiaoTime" />
     <result column="qianggou_brand_id" jdbcType="INTEGER" property="qianggouBrandId" />
     <result column="qianggou_platform_id" jdbcType="INTEGER" property="qianggouPlatformId" />
     <!-- 指定联合查询出的品牌字段的封装 -->
-    <association property="brand" javaType="com.cgd.crud.bean.Brand">
-    	<id column="brand_id" property="brandId"/>
-    	<result column="brand_name" property="brandName"/>
+    <association javaType="com.cgd.crud.bean.Brand" property="brand">
+    	<id column="brand_id" property="brandId" />
+    	<result column="brand_name" property="brandName" />
     </association>
     <!-- 指定联合查询出的平台字段的封装 -->
-    <association property="platform" javaType="com.cgd.crud.bean.Platform">
-    	<id column="platform_id" property="platformId"/>
-    	<result column="platform_name" property="platformName"/>
+    <association javaType="com.cgd.crud.bean.Platform" property="platform">
+    	<id column="platform_id" property="platformId" />
+    	<result column="platform_name" property="platformName" />
     </association>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -92,8 +92,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    qianggou_id, qianngou_name, create_time, logo, remark, directe_url, is_invalid, create_user, 
-    qianggoubiao_time, qianggou_brand_id, qianggou_platform_id
+    qianggou_id, qianngou_name, create_time, directe_url, qianggoubiao_time, qianggou_brand_id, 
+    qianggou_platform_id, logo, remark, is_invalid, create_user
   </sql>
   <sql id="WithBrand_Column_List">
   	q.qianggou_id, q.qianngou_name, q.create_time, q.directe_url, q.qianggoubiao_time,
@@ -115,7 +115,6 @@
 	      order by ${orderByClause}
 	    </if>
   </select>
-  
   <select id="selectByExample" parameterType="com.cgd.crud.bean.QianggoubiaoExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -148,13 +147,13 @@
   </delete>
   <insert id="insert" parameterType="com.cgd.crud.bean.Qianggoubiao">
     insert into qianggoubiao (qianggou_id, qianngou_name, create_time, 
-      logo, remark, directe_url, 
-      is_invalid, create_user, qianggoubiao_time, 
-      qianggou_brand_id, qianggou_platform_id)
+      directe_url, qianggoubiao_time, qianggou_brand_id, 
+      qianggou_platform_id, logo, remark, 
+      is_invalid, create_user)
     values (#{qianggouId,jdbcType=INTEGER}, #{qianngouName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{logo,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{directeUrl,jdbcType=VARCHAR}, 
-      #{isInvalid,jdbcType=CHAR}, #{createUser,jdbcType=VARCHAR}, #{qianggoubiaoTime,jdbcType=VARCHAR}, 
-      #{qianggouBrandId,jdbcType=INTEGER}, #{qianggouPlatformId,jdbcType=INTEGER})
+      #{directeUrl,jdbcType=VARCHAR}, #{qianggoubiaoTime,jdbcType=TIMESTAMP}, #{qianggouBrandId,jdbcType=INTEGER}, 
+      #{qianggouPlatformId,jdbcType=INTEGER}, #{logo,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{isInvalid,jdbcType=CHAR}, #{createUser,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cgd.crud.bean.Qianggoubiao">
     insert into qianggoubiao
@@ -168,20 +167,8 @@
       <if test="createTime != null">
         create_time,
       </if>
-      <if test="logo != null">
-        logo,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
       <if test="directeUrl != null">
         directe_url,
-      </if>
-      <if test="isInvalid != null">
-        is_invalid,
-      </if>
-      <if test="createUser != null">
-        create_user,
       </if>
       <if test="qianggoubiaoTime != null">
         qianggoubiao_time,
@@ -191,6 +178,18 @@
       </if>
       <if test="qianggouPlatformId != null">
         qianggou_platform_id,
+      </if>
+      <if test="logo != null">
+        logo,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="isInvalid != null">
+        is_invalid,
+      </if>
+      <if test="createUser != null">
+        create_user,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -203,29 +202,29 @@
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="logo != null">
-        #{logo,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
       <if test="directeUrl != null">
         #{directeUrl,jdbcType=VARCHAR},
       </if>
-      <if test="isInvalid != null">
-        #{isInvalid,jdbcType=CHAR},
-      </if>
-      <if test="createUser != null">
-        #{createUser,jdbcType=VARCHAR},
-      </if>
       <if test="qianggoubiaoTime != null">
-        #{qianggoubiaoTime,jdbcType=VARCHAR},
+        #{qianggoubiaoTime,jdbcType=TIMESTAMP},
       </if>
       <if test="qianggouBrandId != null">
         #{qianggouBrandId,jdbcType=INTEGER},
       </if>
       <if test="qianggouPlatformId != null">
         #{qianggouPlatformId,jdbcType=INTEGER},
+      </if>
+      <if test="logo != null">
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isInvalid != null">
+        #{isInvalid,jdbcType=CHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -247,29 +246,29 @@
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.logo != null">
-        logo = #{record.logo,jdbcType=VARCHAR},
-      </if>
-      <if test="record.remark != null">
-        remark = #{record.remark,jdbcType=VARCHAR},
-      </if>
       <if test="record.directeUrl != null">
         directe_url = #{record.directeUrl,jdbcType=VARCHAR},
       </if>
-      <if test="record.isInvalid != null">
-        is_invalid = #{record.isInvalid,jdbcType=CHAR},
-      </if>
-      <if test="record.createUser != null">
-        create_user = #{record.createUser,jdbcType=VARCHAR},
-      </if>
       <if test="record.qianggoubiaoTime != null">
-        qianggoubiao_time = #{record.qianggoubiaoTime,jdbcType=VARCHAR},
+        qianggoubiao_time = #{record.qianggoubiaoTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.qianggouBrandId != null">
         qianggou_brand_id = #{record.qianggouBrandId,jdbcType=INTEGER},
       </if>
       <if test="record.qianggouPlatformId != null">
         qianggou_platform_id = #{record.qianggouPlatformId,jdbcType=INTEGER},
+      </if>
+      <if test="record.logo != null">
+        logo = #{record.logo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isInvalid != null">
+        is_invalid = #{record.isInvalid,jdbcType=CHAR},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -281,14 +280,14 @@
     set qianggou_id = #{record.qianggouId,jdbcType=INTEGER},
       qianngou_name = #{record.qianngouName,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      directe_url = #{record.directeUrl,jdbcType=VARCHAR},
+      qianggoubiao_time = #{record.qianggoubiaoTime,jdbcType=TIMESTAMP},
+      qianggou_brand_id = #{record.qianggouBrandId,jdbcType=INTEGER},
+      qianggou_platform_id = #{record.qianggouPlatformId,jdbcType=INTEGER},
       logo = #{record.logo,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR},
-      directe_url = #{record.directeUrl,jdbcType=VARCHAR},
       is_invalid = #{record.isInvalid,jdbcType=CHAR},
-      create_user = #{record.createUser,jdbcType=VARCHAR},
-      qianggoubiao_time = #{record.qianggoubiaoTime,jdbcType=VARCHAR},
-      qianggou_brand_id = #{record.qianggouBrandId,jdbcType=INTEGER},
-      qianggou_platform_id = #{record.qianggouPlatformId,jdbcType=INTEGER}
+      create_user = #{record.createUser,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -302,29 +301,29 @@
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="logo != null">
-        logo = #{logo,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
       <if test="directeUrl != null">
         directe_url = #{directeUrl,jdbcType=VARCHAR},
       </if>
-      <if test="isInvalid != null">
-        is_invalid = #{isInvalid,jdbcType=CHAR},
-      </if>
-      <if test="createUser != null">
-        create_user = #{createUser,jdbcType=VARCHAR},
-      </if>
       <if test="qianggoubiaoTime != null">
-        qianggoubiao_time = #{qianggoubiaoTime,jdbcType=VARCHAR},
+        qianggoubiao_time = #{qianggoubiaoTime,jdbcType=TIMESTAMP},
       </if>
       <if test="qianggouBrandId != null">
         qianggou_brand_id = #{qianggouBrandId,jdbcType=INTEGER},
       </if>
       <if test="qianggouPlatformId != null">
         qianggou_platform_id = #{qianggouPlatformId,jdbcType=INTEGER},
+      </if>
+      <if test="logo != null">
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isInvalid != null">
+        is_invalid = #{isInvalid,jdbcType=CHAR},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
       </if>
     </set>
     where qianggou_id = #{qianggouId,jdbcType=INTEGER}
@@ -333,14 +332,14 @@
     update qianggoubiao
     set qianngou_name = #{qianngouName,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
+      directe_url = #{directeUrl,jdbcType=VARCHAR},
+      qianggoubiao_time = #{qianggoubiaoTime,jdbcType=TIMESTAMP},
+      qianggou_brand_id = #{qianggouBrandId,jdbcType=INTEGER},
+      qianggou_platform_id = #{qianggouPlatformId,jdbcType=INTEGER},
       logo = #{logo,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
-      directe_url = #{directeUrl,jdbcType=VARCHAR},
       is_invalid = #{isInvalid,jdbcType=CHAR},
-      create_user = #{createUser,jdbcType=VARCHAR},
-      qianggoubiao_time = #{qianggoubiaoTime,jdbcType=VARCHAR},
-      qianggou_brand_id = #{qianggouBrandId,jdbcType=INTEGER},
-      qianggou_platform_id = #{qianggouPlatformId,jdbcType=INTEGER}
+      create_user = #{createUser,jdbcType=VARCHAR}
     where qianggou_id = #{qianggouId,jdbcType=INTEGER}
   </update>
 </mapper>

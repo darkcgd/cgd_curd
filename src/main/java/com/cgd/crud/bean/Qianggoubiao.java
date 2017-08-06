@@ -2,50 +2,49 @@ package com.cgd.crud.bean;
 
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 public class Qianggoubiao {
     private Integer qianggouId;
 
     private String qianngouName;
 
-    @DateTimeFormat( pattern = "yyyy-MM-dd hh:mm:ss" )
     private Date createTime;
-
-    private String logo;
-
-    private String remark;
 
     private String directeUrl;
 
-    private String isInvalid;
-
-    private String createUser;
-
-    private String qianggoubiaoTime;
+    private Date qianggoubiaoTime;
 
     private Integer qianggouBrandId;
 
     private Integer qianggouPlatformId;
 
+    private String logo;
+
+    private String remark;
+
+    private String isInvalid;
+
+    private String createUser;
+
     private Brand brand;
     
     private Platform platform;
     
-    public Platform getPlatform() {
-		return platform;
-	}
-
-	public void setPlatform(Platform platform) {
-		this.platform = platform;
-	}
-
-	public Brand getBrand() {
+    
+    
+    public Brand getBrand() {
 		return brand;
 	}
 
 	public void setBrand(Brand brand) {
 		this.brand = brand;
+	}
+
+	public Platform getPlatform() {
+		return platform;
+	}
+
+	public void setPlatform(Platform platform) {
+		this.platform = platform;
 	}
 
 	public Integer getQianggouId() {
@@ -72,22 +71,6 @@ public class Qianggoubiao {
         this.createTime = createTime;
     }
 
-    public String getLogo() {
-        return logo;
-    }
-
-    public void setLogo(String logo) {
-        this.logo = logo == null ? null : logo.trim();
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
-    }
-
     public String getDirecteUrl() {
         return directeUrl;
     }
@@ -96,28 +79,12 @@ public class Qianggoubiao {
         this.directeUrl = directeUrl == null ? null : directeUrl.trim();
     }
 
-    public String getIsInvalid() {
-        return isInvalid;
-    }
-
-    public void setIsInvalid(String isInvalid) {
-        this.isInvalid = isInvalid == null ? null : isInvalid.trim();
-    }
-
-    public String getCreateUser() {
-        return createUser;
-    }
-
-    public void setCreateUser(String createUser) {
-        this.createUser = createUser == null ? null : createUser.trim();
-    }
-
-    public String getQianggoubiaoTime() {
+    public Date getQianggoubiaoTime() {
         return qianggoubiaoTime;
     }
 
-    public void setQianggoubiaoTime(String qianggoubiaoTime) {
-        this.qianggoubiaoTime = qianggoubiaoTime == null ? null : qianggoubiaoTime.trim();
+    public void setQianggoubiaoTime(Date qianggoubiaoTime) {
+        this.qianggoubiaoTime = qianggoubiaoTime;
     }
 
     public Integer getQianggouBrandId() {
@@ -136,19 +103,35 @@ public class Qianggoubiao {
         this.qianggouPlatformId = qianggouPlatformId;
     }
 
-	@Override
-	public String toString() {
-		return "Qianggoubiao [qianggouId=" + qianggouId + ", qianngouName=" + qianngouName + ", createTime="
-				+ createTime + ", logo=" + logo + ", remark=" + remark + ", directeUrl=" + directeUrl + ", isInvalid="
-				+ isInvalid + ", createUser=" + createUser + ", qianggoubiaoTime=" + qianggoubiaoTime
-				+ ", qianggouBrandId=" + qianggouBrandId + ", qianggouPlatformId=" + qianggouPlatformId + ", brand="
-				+ brand + ", getBrand()=" + getBrand() + ", getQianggouId()=" + getQianggouId() + ", getQianngouName()="
-				+ getQianngouName() + ", getCreateTime()=" + getCreateTime() + ", getLogo()=" + getLogo()
-				+ ", getRemark()=" + getRemark() + ", getDirecteUrl()=" + getDirecteUrl() + ", getIsInvalid()="
-				+ getIsInvalid() + ", getCreateUser()=" + getCreateUser() + ", getQianggoubiaoTime()="
-				+ getQianggoubiaoTime() + ", getQianggouBrandId()=" + getQianggouBrandId()
-				+ ", getQianggouPlatformId()=" + getQianggouPlatformId();
-	}
-    
-    
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo == null ? null : logo.trim();
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
+    }
+
+    public String getIsInvalid() {
+        return isInvalid;
+    }
+
+    public void setIsInvalid(String isInvalid) {
+        this.isInvalid = isInvalid == null ? null : isInvalid.trim();
+    }
+
+    public String getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser == null ? null : createUser.trim();
+    }
 }

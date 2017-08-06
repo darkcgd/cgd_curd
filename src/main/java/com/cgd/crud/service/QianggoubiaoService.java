@@ -41,6 +41,8 @@ public class QianggoubiaoService {
 			criteria.andCreateTimeBetween(data.getCreateTime(), AbDateUtil.tomorrow(data.getCreateTime()));
 		}
 		
+		example.setOrderByClause("qianggoubiao_time asc"); //asc 升序   desc 降序 
+		
 		System.out.println(data.toString());
         //可能返回多条记录  
         List<Qianggoubiao> selectByExampleWithBrand = mapper.selectByExampleWithBrand(example);
@@ -72,23 +74,4 @@ IN - 指相关的列必须在传入的方法参数的list中.
 NOT IN - 指相关的列必须不在传入的方法参数的list中.
 	 
 	 */
-	
-	/**
-	 * 根据用户name查询用户
-	 * @param id
-	 * @return
-	 */
-	/*public User getUserByName(String name) {
-		UserExample userExample=new UserExample();  
-        //通过Criteria构造查询条件  
-        UserExample.Criteria criteria=userExample.createCriteria();  
-        criteria.andNameEqualTo(name);  
-        //可能返回多条记录  
-        List<User> list=mapper.selectByExample(userExample);  
-        if(list.size()>0){
-        	return list.get(0);
-        }else{
-        	return null;
-        }
-	}*/
 }
