@@ -2,6 +2,8 @@ package com.cgd.crud.bean;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Qianggoubiao {
     private Integer qianggouId;
 
@@ -11,6 +13,7 @@ public class Qianggoubiao {
 
     private String directeUrl;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date qianggoubiaoTime;
 
     private Integer qianggouBrandId;
@@ -29,9 +32,28 @@ public class Qianggoubiao {
     
     private Platform platform;
     
+    private String brandName;
+    
+    private String platformName;
     
     
-    public Brand getBrand() {
+	public String getBrandName() {
+		return brandName;
+	}
+
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
+	}
+
+	public String getPlatformName() {
+		return platformName;
+	}
+
+	public void setPlatformName(String platformName) {
+		this.platformName = platformName;
+	}
+
+	public Brand getBrand() {
 		return brand;
 	}
 

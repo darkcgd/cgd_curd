@@ -37,13 +37,11 @@ public class QianggoubiaoService {
 		if(data.getQianggouPlatformId()!=null){
 			criteria.andQianggouPlatformIdEqualTo(data.getQianggouPlatformId());
 		}
-		if(data.getCreateTime()!=null){
-			criteria.andCreateTimeBetween(data.getCreateTime(), AbDateUtil.tomorrow(data.getCreateTime()));
+		if(data.getQianggoubiaoTime()!=null){
+			criteria.andQianggoubiaoTimeBetween(data.getQianggoubiaoTime(), AbDateUtil.tomorrow(data.getQianggoubiaoTime()));
 		}
-		
 		example.setOrderByClause("qianggoubiao_time asc"); //asc 升序   desc 降序 
 		
-		System.out.println(data.toString());
         //可能返回多条记录  
         List<Qianggoubiao> selectByExampleWithBrand = mapper.selectByExampleWithBrand(example);
         return selectByExampleWithBrand;
