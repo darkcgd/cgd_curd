@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ page import="com.cgd.crud.util.TokenUtil" %>  
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -24,6 +25,12 @@
 <link href="${APP_PATH }/static/css/login.css" rel="stylesheet">
 <script
 	src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+	
+	<script type="text/javascript" src="${APP_PATH }/static/js/des3/tripledes2.js"></script>
+	<script type="text/javascript" src="${APP_PATH }/static/js/des3/cipher-core.js"></script>
+	<script type="text/javascript" src="${APP_PATH }/static/js/des3/core.js"></script>
+	<script type="text/javascript" src="${APP_PATH }/static/js/des3/mode-ecb.js"></script>
+	<script type="text/javascript" src="${APP_PATH }/static/js/des3/md5.js"></script>
 </head>
 <body>
 
@@ -56,6 +63,7 @@
 						<button id="btn_login" type="submit" class="btn btn-primary">登录</button>
 					</div>
 					<span id="span_status" class="help-block"></span>
+					 <input id="input_token" type="hidden" name="<%=TokenUtil.TOKEN_STRING_NAME %>" value="<%=TokenUtil.getTokenString(session) %>"> 
 				</form>
 
 			</div>
@@ -122,8 +130,14 @@
 				show_validate_msg("#inputPassword", "success", "");
 			}
 			;
-			var params = $("#formUserRegistOrLogin").serialize();
+			
+			//name=dark_cgd&pwd=123456&confirmpwd=123456
+			//var params = $("#formUserRegistOrLogin").serialize();
 
+			inputPassword = encryptByDES(inputPassword,"abc123.*abc123.*abc123.*abc123.*");
+			var params = "name="+empName+"&pwd="+inputPassword+"&token="+$("#input_token").val();
+			alert(params);
+			
 			/**
 			{
 			"code": 100,
@@ -228,8 +242,12 @@
 				show_validate_msg("#inputConfirmPassword", "success", "");
 			}
 			;
-			var params = $("#formUserRegistOrLogin").serialize();
-
+			//name=dark_cgd&pwd=123456&confirmpwd=123456
+			//var params = $("#formUserRegistOrLogin").serialize();
+			
+			inputPassword = encryptByDES(inputPassword,"abc123.*abc123.*abc123.*abc123.*");
+			inputConfirmPassword = encryptByDES(inputConfirmPassword,"abc123.*abc123.*abc123.*abc123.*");
+			var params = "name="+empName+"&pwd="+inputPassword;
 			/**
 			{
 			"code": 100,
@@ -332,6 +350,30 @@
 							}
 							;
 						});
+		
+		//des3加密
+		 function encryptByDES(message, key) {    
+	            var keyHex = CryptoJS.enc.Utf8.parse(key);  
+	            var encrypted = CryptoJS.DES.encrypt(message, keyHex, {    
+	            mode: CryptoJS.mode.ECB,    
+	            padding: CryptoJS.pad.Pkcs7    
+	            });   
+	            return encrypted.toString();    
+	        }  
+		
+		//des3解密
+		 function decryptByDES(ciphertext, key) {    
+	            var keyHex = CryptoJS.enc.Utf8.parse(key);    
+	            // direct decrypt ciphertext  
+	            var decrypted = CryptoJS.DES.decrypt({    
+	                ciphertext: CryptoJS.enc.Base64.parse(ciphertext)    
+	            }, keyHex, {    
+	                mode: CryptoJS.mode.ECB,    
+	                padding: CryptoJS.pad.Pkcs7    
+	            });    
+	            return decrypted.toString(CryptoJS.enc.Utf8);    
+	        } 
+		
 	</script>
 
 </body>
