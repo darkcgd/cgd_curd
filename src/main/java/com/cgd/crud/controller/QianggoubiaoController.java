@@ -1,7 +1,6 @@
 package com.cgd.crud.controller;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -16,19 +15,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cgd.crud.bean.Employee;
+import com.cgd.crud.base.BaseController;
 import com.cgd.crud.bean.Msg;
 import com.cgd.crud.bean.Qianggoubiao;
-import com.cgd.crud.bean.User;
-import com.cgd.crud.service.EmployeeService;
 import com.cgd.crud.service.QianggoubiaoService;
-import com.cgd.crud.service.UserService;
 import com.cgd.crud.util.Constant;
 import com.cgd.crud.util.SortUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-
-import base.BaseController;
 
 @Controller
 @RequestMapping("/qianggoubiao") 

@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cgd.crud.base.BaseController;
 import com.cgd.crud.bean.Msg;
 import com.cgd.crud.bean.Platform;
 import com.cgd.crud.service.PlatformService;
-
-import base.BaseController;
 
 @Controller
 @RequestMapping("/platform") 

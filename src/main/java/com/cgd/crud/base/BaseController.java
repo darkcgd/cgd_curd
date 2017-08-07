@@ -1,4 +1,4 @@
-package base;
+package com.cgd.crud.base;
 
 import java.util.Map;
 
