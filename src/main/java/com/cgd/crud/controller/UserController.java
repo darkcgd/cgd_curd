@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -20,6 +22,7 @@ import com.cgd.crud.bean.Msg;
 import com.cgd.crud.bean.User;
 import com.cgd.crud.service.EmployeeService;
 import com.cgd.crud.service.UserService;
+import com.cgd.crud.util.TokenUtil;
 
 @Controller
 public class UserController {
@@ -76,7 +79,12 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping("/login")
-	public Msg getUserByName(@RequestParam("name")String name,@RequestParam("pwd")String pwd){
+	public Msg getUserByName(@RequestParam("name")String name,@RequestParam("pwd")String pwd,HttpServletRequest request){
+		if(TokenUtil.isTokenStringValid(request.getParameter(TokenUtil.TOKEN_STRING_NAME), request.getSession())){  
+		    //To Do 业务代码  
+			System.out.println("isTokenStringValid");
+		}  
+		
 		//先判断用户名是否是合法的表达式;
 		String regx = "(^[a-zA-Z0-9_-]{6,16}$)|(^[\u2E80-\u9FFF]{2,5})";
 		if(!name.matches(regx)){
