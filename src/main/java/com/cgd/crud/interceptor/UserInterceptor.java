@@ -27,15 +27,15 @@ public class UserInterceptor implements HandlerInterceptor{
 	 */
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)throws Exception {
-		ObjectMapper mapper = new ObjectMapper(); //转换器
-
-		//测试01：对象--json  
+		/*ObjectMapper mapper = new ObjectMapper(); //转换器
+		//测试01：对象--json
 		String json=mapper.writeValueAsString(new Msg().fail("需要重新登录")); //将对象转换成json  
 		System.out.println(json);  
 		response.setCharacterEncoding("gbk");
 		PrintWriter writer = response.getWriter();
 		writer.print(json);
-		return false;
+		return false;*/
+		return true;
 	}
 
 	/** 
