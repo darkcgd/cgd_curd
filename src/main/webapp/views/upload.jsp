@@ -11,12 +11,12 @@
     <title>Title</title>
 </head>
 <body>
-<form action="http://localhost:8080/file/upload" method="post" enctype="multipart/form-data">
+<form action="http://localhost:8080/cgd-curd/file/upload" method="post" enctype="multipart/form-data">
     选择文件:<input type="file" name="file" width="120px">
     <input type="submit" value="上传">
 </form>
 <hr>
-<form action="http://localhost:8080/file/down" method="get">
+<form action="http://localhost:8080/cgd-curd/file/down" method="get">
     <input type="submit" value="下载">
 </form>
 </body>

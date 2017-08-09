@@ -136,7 +136,7 @@
 
 			inputPassword = encryptByDES(inputPassword,"abc123.*abc123.*abc123.*abc123.*");
 			var params = "name="+empName+"&pwd="+inputPassword+"&token="+$("#input_token").val();
-			alert(params);
+			//alert(params);
 			
 			/**
 			{

@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cgd.crud.dao.ArticleBeanMapper">
+  <resultMap id="BaseResultMap" type="com.cgd.crud.bean.ArticleBean">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="directe_url" jdbcType="VARCHAR" property="directeUrl" />
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="read_count" jdbcType="INTEGER" property="readCount" />
+    <result column="tag_id1" jdbcType="INTEGER" property="tagId1" />
+    <result column="tag_id2" jdbcType="INTEGER" property="tagId2" />
+    <result column="tag_id3" jdbcType="INTEGER" property="tagId3" />
+    <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.cgd.crud.bean.ArticleBean">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, title, directe_url, logo, create_time, update_time, read_count, tag_id1, tag_id2, 
+    tag_id3, create_user_id, status, remark
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.cgd.crud.bean.ArticleBeanExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tbl_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.cgd.crud.bean.ArticleBeanExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tbl_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tbl_article
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_article
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cgd.crud.bean.ArticleBeanExample">
+    delete from tbl_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cgd.crud.bean.ArticleBean">
+    insert into tbl_article (id, title, directe_url, 
+      logo, create_time, update_time, 
+      read_count, tag_id1, tag_id2, 
+      tag_id3, create_user_id, status, 
+      remark, content)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{directeUrl,jdbcType=VARCHAR}, 
+      #{logo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{readCount,jdbcType=INTEGER}, #{tagId1,jdbcType=INTEGER}, #{tagId2,jdbcType=INTEGER}, 
+      #{tagId3,jdbcType=INTEGER}, #{createUserId,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cgd.crud.bean.ArticleBean">
+    insert into tbl_article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="directeUrl != null">
+        directe_url,
+      </if>
+      <if test="logo != null">
+        logo,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="readCount != null">
+        read_count,
+      </if>
+      <if test="tagId1 != null">
+        tag_id1,
+      </if>
+      <if test="tagId2 != null">
+        tag_id2,
+      </if>
+      <if test="tagId3 != null">
+        tag_id3,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="directeUrl != null">
+        #{directeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readCount != null">
+        #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="tagId1 != null">
+        #{tagId1,jdbcType=INTEGER},
+      </if>
+      <if test="tagId2 != null">
+        #{tagId2,jdbcType=INTEGER},
+      </if>
+      <if test="tagId3 != null">
+        #{tagId3,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cgd.crud.bean.ArticleBeanExample" resultType="java.lang.Long">
+    select count(*) from tbl_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tbl_article
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.directeUrl != null">
+        directe_url = #{record.directeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logo != null">
+        logo = #{record.logo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.readCount != null">
+        read_count = #{record.readCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.tagId1 != null">
+        tag_id1 = #{record.tagId1,jdbcType=INTEGER},
+      </if>
+      <if test="record.tagId2 != null">
+        tag_id2 = #{record.tagId2,jdbcType=INTEGER},
+      </if>
+      <if test="record.tagId3 != null">
+        tag_id3 = #{record.tagId3,jdbcType=INTEGER},
+      </if>
+      <if test="record.createUserId != null">
+        create_user_id = #{record.createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update tbl_article
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      directe_url = #{record.directeUrl,jdbcType=VARCHAR},
+      logo = #{record.logo,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      read_count = #{record.readCount,jdbcType=INTEGER},
+      tag_id1 = #{record.tagId1,jdbcType=INTEGER},
+      tag_id2 = #{record.tagId2,jdbcType=INTEGER},
+      tag_id3 = #{record.tagId3,jdbcType=INTEGER},
+      create_user_id = #{record.createUserId,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=CHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tbl_article
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      directe_url = #{record.directeUrl,jdbcType=VARCHAR},
+      logo = #{record.logo,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      read_count = #{record.readCount,jdbcType=INTEGER},
+      tag_id1 = #{record.tagId1,jdbcType=INTEGER},
+      tag_id2 = #{record.tagId2,jdbcType=INTEGER},
+      tag_id3 = #{record.tagId3,jdbcType=INTEGER},
+      create_user_id = #{record.createUserId,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=CHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cgd.crud.bean.ArticleBean">
+    update tbl_article
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="directeUrl != null">
+        directe_url = #{directeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readCount != null">
+        read_count = #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="tagId1 != null">
+        tag_id1 = #{tagId1,jdbcType=INTEGER},
+      </if>
+      <if test="tagId2 != null">
+        tag_id2 = #{tagId2,jdbcType=INTEGER},
+      </if>
+      <if test="tagId3 != null">
+        tag_id3 = #{tagId3,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cgd.crud.bean.ArticleBean">
+    update tbl_article
+    set title = #{title,jdbcType=VARCHAR},
+      directe_url = #{directeUrl,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      read_count = #{readCount,jdbcType=INTEGER},
+      tag_id1 = #{tagId1,jdbcType=INTEGER},
+      tag_id2 = #{tagId2,jdbcType=INTEGER},
+      tag_id3 = #{tagId3,jdbcType=INTEGER},
+      create_user_id = #{createUserId,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cgd.crud.bean.ArticleBean">
+    update tbl_article
+    set title = #{title,jdbcType=VARCHAR},
+      directe_url = #{directeUrl,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      read_count = #{readCount,jdbcType=INTEGER},
+      tag_id1 = #{tagId1,jdbcType=INTEGER},
+      tag_id2 = #{tagId2,jdbcType=INTEGER},
+      tag_id3 = #{tagId3,jdbcType=INTEGER},
+      create_user_id = #{createUserId,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

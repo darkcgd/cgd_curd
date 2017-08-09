@@ -46,7 +46,11 @@
 		<table tableName="user" domainObjectName="User"></table> 
 		<table tableName="qianggoubiao" domainObjectName="Qianggoubiao"></table>
 		<table tableName="brand" domainObjectName="Brand"></table>
-		<table tableName="platform" domainObjectName="Platform"></table>-->
-		<table tableName="qianggoubiao" domainObjectName="Qianggoubiao"></table>
+		<table tableName="platform" domainObjectName="Platform"></table>
+		<table tableName="tbl_article" domainObjectName="ArticleBean"></table>
+		<table tableName="tbl_tag" domainObjectName="TagBean"></table>
+		<table tableName="tbl_status" domainObjectName="StatusBean"></table>
+		-->
+		<table tableName="tbl_collect" domainObjectName="CollectBean"></table>
 	</context>
 </generatorConfiguration>

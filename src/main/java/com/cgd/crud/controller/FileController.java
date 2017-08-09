@@ -26,8 +26,10 @@ public class FileController {
         String path = request.getSession().getServletContext().getRealPath("upload");
         String fileName = file.getOriginalFilename();
         File dir = new File(path,fileName);
-        if(!new File(path).exists()){
-            dir.mkdir();
+
+        File fileDir = new File(path);
+        if(!fileDir.exists()){
+            fileDir.mkdirs();
         }
         if(!dir.exists()){
             dir.mkdirs();
