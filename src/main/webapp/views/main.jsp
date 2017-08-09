@@ -113,8 +113,18 @@
 
 			<div class="col-xs-8">
 
+
+				<ul class="nav nav-tabs nav-justified">
+					<li role="presentation"><a href="#">明天</a></li>
+					<li role="presentation"><a href="#">今天(8月9日)</a></li>
+					<li role="presentation"  class="active"><a href="#">昨天</a></li>
+					<li role="presentation"><a href="#">8月7日</a></li>
+					<li role="presentation"><a href="#">8月6日</a></li>
+					<li role="presentation"><a href="#">8月5日</a></li>
+				</ul>
+
 				<div style="background-color: #F1F1F1;padding: 20px">
-					<a href="#"">
+					<a href="#">
 						<a><span style="font-size: 24px">【7.25周二】手机抢购表(京东数码超级品类日)</span></a>
 					</a> 
 					<br><br>
@@ -123,60 +133,12 @@
 						<a class="main-list-body">荣耀9 4+64金（2299-5181406）  荣耀9 4+64灰（2299-5181404）</a>
 						<br><br>
 						<a class="main-list-body">荣耀9 4+64蓝（2299-5181380）  荣耀9 4+64黑（2299-4538873）</a>
-						<br><br>
+						<br><br><br><br>
 						<a class="main-list-body">荣耀9​（2299起）</a>
 						<br><br>
 						<a class="main-list-body">荣耀9​（2299起）</a>
 				</div>
 
-				<div style="background-color: #F1F1F1;padding: 20px;margin-top: 20px">
-					<a href="#"">
-						<a><span style="font-size: 24px">【7.25周二】手机抢购表(京东数码超级品类日)</span></a>
-					</a> 
-					<br><br>
-					<a  style="font-size: 20px;margin-left: 20px" href="#">00:00【京东数码品类日】</a>
-						<br><br>
-						<a class="main-list-body">荣耀9 4+64金（2299-5181406）  荣耀9 4+64灰（2299-5181404）</a>
-						<br><br>
-						<a class="main-list-body">荣耀9 4+64蓝（2299-5181380）  荣耀9 4+64黑（2299-4538873）</a>
-						<br><br>
-						<a class="main-list-body">荣耀9​（2299起）</a>
-						<br><br>
-						<a class="main-list-body">荣耀9​（2299起）</a>
-				</div>
-
-				<div style="background-color: #F1F1F1;padding: 20px;margin-top: 20px">
-					<a href="#"">
-						<a><span style="font-size: 24px">【7.25周二】手机抢购表(京东数码超级品类日)</span></a>
-					</a> 
-					<br><br>
-					<a  style="font-size: 20px;margin-left: 20px" href="#">00:00【京东数码品类日】</a>
-						<br><br>
-						<a class="main-list-body">荣耀9 4+64金（2299-5181406）  荣耀9 4+64灰（2299-5181404）</a>
-						<br><br>
-						<a class="main-list-body">荣耀9 4+64蓝（2299-5181380）  荣耀9 4+64黑（2299-4538873）</a>
-						<br><br>
-						<a class="main-list-body">荣耀9​（2299起）</a>
-						<br><br>
-						<a class="main-list-body">荣耀9​（2299起）</a>
-				</div>
-
-				<div style="background-color: #F1F1F1;padding: 20px;margin-top: 20px">
-					<a href="#"">
-						<a><span style="font-size: 24px">【7.25周二】手机抢购表(京东数码超级品类日)</span></a>
-					</a> 
-					<br><br>
-					<a  style="font-size: 20px;margin-left: 20px" href="#">00:00【京东数码品类日】</a>
-						<br><br>
-						<a class="main-list-body">荣耀9 4+64金（2299-5181406）  荣耀9 4+64灰（2299-5181404）</a>
-						<br><br>
-						<a class="main-list-body">荣耀9 4+64蓝（2299-5181380）  荣耀9 4+64黑（2299-4538873）</a>
-						<br><br>
-						<a class="main-list-body">荣耀9​（2299起）</a>
-						<br><br>
-						<a class="main-list-body">荣耀9​（2299起）</a>
-				</div>
-				
 			</div>
 		</div>
 	</div>
@@ -184,6 +146,7 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			dropdownOpen();//调用
+			getQianggoubiaoInfo(1);
 		});
 		/**
 		 * 鼠标划过就展开子菜单，免得需要点击才能展开
@@ -206,9 +169,9 @@
 			to_page(1);
 		});
 		
-		function to_page(pn){
+		function getQianggoubiaoInfo(qianggouTime,pn){
 			$.ajax({
-				url:"${APP_PATH}/emps",
+				url:"${APP_PATH}/qianggoubiao/getInfo",
 				data:"pn="+pn,
 				type:"GET",
 				success:function(result){

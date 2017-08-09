@@ -593,14 +593,14 @@ public class AbDateUtil {
 	 * @param format the format
 	 * @return the time quantum
 	 */
-	public static String getTimeQuantum(String strDate, String format) {
+	/*public static String getTimeQuantum(String strDate, String format) {
 		Date mDate = getDateByFormat(strDate, format);
 		int hour  = mDate.getHours();
 		if(hour >=12)
 			return "PM";
 		else
 			return "AM";
-	}
+	}*/
 
 	/**
 	 * 根据给定的毫秒数算得时间的描述.

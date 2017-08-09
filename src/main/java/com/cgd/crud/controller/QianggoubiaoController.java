@@ -59,9 +59,6 @@ public class QianggoubiaoController extends BaseController{
 	/**
 	 * 参考 http://blog.csdn.net/whu_zcj/article/details/53506572
 	 * 获取抢购表信息(重要)
-	 * @param time 发布时间
-	 * @param brand 品牌
-	 * @param platform 平台
 	 * @return
 	 */
 	@ResponseBody

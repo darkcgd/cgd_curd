@@ -19,7 +19,7 @@ public class QianggoubiaoService {
 
 	/**
 	 * 抢购信息保存
-	 * @param user
+	 * @param data
 	 */
 	public void saveQianggoubiao(Qianggoubiao data) {
 		data.setCreateTime(new Date());

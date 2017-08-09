@@ -70,7 +70,8 @@ public class UserController {
 	
 	/**
 	 * 用户登录(账号密码)
-	 * @param empName
+	 * @param name
+	 * @param pwd
 	 * @return
 	 */
 	@ResponseBody
@@ -79,7 +80,7 @@ public class UserController {
 		//先判断用户名是否是合法的表达式;
 		String regx = "(^[a-zA-Z0-9_-]{6,16}$)|(^[\u2E80-\u9FFF]{2,5})";
 		if(!name.matches(regx)){
-			return Msg.fail().add("va_msg", "用户名必须是6-16位数字和字母的组合或者2-5位中文");
+			return Msg.fail().add("msg", "用户名必须是6-16位数字和字母的组合或者2-5位中文");
 		}
 		
 		//数据库用户名重复校验
