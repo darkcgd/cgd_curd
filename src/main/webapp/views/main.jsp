@@ -115,12 +115,12 @@
 
 
 				<ul class="nav nav-tabs nav-justified">
-					<li role="presentation"><a href="#">明天</a></li>
-					<li role="presentation"><a href="#">今天(8月9日)</a></li>
-					<li role="presentation"  class="active"><a href="#">昨天</a></li>
-					<li role="presentation"><a href="#">8月7日</a></li>
-					<li role="presentation"><a href="#">8月6日</a></li>
-					<li role="presentation"><a href="#">8月5日</a></li>
+					<li id="li_day1" role="presentation" onclick="clickLi(id)"><a href="#">明天</a></li>
+					<li id="li_day2" role="presentation" onclick="clickLi(id)"  class="active"><a href="#">今天(8月9日)</a></li>
+					<li id="li_day3" role="presentation"  onclick="clickLi(id)"><a href="#">昨天</a></li>
+					<li id="li_day4" role="presentation" onclick="clickLi(id)"><a href="#">8月7日</a></li>
+					<li id="li_day5" role="presentation" onclick="clickLi(id)"><a href="#">8月6日</a></li>
+					<li id="li_day6" role="presentation" onclick="clickLi(id)"><a href="#">8月5日</a></li>
 				</ul>
 
 				<div style="background-color: #F1F1F1;padding: 20px">
@@ -144,8 +144,12 @@
 	</div>
 
 	<script type="text/javascript">
+        var currentdate = new Date();
+        var currentDay = currentdate.getDate(); //获取当前日(1-31)
+
 		$(document).ready(function() {
 			dropdownOpen();//调用
+			setDateToLi();
 			getQianggoubiaoInfo(1);
 		});
 		/**
@@ -161,14 +165,51 @@
 				$(this).removeClass('open');
 			});
 		}
-		
-		
-		//1、页面加载完成以后，直接去发送ajax请求,要到分页数据
-		$(function(){
-			//去首页
-			to_page(1);
-		});
-		
+
+
+        function setDateToLi(){
+            change("#li_day1 a",1);
+            change("#li_day2 a",0);
+            change("#li_day3 a",-1);
+            change("#li_day4 a",-2);
+            change("#li_day5 a",-3);
+            change("#li_day6 a",-4);
+        }
+
+
+        function change(ele,addDay) {
+            var d7 = currentdate.setDate(currentDay + addDay);
+            var date = new Date(d7);
+            var getFullYear = date.getFullYear(); //获取完整的年份(4位,1970-????)
+            var getMonth = date.getMonth(); //获取当前月份(0-11,0代表1月)
+            var getDate = date.getDate(); //获取当前日(1-31)
+			if(addDay==1){
+                $(ele).text("明天").val(getFullYear+"-"+(getMonth + 1) + "-" + getDate);
+			}else if(addDay==0){
+                $(ele).text("今天("+(getMonth + 1)+"月"+ getDate + "日)").val(getFullYear+"-"+(getMonth + 1) + "-" + getDate);
+			}else if(addDay==-1){
+                $(ele).text("昨天").val(getFullYear+"-"+(getMonth + 1) + "-" + getDate);
+            }else{
+                $(ele).text((getMonth + 1)+"月"+ getDate + "日").val(getFullYear+"-"+(getMonth + 1) + "-" + getDate);
+			}
+        }
+
+        function clickLi(id){
+            $("#li_day1").removeClass("active");
+            $("#li_day2").removeClass("active");
+            $("#li_day3").removeClass("active");
+            $("#li_day4").removeClass("active");
+            $("#li_day5").removeClass("active");
+            $("#li_day6").removeClass("active");
+
+            $("#"+id).addClass("active");
+            var value = $("#"+id).children().val();
+            getQianggoubiaoInfo(value,1);
+
+            //alert(value);
+        }
+
+
 		function getQianggoubiaoInfo(qianggouTime,pn){
 			$.ajax({
 				url:"${APP_PATH}/qianggoubiao/getInfo",

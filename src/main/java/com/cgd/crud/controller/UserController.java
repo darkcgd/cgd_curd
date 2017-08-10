@@ -4,6 +4,7 @@ import com.cgd.crud.bean.Msg;
 import com.cgd.crud.bean.User;
 import com.cgd.crud.service.TokenService;
 import com.cgd.crud.service.UserService;
+import com.cgd.crud.util.BaseUtil;
 import com.cgd.crud.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -93,13 +94,13 @@ public class UserController {
 		User userByName = userService.getUserByName(name);
 		if(userByName!=null){
 			if(userByName.getPwd()!=null&&userByName.getPwd().equals(pwd)){
-				tokenService.generateToken(userByName.getId());
+				String token = tokenService.generateToken(userByName.getId());
 
 				Msg msg = Msg.success("登录成功");
 				Map<String, Object> data = msg.getData();
 				data.put("user_id", userByName.getId());
 				data.put("user_name", userByName.getName());
-				data.put("user_token", userByName.getToken());
+				data.put("user_token", token);
 				data.put("user_phone", userByName.getPhone());
 				data.put("user_sex", userByName.getSex());
 				data.put("user_email", userByName.getEmail());

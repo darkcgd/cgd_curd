@@ -41,7 +41,7 @@ public class TokenService {
 		return null;
 	}
 
-	public void generateToken(Integer userId) {
+	public String generateToken(Integer userId) {
 		CollectBeanExample example=new CollectBeanExample();
 		//通过Criteria构造查询条件
 		CollectBeanExample.Criteria criteria=example.createCriteria();
@@ -79,5 +79,6 @@ public class TokenService {
 			collectBean.setUpdateTime(new Date(time));
 			collectBeanMapper.insert(collectBean);
 		}
+		 return md5Str;
 	}
 }
