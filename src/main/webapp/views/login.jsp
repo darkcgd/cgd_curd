@@ -62,8 +62,6 @@
 						<span class="text">记住我</span>
 						<button id="btn_login" type="submit" class="btn btn-primary">登录</button>
 					</div>
-					<span id="span_status" class="help-block"></span>
-					 <input id="input_token" type="hidden" name="<%=TokenUtil.TOKEN_STRING_NAME %>" value="<%=TokenUtil.getTokenString(session) %>"> 
 				</form>
 
 			</div>
@@ -135,7 +133,7 @@
 			//var params = $("#formUserRegistOrLogin").serialize();
 
 			inputPassword = encryptByDES(inputPassword,"abc123.*abc123.*abc123.*abc123.*");
-			var params = "name="+empName+"&pwd="+inputPassword+"&token="+$("#input_token").val();
+			var params = "name="+empName+"&pwd="+inputPassword;
 			//alert(params);
 			
 			/**

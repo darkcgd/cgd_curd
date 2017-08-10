@@ -89,7 +89,7 @@ public class ArticleController extends BaseController{
 
     }
     /**
-     * 获取新闻详情
+     * 给文章添加收藏
      * @return
      */
     @ResponseBody

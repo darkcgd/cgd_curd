@@ -1,14 +1,11 @@
 package com.cgd.crud.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-
+import com.cgd.crud.bean.Msg;
+import com.cgd.crud.bean.User;
+import com.cgd.crud.service.TokenService;
+import com.cgd.crud.service.UserService;
+import com.cgd.crud.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -17,18 +14,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cgd.crud.bean.Employee;
-import com.cgd.crud.bean.Msg;
-import com.cgd.crud.bean.User;
-import com.cgd.crud.service.EmployeeService;
-import com.cgd.crud.service.UserService;
-import com.cgd.crud.util.TokenUtil;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class UserController {
 
 	@Autowired
 	UserService userService;
+	@Autowired
+	TokenService tokenService;
 	
 	/**
 	 * 用户保存(注册)
@@ -95,6 +93,8 @@ public class UserController {
 		User userByName = userService.getUserByName(name);
 		if(userByName!=null){
 			if(userByName.getPwd()!=null&&userByName.getPwd().equals(pwd)){
+				tokenService.generateToken(userByName.getId());
+
 				Msg msg = Msg.success("登录成功");
 				Map<String, Object> data = msg.getData();
 				data.put("user_id", userByName.getId());
