@@ -153,7 +153,7 @@
 
 			//2、发送ajax请求保存员工
 			$.ajax({
-				url : "${APP_PATH}/login",
+				url : "${APP_PATH}/admin/login",
 				type : "GET",
 				data : params,
 				success : function(result) {
@@ -263,7 +263,7 @@
 
 			//2、发送ajax请求保存员工
 			$.ajax({
-				url : "${APP_PATH}/regist",
+				url : "${APP_PATH}/admin/regist",
 				type : "GET",
 				data : params,
 				success : function(result) {

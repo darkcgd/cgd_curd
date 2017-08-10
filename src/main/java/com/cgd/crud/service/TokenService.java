@@ -1,8 +1,8 @@
 package com.cgd.crud.service;
 
-import com.cgd.crud.bean.CollectBean;
-import com.cgd.crud.bean.CollectBeanExample;
-import com.cgd.crud.dao.CollectBeanMapper;
+import com.cgd.crud.bean.TokenBean;
+import com.cgd.crud.bean.TokenBeanExample;
+import com.cgd.crud.dao.TokenBeanMapper;
 import com.cgd.crud.util.AbMd5;
 import com.cgd.crud.util.BaseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,67 +17,67 @@ public class TokenService {
 	
 
 	@Autowired
-	CollectBeanMapper collectBeanMapper;
+	TokenBeanMapper tokenBeanMapper;
 	/**
 	 * 获取token
 	 * @param userId
 	 * @return
 	 */
-	public CollectBean getToken(Integer userId) {
-		CollectBeanExample example=new CollectBeanExample();
+	public TokenBean getToken(Integer userId) {
+		TokenBeanExample example=new TokenBeanExample();
 		//通过Criteria构造查询条件
-		CollectBeanExample.Criteria criteria=example.createCriteria();
+		TokenBeanExample.Criteria criteria=example.createCriteria();
 		if(BaseUtil.isNotEmpty(userId)){
 			criteria.andUserIdEqualTo(userId);
 		}
 
-		criteria.andUpdateTimeGreaterThanOrEqualTo(new Date());//过期时间大于等于现在时间
+		criteria.andExpireTimeGreaterThanOrEqualTo(new Date());//过期时间大于等于现在时间
 
 
-		List<CollectBean> collectBeans = collectBeanMapper.selectByExample(example);
-		if(collectBeans!=null&&collectBeans.size()>0){
-			return collectBeans.get(0);
+		List<TokenBean> tokenBeans = tokenBeanMapper.selectByExample(example);
+		if(tokenBeans!=null&&tokenBeans.size()>0){
+			return tokenBeans.get(0);
 		}
 		return null;
 	}
 
 	public String generateToken(Integer userId) {
-		CollectBeanExample example=new CollectBeanExample();
+		TokenBeanExample example=new TokenBeanExample();
 		//通过Criteria构造查询条件
-		CollectBeanExample.Criteria criteria=example.createCriteria();
+		TokenBeanExample.Criteria criteria=example.createCriteria();
 		if(BaseUtil.isNotEmpty(userId)){
 			criteria.andUserIdEqualTo(userId);
 		}
 
-		List<CollectBean> collectBeans = collectBeanMapper.selectByExample(example);
+		List<TokenBean> tokenBeans = tokenBeanMapper.selectByExample(example);
 
 		String uuid = UUID.randomUUID().toString().replaceAll("-","");
 		long nowTime=new Date().getTime();
 		String str=userId+uuid+nowTime;
 		String md5Str = AbMd5.MD5(str);
 
-		if(collectBeans!=null&&collectBeans.size()>0){//说明之前已经存在该token信息,现在需要修改
-			CollectBean collectBean = collectBeans.get(0);
-			collectBean.setRemark(md5Str);
+		if(tokenBeans!=null&&tokenBeans.size()>0){//说明之前已经存在该token信息,现在需要修改
+			TokenBean tokenBean = tokenBeans.get(0);
+			tokenBean.setToken(md5Str);
 			Date date = new Date();
 			long time = date.getTime();
-			collectBean.setCreateTime(date);
+			tokenBean.setCreateTime(date);
 
 			time+=1000*60*60*24*7;
-			collectBean.setUpdateTime(new Date(time));
-			collectBeanMapper.updateByExample(collectBean,example);
+			tokenBean.setExpireTime(new Date(time));
+			tokenBeanMapper.updateByExample(tokenBean,example);
 
 		}else{//说明之前未存在该token信息,需执行增 操作
-			CollectBean collectBean=new CollectBean();
-			collectBean.setUserId(userId);
-			collectBean.setRemark(md5Str);
+			TokenBean tokenBean=new TokenBean();
+			tokenBean.setUserId(userId);
+			tokenBean.setToken(md5Str);
 			Date date = new Date();
 			long time = date.getTime();
-			collectBean.setCreateTime(date);
+			tokenBean.setCreateTime(date);
 
 			time+=1000*60*60*24*7;
-			collectBean.setUpdateTime(new Date(time));
-			collectBeanMapper.insert(collectBean);
+			tokenBean.setExpireTime(new Date(time));
+			tokenBeanMapper.insert(tokenBean);
 		}
 		 return md5Str;
 	}

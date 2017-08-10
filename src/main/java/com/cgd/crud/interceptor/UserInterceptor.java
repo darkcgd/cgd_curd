@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cgd.crud.bean.CollectBean;
+import com.cgd.crud.bean.TokenBean;
 import com.cgd.crud.service.TokenService;
 import com.cgd.crud.util.BaseUtil;
 import com.cgd.crud.util.Constant;
@@ -37,14 +38,20 @@ public class UserInterceptor implements HandlerInterceptor{
 	 */
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)throws Exception {
+		String requestURI = request.getRequestURI();
+		if(requestURI!=null){
+			if(requestURI.contains("regist")||requestURI.contains("login")){
+				return true;
+			}
+		}
 		String userIdStr = request.getParameter(Constant.USER_ID);
 		String requestToken = request.getParameter(Constant.TOKEN);
 		if(BaseUtil.isNotEmpty(userIdStr)&&BaseUtil.isNotEmpty(requestToken)){
 			Integer userId = Integer.parseInt(userIdStr);
 
-			CollectBean tokenBean = tokenService.getToken(userId);
+			TokenBean tokenBean = tokenService.getToken(userId);
 			if(tokenBean!=null){
-				String saveToken = tokenBean.getRemark();
+				String saveToken = tokenBean.getToken();
 				if(BaseUtil.isNotEmpty(saveToken)&&requestToken.equals(saveToken)){
 					return true;
 				}

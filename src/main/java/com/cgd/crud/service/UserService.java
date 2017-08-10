@@ -2,6 +2,7 @@ package com.cgd.crud.service;
 
 import java.util.List;
 
+import com.cgd.crud.util.BaseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,7 +52,7 @@ NOT IN - 指相关的列必须不在传入的方法参数的list中.
 	
 	/**
 	 * 根据用户name查询用户
-	 * @param id
+	 * @param name
 	 * @return
 	 */
 	public User getUserByName(String name) {
@@ -66,5 +67,12 @@ NOT IN - 指相关的列必须不在传入的方法参数的list中.
         }else{
         	return null;
         }
+	}
+
+	public User getUserById(Integer userId) {
+		if(BaseUtil.isNotEmpty(userId)){
+			return userMapper.selectByPrimaryKey(userId);
+		}
+		return null;
 	}
 }

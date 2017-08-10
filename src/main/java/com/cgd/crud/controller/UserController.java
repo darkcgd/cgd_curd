@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@RequestMapping("/admin")
 public class UserController {
 
 	@Autowired
@@ -112,8 +113,38 @@ public class UserController {
 			return Msg.fail("用户不存在");
 		}
 	}
-	
-	
-	
-	
+
+
+	/**
+	 * 查询用户信息
+	 * @param userId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getUserInfo",method=RequestMethod.GET)
+	public Msg getUserInfo(@RequestParam(value = "userId", required=false) Integer userId,HttpServletRequest request){
+		if(BaseUtil.isEmpty(userId)){
+			Msg msg = Msg.fail("需要传userId参数");
+			Map<String, Object> data = msg.getData();
+			return msg;
+		}
+		if(TokenUtil.isTokenStringValid(request.getParameter(TokenUtil.TOKEN_STRING_NAME), request.getSession())){
+			//To Do 业务代码
+			System.out.println("isTokenStringValid");
+		}
+		User userById = userService.getUserById(userId);
+		if(userById!=null){
+			Msg msg = Msg.success("获取成功");
+			Map<String, Object> data = msg.getData();
+			data.put("user_id", userById.getId());
+			data.put("user_name", userById.getName());
+			data.put("user_phone", userById.getPhone());
+			data.put("user_sex", userById.getSex());
+			data.put("user_email", userById.getEmail());
+			return msg;
+		}else{
+			return Msg.fail("查询不到该用户!");
+		}
+	}
+
 }

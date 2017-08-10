@@ -73,22 +73,22 @@
 					</div>
 					<div>
 						<ul class="nav navbar-nav">
-							<li><a href="#">天猫优惠券</a></li>
-							<li><a href="#">京东优惠券</a></li>
-							<li><a href="#">预约提醒</a></li>
+							<li><a href="https://chaoshi.tmall.com/coupon.htm?spm=a3204.7084717.1998159245.1.pJ4Z6z">天猫优惠券</a></li>
+							<li><a href="https://sale.jd.com/act/RvoSGBc4pH0.html?cpdad=1DLSUE">京东优惠券</a></li>
+							<li><a href="http://www.qianggou8.cn">预约提醒</a></li>
 							<li><a href="http://www.qianggou8.cn">大家返</a></li>
 
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown">抢购常用链接 <b class="caret"></b>
 							</a>
 								<ul class="dropdown-menu">
-									<li><a href="#">华为常用链接</a></li>
-									<li><a href="#">小米常用链接</a></li>
-									<li><a href="#">魅族常用链接</a></li>
-									<li><a href="#">其他</a></li>
+									<li><a href="http://consumer.huawei.com/cn/mobile-phones/index.htm">华为常用链接</a></li>
+									<li><a href="https://www.mi.com">小米常用链接</a></li>
+									<li><a href="https://www.meizu.com">魅族常用链接</a></li>
+									<li><a href="https://www.taobao.com">其他</a></li>
 								</ul></li>
-							<li><a href="#">抢购软件</a></li>
-							<li><a href="#">每日报价参考 </a></li>
+							<li><a href="http://www.qianggou8.cn">抢购软件</a></li>
+							<li><a href="https://mp.weixin.qq.com/s?__biz=MzAxNzMzNDU3OA==&mid=206097994&idx=1&sn=8a1098c664e1a4fe536ac2829d9614b8#rd">每日报价参考 </a></li>
 							<li><a href="http://www.qianggou8.cn">关于大家返 </a></li>
 
 						</ul>
@@ -101,15 +101,7 @@
 
 	<div class="container">
 		<div class="row" style="margin-top: 30px">
-			<div class="col-xs-4" style="text-align: center">
-				<img src="${APP_PATH }/static/image/bg_gonggao.jpg" alt="公告"
-					class="img-rounded">
-				<img src="${APP_PATH }/static/image/bg_gonggao.jpg" alt="公告"
-					class="img-circle magintop20">
-					<br>
-				<img src="${APP_PATH }/static/image/bg_gonggao.jpg" alt="公告"
-					class="img-rounded magintop20">
-			</div>
+
 
 			<div class="col-xs-8">
 
@@ -123,22 +115,52 @@
 					<li id="li_day6" role="presentation" onclick="clickLi(id)"><a href="#">8月5日</a></li>
 				</ul>
 
-				<div style="background-color: #F1F1F1;padding: 20px">
-					<a href="#">
+				<div style="background-color: #FFFFFF;padding: 20px">
+					<%--<a href="#">
 						<a><span style="font-size: 24px">【7.25周二】手机抢购表(京东数码超级品类日)</span></a>
-					</a> 
-					<br><br>
-					<a  style="font-size: 20px;margin-left: 20px" href="#">00:00【京东数码品类日】</a>
-						<br><br>
+					</a> --%>
+					<h2 id="a_title_body" style="font-size: 20px;margin-left: 20px"><%--00:00【京东数码品类日】--%></h2>
+						<%--<br><br>
 						<a class="main-list-body">荣耀9 4+64金（2299-5181406）  荣耀9 4+64灰（2299-5181404）</a>
 						<br><br>
 						<a class="main-list-body">荣耀9 4+64蓝（2299-5181380）  荣耀9 4+64黑（2299-4538873）</a>
 						<br><br><br><br>
 						<a class="main-list-body">荣耀9​（2299起）</a>
 						<br><br>
-						<a class="main-list-body">荣耀9​（2299起）</a>
+						<a class="main-list-body">荣耀9​（2299起）</a>--%>
 				</div>
 
+			</div>
+			<div class="col-xs-4" style="text-align: center">
+				<div>
+					<span style="font-size: 30px;color: #ff0a27">公告:</span>
+					<br><br>
+					1.请加抢购群:143314905
+					<br><br>
+					2.每天会不定时更新抢购信息
+					<br><br>
+					<span style="font-size: 16px;color: #ff0a27">明天的小米7抢购会很激烈,各位抢友要给力啦!</span>
+				</div>
+				<img src="${APP_PATH }/static/image/qrcode.jpg" alt="公告"
+					 class="img-rounded img-responsive center-block magintop20">
+				<br>
+				<a href="https://detail.ju.taobao.com/home.htm?spm=a220o.1000855.1998059570.1.4732a2bdmEZBXA&item_id=549049522944&ali_trackid=2:mm_31735899_13434959_53336292:1501666709_310_1044786802">
+				<img src="${APP_PATH }/static/image/ad1.jpg" alt="公告"
+					 class="img-rounded img-responsive center-block magintop20">
+				</a>
+				<a href="https://detail.ju.taobao.com/home.htm?spm=a220o.1000855.1998059570.1.4732a2bdmEZBXA&item_id=549049522944&ali_trackid=2:mm_31735899_13434959_53336292:1501666709_310_1044786802">
+				<img src="${APP_PATH }/static/image/ad2.jpg" alt="公告"
+					 class="img-rounded img-responsive center-block magintop20">
+				</a>
+				<a href="https://detail.ju.taobao.com/home.htm?spm=a220o.1000855.1998059570.1.4732a2bdmEZBXA&item_id=549049522944&ali_trackid=2:mm_31735899_13434959_53336292:1501666709_310_1044786802">
+				<img src="${APP_PATH }/static/image/ad3.jpg" alt="公告"
+					 class="img-rounded img-responsive center-block magintop20">
+				</a>
+				<a href="https://detail.ju.taobao.com/home.htm?spm=a220o.1000855.1998059570.1.4732a2bdmEZBXA&item_id=549049522944&ali_trackid=2:mm_31735899_13434959_53336292:1501666709_310_1044786802">
+				<img src="${APP_PATH }/static/image/ad4.jpg" alt="公告"
+					 class="img-rounded img-responsive center-block magintop20">
+				</a>
+				<a href="https://detail.ju.taobao.com/home.htm?spm=a220o.1000855.1998059570.1.4732a2bdmEZBXA&item_id=549049522944&ali_trackid=2:mm_31735899_13434959_53336292:1501666709_310_1044786802">
 			</div>
 		</div>
 	</div>
@@ -148,9 +170,9 @@
         var currentDay = currentdate.getDate(); //获取当前日(1-31)
 
 		$(document).ready(function() {
-			dropdownOpen();//调用
-			setDateToLi();
-			getQianggoubiaoInfo(1);
+            getQianggoubiaoInfo(currentdate.getFullYear()+"-"+(currentdate.getMonth() + 1) + "-" + currentdate.getDate(),1);
+            dropdownOpen();//调用
+            setDateToLi();
 		});
 		/**
 		 * 鼠标划过就展开子菜单，免得需要点击才能展开
@@ -211,13 +233,33 @@
 
 
 		function getQianggoubiaoInfo(qianggouTime,pn){
+            //alert("pagerNumber="+pn+"&qianggoubiaoTime="+qianggouTime);
+            console.log("pagerNumber="+pn+"&qianggoubiaoTime="+qianggouTime)
 			$.ajax({
 				url:"${APP_PATH}/qianggoubiao/getInfo",
-				data:"pn="+pn,
+				data:"pagerNumber="+pn+"&qianggoubiaoTime="+qianggouTime,
 				type:"GET",
 				success:function(result){
-					/* alert(result);
-					console.log(result); */
+                    $("#a_title_body").empty();
+					console.log(result);
+
+                    var listInfo = result.data.list;
+                    var length=listInfo.length;
+                    if(length==0){
+                        $("<h4></h4>").append("该天暂无抢购信息!")
+                           .append("<br><br>")
+                            .appendTo("#a_title_body");
+                    }else{
+                        $.each(listInfo,function(index,item){
+                            $("<a></a>").addClass("main-list-body").append(item.qianngouName)
+                                .attr("href",item.directeUrl).append("<br><br>")
+                                .appendTo("#a_title_body");
+
+                            /*<br><br>
+                                <a class="main-list-body">荣耀9 4+64金（2299-5181406）  荣耀9 4+64灰（2299-5181404）</a>*/
+                        });
+                    }
+
 				}
 			});
 		}
