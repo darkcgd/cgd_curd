@@ -13,7 +13,7 @@ public class Qianggoubiao {
 
     private String directeUrl;
 
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+   /* @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")*/
     private Date qianggoubiaoTime;
 
     private Integer qianggouBrandId;

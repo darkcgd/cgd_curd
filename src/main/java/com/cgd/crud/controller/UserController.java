@@ -125,7 +125,6 @@ public class UserController {
 	public Msg getUserInfo(@RequestParam(value = "userId", required=false) Integer userId,HttpServletRequest request){
 		if(BaseUtil.isEmpty(userId)){
 			Msg msg = Msg.fail("需要传userId参数");
-			Map<String, Object> data = msg.getData();
 			return msg;
 		}
 		if(TokenUtil.isTokenStringValid(request.getParameter(TokenUtil.TOKEN_STRING_NAME), request.getSession())){
