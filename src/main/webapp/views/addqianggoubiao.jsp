@@ -85,6 +85,13 @@
     var currentdate = new Date();
     var currentDay = currentdate.getDate(); //获取当前日(1-31)
     $(document).ready(function() {
+
+        var isLogin = $.session.get('isLogin');
+        if (isLogin==undefined||!isLogin) {
+            window.location.href = "login.jsp";
+            window.event.returnValue = true;
+        }
+
         getBrandInfo("#select_brand");
         getPlatFormInfo("#select_platform");
 
