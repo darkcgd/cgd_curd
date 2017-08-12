@@ -49,7 +49,7 @@
 						<input type="password" class="form-control" id="inputPassword"
 							name="pwd" value="123456"> <span class="help-block"></span>
 					</div>
-					<div id="div_confirm_pwd" class="form-group help hidden">
+					<div id="div_confirm_pwd" class="form-group help hiden">
 						<input type="password" class="form-control" name="confirmpwd"
 							id="inputConfirmPassword" value="123456"> <span
 							class="help-block"></span>
@@ -84,7 +84,7 @@
 		$(document).ready(function() {
 			var isLogin = $.session.get('isLogin');
 			if (isLogin) {
-				window.location.href = "views/main.jsp";
+				window.location.href = "main.jsp";
 				window.event.returnValue = false;
 			}
 		});
@@ -93,7 +93,7 @@
 		$("#btn_login").click(function() {
 			var isLogin = $.session.get('isLogin');
 			if (isLogin) {
-				window.location.href = "views/main.jsp";
+				window.location.href = "main.jsp";
 				window.event.returnValue = false;
 			} else {
 				if ($("#div_confirm_pwd").is(":hidden")) {
@@ -191,7 +191,7 @@
 						$.session.set('isLogin', true)
 
 						//window.location.href="views/imageTest.jsp?userid="+data.user_id+"&username="+data.user_name;
-						window.location.href = "views/main.jsp";
+						window.location.href = "main.jsp";
 						//window.event.returnValue=false; 
 
 					}
@@ -301,7 +301,7 @@
 						$.session.set('isLogin', true)
 
 						//window.location.href="views/imageTest.jsp?userid="+data.user_id+"&username="+data.user_name;
-						window.location.href = "views/main.jsp";
+						window.location.href = "main.jsp";
 						//window.event.returnValue=false; 
 
 					}

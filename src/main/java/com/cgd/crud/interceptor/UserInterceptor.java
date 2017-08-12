@@ -61,7 +61,7 @@ public class UserInterceptor implements HandlerInterceptor{
 		//测试01：对象--json
 		String json=mapper.writeValueAsString(new Msg().fail("登录信息失效,请重新登录!")); //将对象转换成json
 		System.out.println(json);
-		response.setCharacterEncoding("gbk");
+		response.setCharacterEncoding("utf8");
 		PrintWriter writer = response.getWriter();
 		writer.print(json);
 		return false;
