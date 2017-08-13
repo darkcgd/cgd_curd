@@ -5,7 +5,7 @@ import java.util.Date;
 public class ProductCommentBean {
     private Integer commentId;
 
-    private String targetId;
+    private Integer targetId;
 
     private Integer targetType;
 
@@ -14,6 +14,12 @@ public class ProductCommentBean {
     private Integer createUserId;
 
     private String content;
+
+    private String image1;
+
+    private String image2;
+
+    private String image3;
 
     private String remark;
 
@@ -25,12 +31,12 @@ public class ProductCommentBean {
         this.commentId = commentId;
     }
 
-    public String getTargetId() {
+    public Integer getTargetId() {
         return targetId;
     }
 
-    public void setTargetId(String targetId) {
-        this.targetId = targetId == null ? null : targetId.trim();
+    public void setTargetId(Integer targetId) {
+        this.targetId = targetId;
     }
 
     public Integer getTargetType() {
@@ -63,6 +69,30 @@ public class ProductCommentBean {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    public String getImage1() {
+        return image1;
+    }
+
+    public void setImage1(String image1) {
+        this.image1 = image1 == null ? null : image1.trim();
+    }
+
+    public String getImage2() {
+        return image2;
+    }
+
+    public void setImage2(String image2) {
+        this.image2 = image2 == null ? null : image2.trim();
+    }
+
+    public String getImage3() {
+        return image3;
+    }
+
+    public void setImage3(String image3) {
+        this.image3 = image3 == null ? null : image3.trim();
     }
 
     public String getRemark() {

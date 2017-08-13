@@ -1,12 +1,10 @@
 package com.cgd.crud.controller;
 
 import com.cgd.crud.base.BaseController;
-import com.cgd.crud.bean.Brand;
 import com.cgd.crud.bean.MsgBean;
 import com.cgd.crud.bean.MsgSimple;
 import com.cgd.crud.bean.ProductBean;
-import com.cgd.crud.service.BrandService;
-import com.cgd.crud.service.CollectService;
+import com.cgd.crud.service.CommonService;
 import com.cgd.crud.service.ProductService;
 import com.cgd.crud.util.BaseUtil;
 import com.cgd.crud.util.Constant;
@@ -19,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +27,8 @@ public class ProductController extends BaseController{
 	@Autowired
 	ProductService productService;
 	@Autowired
-	CollectService collectService;
+	CommonService commonService;
+
 
 	@ResponseBody
 	@RequestMapping(value="/getProductList",method=RequestMethod.GET)
@@ -44,40 +43,61 @@ public class ProductController extends BaseController{
 		return msg;
 	}
 
-	/**
-	 *
-	 * @param collectType //1代表收藏商品,2代表收藏(关注)商家
-	 * @param targetId   //目标id 如果collectType=1 即是商品id ....
-	 * @param userId   //用户id
-	 * @return
-	 */
 	@ResponseBody
-	@RequestMapping(value="admin/doCollect",method= RequestMethod.GET)
-	public Object doCollect(@RequestParam(value = "collectType", required=false) Integer collectType,
-							 @RequestParam(value = "targetId", required=false) Integer targetId,
-							 @RequestParam(value = "userId", required=false) Integer userId){
-
-		if(BaseUtil.isEmpty(collectType)){
-			return MsgSimple.fail("需要传collectType参数");
+	@RequestMapping(value="/getProductDetail",method=RequestMethod.GET)
+	public Object getProductDetail(@RequestParam(value = "productId", required=false) Integer productId){
+		if(BaseUtil.isEmpty(productId)){
+			return MsgSimple.fail("需要传productId参数");
 		}
-		if(BaseUtil.isEmpty(targetId)){
-			return MsgSimple.fail("需要传targetId参数");
-		}
-		MsgBean msg;
-		int flag = collectService.doCollect(collectType,targetId, userId);//1代表收藏 0代表未收藏(取消收藏)
+		ProductBean productDetail = productService.getProductDetail(productId);
+		if(productDetail!=null){
+			long collectCount = commonService.getCollectCount(1, productId);
+			long praiseCount = commonService.getPraiseCount(1, productId);
+			List<String> imageStr=setProductImage(productDetail);
 
-		if(flag==1){
-			msg = MsgBean.success("收藏成功");
+			MsgBean msg = MsgBean.success("获取成功");
 			Map<String, Object> data = msg.getData();
-			data.put("isCollect",1);
+			data.put("productId", productDetail.getProductId());
+			data.put("productName", productDetail.getProductName());
+			data.put("productCode", productDetail.getProductCode());
+			data.put("logo", productDetail.getLogo());
+			data.put("image",imageStr);
+			data.put("title", productDetail.getTitle());
+			data.put("buyPrice", productDetail.getBuyPrice());
+			data.put("originalPrice", productDetail.getOriginalPrice());
+			data.put("nowPrice", productDetail.getNowPrice());
+			data.put("discount", productDetail.getDiscount());
+			data.put("productTagId", productDetail.getProductTagId());
+			data.put("graphicDetail", productDetail.getGraphicDetail());
+			data.put("isSale", productDetail.getIsSale());
+			data.put("shopId", productDetail.getShopId());
+			data.put("summary", productDetail.getSummary());
+			data.put("collectCount", collectCount);
+			data.put("praiseCount", praiseCount);
+			return msg;
 		}else{
-			msg = MsgBean.success("取消收藏成功");
-			Map<String, Object> data = msg.getData();
-			data.put("isCollect",0);
+			return MsgBean.fail("查询不到该商品");
 		}
-		return msg;
 	}
 
-
+	private List<String> setProductImage(ProductBean productDetail) {
+		List<String> imageStr=new ArrayList<>();
+		if(BaseUtil.isNotEmpty(productDetail.getImage1())){
+			imageStr.add(productDetail.getImage1());
+		}
+		if(BaseUtil.isNotEmpty(productDetail.getImage2())){
+			imageStr.add(productDetail.getImage2());
+		}
+		if(BaseUtil.isNotEmpty(productDetail.getImage3())){
+			imageStr.add(productDetail.getImage3());
+		}
+		if(BaseUtil.isNotEmpty(productDetail.getImage4())){
+			imageStr.add(productDetail.getImage4());
+		}
+		if(BaseUtil.isNotEmpty(productDetail.getImage5())){
+			imageStr.add(productDetail.getImage5());
+		}
+		return imageStr;
+	}
 
 }

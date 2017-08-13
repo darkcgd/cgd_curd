@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-08-13 19:34:38
+Date: 2017-08-13 22:11:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -133,12 +133,23 @@ CREATE TABLE `tbl_collect` (
   `update_time` datetime DEFAULT NULL,
   `remark` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`collect_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_collect
 -- ----------------------------
-INSERT INTO `tbl_collect` VALUES ('6', '1', '1', '43', '1', '2017-08-13 19:33:40', '2017-08-13 19:34:04', null);
+INSERT INTO `tbl_collect` VALUES ('7', '2', '1', '46', '1', '2017-08-13 21:21:32', '2017-08-13 21:21:32', null);
+INSERT INTO `tbl_collect` VALUES ('8', '1', '1', '46', '1', '2017-08-13 21:21:40', '2017-08-13 21:22:12', null);
+INSERT INTO `tbl_collect` VALUES ('15', '2', '2', '45', '1', '2017-08-13 21:23:57', '2017-08-13 21:24:32', null);
+INSERT INTO `tbl_collect` VALUES ('9', '1', '2', '46', '1', '2017-08-13 21:21:52', '2017-08-13 21:21:52', null);
+INSERT INTO `tbl_collect` VALUES ('10', '2', '2', '46', '1', '2017-08-13 21:22:02', '2017-08-13 21:22:02', null);
+INSERT INTO `tbl_collect` VALUES ('11', '1', '1', '43', '1', '2017-08-13 21:22:51', '2017-08-13 21:22:51', null);
+INSERT INTO `tbl_collect` VALUES ('12', '2', '1', '43', '1', '2017-08-13 21:22:56', '2017-08-13 21:22:56', null);
+INSERT INTO `tbl_collect` VALUES ('13', '1', '2', '43', '1', '2017-08-13 21:23:03', '2017-08-13 21:23:03', null);
+INSERT INTO `tbl_collect` VALUES ('14', '2', '2', '43', '1', '2017-08-13 21:23:07', '2017-08-13 21:23:07', null);
+INSERT INTO `tbl_collect` VALUES ('16', '1', '2', '45', '1', '2017-08-13 21:24:01', '2017-08-13 21:24:01', null);
+INSERT INTO `tbl_collect` VALUES ('17', '2', '1', '45', '1', '2017-08-13 21:24:06', '2017-08-13 21:24:06', null);
+INSERT INTO `tbl_collect` VALUES ('18', '1', '1', '45', '1', '2017-08-13 21:24:11', '2017-08-13 21:24:11', null);
 
 -- ----------------------------
 -- Table structure for `tbl_dept`
@@ -1229,13 +1240,20 @@ CREATE TABLE `tbl_praise` (
   `update_time` datetime DEFAULT NULL,
   `remark` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`praise_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_praise
 -- ----------------------------
-INSERT INTO `tbl_praise` VALUES ('1', '1', null, '43', '0', '2017-08-09 21:33:19', '2017-08-09 21:33:21', null);
-INSERT INTO `tbl_praise` VALUES ('2', null, null, '43', null, '2017-08-10 16:26:38', '2017-08-10 16:40:38', 'DA67BFB8AC5890144DE9F19EB353CB11');
+INSERT INTO `tbl_praise` VALUES ('5', '1', '2', '43', '0', '2017-08-13 20:15:26', '2017-08-13 20:15:38', null);
+INSERT INTO `tbl_praise` VALUES ('6', '2', '2', '45', '1', '2017-08-13 21:25:12', '2017-08-13 21:25:12', null);
+INSERT INTO `tbl_praise` VALUES ('7', '1', '2', '45', '1', '2017-08-13 21:25:15', '2017-08-13 21:25:15', null);
+INSERT INTO `tbl_praise` VALUES ('8', '2', '1', '45', '1', '2017-08-13 21:25:23', '2017-08-13 21:25:23', null);
+INSERT INTO `tbl_praise` VALUES ('9', '1', '1', '45', '1', '2017-08-13 21:25:27', '2017-08-13 21:25:27', null);
+INSERT INTO `tbl_praise` VALUES ('10', '1', '1', '47', '1', '2017-08-13 21:25:45', '2017-08-13 21:25:45', null);
+INSERT INTO `tbl_praise` VALUES ('11', '2', '1', '47', '1', '2017-08-13 21:25:48', '2017-08-13 21:25:48', null);
+INSERT INTO `tbl_praise` VALUES ('12', '1', '2', '47', '1', '2017-08-13 21:25:54', '2017-08-13 21:25:54', null);
+INSERT INTO `tbl_praise` VALUES ('13', '2', '2', '47', '1', '2017-08-13 21:25:57', '2017-08-13 21:25:57', null);
 
 -- ----------------------------
 -- Table structure for `tbl_product`
@@ -1266,12 +1284,13 @@ CREATE TABLE `tbl_product` (
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   PRIMARY KEY (`product_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_product
 -- ----------------------------
 INSERT INTO `tbl_product` VALUES ('1', '夏天家2017夏季小黑裙新款女韩版系带收腰a字短裙v领连衣裙子显瘦', '1', 'https://img.alicdn.com/imgextra/i1/50675334/TB2qBwtuctnpuFjSZFKXXalFFXa_!!50675334.jpg', 'https://img.alicdn.com/imgextra/i4/50675334/TB2_BPqaIPRfKJjSZFOXXbKEVXa_!!50675334.jpg', 'https://img.alicdn.com/imgextra/i2/50675334/TB2Bi3sumVmpuFjSZFFXXcZApXa_!!50675334.jpg', 'https://img.alicdn.com/imgextra/i1/50675334/TB2qBHSohRDOuFjSZFzXXcIipXa_!!50675334.jpg', 'https://img.alicdn.com/imgextra/i4/50675334/TB28S3WuctnpuFjSZFvXXbcTpXa_!!50675334.jpg', null, '夏天家2017夏季小黑裙新款女韩版系带收腰a字短裙v领连衣裙子显瘦', '36', '115', '69', '65', '1', '2', '作为一款裙装，小黑裙在服装界的重要性相当于法国娇兰在香水界的地位， 她经历了数十年，它成功出现在了各个女性的衣橱里。 无论是上班还是度假、工作还是休闲， 优雅百搭的黑裙子总是能够演绎出恰到好处的风格。 更重要的是，黑色百搭又显身材！', '0', '1', '作为一款裙装，小黑裙在服装界的重要性相当于法国娇兰在香水界的地位， 她经历了数十年，它成功出现在了各个女性的衣橱里。 无论是上班还是度假、工作还是休闲， 优雅百搭的黑裙子总是能够演绎出恰到好处的风格。 更重要的是，黑色百搭又显身材！', null, '2017-08-13 19:03:53', '2017-08-13 19:03:56');
+INSERT INTO `tbl_product` VALUES ('2', '珂莱蒂尔正品新款秋冬印花休闲显瘦无袖高腰打底连衣裙', '2', 'https://gdp.alicdn.com/imgextra/i4/692195348/TB26Pz0atmgF1Jjy0FaXXX5jpXa_!!692195348.jpg', 'https://img.alicdn.com/imgextra/i4/692195348/TB2C3p6yrBmpuFjSZFAXXaQ0pXa_!!692195348.jpg', 'https://img.alicdn.com/imgextra/i2/692195348/TB29uE8yohnpuFjSZFpXXcpuXXa_!!692195348.jpg', 'https://img.alicdn.com/imgextra/i4/692195348/TB2NlsFdA7myKJjSZFzXXXgDpXa_!!692195348.jpg', 'https://img.alicdn.com/imgextra/i2/692195348/TB2S1wLubXlpuFjSszfXXcSGXXa_!!692195348.jpg', 'https://img.alicdn.com/imgextra/i4/692195348/TB2n3kDbkUkyKJjy1zjXXX1wFXa_!!692195348.jpg', '珂莱蒂尔正品新款秋冬印花休闲显瘦无袖高腰打底连衣裙', '500', '3287', '1972', '60', '2', '2', '品牌旗舰,正品特惠,限时特价中,让您省钱也省心', '0', '2', '品牌旗舰,正品特惠,限时特价中,让您省钱也省心', null, '2017-08-13 21:06:41', '2017-08-13 21:06:44');
 
 -- ----------------------------
 -- Table structure for `tbl_product_category`
@@ -1300,18 +1319,24 @@ INSERT INTO `tbl_product_category` VALUES ('2', '下装', null, '2017-08-13 18:5
 DROP TABLE IF EXISTS `tbl_product_comment`;
 CREATE TABLE `tbl_product_comment` (
   `comment_id` int(11) NOT NULL AUTO_INCREMENT,
-  `target_id` varchar(255) DEFAULT NULL,
+  `target_id` int(255) DEFAULT NULL,
   `target_type` int(1) DEFAULT NULL COMMENT '评论的类型,1代表商品评论,其他为2',
   `create_time` datetime DEFAULT NULL,
   `create_user_id` int(11) DEFAULT NULL,
   `content` varchar(255) DEFAULT NULL,
+  `image1` varchar(255) DEFAULT NULL,
+  `image2` varchar(255) DEFAULT NULL,
+  `image3` varchar(255) DEFAULT NULL,
   `remark` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`comment_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_product_comment
 -- ----------------------------
+INSERT INTO `tbl_product_comment` VALUES ('1', '1', '1', '2017-08-13 21:28:42', '43', '还不错', 'https://img.alicdn.com/tfs/TB1Ya3aQVXXXXa3XVXXXXXXXXXX-360-280.jpg_180x180q90.jpg', 'https://img.alicdn.com/tps/TB11EjgLVXXXXcaXFXXXXXXXXXX-90-90.jpg_120x120.jpg', null, null);
+INSERT INTO `tbl_product_comment` VALUES ('2', '1', '1', '2017-08-13 21:32:39', '46', '一直用这个,下次还来帮衬', 'https://img.alicdn.com/tfs/TB1iODTSXXXXXc2aXXXXXXXXXXX-180-400.jpg_200x200.jpg', 'https://img.alicdn.com/tfs/TB1iODTSXXXXXc2aXXXXXXXXXXX-180-400.jpg_200x200.jpg', 'https://img.alicdn.com/tfs/TB1iODTSXXXXXc2aXXXXXXXXXXX-180-400.jpg_200x200.jpg', null);
+INSERT INTO `tbl_product_comment` VALUES ('3', '2', '1', '2017-08-13 21:33:24', '47', '戴着很舒服,支持支持', 'https://img.alicdn.com/tps/TB1QsYnJVXXXXbVXVXXXXXXXXXX-200-200.jpg_120x120.jpg', 'https://img.alicdn.com/tps/TB1QsYnJVXXXXbVXVXXXXXXXXXX-200-200.jpg_120x120.jpg', null, null);
 
 -- ----------------------------
 -- Table structure for `tbl_product_tag`
@@ -1362,12 +1387,13 @@ CREATE TABLE `tbl_shop` (
   `summary` varchar(255) DEFAULT NULL,
   `remark` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`shop_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_shop
 -- ----------------------------
 INSERT INTO `tbl_shop` VALUES ('1', '我的小城迷你店', 'https://img.alicdn.com/imgextra/i3/99404200/TB2976tXXgkyKJjSspiXXcwBpXa_!!99404200.jpg', 'https://img.alicdn.com/tps/TB1W_vlJFXXXXXxXXXXXXXXXXXX-150-45.png', '13600055457', '0668-7579000', '1', '中国', '广东', '深圳', '龙岗', '坂田', '和磡', '20号604', null, null, '2017-08-13 18:50:47', '2017-08-13 18:50:50', null, null);
+INSERT INTO `tbl_shop` VALUES ('2', '浪漫满店', 'https://gdp.alicdn.com/imgextra/i1/692195348/TB2VfZaz0BopuFjSZPcXXc9EpXa_!!692195348.jpg', 'https://gdp.alicdn.com/imgextra/i1/692195348/TB2VfZaz0BopuFjSZPcXXc9EpXa_!!692195348.jpg', '13428281907', '0750-32659874', '2', '中国', '广东', '深圳', '福田', '莲花', '中和', '30号203', null, null, '2017-08-13 21:09:09', '2017-08-13 21:09:12', '品牌旗舰,正品特惠,限时特价中,让您省钱也省心', null);
 
 -- ----------------------------
 -- Table structure for `tbl_shop_grade`

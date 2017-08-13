@@ -3,11 +3,14 @@
 <mapper namespace="com.cgd.crud.dao.ProductCommentBeanMapper">
   <resultMap id="BaseResultMap" type="com.cgd.crud.bean.ProductCommentBean">
     <id column="comment_id" jdbcType="INTEGER" property="commentId" />
-    <result column="target_id" jdbcType="VARCHAR" property="targetId" />
+    <result column="target_id" jdbcType="INTEGER" property="targetId" />
     <result column="target_type" jdbcType="INTEGER" property="targetType" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
     <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="image1" jdbcType="VARCHAR" property="image1" />
+    <result column="image2" jdbcType="VARCHAR" property="image2" />
+    <result column="image3" jdbcType="VARCHAR" property="image3" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -69,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    comment_id, target_id, target_type, create_time, create_user_id, content, remark
+    comment_id, target_id, target_type, create_time, create_user_id, content, image1, 
+    image2, image3, remark
   </sql>
   <select id="selectByExample" parameterType="com.cgd.crud.bean.ProductCommentBeanExample" resultMap="BaseResultMap">
     select
@@ -104,9 +108,11 @@
   <insert id="insert" parameterType="com.cgd.crud.bean.ProductCommentBean">
     insert into tbl_product_comment (comment_id, target_id, target_type, 
       create_time, create_user_id, content, 
+      image1, image2, image3, 
       remark)
-    values (#{commentId,jdbcType=INTEGER}, #{targetId,jdbcType=VARCHAR}, #{targetType,jdbcType=INTEGER}, 
+    values (#{commentId,jdbcType=INTEGER}, #{targetId,jdbcType=INTEGER}, #{targetType,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 
+      #{image1,jdbcType=VARCHAR}, #{image2,jdbcType=VARCHAR}, #{image3,jdbcType=VARCHAR}, 
       #{remark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cgd.crud.bean.ProductCommentBean">
@@ -130,6 +136,15 @@
       <if test="content != null">
         content,
       </if>
+      <if test="image1 != null">
+        image1,
+      </if>
+      <if test="image2 != null">
+        image2,
+      </if>
+      <if test="image3 != null">
+        image3,
+      </if>
       <if test="remark != null">
         remark,
       </if>
@@ -139,7 +154,7 @@
         #{commentId,jdbcType=INTEGER},
       </if>
       <if test="targetId != null">
-        #{targetId,jdbcType=VARCHAR},
+        #{targetId,jdbcType=INTEGER},
       </if>
       <if test="targetType != null">
         #{targetType,jdbcType=INTEGER},
@@ -152,6 +167,15 @@
       </if>
       <if test="content != null">
         #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="image1 != null">
+        #{image1,jdbcType=VARCHAR},
+      </if>
+      <if test="image2 != null">
+        #{image2,jdbcType=VARCHAR},
+      </if>
+      <if test="image3 != null">
+        #{image3,jdbcType=VARCHAR},
       </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
@@ -171,7 +195,7 @@
         comment_id = #{record.commentId,jdbcType=INTEGER},
       </if>
       <if test="record.targetId != null">
-        target_id = #{record.targetId,jdbcType=VARCHAR},
+        target_id = #{record.targetId,jdbcType=INTEGER},
       </if>
       <if test="record.targetType != null">
         target_type = #{record.targetType,jdbcType=INTEGER},
@@ -185,6 +209,15 @@
       <if test="record.content != null">
         content = #{record.content,jdbcType=VARCHAR},
       </if>
+      <if test="record.image1 != null">
+        image1 = #{record.image1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image2 != null">
+        image2 = #{record.image2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image3 != null">
+        image3 = #{record.image3,jdbcType=VARCHAR},
+      </if>
       <if test="record.remark != null">
         remark = #{record.remark,jdbcType=VARCHAR},
       </if>
@@ -196,11 +229,14 @@
   <update id="updateByExample" parameterType="map">
     update tbl_product_comment
     set comment_id = #{record.commentId,jdbcType=INTEGER},
-      target_id = #{record.targetId,jdbcType=VARCHAR},
+      target_id = #{record.targetId,jdbcType=INTEGER},
       target_type = #{record.targetType,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       create_user_id = #{record.createUserId,jdbcType=INTEGER},
       content = #{record.content,jdbcType=VARCHAR},
+      image1 = #{record.image1,jdbcType=VARCHAR},
+      image2 = #{record.image2,jdbcType=VARCHAR},
+      image3 = #{record.image3,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -210,7 +246,7 @@
     update tbl_product_comment
     <set>
       <if test="targetId != null">
-        target_id = #{targetId,jdbcType=VARCHAR},
+        target_id = #{targetId,jdbcType=INTEGER},
       </if>
       <if test="targetType != null">
         target_type = #{targetType,jdbcType=INTEGER},
@@ -224,6 +260,15 @@
       <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
       </if>
+      <if test="image1 != null">
+        image1 = #{image1,jdbcType=VARCHAR},
+      </if>
+      <if test="image2 != null">
+        image2 = #{image2,jdbcType=VARCHAR},
+      </if>
+      <if test="image3 != null">
+        image3 = #{image3,jdbcType=VARCHAR},
+      </if>
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
       </if>
@@ -232,11 +277,14 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.cgd.crud.bean.ProductCommentBean">
     update tbl_product_comment
-    set target_id = #{targetId,jdbcType=VARCHAR},
+    set target_id = #{targetId,jdbcType=INTEGER},
       target_type = #{targetType,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_user_id = #{createUserId,jdbcType=INTEGER},
       content = #{content,jdbcType=VARCHAR},
+      image1 = #{image1,jdbcType=VARCHAR},
+      image2 = #{image2,jdbcType=VARCHAR},
+      image3 = #{image3,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR}
     where comment_id = #{commentId,jdbcType=INTEGER}
   </update>

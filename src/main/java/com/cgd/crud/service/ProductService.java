@@ -27,6 +27,8 @@ public class ProductService {
 		return productBeanMapper.selectByExample(null);
 	}
 
-
+	public ProductBean getProductDetail(Integer productId) {
+		return productBeanMapper.selectByPrimaryKey(productId);
+	}
 
 }
