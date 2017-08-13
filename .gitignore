@@ -234,7 +234,6 @@ target/cgd-crud-1.0/static/js/des3/readme.html
 target/cgd-crud-1.0/static/js/des3/tripledes2.js
 target/cgd-crud-1.0/static/js/jquery-3.2.1.min.js
 target/cgd-crud-1.0/static/js/jquery.datetimepicker.full.js
-target/cgd-crud-1.0/static/js/jquerysession.js
 target/cgd-crud-1.0/views/addqianggoubiao.jsp
 target/cgd-crud-1.0/views/carousel.jsp
 target/cgd-crud-1.0/views/imageTest.jsp
@@ -359,3 +358,11 @@ target/classes/mbg.xml
 target/maven-archiver/pom.properties
 target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
 target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+.idea/dictionaries/Administrator.xml
+.idea/uiDesigner.xml
+target/cgd-crud-1.0/WEB-INF/classes/com/cgd/crud/bean/MsgBean.class
+target/cgd-crud-1.0/WEB-INF/classes/com/cgd/crud/bean/MsgSimple.class
+target/classes/com/cgd/crud/bean/MsgBean.class
+target/classes/com/cgd/crud/bean/MsgSimple.class
+target/cgd-crud-1.0/static/js/util.js
+target/classes/mapper/UserMapper.xml
