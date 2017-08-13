@@ -22,6 +22,7 @@
     <result column="shop_id" jdbcType="INTEGER" property="shopId" />
     <result column="summary" jdbcType="VARCHAR" property="summary" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="read_count" jdbcType="INTEGER" property="readCount" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -89,7 +90,7 @@
   <sql id="Base_Column_List">
     product_id, product_name, product_code, logo, image1, image2, image3, image4, image5, 
     title, buy_price, original_price, now_price, discount, product_tag_id, category_id, 
-    is_sale, shop_id, summary, remark, create_time, update_time
+    is_sale, shop_id, summary, remark, read_count, create_time, update_time
   </sql>
   <sql id="Blob_Column_List">
     graphic_detail
@@ -149,16 +150,18 @@
       title, buy_price, original_price, 
       now_price, discount, product_tag_id, 
       category_id, is_sale, shop_id, 
-      summary, remark, create_time, 
-      update_time, graphic_detail)
+      summary, remark, read_count, 
+      create_time, update_time, graphic_detail
+      )
     values (#{productId,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, #{productCode,jdbcType=VARCHAR}, 
       #{logo,jdbcType=VARCHAR}, #{image1,jdbcType=VARCHAR}, #{image2,jdbcType=VARCHAR}, 
       #{image3,jdbcType=VARCHAR}, #{image4,jdbcType=VARCHAR}, #{image5,jdbcType=VARCHAR}, 
       #{title,jdbcType=VARCHAR}, #{buyPrice,jdbcType=DECIMAL}, #{originalPrice,jdbcType=DECIMAL}, 
       #{nowPrice,jdbcType=DECIMAL}, #{discount,jdbcType=INTEGER}, #{productTagId,jdbcType=INTEGER}, 
       #{categoryId,jdbcType=INTEGER}, #{isSale,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, 
-      #{summary,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{graphicDetail,jdbcType=LONGVARCHAR})
+      #{summary,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{readCount,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{graphicDetail,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.cgd.crud.bean.ProductBean">
     insert into tbl_product
@@ -222,6 +225,9 @@
       </if>
       <if test="remark != null">
         remark,
+      </if>
+      <if test="readCount != null">
+        read_count,
       </if>
       <if test="createTime != null">
         create_time,
@@ -293,6 +299,9 @@
       </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="readCount != null">
+        #{readCount,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -374,6 +383,9 @@
       <if test="record.remark != null">
         remark = #{record.remark,jdbcType=VARCHAR},
       </if>
+      <if test="record.readCount != null">
+        read_count = #{record.readCount,jdbcType=INTEGER},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -410,6 +422,7 @@
       shop_id = #{record.shopId,jdbcType=INTEGER},
       summary = #{record.summary,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR},
+      read_count = #{record.readCount,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       graphic_detail = #{record.graphicDetail,jdbcType=LONGVARCHAR}
@@ -439,6 +452,7 @@
       shop_id = #{record.shopId,jdbcType=INTEGER},
       summary = #{record.summary,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR},
+      read_count = #{record.readCount,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -505,6 +519,9 @@
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
       </if>
+      <if test="readCount != null">
+        read_count = #{readCount,jdbcType=INTEGER},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -538,6 +555,7 @@
       shop_id = #{shopId,jdbcType=INTEGER},
       summary = #{summary,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
+      read_count = #{readCount,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       graphic_detail = #{graphicDetail,jdbcType=LONGVARCHAR}
@@ -564,8 +582,21 @@
       shop_id = #{shopId,jdbcType=INTEGER},
       summary = #{summary,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
+      read_count = #{readCount,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where product_id = #{productId,jdbcType=INTEGER}
   </update>
+
+  <!--update tbl_product set read_count=read_count+1 where product_id = 1-->
+  <update id="updateCountByPrimaryKey" parameterType="java.lang.Integer">
+    update tbl_product set read_count=read_count+1
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
+  <!--update tbl_product set read_count=read_count+1 where product_id = 1-->
+  <update id="updateCountTo0ByPrimaryKey" parameterType="java.lang.Integer">
+    update tbl_product set read_count=1
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
+
 </mapper>

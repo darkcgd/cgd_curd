@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-08-13 22:11:26
+Date: 2017-08-13 23:08:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1281,6 +1281,7 @@ CREATE TABLE `tbl_product` (
   `shop_id` int(11) DEFAULT NULL,
   `summary` varchar(255) DEFAULT NULL,
   `remark` varchar(255) DEFAULT NULL,
+  `read_count` int(11) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   PRIMARY KEY (`product_id`)
@@ -1289,8 +1290,8 @@ CREATE TABLE `tbl_product` (
 -- ----------------------------
 -- Records of tbl_product
 -- ----------------------------
-INSERT INTO `tbl_product` VALUES ('1', '夏天家2017夏季小黑裙新款女韩版系带收腰a字短裙v领连衣裙子显瘦', '1', 'https://img.alicdn.com/imgextra/i1/50675334/TB2qBwtuctnpuFjSZFKXXalFFXa_!!50675334.jpg', 'https://img.alicdn.com/imgextra/i4/50675334/TB2_BPqaIPRfKJjSZFOXXbKEVXa_!!50675334.jpg', 'https://img.alicdn.com/imgextra/i2/50675334/TB2Bi3sumVmpuFjSZFFXXcZApXa_!!50675334.jpg', 'https://img.alicdn.com/imgextra/i1/50675334/TB2qBHSohRDOuFjSZFzXXcIipXa_!!50675334.jpg', 'https://img.alicdn.com/imgextra/i4/50675334/TB28S3WuctnpuFjSZFvXXbcTpXa_!!50675334.jpg', null, '夏天家2017夏季小黑裙新款女韩版系带收腰a字短裙v领连衣裙子显瘦', '36', '115', '69', '65', '1', '2', '作为一款裙装，小黑裙在服装界的重要性相当于法国娇兰在香水界的地位， 她经历了数十年，它成功出现在了各个女性的衣橱里。 无论是上班还是度假、工作还是休闲， 优雅百搭的黑裙子总是能够演绎出恰到好处的风格。 更重要的是，黑色百搭又显身材！', '0', '1', '作为一款裙装，小黑裙在服装界的重要性相当于法国娇兰在香水界的地位， 她经历了数十年，它成功出现在了各个女性的衣橱里。 无论是上班还是度假、工作还是休闲， 优雅百搭的黑裙子总是能够演绎出恰到好处的风格。 更重要的是，黑色百搭又显身材！', null, '2017-08-13 19:03:53', '2017-08-13 19:03:56');
-INSERT INTO `tbl_product` VALUES ('2', '珂莱蒂尔正品新款秋冬印花休闲显瘦无袖高腰打底连衣裙', '2', 'https://gdp.alicdn.com/imgextra/i4/692195348/TB26Pz0atmgF1Jjy0FaXXX5jpXa_!!692195348.jpg', 'https://img.alicdn.com/imgextra/i4/692195348/TB2C3p6yrBmpuFjSZFAXXaQ0pXa_!!692195348.jpg', 'https://img.alicdn.com/imgextra/i2/692195348/TB29uE8yohnpuFjSZFpXXcpuXXa_!!692195348.jpg', 'https://img.alicdn.com/imgextra/i4/692195348/TB2NlsFdA7myKJjSZFzXXXgDpXa_!!692195348.jpg', 'https://img.alicdn.com/imgextra/i2/692195348/TB2S1wLubXlpuFjSszfXXcSGXXa_!!692195348.jpg', 'https://img.alicdn.com/imgextra/i4/692195348/TB2n3kDbkUkyKJjy1zjXXX1wFXa_!!692195348.jpg', '珂莱蒂尔正品新款秋冬印花休闲显瘦无袖高腰打底连衣裙', '500', '3287', '1972', '60', '2', '2', '品牌旗舰,正品特惠,限时特价中,让您省钱也省心', '0', '2', '品牌旗舰,正品特惠,限时特价中,让您省钱也省心', null, '2017-08-13 21:06:41', '2017-08-13 21:06:44');
+INSERT INTO `tbl_product` VALUES ('1', '夏天家2017夏季小黑裙新款女韩版系带收腰a字短裙v领连衣裙子显瘦', '1', 'https://img.alicdn.com/imgextra/i1/50675334/TB2qBwtuctnpuFjSZFKXXalFFXa_!!50675334.jpg', 'https://img.alicdn.com/imgextra/i4/50675334/TB2_BPqaIPRfKJjSZFOXXbKEVXa_!!50675334.jpg', 'https://img.alicdn.com/imgextra/i2/50675334/TB2Bi3sumVmpuFjSZFFXXcZApXa_!!50675334.jpg', 'https://img.alicdn.com/imgextra/i1/50675334/TB2qBHSohRDOuFjSZFzXXcIipXa_!!50675334.jpg', 'https://img.alicdn.com/imgextra/i4/50675334/TB28S3WuctnpuFjSZFvXXbcTpXa_!!50675334.jpg', null, '夏天家2017夏季小黑裙新款女韩版系带收腰a字短裙v领连衣裙子显瘦', '36', '115', '69', '65', '1', '2', '作为一款裙装，小黑裙在服装界的重要性相当于法国娇兰在香水界的地位， 她经历了数十年，它成功出现在了各个女性的衣橱里。 无论是上班还是度假、工作还是休闲， 优雅百搭的黑裙子总是能够演绎出恰到好处的风格。 更重要的是，黑色百搭又显身材！', '0', '1', '作为一款裙装，小黑裙在服装界的重要性相当于法国娇兰在香水界的地位， 她经历了数十年，它成功出现在了各个女性的衣橱里。 无论是上班还是度假、工作还是休闲， 优雅百搭的黑裙子总是能够演绎出恰到好处的风格。 更重要的是，黑色百搭又显身材！', null, '1', '2017-08-13 19:03:53', '2017-08-13 19:03:56');
+INSERT INTO `tbl_product` VALUES ('2', '珂莱蒂尔正品新款秋冬印花休闲显瘦无袖高腰打底连衣裙', '2', 'https://gdp.alicdn.com/imgextra/i4/692195348/TB26Pz0atmgF1Jjy0FaXXX5jpXa_!!692195348.jpg', 'https://img.alicdn.com/imgextra/i4/692195348/TB2C3p6yrBmpuFjSZFAXXaQ0pXa_!!692195348.jpg', 'https://img.alicdn.com/imgextra/i2/692195348/TB29uE8yohnpuFjSZFpXXcpuXXa_!!692195348.jpg', 'https://img.alicdn.com/imgextra/i4/692195348/TB2NlsFdA7myKJjSZFzXXXgDpXa_!!692195348.jpg', 'https://img.alicdn.com/imgextra/i2/692195348/TB2S1wLubXlpuFjSszfXXcSGXXa_!!692195348.jpg', 'https://img.alicdn.com/imgextra/i4/692195348/TB2n3kDbkUkyKJjy1zjXXX1wFXa_!!692195348.jpg', '珂莱蒂尔正品新款秋冬印花休闲显瘦无袖高腰打底连衣裙', '500', '3287', '1972', '60', '2', '2', '品牌旗舰,正品特惠,限时特价中,让您省钱也省心', '0', '2', '品牌旗舰,正品特惠,限时特价中,让您省钱也省心', null, '3', '2017-08-13 21:06:41', '2017-08-13 21:06:44');
 
 -- ----------------------------
 -- Table structure for `tbl_product_category`

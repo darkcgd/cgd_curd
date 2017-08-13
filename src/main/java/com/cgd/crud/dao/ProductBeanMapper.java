@@ -33,4 +33,9 @@ public interface ProductBeanMapper {
     int updateByPrimaryKeyWithBLOBs(ProductBean record);
 
     int updateByPrimaryKey(ProductBean record);
+
+    //update student set score=score+1 where id = 1
+    void updateCountByPrimaryKey(Integer productId);
+    //update student set score=0 where id = 1
+    void updateCountTo0ByPrimaryKey(Integer productId);
 }

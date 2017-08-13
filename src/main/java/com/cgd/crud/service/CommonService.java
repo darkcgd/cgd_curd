@@ -156,4 +156,24 @@ public class CommonService {
 		return productCommentBeanMapper.selectByExample(example);
 	}
 
+	/**
+	 * 根据评论类型和评论的目标id查询评论的数量
+	 * @param praiseType
+	 * @param targetId
+	 * @return
+	 */
+	public long getProductCommentCount(Integer praiseType,Integer targetId){
+		long count=0;
+		ProductCommentBeanExample example=new ProductCommentBeanExample();
+		//通过Criteria构造查询条件
+		ProductCommentBeanExample.Criteria criteria=example.createCriteria();
+		criteria.andTargetTypeEqualTo(praiseType);
+		criteria.andTargetIdEqualTo(targetId);
+		count = productCommentBeanMapper.countByExample(example);
+		if(count<0){
+			count=0;
+		}
+		return count;
+	}
+
 }

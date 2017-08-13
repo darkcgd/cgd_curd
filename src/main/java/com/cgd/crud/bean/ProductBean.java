@@ -43,6 +43,8 @@ public class ProductBean {
 
     private String remark;
 
+    private Integer readCount;
+
     private Date createTime;
 
     private Date updateTime;
@@ -207,6 +209,14 @@ public class ProductBean {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    public Integer getReadCount() {
+        return readCount;
+    }
+
+    public void setReadCount(Integer readCount) {
+        this.readCount = readCount;
     }
 
     public Date getCreateTime() {

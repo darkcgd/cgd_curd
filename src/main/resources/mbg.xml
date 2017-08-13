@@ -61,6 +61,6 @@
 		<table tableName="tbl_shop" domainObjectName="ShopBean"></table>
 		<table tableName="tbl_shop_grade" domainObjectName="ShopGradeBean"></table>
 		-->
-		<table tableName="tbl_product_comment" domainObjectName="ProductCommentBean"></table>
+		<table tableName="tbl_product" domainObjectName="ProductBean"></table>
 	</context>
 </generatorConfiguration>

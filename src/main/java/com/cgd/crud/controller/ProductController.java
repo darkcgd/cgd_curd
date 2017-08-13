@@ -4,8 +4,10 @@ import com.cgd.crud.base.BaseController;
 import com.cgd.crud.bean.MsgBean;
 import com.cgd.crud.bean.MsgSimple;
 import com.cgd.crud.bean.ProductBean;
+import com.cgd.crud.bean.User;
 import com.cgd.crud.service.CommonService;
 import com.cgd.crud.service.ProductService;
+import com.cgd.crud.util.AbDateUtil;
 import com.cgd.crud.util.BaseUtil;
 import com.cgd.crud.util.Constant;
 import com.github.pagehelper.PageHelper;
@@ -17,9 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class ProductController extends BaseController{
@@ -39,7 +39,35 @@ public class ProductController extends BaseController{
 		MsgBean msg = MsgBean.success("获取成功");
 		Map<String, Object> data = msg.getData();
 		handlerPageInfo(data,new PageInfo(info, pagerSize));
-		data.put("list", info);
+		List<Map<String,Object>> productBeanResults=new ArrayList<>();
+		for (ProductBean productBean:info) {
+			Integer productId = productBean.getProductId();
+			long collectCount = commonService.getCollectCount(1, productId);
+			long praiseCount = commonService.getPraiseCount(1, productId);
+			long productCommentCount = commonService.getProductCommentCount(1, productId);
+			Map<String,Object> map = new HashMap<>();
+			List<String> imageStr=setProductImage(productBean);
+			map.put("productId", productId);
+			map.put("productName", productBean.getProductName());
+			map.put("productCode", productBean.getProductCode());
+			map.put("logo", productBean.getLogo());
+			map.put("image",imageStr);
+			map.put("title", productBean.getTitle());
+			map.put("buyPrice", productBean.getBuyPrice());
+			map.put("originalPrice", productBean.getOriginalPrice());
+			map.put("nowPrice", productBean.getNowPrice());
+			map.put("discount", productBean.getDiscount());
+			map.put("productTagId", productBean.getProductTagId());
+			map.put("graphicDetail", productBean.getGraphicDetail());
+			map.put("isSale", productBean.getIsSale());
+			map.put("shopId", productBean.getShopId());
+			map.put("summary", productBean.getSummary());
+			map.put("collectCount", collectCount);
+			map.put("praiseCount", praiseCount);
+			map.put("commentCount", productCommentCount);
+			productBeanResults.add(map);
+		}
+		data.put("list", productBeanResults);
 		return msg;
 	}
 
@@ -51,8 +79,12 @@ public class ProductController extends BaseController{
 		}
 		ProductBean productDetail = productService.getProductDetail(productId);
 		if(productDetail!=null){
+			//插入阅读量
+			productService.updateReadCount(productId);
+
 			long collectCount = commonService.getCollectCount(1, productId);
 			long praiseCount = commonService.getPraiseCount(1, productId);
+			long productCommentCount = commonService.getProductCommentCount(1, productId);
 			List<String> imageStr=setProductImage(productDetail);
 
 			MsgBean msg = MsgBean.success("获取成功");
@@ -74,6 +106,13 @@ public class ProductController extends BaseController{
 			data.put("summary", productDetail.getSummary());
 			data.put("collectCount", collectCount);
 			data.put("praiseCount", praiseCount);
+			data.put("commentCount", productCommentCount);
+			if(productDetail.getReadCount()==null){
+				productService.updateReadCountTo0(productId);
+				data.put("readCount", 1);
+			}else{
+				data.put("readCount", productDetail.getReadCount()+1);
+			}
 			return msg;
 		}else{
 			return MsgBean.fail("查询不到该商品");
