@@ -52,6 +52,6 @@
 		<table tableName="tbl_status" domainObjectName="StatusBean"></table>
 		<table tableName="tbl_collect" domainObjectName="CollectBean"></table>
 		-->
-		<table tableName="tbl_token" domainObjectName="TokenBean"></table>
+		<table tableName="***" domainObjectName="***"></table>
 	</context>
 </generatorConfiguration>

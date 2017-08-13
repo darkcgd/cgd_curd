@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cgd.crud.base.BaseController;
 import com.cgd.crud.bean.Brand;
-import com.cgd.crud.bean.Msg;
+import com.cgd.crud.bean.MsgBean;
 import com.cgd.crud.service.BrandService;
 
 @Controller
@@ -25,9 +25,9 @@ public class BrandController extends BaseController{
 	
 	@RequestMapping(value="/getAllBrandList",method=RequestMethod.GET)
 	@ResponseBody
-	public Msg getAllBrandList(@Valid Brand brand){
+	public MsgBean getAllBrandList(@Valid Brand brand){
 		List<Brand> info = service.getAllBrandList();
-		Msg msg = Msg.success("获取成功");
+		MsgBean msg = MsgBean.success("获取成功");
 		Map<String, Object> data = msg.getData();
 		data.put("list", info);
 		return msg;

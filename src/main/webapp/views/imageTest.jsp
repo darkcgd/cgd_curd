@@ -16,8 +16,6 @@
  -->
 <script type="text/javascript"
 	src="${APP_PATH }/static/js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript"
-	src="${APP_PATH }/static/js/jquerysession.js"></script>
 <link
 	href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css"
 	rel="stylesheet">

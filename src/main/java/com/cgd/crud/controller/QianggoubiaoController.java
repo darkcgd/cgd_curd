@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cgd.crud.base.BaseController;
-import com.cgd.crud.bean.Msg;
+import com.cgd.crud.bean.MsgBean;
 import com.cgd.crud.bean.Qianggoubiao;
 import com.cgd.crud.service.QianggoubiaoService;
 import com.cgd.crud.util.Constant;
@@ -36,7 +36,7 @@ public class QianggoubiaoController extends BaseController{
 	 */
 	@RequestMapping(value="/save",method=RequestMethod.GET)
 	@ResponseBody
-	public Msg saveQianggoubiao(@Valid Qianggoubiao data,BindingResult result){
+	public MsgBean saveQianggoubiao(@Valid Qianggoubiao data, BindingResult result){
 		if(result.hasErrors()){
 			//校验失败，应该返回失败，在模态框中显示校验失败的错误信息
 			Map<String, Object> map = new HashMap<>();
@@ -46,13 +46,13 @@ public class QianggoubiaoController extends BaseController{
 				System.out.println("错误信息："+fieldError.getDefaultMessage());
 				map.put(fieldError.getField(), fieldError.getDefaultMessage());
 			}
-			return Msg.fail().add("errorFields", map);
+			return MsgBean.fail().add("errorFields", map);
 		}else{
 			if(data!=null){
 				service.saveQianggoubiao(data);
-				return Msg.success("保存成功");
+				return MsgBean.success("保存成功");
 			}
-			return Msg.success("保存失败");
+			return MsgBean.success("保存失败");
 		}
 	}
 	
@@ -63,10 +63,10 @@ public class QianggoubiaoController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping("/getInfo")
-	public Msg getInfo(@Valid Qianggoubiao qianggoubiao,
-			@RequestParam(value = "pagerNumber", defaultValue = ""+Constant.DefaultPagerNumber) Integer pagerNumber,
-			@RequestParam(value = "pagerSize", defaultValue = ""+Constant.DefaultPagerSize) Integer pagerSize,
-			BindingResult result){
+	public MsgBean getInfo(@Valid Qianggoubiao qianggoubiao,
+						   @RequestParam(value = "pagerNumber", defaultValue = ""+Constant.DefaultPagerNumber) Integer pagerNumber,
+						   @RequestParam(value = "pagerSize", defaultValue = ""+Constant.DefaultPagerSize) Integer pagerSize,
+						   BindingResult result){
 		if(result.hasErrors()){
 			//校验失败，应该返回失败，在模态框中显示校验失败的错误信息
 			Map<String, Object> map = new HashMap<>();
@@ -76,7 +76,7 @@ public class QianggoubiaoController extends BaseController{
 				System.out.println("错误信息："+fieldError.getDefaultMessage());
 				map.put(fieldError.getField(), fieldError.getDefaultMessage());
 			}
-			return Msg.fail().add("errorMsg", map);
+			return MsgBean.fail().add("errorMsg", map);
 		}else{
 			// 这不是一个分页查询
 			// 引入PageHelper分页插件
@@ -86,12 +86,12 @@ public class QianggoubiaoController extends BaseController{
 			// 封装了详细的分页信息,包括有我们查询出来的数据，传入连续显示的页数 new PageInfo(info, pagerSize)
 			List<Qianggoubiao> info = service.getInfo(qianggoubiao);
 			
-	        String [] sortNameArr = {"qianggoubiaoTime","qianngouName","brandName","platformName"};  
-	        boolean [] isAscArr = {false,false,false,false};  
+	        String [] sortNameArr = {"qianggoubiaoTime","brandName","platformName","qianngouName"};
+	        boolean [] isAscArr = {true,true,true,true};
 	        SortUtil.sort(info,sortNameArr,isAscArr);  
 			
 			
-			Msg msg = Msg.success("获取成功");
+			MsgBean msg = MsgBean.success("获取成功");
 			Map<String, Object> data = msg.getData();
 			handlerPageInfo(data,new PageInfo(info, pagerSize));
 			data.put("list", info);

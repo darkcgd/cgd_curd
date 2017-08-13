@@ -2,17 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cgd.crud.dao.UserMapper">
   <resultMap id="BaseResultMap" type="com.cgd.crud.bean.User">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+    <result column="head_url" jdbcType="VARCHAR" property="headUrl" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="age" jdbcType="INTEGER" property="age" />
-    <result column="sex" jdbcType="CHAR" property="sex" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
-    <result column="token" jdbcType="VARCHAR" property="token" />
-    <result column="token_create_time" jdbcType="TIMESTAMP" property="tokenCreateTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="user_type" jdbcType="INTEGER" property="userType" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -73,7 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, phone, email, age, sex, remark, create_time, pwd, token, token_create_time
+    user_id, user_name, pwd, head_url, phone, email, age, sex, create_time, update_time, 
+    last_login_time, user_type, remark
   </sql>
   <select id="selectByExample" parameterType="com.cgd.crud.bean.UserExample" resultMap="BaseResultMap">
     select
@@ -93,11 +96,11 @@
     select 
     <include refid="Base_Column_List" />
     from user
-    where id = #{id,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user
-    where id = #{id,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.cgd.crud.bean.UserExample">
     delete from user
@@ -106,23 +109,31 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.cgd.crud.bean.User">
-    insert into user (id, name, phone, 
-      email, age, sex, remark, 
-      create_time, pwd, token, 
-      token_create_time)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{sex,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{pwd,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, 
-      #{tokenCreateTime,jdbcType=TIMESTAMP})
+    insert into user (user_id, user_name, pwd, 
+      head_url, phone, email, 
+      age, sex, create_time, 
+      update_time, last_login_time, user_type, 
+      remark)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
+      #{headUrl,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER}, #{sex,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{userType,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cgd.crud.bean.User">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
+      <if test="userId != null">
+        user_id,
       </if>
-      <if test="name != null">
-        name,
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="pwd != null">
+        pwd,
+      </if>
+      <if test="headUrl != null">
+        head_url,
       </if>
       <if test="phone != null">
         phone,
@@ -136,28 +147,34 @@
       <if test="sex != null">
         sex,
       </if>
-      <if test="remark != null">
-        remark,
-      </if>
       <if test="createTime != null">
         create_time,
       </if>
-      <if test="pwd != null">
-        pwd,
+      <if test="updateTime != null">
+        update_time,
       </if>
-      <if test="token != null">
-        token,
+      <if test="lastLoginTime != null">
+        last_login_time,
       </if>
-      <if test="tokenCreateTime != null">
-        token_create_time,
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="remark != null">
+        remark,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="headUrl != null">
+        #{headUrl,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
@@ -169,22 +186,22 @@
         #{age,jdbcType=INTEGER},
       </if>
       <if test="sex != null">
-        #{sex,jdbcType=CHAR},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
+        #{sex,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="pwd != null">
-        #{pwd,jdbcType=VARCHAR},
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="token != null">
-        #{token,jdbcType=VARCHAR},
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="tokenCreateTime != null">
-        #{tokenCreateTime,jdbcType=TIMESTAMP},
+      <if test="userType != null">
+        #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -197,11 +214,17 @@
   <update id="updateByExampleSelective" parameterType="map">
     update user
     <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pwd != null">
+        pwd = #{record.pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headUrl != null">
+        head_url = #{record.headUrl,jdbcType=VARCHAR},
       </if>
       <if test="record.phone != null">
         phone = #{record.phone,jdbcType=VARCHAR},
@@ -213,22 +236,22 @@
         age = #{record.age,jdbcType=INTEGER},
       </if>
       <if test="record.sex != null">
-        sex = #{record.sex,jdbcType=CHAR},
-      </if>
-      <if test="record.remark != null">
-        remark = #{record.remark,jdbcType=VARCHAR},
+        sex = #{record.sex,jdbcType=INTEGER},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.pwd != null">
-        pwd = #{record.pwd,jdbcType=VARCHAR},
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.token != null">
-        token = #{record.token,jdbcType=VARCHAR},
+      <if test="record.lastLoginTime != null">
+        last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.tokenCreateTime != null">
-        token_create_time = #{record.tokenCreateTime,jdbcType=TIMESTAMP},
+      <if test="record.userType != null">
+        user_type = #{record.userType,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -237,17 +260,19 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update user
-    set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      pwd = #{record.pwd,jdbcType=VARCHAR},
+      head_url = #{record.headUrl,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       age = #{record.age,jdbcType=INTEGER},
-      sex = #{record.sex,jdbcType=CHAR},
-      remark = #{record.remark,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      pwd = #{record.pwd,jdbcType=VARCHAR},
-      token = #{record.token,jdbcType=VARCHAR},
-      token_create_time = #{record.tokenCreateTime,jdbcType=TIMESTAMP}
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      user_type = #{record.userType,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -255,8 +280,14 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.cgd.crud.bean.User">
     update user
     <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="headUrl != null">
+        head_url = #{headUrl,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
@@ -268,38 +299,40 @@
         age = #{age,jdbcType=INTEGER},
       </if>
       <if test="sex != null">
-        sex = #{sex,jdbcType=CHAR},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
+        sex = #{sex,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="pwd != null">
-        pwd = #{pwd,jdbcType=VARCHAR},
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="token != null">
-        token = #{token,jdbcType=VARCHAR},
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="tokenCreateTime != null">
-        token_create_time = #{tokenCreateTime,jdbcType=TIMESTAMP},
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.cgd.crud.bean.User">
     update user
-    set name = #{name,jdbcType=VARCHAR},
+    set user_name = #{userName,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      head_url = #{headUrl,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER},
-      sex = #{sex,jdbcType=CHAR},
-      remark = #{remark,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      pwd = #{pwd,jdbcType=VARCHAR},
-      token = #{token,jdbcType=VARCHAR},
-      token_create_time = #{tokenCreateTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      user_type = #{userType,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>

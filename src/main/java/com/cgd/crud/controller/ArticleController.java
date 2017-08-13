@@ -3,7 +3,7 @@ package com.cgd.crud.controller;
 import com.cgd.crud.base.BaseController;
 import com.cgd.crud.bean.ArticleBean;
 import com.cgd.crud.bean.CollectBean;
-import com.cgd.crud.bean.Msg;
+import com.cgd.crud.bean.MsgBean;
 import com.cgd.crud.service.ArticleService;
 import com.cgd.crud.util.BaseUtil;
 import com.cgd.crud.util.Constant;
@@ -11,15 +11,12 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +32,7 @@ public class ArticleController extends BaseController{
      */
     @RequestMapping(value="/getArticleList",method= RequestMethod.GET)
     @ResponseBody
-    public Msg getArticleList(
+    public MsgBean getArticleList(
             @Valid ArticleBean articleBean,
             @RequestParam(value = "pagerNumber", defaultValue = ""+ Constant.DefaultPagerNumber) Integer pagerNumber,
                              @RequestParam(value = "pagerSize", defaultValue = ""+Constant.DefaultPagerSize) Integer pagerSize,
@@ -46,7 +43,7 @@ public class ArticleController extends BaseController{
         List<ArticleBean> articleList = articleService.getArticleList(tagId,sort);
         PageHelper.startPage(pagerNumber, pagerSize);
 
-        Msg msg = Msg.success("获取成功");
+        MsgBean msg = MsgBean.success("获取成功");
         Map<String, Object> data = msg.getData();
         handlerPageInfo(data,new PageInfo(articleList, pagerSize));
         data.put("list", articleList);
@@ -60,12 +57,12 @@ public class ArticleController extends BaseController{
      */
     @ResponseBody
     @RequestMapping(value="/getArticleDetail",method= RequestMethod.GET)
-    public Msg getArticleDetail(@RequestParam("id") Integer id,
-                             @RequestParam(value = "userId", defaultValue = "0") Integer userId
+    public MsgBean getArticleDetail(@RequestParam("id") Integer id,
+                                    @RequestParam(value = "userId", defaultValue = "0") Integer userId
                             ){
         ArticleBean articleDetail = articleService.getArticleDetail(id);
         if(articleDetail!=null){
-            Msg msg = Msg.success("获取成功");
+            MsgBean msg = MsgBean.success("获取成功");
             Map<String, Object> data = msg.getData();
             data.put("data",articleDetail);
             if(userId!=null){
@@ -84,7 +81,7 @@ public class ArticleController extends BaseController{
             }
             return msg;
         }else{
-            return Msg.fail("获取不到该文章");
+            return MsgBean.fail("获取不到该文章");
         }
 
     }
@@ -94,17 +91,17 @@ public class ArticleController extends BaseController{
      */
     @ResponseBody
     @RequestMapping(value="/doCollect",method= RequestMethod.GET)
-    public Msg doCollect(@RequestParam(value = "id", required=false) Integer id,
+    public MsgBean doCollect(@RequestParam(value = "id", required=false) Integer id,
                              @RequestParam(value = "userId", required=false) Integer userId){
-        Msg msg;
+        MsgBean msg;
         if(BaseUtil.isEmpty(id)){
-            msg = Msg.fail("需要传id参数");
+            msg = MsgBean.fail("需要传id参数");
             Map<String, Object> data = msg.getData();
             data.put("isCollect",0);
             return msg;
         }
         if(BaseUtil.isEmpty(userId)){
-            msg = Msg.fail("需要传userId参数");
+            msg = MsgBean.fail("需要传userId参数");
             Map<String, Object> data = msg.getData();
             data.put("isCollect",0);
             return msg;
@@ -113,11 +110,11 @@ public class ArticleController extends BaseController{
         int flag = articleService.doCollect(id, userId);//1代表收藏 0代表未收藏(取消收藏)
 
         if(flag==1){
-            msg = Msg.success("收藏成功");
+            msg = MsgBean.success("收藏成功");
             Map<String, Object> data = msg.getData();
             data.put("isCollect",1);
         }else{
-            msg = Msg.success("取消收藏成功");
+            msg = MsgBean.success("取消收藏成功");
             Map<String, Object> data = msg.getData();
             data.put("isCollect",0);
         }

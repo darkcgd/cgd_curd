@@ -23,14 +23,14 @@ public class AbDES3Utils {
         setKey(str);// 生成密匙    
     }    
     
-    public AbDES3Utils() {    
-        setKey("abc123.*abc123.*abc123.*abc123.*");    
-    }    
-    
+    public AbDES3Utils() {
+        setKey("abc123.*abc123.*abc123.*abc123.*");
+    }
+
     /**   
      * 根据参数生成KEY   
      */    
-    public static void setKey(String strKey) {    
+    public static void setKey(String strKey) {
         try {   
             //对比DES  
             SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DESede");    
@@ -38,7 +38,7 @@ public class AbDES3Utils {
         } catch (Exception e) {    
             throw new RuntimeException(    
                     "Error initializing SqlMap class. Cause: " + e);    
-        }    
+        }
     }    
     
         
@@ -97,7 +97,10 @@ public class AbDES3Utils {
         byte[] byteFina = null;    
         Cipher cipher;    
         try {//对比DES   
-            cipher = Cipher.getInstance("DESede");    
+            cipher = Cipher.getInstance("DESede");
+            if(key==null){
+                setKey("abc123.*abc123.*abc123.*abc123.*");
+            }
             cipher.init(Cipher.ENCRYPT_MODE, key,SecureRandom.getInstance("SHA1PRNG"));    
             byteFina = cipher.doFinal(byteS);    
         } catch (Exception e) {    
@@ -119,7 +122,10 @@ public class AbDES3Utils {
         Cipher cipher;    
         byte[] byteFina = null;    
         try {//对比DES  
-            cipher = Cipher.getInstance("DESede");    
+            cipher = Cipher.getInstance("DESede");
+            if(key==null){
+                setKey("abc123.*abc123.*abc123.*abc123.*");
+            }
             cipher.init(Cipher.DECRYPT_MODE, key,SecureRandom.getInstance("SHA1PRNG"));    
             byteFina = cipher.doFinal(byteD);    
         } catch (Exception e) {    
@@ -135,9 +141,9 @@ public class AbDES3Utils {
     
     public static void main(String args[])  {    
     
-        String str1 = "123456";    
+        String str1 = "12345678";
         // DES加密    
-        String str2 = AbDES3Utils.encrypt(str1);    
+        String str2 = AbDES3Utils.encrypt(str1);
         String deStr = decrypt(str2);//bZMHZN5iofs=    
         //String deStr = des1.decrypt("ED5wLgc3Mnw=");    
         System.out.println("密文:" + str2);    

@@ -15,7 +15,7 @@
             http://localhost:3306/crud
      -->
 	<script type="text/javascript" src="${APP_PATH }/static/js/jquery-3.2.1.min.js"></script>
-	<script type="text/javascript" src="${APP_PATH }/static/js/jquerysession.js"></script>
+	<script type="text/javascript" src="${APP_PATH }/static/js/util.js"></script>
 	<script type="text/javascript" src="${APP_PATH }/static/js/jquery.datetimepicker.full.js"></script>
 	<link href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${APP_PATH }/static/css/login.css" rel="stylesheet">
@@ -86,10 +86,12 @@
     var currentDay = currentdate.getDate(); //获取当前日(1-31)
     $(document).ready(function() {
 
-        var isLogin = $.session.get('isLogin');
-        if (isLogin==undefined||!isLogin) {
+        var isLogin = getCookie('isLogin');
+        //console.log(isLogin);
+        //alert(isLogin);
+        if (isLogin==undefined) {
             window.location.href = "login.jsp";
-            window.event.returnValue = true;
+            return true;
         }
 
         getBrandInfo("#select_brand");
@@ -156,41 +158,6 @@
         var name = $("#input_name").val();
         var time = $("#input_time").val();
         var url = $("#input_url").val();
-        /*var regName = /(^[a-zA-Z0-9_-]{6,16}$)|(^[\u2E80-\u9FFF]{2,5})/;
-        if (!regName.test(empName)) {
-            //alert("用户名可以是2-5位中文或者6-16位英文和数字的组合");
-            show_validate_msg("#inputName", "error",
-                    "用户名需要是2-5位中文或者6-16位英文和数字的组合!");
-            return false;
-        } else {
-            show_validate_msg("#inputName", "success", "");
-        }
-        ;
-
-        //2.校验密码是否为空 是否一致
-        var inputPassword = $("#inputPassword").val();
-        var inputConfirmPassword = $("#inputConfirmPassword").val();
-        if (inputPassword == null || inputPassword == "") {
-            show_validate_msg("#inputPassword", "error", "密码不能为空!");
-            return false;
-        } else {
-            show_validate_msg("#inputPassword", "success", "");
-        }
-        ;
-        if (inputConfirmPassword == null || inputConfirmPassword == "") {
-            show_validate_msg("#inputConfirmPassword", "error", "确认密码不能为空!");
-            return false;
-        } else {
-            show_validate_msg("#inputConfirmPassword", "success", "");
-        }
-        ;
-        if (inputPassword != inputConfirmPassword) {
-            show_validate_msg("#inputConfirmPassword", "error", "两次密码不一致!");
-            return false;
-        } else {
-            show_validate_msg("#inputConfirmPassword", "success", "");
-        }*/
-        ;
         var params = $("#formAddQianggoubiao").serialize();
         //alert(params);
         //2、发送ajax请求保存抢购信息
@@ -207,10 +174,6 @@
                 } else {
                     $("#span_status").addClass("glyphicon glyphicon-ok");
                     $("#span_status").text(result.msg);
-                    var msg = result.msg;
-                    var data = result.data;
-                    var userId = data.user_id;
-                    var userName = data.user_name;
                 }
             }
         });

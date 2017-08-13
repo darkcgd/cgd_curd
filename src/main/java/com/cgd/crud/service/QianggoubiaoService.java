@@ -39,7 +39,7 @@ public class QianggoubiaoService {
 		if(data.getQianggoubiaoTime()!=null){
 			criteria.andQianggoubiaoTimeBetween(data.getQianggoubiaoTime(), AbDateUtil.tomorrow(data.getQianggoubiaoTime()));
 		}
-		example.setOrderByClause("qianggoubiao_time asc"); //asc 升序   desc 降序 
+		example.setOrderByClause("qianggoubiao_time asc"); //asc 升序   desc 降序
 		
         //可能返回多条记录  
         List<Qianggoubiao> selectByExampleWithBrand = mapper.selectByExampleWithBrand(example);

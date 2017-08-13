@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cgd.crud.bean.Department;
-import com.cgd.crud.bean.Msg;
+import com.cgd.crud.bean.MsgBean;
 import com.cgd.crud.service.DepartmentService;
 
 /**
@@ -27,10 +27,10 @@ public class DepartmentController {
 	 */
 	@RequestMapping("/depts")
 	@ResponseBody
-	public Msg getDepts(){
+	public MsgBean getDepts(){
 		//查出的所有部门信息
 		List<Department> list = departmentService.getDepts();
-		return Msg.success().add("depts", list);
+		return MsgBean.success().add("depts", list);
 	}
 
 }

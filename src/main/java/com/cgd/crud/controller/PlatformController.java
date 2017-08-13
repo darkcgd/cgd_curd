@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cgd.crud.base.BaseController;
-import com.cgd.crud.bean.Msg;
+import com.cgd.crud.bean.MsgBean;
 import com.cgd.crud.bean.Platform;
 import com.cgd.crud.service.PlatformService;
 
@@ -25,9 +25,9 @@ public class PlatformController extends BaseController{
 	
 	@RequestMapping(value="/getAllPlatformList",method=RequestMethod.GET)
 	@ResponseBody
-	public Msg getAllPlatformList(@Valid Platform platform){
+	public MsgBean getAllPlatformList(@Valid Platform platform){
 		List<Platform> info = service.getAllPlatFormList();
-		Msg msg = Msg.success("获取成功");
+		MsgBean msg = MsgBean.success("获取成功");
 		Map<String, Object> data = msg.getData();
 		data.put("list", info);
 		return msg;

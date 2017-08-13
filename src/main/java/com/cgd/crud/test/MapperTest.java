@@ -80,12 +80,12 @@ public class MapperTest {
         UserExample userExample=new UserExample();  
         //通过Criteria构造查询条件  
         UserExample.Criteria criteria=userExample.createCriteria();  
-        criteria.andNameEqualTo("dark_cgd_1").andPwdEqualTo("123456");  
+        criteria.andUserNameEqualTo("dark_cgd_1").andPwdEqualTo("123456");
         //可能返回多条记录  
         List<User> list=userMapper.selectByExample(userExample);  
         for (int i = 0; i < list.size(); i++) {  
         	User it=list.get(i);  
-            System.out.println(it.getId()+":"+it.getName());  
+            System.out.println(it.getUserId()+":"+it.getUserName());
         }  
         System.out.println("查询结束");
     }  

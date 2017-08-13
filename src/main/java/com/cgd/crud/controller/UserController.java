@@ -1,6 +1,7 @@
 package com.cgd.crud.controller;
 
-import com.cgd.crud.bean.Msg;
+import com.cgd.crud.bean.MsgBean;
+import com.cgd.crud.bean.MsgSimple;
 import com.cgd.crud.bean.User;
 import com.cgd.crud.service.TokenService;
 import com.cgd.crud.service.UserService;
@@ -17,30 +18,31 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/admin")
 public class UserController {
 
 	@Autowired
 	UserService userService;
 	@Autowired
 	TokenService tokenService;
-	
+
 	/**
 	 * 用户保存(注册)
 	 * 1、支持JSR303校验
 	 * 2、导入Hibernate-Validator
-	 * 
-	 * 
+	 *
+	 *
 	 * @return
 	 */
 	@RequestMapping(value="/regist",method=RequestMethod.GET)
 	@ResponseBody
-	public Msg saveUser(@Valid User user,BindingResult result){
+	public MsgBean regist(@Valid User user, BindingResult result){
 		if(result.hasErrors()){
 			//校验失败，应该返回失败，在模态框中显示校验失败的错误信息
 			Map<String, Object> map = new HashMap<>();
@@ -50,27 +52,29 @@ public class UserController {
 				System.out.println("错误信息："+fieldError.getDefaultMessage());
 				map.put(fieldError.getField(), fieldError.getDefaultMessage());
 			}
-			return Msg.fail().add("errorFields", map);
+			return MsgBean.fail().add("errorFields", map);
 		}else{
 			userService.saveUser(user);
-			User userByName = userService.getUserByName(user.getName());
+			User userByName = userService.getUserByName(user.getUserName());
 			if(userByName!=null){
-					Msg msg = Msg.success("注册成功");
-					Map<String, Object> data = msg.getData();
-					data.put("user_id", userByName.getId());
-					data.put("user_name", userByName.getName());
-					data.put("user_token", userByName.getToken());
-					data.put("user_phone", userByName.getPhone());
-					data.put("user_sex", userByName.getSex());
-					data.put("user_email", userByName.getEmail());
-					System.out.println(userByName.getName()+"注册成功!");
-					return msg;
+				String token = tokenService.generateToken(userByName.getUserId());
+
+				MsgBean msg = MsgBean.success("注册成功");
+				Map<String, Object> data = msg.getData();
+				data.put("user_id", userByName.getUserId());
+				data.put("user_name", userByName.getUserName());
+				data.put("user_token", token);
+				data.put("user_phone", userByName.getPhone());
+				data.put("user_sex", userByName.getSex());
+				data.put("user_email", userByName.getEmail());
+				System.out.println(userByName.getUserName()+"注册成功!");
+				return msg;
 			}else{
-				return Msg.fail("注册失败");
+				return MsgBean.fail("注册失败");
 			}
 		}
 	}
-	
+
 	/**
 	 * 用户登录(账号密码)
 	 * @param name
@@ -79,38 +83,44 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping("/login")
-	public Msg getUserByName(@RequestParam("name")String name,@RequestParam("pwd")String pwd,HttpServletRequest request){
-		if(TokenUtil.isTokenStringValid(request.getParameter(TokenUtil.TOKEN_STRING_NAME), request.getSession())){  
-		    //To Do 业务代码  
-			System.out.println("isTokenStringValid");
-		}  
-		
+	public Object login(@RequestParam(value = "name", required=false)String name, @RequestParam(value = "pwd", required=false)String pwd, HttpServletRequest request){
+		if(BaseUtil.isEmpty(name)){
+			return MsgSimple.fail("需要传name参数");
+		}
 		//先判断用户名是否是合法的表达式;
 		String regx = "(^[a-zA-Z0-9_-]{6,16}$)|(^[\u2E80-\u9FFF]{2,5})";
 		if(!name.matches(regx)){
-			return Msg.fail().add("msg", "用户名必须是6-16位数字和字母的组合或者2-5位中文");
+			return MsgSimple.fail("用户名必须是6-16位数字和字母的组合或者2-5位中文");
 		}
-		
+		if(BaseUtil.isEmpty(pwd)){
+			return MsgSimple.fail("需要传pwd参数");
+		}
+
 		//数据库用户名重复校验
 		User userByName = userService.getUserByName(name);
 		if(userByName!=null){
 			if(userByName.getPwd()!=null&&userByName.getPwd().equals(pwd)){
-				String token = tokenService.generateToken(userByName.getId());
+				String token = tokenService.generateToken(userByName.getUserId());
 
-				Msg msg = Msg.success("登录成功");
+				userByName.setLastLoginTime(new Date());
+				userService.updateUserInfo(userByName);//更新最后登录时间
+
+				MsgBean msg = MsgBean.success("登录成功");
 				Map<String, Object> data = msg.getData();
-				data.put("user_id", userByName.getId());
-				data.put("user_name", userByName.getName());
-				data.put("user_token", token);
-				data.put("user_phone", userByName.getPhone());
-				data.put("user_sex", userByName.getSex());
-				data.put("user_email", userByName.getEmail());
+				data.put("userId", userByName.getUserId());
+				data.put("name", userByName.getUserName());
+				data.put("token", token);
+				data.put("phone", userByName.getPhone());
+				data.put("sex", userByName.getSex());
+				data.put("age", userByName.getAge());
+				data.put("email", userByName.getEmail());
+				data.put("headUrl", userByName.getHeadUrl());
 				return msg;
 			}else{
-				return Msg.fail("密码错误");
+				return MsgBean.fail("密码错误");
 			}
 		}else{
-			return Msg.fail("用户不存在");
+			return MsgBean.fail("用户不存在");
 		}
 	}
 
@@ -121,29 +131,124 @@ public class UserController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/getUserInfo",method=RequestMethod.GET)
-	public Msg getUserInfo(@RequestParam(value = "userId", required=false) Integer userId,HttpServletRequest request){
+	@RequestMapping(value="/admin/getUserInfo",method=RequestMethod.GET)
+	public MsgBean getUserInfo(@RequestParam(value = "userId", required=false) Integer userId, HttpServletRequest request){
 		if(BaseUtil.isEmpty(userId)){
-			Msg msg = Msg.fail("需要传userId参数");
+			MsgBean msg = MsgBean.fail("需要传userId参数");
 			return msg;
-		}
-		if(TokenUtil.isTokenStringValid(request.getParameter(TokenUtil.TOKEN_STRING_NAME), request.getSession())){
-			//To Do 业务代码
-			System.out.println("isTokenStringValid");
 		}
 		User userById = userService.getUserById(userId);
 		if(userById!=null){
-			Msg msg = Msg.success("获取成功");
+			MsgBean msg = MsgBean.success("获取成功");
 			Map<String, Object> data = msg.getData();
-			data.put("user_id", userById.getId());
-			data.put("user_name", userById.getName());
+			data.put("user_id", userById.getUserId());
+			data.put("user_name", userById.getUserName());
 			data.put("user_phone", userById.getPhone());
 			data.put("user_sex", userById.getSex());
 			data.put("user_email", userById.getEmail());
 			return msg;
 		}else{
-			return Msg.fail("查询不到该用户!");
+			return MsgBean.fail("查询不到该用户!");
 		}
+	}
+
+	/**
+	 注册(用户名或手机号码注册)
+	 登录
+	 用户名是否已注册
+	 手机号码是否已注册
+	 获取用户信息
+	 修改用户信息(头像,昵称,性别,年龄,生日,手机号码)
+	 修改密码
+	 忘记密码
+	 发送验证码
+	 */
+	/**
+	 手机号码是否已注册
+	 */
+	@ResponseBody
+	@RequestMapping(value="/isRegisted",method=RequestMethod.GET)
+	public MsgSimple isRegisted(@RequestParam(value = "phone", required=false) String phone){
+		MsgSimple msg=null;
+		if(BaseUtil.isEmpty(phone)){
+			msg = MsgSimple.fail("需要传phone参数");
+			return msg;
+		}
+		if(!BaseUtil.isPhone(phone)){
+			msg = MsgSimple.fail("手机格式不正确");
+			return msg;
+		}
+		User user = userService.isRegisted(phone);
+		if(user!=null){
+			msg=MsgSimple.fail("该手机号码已注册!");
+		}else{
+			msg=MsgSimple.success("该手机号码还没注册!");
+		}
+		return msg;
+	}
+
+	/**
+	 * 修改用户信息(头像,昵称,性别,年龄,生日,手机号码)
+	 */
+	@ResponseBody
+	@RequestMapping(value="/admin/updateUserInfo",method=RequestMethod.GET)
+	public Object updateUserInfo(@Valid User user, BindingResult result){
+		if(result.hasErrors()){
+			//校验失败，应该返回失败，在模态框中显示校验失败的错误信息
+			Map<String, Object> map = new HashMap<>();
+			List<FieldError> errors = result.getFieldErrors();
+			for (FieldError fieldError : errors) {
+				System.out.println("错误的字段名："+fieldError.getField());
+				System.out.println("错误信息："+fieldError.getDefaultMessage());
+				map.put(fieldError.getField(), fieldError.getDefaultMessage());
+			}
+			return MsgBean.fail().add("errorFields", map);
+		}else{
+			int updateCount = userService.updateUserInfo(user);
+			return MsgSimple.success("更新成功!");
+		}
+	}
+
+	/**
+	 * 修改密码
+	 */
+	@ResponseBody
+	@RequestMapping(value="/admin/updatePwd",method=RequestMethod.GET)
+	public MsgSimple updatePwd(@RequestParam(value = "userId", required=false) Integer userId,
+							   @RequestParam(value = "oldPwd", required=false) String oldPwd,
+							   @RequestParam(value = "newPwd", required=false) String newPwd){
+		if(BaseUtil.isEmpty(oldPwd)){
+			return MsgSimple.fail("需要传oldPwd参数");
+		}
+		if(BaseUtil.isEmpty(newPwd)){
+			return MsgSimple.fail("需要传newPwd参数");
+		}
+		User userById = userService.getUserById(userId);
+		if(userById==null){
+			return MsgSimple.fail("该用户不存在");
+		}
+		if(BaseUtil.isEmpty(userById.getPwd())||!userById.getPwd().equals(oldPwd)){
+			return MsgSimple.fail("旧密码错误");
+		}
+		int updateCount = userService.updatePwd(userId, newPwd);
+		//if(updateCount>0){
+		return MsgSimple.success("修改成功!");
+		//}
+		//return MsgSimple.fail("更新失败!");
+	}
+
+	/**
+	 * 忘记密码
+	 */
+	public void forgetPwd(){
+
+	}
+
+	/**
+	 * 发送验证码
+	 */
+	public void sendCode(){
+
 	}
 
 }
