@@ -72,12 +72,12 @@ public class ArticleService {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param userId
 	 */
 	public int doCollect(Integer targetId,Integer userId) {
 		int flag=0;
-		CollectBeanExample example=new CollectBeanExample();
+		/*CollectBeanExample example=new CollectBeanExample();
         //通过Criteria构造查询条件
 		CollectBeanExample.Criteria criteria=example.createCriteria();
 		if(BaseUtil.isNotEmpty(targetId)){
@@ -107,7 +107,7 @@ public class ArticleService {
 			collectBean.setUpdateTime(new Date());
 			collectBeanMapper.insert(collectBean);
 			flag=1;
-		}
+		}*/
 		return flag;
 	}
 }

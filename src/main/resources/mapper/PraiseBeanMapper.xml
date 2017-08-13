@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cgd.crud.dao.CollectBeanMapper">
-  <resultMap id="BaseResultMap" type="com.cgd.crud.bean.CollectBean">
-    <id column="collect_id" jdbcType="INTEGER" property="collectId" />
+<mapper namespace="com.cgd.crud.dao.PraiseBeanMapper">
+  <resultMap id="BaseResultMap" type="com.cgd.crud.bean.PraiseBean">
+    <id column="praise_id" jdbcType="INTEGER" property="praiseId" />
     <result column="target_id" jdbcType="INTEGER" property="targetId" />
     <result column="target_type" jdbcType="INTEGER" property="targetType" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
@@ -70,16 +70,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    collect_id, target_id, target_type, user_id, is_cancel, create_time, update_time, 
+    praise_id, target_id, target_type, user_id, is_cancel, create_time, update_time, 
     remark
   </sql>
-  <select id="selectByExample" parameterType="com.cgd.crud.bean.CollectBeanExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.cgd.crud.bean.PraiseBeanExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tbl_collect
+    from tbl_praise
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,32 +90,32 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tbl_collect
-    where collect_id = #{collectId,jdbcType=INTEGER}
+    from tbl_praise
+    where praise_id = #{praiseId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tbl_collect
-    where collect_id = #{collectId,jdbcType=INTEGER}
+    delete from tbl_praise
+    where praise_id = #{praiseId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.cgd.crud.bean.CollectBeanExample">
-    delete from tbl_collect
+  <delete id="deleteByExample" parameterType="com.cgd.crud.bean.PraiseBeanExample">
+    delete from tbl_praise
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cgd.crud.bean.CollectBean">
-    insert into tbl_collect (collect_id, target_id, target_type, 
+  <insert id="insert" parameterType="com.cgd.crud.bean.PraiseBean">
+    insert into tbl_praise (praise_id, target_id, target_type, 
       user_id, is_cancel, create_time, 
       update_time, remark)
-    values (#{collectId,jdbcType=INTEGER}, #{targetId,jdbcType=INTEGER}, #{targetType,jdbcType=INTEGER}, 
+    values (#{praiseId,jdbcType=INTEGER}, #{targetId,jdbcType=INTEGER}, #{targetType,jdbcType=INTEGER}, 
       #{userId,jdbcType=INTEGER}, #{isCancel,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.cgd.crud.bean.CollectBean">
-    insert into tbl_collect
+  <insert id="insertSelective" parameterType="com.cgd.crud.bean.PraiseBean">
+    insert into tbl_praise
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="collectId != null">
-        collect_id,
+      <if test="praiseId != null">
+        praise_id,
       </if>
       <if test="targetId != null">
         target_id,
@@ -140,8 +140,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="collectId != null">
-        #{collectId,jdbcType=INTEGER},
+      <if test="praiseId != null">
+        #{praiseId,jdbcType=INTEGER},
       </if>
       <if test="targetId != null">
         #{targetId,jdbcType=INTEGER},
@@ -166,17 +166,17 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.cgd.crud.bean.CollectBeanExample" resultType="java.lang.Long">
-    select count(*) from tbl_collect
+  <select id="countByExample" parameterType="com.cgd.crud.bean.PraiseBeanExample" resultType="java.lang.Long">
+    select count(*) from tbl_praise
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update tbl_collect
+    update tbl_praise
     <set>
-      <if test="record.collectId != null">
-        collect_id = #{record.collectId,jdbcType=INTEGER},
+      <if test="record.praiseId != null">
+        praise_id = #{record.praiseId,jdbcType=INTEGER},
       </if>
       <if test="record.targetId != null">
         target_id = #{record.targetId,jdbcType=INTEGER},
@@ -205,8 +205,8 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update tbl_collect
-    set collect_id = #{record.collectId,jdbcType=INTEGER},
+    update tbl_praise
+    set praise_id = #{record.praiseId,jdbcType=INTEGER},
       target_id = #{record.targetId,jdbcType=INTEGER},
       target_type = #{record.targetType,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
@@ -218,8 +218,8 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cgd.crud.bean.CollectBean">
-    update tbl_collect
+  <update id="updateByPrimaryKeySelective" parameterType="com.cgd.crud.bean.PraiseBean">
+    update tbl_praise
     <set>
       <if test="targetId != null">
         target_id = #{targetId,jdbcType=INTEGER},
@@ -243,10 +243,10 @@
         remark = #{remark,jdbcType=VARCHAR},
       </if>
     </set>
-    where collect_id = #{collectId,jdbcType=INTEGER}
+    where praise_id = #{praiseId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cgd.crud.bean.CollectBean">
-    update tbl_collect
+  <update id="updateByPrimaryKey" parameterType="com.cgd.crud.bean.PraiseBean">
+    update tbl_praise
     set target_id = #{targetId,jdbcType=INTEGER},
       target_type = #{targetType,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=INTEGER},
@@ -254,6 +254,6 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       remark = #{remark,jdbcType=VARCHAR}
-    where collect_id = #{collectId,jdbcType=INTEGER}
+    where praise_id = #{praiseId,jdbcType=INTEGER}
   </update>
 </mapper>

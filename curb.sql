@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-08-13 16:32:52
+Date: 2017-08-13 19:34:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -124,21 +124,21 @@ INSERT INTO `tbl_article` VALUES ('2', '专访吴恩达，课程项目Deeplearni
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_collect`;
 CREATE TABLE `tbl_collect` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `collect_id` int(11) NOT NULL AUTO_INCREMENT,
   `target_id` int(11) DEFAULT NULL,
+  `target_type` int(11) DEFAULT NULL COMMENT '1代表收藏商品,2代表收藏(关注)商家',
   `user_id` int(11) DEFAULT NULL,
   `is_cancel` int(1) DEFAULT NULL COMMENT '1代表收藏 0代表未收藏(取消收藏)',
-  `remark` varchar(255) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `remark` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`collect_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_collect
 -- ----------------------------
-INSERT INTO `tbl_collect` VALUES ('1', '1', '43', '0', null, '2017-08-09 21:33:19', '2017-08-09 21:33:21');
-INSERT INTO `tbl_collect` VALUES ('2', null, '43', null, 'DA67BFB8AC5890144DE9F19EB353CB11', '2017-08-10 16:26:38', '2017-08-10 16:40:38');
+INSERT INTO `tbl_collect` VALUES ('6', '1', '1', '43', '1', '2017-08-13 19:33:40', '2017-08-13 19:34:04', null);
 
 -- ----------------------------
 -- Table structure for `tbl_dept`
@@ -1176,6 +1176,220 @@ INSERT INTO `tbl_emp` VALUES ('1000', '51c17998', 'M', '51c17998@cgd.com', '1');
 INSERT INTO `tbl_emp` VALUES ('1001', '885a8999', 'M', '885a8999@cgd.com', '1');
 INSERT INTO `tbl_emp` VALUES ('1002', 'dark_cgd123', 'M', 'cgd@qq.com', '2');
 INSERT INTO `tbl_emp` VALUES ('1003', '123cgd', 'F', 'cgd@qq.com', '2');
+
+-- ----------------------------
+-- Table structure for `tbl_order`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_order`;
+CREATE TABLE `tbl_order` (
+  `order_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_sn` varchar(60) DEFAULT NULL COMMENT '订单号',
+  `product_id` int(11) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL COMMENT '下单时间',
+  `order_status` int(2) DEFAULT NULL COMMENT '1待付款2待发货3发货中4待评价5已完成6已取消7已删除',
+  `user_id` int(11) DEFAULT NULL,
+  `shop_id` int(11) DEFAULT NULL,
+  `product_count` int(11) DEFAULT NULL COMMENT '下单的数量',
+  `product_price` decimal(10,0) DEFAULT NULL COMMENT '商品的单价',
+  `pay_method` int(1) DEFAULT NULL COMMENT '1微信支付 2支付宝 3银联支付 4其他平台支付',
+  `pay_sn` varchar(255) DEFAULT NULL COMMENT '支付平台对接的交易号',
+  `pay_time` datetime DEFAULT NULL COMMENT '支付时间',
+  `confirm_time` datetime DEFAULT NULL COMMENT '确认收货时间',
+  `cancel_time` datetime DEFAULT NULL COMMENT '取消订单时间',
+  `is_return` int(1) DEFAULT NULL COMMENT '1退款0不退款（默认）',
+  `pay_money` decimal(10,0) DEFAULT NULL COMMENT '实际支付费用',
+  `logistics_price` decimal(10,0) DEFAULT NULL COMMENT '物流价格',
+  `discount_price` decimal(10,0) DEFAULT NULL COMMENT '优惠的费用',
+  `reciver_name` varchar(255) DEFAULT NULL COMMENT '收货人姓名',
+  `reciver_phone` varchar(255) DEFAULT NULL COMMENT '收货人电话',
+  `reciver_addr` varchar(255) DEFAULT NULL COMMENT '收货人地址',
+  `send_time` datetime DEFAULT NULL COMMENT '配送时间',
+  `sender_id` int(11) DEFAULT NULL COMMENT '配送员',
+  `logistics_sn` varchar(255) DEFAULT NULL COMMENT '物流单号(第三方)',
+  `remark` varchar(255) DEFAULT NULL COMMENT '订单的备注(留言)',
+  `update_time` datetime DEFAULT NULL COMMENT '订单的更新时间',
+  PRIMARY KEY (`order_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_order
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tbl_praise`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_praise`;
+CREATE TABLE `tbl_praise` (
+  `praise_id` int(11) NOT NULL AUTO_INCREMENT,
+  `target_id` int(11) DEFAULT NULL,
+  `target_type` int(11) DEFAULT NULL COMMENT '1代表点赞商品,2代表点赞商家',
+  `user_id` int(11) DEFAULT NULL,
+  `is_cancel` int(1) DEFAULT NULL COMMENT '1代表收藏 0代表未收藏(取消收藏)',
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`praise_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_praise
+-- ----------------------------
+INSERT INTO `tbl_praise` VALUES ('1', '1', null, '43', '0', '2017-08-09 21:33:19', '2017-08-09 21:33:21', null);
+INSERT INTO `tbl_praise` VALUES ('2', null, null, '43', null, '2017-08-10 16:26:38', '2017-08-10 16:40:38', 'DA67BFB8AC5890144DE9F19EB353CB11');
+
+-- ----------------------------
+-- Table structure for `tbl_product`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_product`;
+CREATE TABLE `tbl_product` (
+  `product_id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_name` varchar(255) DEFAULT NULL,
+  `product_code` varchar(255) DEFAULT NULL,
+  `logo` varchar(255) DEFAULT NULL COMMENT '商品的图标',
+  `image1` varchar(255) DEFAULT NULL COMMENT '商品的展示图,下同',
+  `image2` varchar(255) DEFAULT NULL,
+  `image3` varchar(255) DEFAULT NULL,
+  `image4` varchar(255) DEFAULT NULL,
+  `image5` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `buy_price` decimal(10,0) DEFAULT NULL COMMENT '成本价',
+  `original_price` decimal(10,0) DEFAULT NULL COMMENT '原价',
+  `now_price` decimal(10,0) DEFAULT NULL COMMENT '现价',
+  `discount` int(11) DEFAULT NULL COMMENT '折扣',
+  `product_tag_id` int(11) DEFAULT NULL COMMENT '标签（0无默认，1新品2热卖3推荐4特价)',
+  `category_id` int(11) DEFAULT NULL COMMENT '商品分类id',
+  `graphic_detail` text,
+  `is_sale` int(1) DEFAULT NULL COMMENT '0上架1下架',
+  `shop_id` int(11) DEFAULT NULL,
+  `summary` varchar(255) DEFAULT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`product_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_product
+-- ----------------------------
+INSERT INTO `tbl_product` VALUES ('1', '夏天家2017夏季小黑裙新款女韩版系带收腰a字短裙v领连衣裙子显瘦', '1', 'https://img.alicdn.com/imgextra/i1/50675334/TB2qBwtuctnpuFjSZFKXXalFFXa_!!50675334.jpg', 'https://img.alicdn.com/imgextra/i4/50675334/TB2_BPqaIPRfKJjSZFOXXbKEVXa_!!50675334.jpg', 'https://img.alicdn.com/imgextra/i2/50675334/TB2Bi3sumVmpuFjSZFFXXcZApXa_!!50675334.jpg', 'https://img.alicdn.com/imgextra/i1/50675334/TB2qBHSohRDOuFjSZFzXXcIipXa_!!50675334.jpg', 'https://img.alicdn.com/imgextra/i4/50675334/TB28S3WuctnpuFjSZFvXXbcTpXa_!!50675334.jpg', null, '夏天家2017夏季小黑裙新款女韩版系带收腰a字短裙v领连衣裙子显瘦', '36', '115', '69', '65', '1', '2', '作为一款裙装，小黑裙在服装界的重要性相当于法国娇兰在香水界的地位， 她经历了数十年，它成功出现在了各个女性的衣橱里。 无论是上班还是度假、工作还是休闲， 优雅百搭的黑裙子总是能够演绎出恰到好处的风格。 更重要的是，黑色百搭又显身材！', '0', '1', '作为一款裙装，小黑裙在服装界的重要性相当于法国娇兰在香水界的地位， 她经历了数十年，它成功出现在了各个女性的衣橱里。 无论是上班还是度假、工作还是休闲， 优雅百搭的黑裙子总是能够演绎出恰到好处的风格。 更重要的是，黑色百搭又显身材！', null, '2017-08-13 19:03:53', '2017-08-13 19:03:56');
+
+-- ----------------------------
+-- Table structure for `tbl_product_category`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_product_category`;
+CREATE TABLE `tbl_product_category` (
+  `category_id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(255) DEFAULT NULL,
+  `logo` varchar(255) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `create_user_id` int(11) DEFAULT NULL,
+  `summary` varchar(255) DEFAULT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`category_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_product_category
+-- ----------------------------
+INSERT INTO `tbl_product_category` VALUES ('1', '上装', null, '2017-08-13 18:54:25', '43', null, null);
+INSERT INTO `tbl_product_category` VALUES ('2', '下装', null, '2017-08-13 18:54:43', '43', null, null);
+
+-- ----------------------------
+-- Table structure for `tbl_product_comment`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_product_comment`;
+CREATE TABLE `tbl_product_comment` (
+  `comment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `target_id` varchar(255) DEFAULT NULL,
+  `target_type` int(1) DEFAULT NULL COMMENT '评论的类型,1代表商品评论,其他为2',
+  `create_time` datetime DEFAULT NULL,
+  `create_user_id` int(11) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`comment_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_product_comment
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tbl_product_tag`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_product_tag`;
+CREATE TABLE `tbl_product_tag` (
+  `tag_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tag_name` varchar(255) DEFAULT NULL,
+  `logo` varchar(255) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `create_user_id` int(11) DEFAULT NULL,
+  `summary` varchar(255) DEFAULT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`tag_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_product_tag
+-- ----------------------------
+INSERT INTO `tbl_product_tag` VALUES ('1', '新品', null, '2017-08-13 18:55:53', '43', null, null);
+INSERT INTO `tbl_product_tag` VALUES ('2', '热卖', null, '2017-08-13 18:56:08', '43', null, null);
+INSERT INTO `tbl_product_tag` VALUES ('3', '推荐', null, '2017-08-13 18:56:22', '43', null, null);
+INSERT INTO `tbl_product_tag` VALUES ('4', '特价', null, '2017-08-13 18:56:37', '43', null, null);
+
+-- ----------------------------
+-- Table structure for `tbl_shop`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_shop`;
+CREATE TABLE `tbl_shop` (
+  `shop_id` int(11) NOT NULL AUTO_INCREMENT,
+  `shop_name` varchar(255) DEFAULT NULL,
+  `head_url` varchar(255) DEFAULT NULL,
+  `logo` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `fixed_telephone` varchar(255) DEFAULT NULL COMMENT '固定电话',
+  `grade` int(2) DEFAULT NULL,
+  `country` varchar(255) DEFAULT NULL COMMENT '国家',
+  `province` varchar(255) DEFAULT NULL COMMENT '省',
+  `city` varchar(255) DEFAULT NULL,
+  `county` varchar(255) DEFAULT NULL COMMENT '县城',
+  `town` varchar(255) DEFAULT NULL COMMENT '镇',
+  `village` varchar(255) DEFAULT NULL COMMENT '村',
+  `address` varchar(255) DEFAULT NULL,
+  `longitude` varchar(255) DEFAULT NULL,
+  `latitude` varchar(255) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `summary` varchar(255) DEFAULT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`shop_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_shop
+-- ----------------------------
+INSERT INTO `tbl_shop` VALUES ('1', '我的小城迷你店', 'https://img.alicdn.com/imgextra/i3/99404200/TB2976tXXgkyKJjSspiXXcwBpXa_!!99404200.jpg', 'https://img.alicdn.com/tps/TB1W_vlJFXXXXXxXXXXXXXXXXXX-150-45.png', '13600055457', '0668-7579000', '1', '中国', '广东', '深圳', '龙岗', '坂田', '和磡', '20号604', null, null, '2017-08-13 18:50:47', '2017-08-13 18:50:50', null, null);
+
+-- ----------------------------
+-- Table structure for `tbl_shop_grade`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_shop_grade`;
+CREATE TABLE `tbl_shop_grade` (
+  `grade_id` int(11) NOT NULL AUTO_INCREMENT,
+  `grade_name` varchar(255) DEFAULT NULL,
+  `logo` varchar(255) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `create_user_id` int(11) DEFAULT NULL,
+  `summary` varchar(255) DEFAULT NULL,
+  `remark` varchar(255) NOT NULL,
+  PRIMARY KEY (`grade_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_shop_grade
+-- ----------------------------
+INSERT INTO `tbl_shop_grade` VALUES ('1', '1心等级', null, '2017-08-13 18:52:31', '43', null, '');
+INSERT INTO `tbl_shop_grade` VALUES ('2', '2心等级', null, '2017-08-13 18:52:55', '43', null, '');
+INSERT INTO `tbl_shop_grade` VALUES ('3', '3心等级', null, '2017-08-13 18:53:09', '43', null, '');
 
 -- ----------------------------
 -- Table structure for `tbl_status`

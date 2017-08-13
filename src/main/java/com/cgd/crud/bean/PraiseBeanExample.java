@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CollectBeanExample {
+public class PraiseBeanExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public CollectBeanExample() {
+    public PraiseBeanExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -105,63 +105,63 @@ public class CollectBeanExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andCollectIdIsNull() {
-            addCriterion("collect_id is null");
+        public Criteria andPraiseIdIsNull() {
+            addCriterion("praise_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andCollectIdIsNotNull() {
-            addCriterion("collect_id is not null");
+        public Criteria andPraiseIdIsNotNull() {
+            addCriterion("praise_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCollectIdEqualTo(Integer value) {
-            addCriterion("collect_id =", value, "collectId");
+        public Criteria andPraiseIdEqualTo(Integer value) {
+            addCriterion("praise_id =", value, "praiseId");
             return (Criteria) this;
         }
 
-        public Criteria andCollectIdNotEqualTo(Integer value) {
-            addCriterion("collect_id <>", value, "collectId");
+        public Criteria andPraiseIdNotEqualTo(Integer value) {
+            addCriterion("praise_id <>", value, "praiseId");
             return (Criteria) this;
         }
 
-        public Criteria andCollectIdGreaterThan(Integer value) {
-            addCriterion("collect_id >", value, "collectId");
+        public Criteria andPraiseIdGreaterThan(Integer value) {
+            addCriterion("praise_id >", value, "praiseId");
             return (Criteria) this;
         }
 
-        public Criteria andCollectIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("collect_id >=", value, "collectId");
+        public Criteria andPraiseIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("praise_id >=", value, "praiseId");
             return (Criteria) this;
         }
 
-        public Criteria andCollectIdLessThan(Integer value) {
-            addCriterion("collect_id <", value, "collectId");
+        public Criteria andPraiseIdLessThan(Integer value) {
+            addCriterion("praise_id <", value, "praiseId");
             return (Criteria) this;
         }
 
-        public Criteria andCollectIdLessThanOrEqualTo(Integer value) {
-            addCriterion("collect_id <=", value, "collectId");
+        public Criteria andPraiseIdLessThanOrEqualTo(Integer value) {
+            addCriterion("praise_id <=", value, "praiseId");
             return (Criteria) this;
         }
 
-        public Criteria andCollectIdIn(List<Integer> values) {
-            addCriterion("collect_id in", values, "collectId");
+        public Criteria andPraiseIdIn(List<Integer> values) {
+            addCriterion("praise_id in", values, "praiseId");
             return (Criteria) this;
         }
 
-        public Criteria andCollectIdNotIn(List<Integer> values) {
-            addCriterion("collect_id not in", values, "collectId");
+        public Criteria andPraiseIdNotIn(List<Integer> values) {
+            addCriterion("praise_id not in", values, "praiseId");
             return (Criteria) this;
         }
 
-        public Criteria andCollectIdBetween(Integer value1, Integer value2) {
-            addCriterion("collect_id between", value1, value2, "collectId");
+        public Criteria andPraiseIdBetween(Integer value1, Integer value2) {
+            addCriterion("praise_id between", value1, value2, "praiseId");
             return (Criteria) this;
         }
 
-        public Criteria andCollectIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("collect_id not between", value1, value2, "collectId");
+        public Criteria andPraiseIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("praise_id not between", value1, value2, "praiseId");
             return (Criteria) this;
         }
 

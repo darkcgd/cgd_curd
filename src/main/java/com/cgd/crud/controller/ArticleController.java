@@ -85,40 +85,5 @@ public class ArticleController extends BaseController{
         }
 
     }
-    /**
-     * 给文章添加收藏
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value="/doCollect",method= RequestMethod.GET)
-    public MsgBean doCollect(@RequestParam(value = "id", required=false) Integer id,
-                             @RequestParam(value = "userId", required=false) Integer userId){
-        MsgBean msg;
-        if(BaseUtil.isEmpty(id)){
-            msg = MsgBean.fail("需要传id参数");
-            Map<String, Object> data = msg.getData();
-            data.put("isCollect",0);
-            return msg;
-        }
-        if(BaseUtil.isEmpty(userId)){
-            msg = MsgBean.fail("需要传userId参数");
-            Map<String, Object> data = msg.getData();
-            data.put("isCollect",0);
-            return msg;
-        }
-
-        int flag = articleService.doCollect(id, userId);//1代表收藏 0代表未收藏(取消收藏)
-
-        if(flag==1){
-            msg = MsgBean.success("收藏成功");
-            Map<String, Object> data = msg.getData();
-            data.put("isCollect",1);
-        }else{
-            msg = MsgBean.success("取消收藏成功");
-            Map<String, Object> data = msg.getData();
-            data.put("isCollect",0);
-        }
-        return msg;
-    }
 
 }

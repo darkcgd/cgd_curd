@@ -52,6 +52,14 @@
 		<table tableName="tbl_status" domainObjectName="StatusBean"></table>
 		<table tableName="tbl_collect" domainObjectName="CollectBean"></table>
 		-->
-		<table tableName="***" domainObjectName="***"></table>
+		<table tableName="tbl_collect" domainObjectName="CollectBean"></table>
+		<table tableName="tbl_order" domainObjectName="OrderBean"></table>
+		<table tableName="tbl_praise" domainObjectName="PraiseBean"></table>
+		<table tableName="tbl_product" domainObjectName="ProductBean"></table>
+		<table tableName="tbl_product_category" domainObjectName="ProductCategoryBean"></table>
+		<table tableName="tbl_product_comment" domainObjectName="ProductCommentBean"></table>
+		<table tableName="tbl_product_tag" domainObjectName="ProductTagBean"></table>
+		<table tableName="tbl_shop" domainObjectName="ShopBean"></table>
+		<table tableName="tbl_shop_grade" domainObjectName="ShopGradeBean"></table>
 	</context>
 </generatorConfiguration>

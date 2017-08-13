@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cgd.crud.dao.CollectBeanMapper">
-  <resultMap id="BaseResultMap" type="com.cgd.crud.bean.CollectBean">
-    <id column="collect_id" jdbcType="INTEGER" property="collectId" />
-    <result column="target_id" jdbcType="INTEGER" property="targetId" />
-    <result column="target_type" jdbcType="INTEGER" property="targetType" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="is_cancel" jdbcType="INTEGER" property="isCancel" />
+<mapper namespace="com.cgd.crud.dao.ProductTagBeanMapper">
+  <resultMap id="BaseResultMap" type="com.cgd.crud.bean.ProductTagBean">
+    <id column="tag_id" jdbcType="INTEGER" property="tagId" />
+    <result column="tag_name" jdbcType="VARCHAR" property="tagName" />
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
+    <result column="summary" jdbcType="VARCHAR" property="summary" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -70,16 +69,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    collect_id, target_id, target_type, user_id, is_cancel, create_time, update_time, 
-    remark
+    tag_id, tag_name, logo, create_time, create_user_id, summary, remark
   </sql>
-  <select id="selectByExample" parameterType="com.cgd.crud.bean.CollectBeanExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.cgd.crud.bean.ProductTagBeanExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tbl_collect
+    from tbl_product_tag
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,111 +88,102 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tbl_collect
-    where collect_id = #{collectId,jdbcType=INTEGER}
+    from tbl_product_tag
+    where tag_id = #{tagId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tbl_collect
-    where collect_id = #{collectId,jdbcType=INTEGER}
+    delete from tbl_product_tag
+    where tag_id = #{tagId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.cgd.crud.bean.CollectBeanExample">
-    delete from tbl_collect
+  <delete id="deleteByExample" parameterType="com.cgd.crud.bean.ProductTagBeanExample">
+    delete from tbl_product_tag
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cgd.crud.bean.CollectBean">
-    insert into tbl_collect (collect_id, target_id, target_type, 
-      user_id, is_cancel, create_time, 
-      update_time, remark)
-    values (#{collectId,jdbcType=INTEGER}, #{targetId,jdbcType=INTEGER}, #{targetType,jdbcType=INTEGER}, 
-      #{userId,jdbcType=INTEGER}, #{isCancel,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.cgd.crud.bean.ProductTagBean">
+    insert into tbl_product_tag (tag_id, tag_name, logo, 
+      create_time, create_user_id, summary, 
+      remark)
+    values (#{tagId,jdbcType=INTEGER}, #{tagName,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=INTEGER}, #{summary,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.cgd.crud.bean.CollectBean">
-    insert into tbl_collect
+  <insert id="insertSelective" parameterType="com.cgd.crud.bean.ProductTagBean">
+    insert into tbl_product_tag
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="collectId != null">
-        collect_id,
+      <if test="tagId != null">
+        tag_id,
       </if>
-      <if test="targetId != null">
-        target_id,
+      <if test="tagName != null">
+        tag_name,
       </if>
-      <if test="targetType != null">
-        target_type,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="isCancel != null">
-        is_cancel,
+      <if test="logo != null">
+        logo,
       </if>
       <if test="createTime != null">
         create_time,
       </if>
-      <if test="updateTime != null">
-        update_time,
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="summary != null">
+        summary,
       </if>
       <if test="remark != null">
         remark,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="collectId != null">
-        #{collectId,jdbcType=INTEGER},
+      <if test="tagId != null">
+        #{tagId,jdbcType=INTEGER},
       </if>
-      <if test="targetId != null">
-        #{targetId,jdbcType=INTEGER},
+      <if test="tagName != null">
+        #{tagName,jdbcType=VARCHAR},
       </if>
-      <if test="targetType != null">
-        #{targetType,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="isCancel != null">
-        #{isCancel,jdbcType=INTEGER},
+      <if test="logo != null">
+        #{logo,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="summary != null">
+        #{summary,jdbcType=VARCHAR},
       </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.cgd.crud.bean.CollectBeanExample" resultType="java.lang.Long">
-    select count(*) from tbl_collect
+  <select id="countByExample" parameterType="com.cgd.crud.bean.ProductTagBeanExample" resultType="java.lang.Long">
+    select count(*) from tbl_product_tag
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update tbl_collect
+    update tbl_product_tag
     <set>
-      <if test="record.collectId != null">
-        collect_id = #{record.collectId,jdbcType=INTEGER},
+      <if test="record.tagId != null">
+        tag_id = #{record.tagId,jdbcType=INTEGER},
       </if>
-      <if test="record.targetId != null">
-        target_id = #{record.targetId,jdbcType=INTEGER},
+      <if test="record.tagName != null">
+        tag_name = #{record.tagName,jdbcType=VARCHAR},
       </if>
-      <if test="record.targetType != null">
-        target_type = #{record.targetType,jdbcType=INTEGER},
-      </if>
-      <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=INTEGER},
-      </if>
-      <if test="record.isCancel != null">
-        is_cancel = #{record.isCancel,jdbcType=INTEGER},
+      <if test="record.logo != null">
+        logo = #{record.logo,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.updateTime != null">
-        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      <if test="record.createUserId != null">
+        create_user_id = #{record.createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.summary != null">
+        summary = #{record.summary,jdbcType=VARCHAR},
       </if>
       <if test="record.remark != null">
         remark = #{record.remark,jdbcType=VARCHAR},
@@ -205,55 +194,50 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update tbl_collect
-    set collect_id = #{record.collectId,jdbcType=INTEGER},
-      target_id = #{record.targetId,jdbcType=INTEGER},
-      target_type = #{record.targetType,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=INTEGER},
-      is_cancel = #{record.isCancel,jdbcType=INTEGER},
+    update tbl_product_tag
+    set tag_id = #{record.tagId,jdbcType=INTEGER},
+      tag_name = #{record.tagName,jdbcType=VARCHAR},
+      logo = #{record.logo,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      create_user_id = #{record.createUserId,jdbcType=INTEGER},
+      summary = #{record.summary,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cgd.crud.bean.CollectBean">
-    update tbl_collect
+  <update id="updateByPrimaryKeySelective" parameterType="com.cgd.crud.bean.ProductTagBean">
+    update tbl_product_tag
     <set>
-      <if test="targetId != null">
-        target_id = #{targetId,jdbcType=INTEGER},
+      <if test="tagName != null">
+        tag_name = #{tagName,jdbcType=VARCHAR},
       </if>
-      <if test="targetType != null">
-        target_type = #{targetType,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="isCancel != null">
-        is_cancel = #{isCancel,jdbcType=INTEGER},
+      <if test="logo != null">
+        logo = #{logo,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="summary != null">
+        summary = #{summary,jdbcType=VARCHAR},
       </if>
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
       </if>
     </set>
-    where collect_id = #{collectId,jdbcType=INTEGER}
+    where tag_id = #{tagId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cgd.crud.bean.CollectBean">
-    update tbl_collect
-    set target_id = #{targetId,jdbcType=INTEGER},
-      target_type = #{targetType,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER},
-      is_cancel = #{isCancel,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="com.cgd.crud.bean.ProductTagBean">
+    update tbl_product_tag
+    set tag_name = #{tagName,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=INTEGER},
+      summary = #{summary,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR}
-    where collect_id = #{collectId,jdbcType=INTEGER}
+    where tag_id = #{tagId,jdbcType=INTEGER}
   </update>
 </mapper>

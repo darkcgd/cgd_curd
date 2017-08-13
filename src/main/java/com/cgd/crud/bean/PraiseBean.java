@@ -2,8 +2,8 @@ package com.cgd.crud.bean;
 
 import java.util.Date;
 
-public class CollectBean {
-    private Integer collectId;
+public class PraiseBean {
+    private Integer praiseId;
 
     private Integer targetId;
 
@@ -19,12 +19,12 @@ public class CollectBean {
 
     private String remark;
 
-    public Integer getCollectId() {
-        return collectId;
+    public Integer getPraiseId() {
+        return praiseId;
     }
 
-    public void setCollectId(Integer collectId) {
-        this.collectId = collectId;
+    public void setPraiseId(Integer praiseId) {
+        this.praiseId = praiseId;
     }
 
     public Integer getTargetId() {

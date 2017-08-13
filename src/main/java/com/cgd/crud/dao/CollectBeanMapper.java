@@ -10,7 +10,7 @@ public interface CollectBeanMapper {
 
     int deleteByExample(CollectBeanExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer collectId);
 
     int insert(CollectBean record);
 
@@ -18,7 +18,7 @@ public interface CollectBeanMapper {
 
     List<CollectBean> selectByExample(CollectBeanExample example);
 
-    CollectBean selectByPrimaryKey(Integer id);
+    CollectBean selectByPrimaryKey(Integer collectId);
 
     int updateByExampleSelective(@Param("record") CollectBean record, @Param("example") CollectBeanExample example);
 

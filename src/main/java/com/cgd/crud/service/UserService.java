@@ -116,7 +116,6 @@ NOT IN - 指相关的列必须不在传入的方法参数的list中.
 
 		 updateByPrimaryKey对你注入的字段全部更新
 		 */
-		user.setUpdateTime(new Date());
 		return userMapper.updateByPrimaryKeySelective(user);
 	}
 

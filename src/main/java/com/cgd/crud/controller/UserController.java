@@ -204,6 +204,7 @@ public class UserController {
 			}
 			return MsgBean.fail().add("errorFields", map);
 		}else{
+			user.setUpdateTime(new Date());
 			int updateCount = userService.updateUserInfo(user);
 			return MsgSimple.success("更新成功!");
 		}
