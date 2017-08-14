@@ -33,6 +33,7 @@ public class CommonService {
 		criteria.andTargetTypeEqualTo(collectType);
 		criteria.andTargetIdEqualTo(targetId);
 		criteria.andUserIdEqualTo(userId);
+		criteria.andIsCancelEqualTo(1);
 		List<CollectBean> collectBeans = collectBeanMapper.selectByExample(example);
 		if(collectBeans!=null&&collectBeans.size()>0){//说明之前已经收藏了,需判断isCancel字段 ,需执行改 操作
 			CollectBean collectBean = collectBeans.get(0);
@@ -74,6 +75,7 @@ public class CommonService {
 		criteria.andTargetTypeEqualTo(collectType);
 		criteria.andTargetIdEqualTo(targetId);
 		criteria.andUserIdEqualTo(userId);
+		criteria.andIsCancelEqualTo(1);
 		List<PraiseBean> praiseBeans = praiseBeanMapper.selectByExample(example);
 		if(praiseBeans!=null&&praiseBeans.size()>0){//说明之前已经收藏了,需判断isCancel字段 ,需执行改 操作
 			PraiseBean praiseBean = praiseBeans.get(0);

@@ -1,21 +1,17 @@
 package com.cgd.crud.test;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import com.cgd.crud.bean.*;
+import com.cgd.crud.dao.*;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import com.cgd.crud.bean.Employee;
-import com.cgd.crud.bean.User;
-import com.cgd.crud.bean.UserExample;
-import com.cgd.crud.dao.DepartmentMapper;
-import com.cgd.crud.dao.EmployeeMapper;
-import com.cgd.crud.dao.UserMapper;
 
 /**
  * 测试dao层的工作
@@ -65,13 +61,65 @@ public class MapperTest {
 //		for(){
 //			employeeMapper.insertSelective(new Employee(null, , "M", "Jerry@cgd.com", 1));
 //		}
-		EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+		/*EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
 		for(int i = 0;i<1000;i++){
 			String uid = UUID.randomUUID().toString().substring(0,5)+i;
 			mapper.insertSelective(new Employee(null,uid, "M", uid+"@cgd.com", 1));
 		}
+		System.out.println("批量完成");*/
+
+		/*CollectBeanMapper mapper = sqlSession.getMapper(CollectBeanMapper.class);
+		for(int i = 0;i<100000;i++){
+			CollectBean collectBean = new CollectBean();
+			collectBean.setTargetId(1);
+			collectBean.setTargetType(1);
+			collectBean.setUserId(43);
+			collectBean.setIsCancel(0);
+			collectBean.setCreateTime(new Date());
+			collectBean.setUpdateTime(new Date());
+			mapper.insertSelective(collectBean);
+		}
+		System.out.println("批量完成");*/
+		/*PraiseBeanMapper mapper = sqlSession.getMapper(PraiseBeanMapper.class);
+		for(int i = 0;i<100000;i++){
+			PraiseBean praiseBean = new PraiseBean();
+			praiseBean.setTargetId(1);
+			praiseBean.setTargetType(1);
+			praiseBean.setUserId(43);
+			praiseBean.setIsCancel(0);
+			praiseBean.setCreateTime(new Date());
+			praiseBean.setUpdateTime(new Date());
+			mapper.insertSelective(praiseBean);
+		}
+		System.out.println("批量完成");*/
+		ProductBeanMapper mapper = sqlSession.getMapper(ProductBeanMapper.class);
+		for(int i = 0;i<100000;i++){
+			ProductBean productBean = new ProductBean();
+			productBean.setProductName("夏天家2017夏季小黑裙新款女韩版系带收腰a字短裙v领连衣裙子显瘦");
+			productBean.setProductCode((i+10)+"");
+			productBean.setLogo("https://img.alicdn.com/imgextra/i1/50675334/TB2qBwtuctnpuFjSZFKXXalFFXa_!!50675334.jpg");
+			productBean.setImage1("https://img.alicdn.com/imgextra/i4/50675334/TB2_BPqaIPRfKJjSZFOXXbKEVXa_!!50675334.jpg");
+			productBean.setImage2("https://img.alicdn.com/imgextra/i4/50675334/TB2_BPqaIPRfKJjSZFOXXbKEVXa_!!50675334.jpg");
+			productBean.setImage3("https://img.alicdn.com/imgextra/i4/50675334/TB2_BPqaIPRfKJjSZFOXXbKEVXa_!!50675334.jpg");
+			productBean.setImage4("https://img.alicdn.com/imgextra/i4/50675334/TB2_BPqaIPRfKJjSZFOXXbKEVXa_!!50675334.jpg");
+			productBean.setTitle("夏天家2017夏季小黑裙新款女韩版系带收腰a字短裙v领连衣裙子显瘦");
+			productBean.setBuyPrice(36l);
+			productBean.setOriginalPrice(115l);
+			productBean.setNowPrice(69l);
+			productBean.setDiscount(65);
+			productBean.setProductTagId(1);
+			productBean.setCategoryId(1);
+			productBean.setGraphicDetail("作为一款裙装，小黑裙在服装界的重要性相当于法国娇兰在香水界的地位， 她经历了数十年，它成功出现在了各个女性的衣橱里。 无论是上班还是度假、工作还是休闲， 优雅百搭的黑裙子总是能够演绎出恰到好处的风格。 更重要的是，黑色百搭又显身材！");
+			productBean.setIsSale(0);
+			productBean.setShopId(1);
+			productBean.setSummary("作为一款裙装，小黑裙在服装界的重要性相当于法国娇兰在香水界的地位， 她经历了数十年，它成功出现在了各个女性的衣橱里。 无论是上班还是度假、工作还是休闲， 优雅百搭的黑裙子总是能够演绎出恰到好处的风格。 更重要的是，黑色百搭又显身材！");
+			productBean.setRemark("作为一款裙装，小黑裙在服装界的重要性相当于法国娇兰在香水界的地位， 她经历了数十年，它成功出现在了各个女性的衣橱里。 无论是上班还是度假、工作还是休闲， 优雅百搭的黑裙子总是能够演绎出恰到好处的风格。 更重要的是，黑色百搭又显身材！");
+			productBean.setReadCount(0);
+			productBean.setCreateTime(new Date());
+			productBean.setUpdateTime(new Date());
+			mapper.insertSelective(productBean);
+		}
 		System.out.println("批量完成");
-		
 	}
 	
 	//自定义条件来查询  

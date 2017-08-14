@@ -1,9 +1,6 @@
 package com.cgd.crud.service;
 
-import com.cgd.crud.bean.Brand;
-import com.cgd.crud.bean.CollectBean;
-import com.cgd.crud.bean.CollectBeanExample;
-import com.cgd.crud.bean.ProductBean;
+import com.cgd.crud.bean.*;
 import com.cgd.crud.dao.BrandMapper;
 import com.cgd.crud.dao.CollectBeanMapper;
 import com.cgd.crud.dao.ProductBeanMapper;
@@ -24,7 +21,11 @@ public class ProductService {
 	 * @return
 	 */
 	public List<ProductBean> getProductList() {
-		return productBeanMapper.selectByExample(null);
+		ProductBeanExample productBeanExample=new ProductBeanExample();
+		//通过Criteria构造查询条件
+		ProductBeanExample.Criteria criteria=productBeanExample.createCriteria();
+		criteria.andIsSaleEqualTo(0);
+		return productBeanMapper.selectByExample(productBeanExample);
 	}
 
 	public ProductBean getProductDetail(Integer productId) {
