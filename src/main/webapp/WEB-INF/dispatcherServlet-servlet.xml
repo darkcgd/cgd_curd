@@ -54,6 +54,7 @@
 		<!-- <bean class="com.cgd.crud.interceptor.UserInterceptor"/> -->
 		<mvc:interceptor>
 			<mvc:mapping path="/admin/*"/>
+			<mvc:mapping path="/order/*"/>
 			<!-- 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 -->
 			<bean class="com.cgd.crud.interceptor.UserInterceptor"/>
 		</mvc:interceptor>

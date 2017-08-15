@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-08-13 23:08:00
+Date: 2017-08-15 22:51:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1220,11 +1220,14 @@ CREATE TABLE `tbl_order` (
   `remark` varchar(255) DEFAULT NULL COMMENT '订单的备注(留言)',
   `update_time` datetime DEFAULT NULL COMMENT '订单的更新时间',
   PRIMARY KEY (`order_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_order
 -- ----------------------------
+INSERT INTO `tbl_order` VALUES ('1', '20170815225117458001', '1', '2017-08-15 22:51:17', '1', '43', '1', '1', '100', null, null, null, null, null, null, null, '10', '20', '陈生', '13600055457', '广东省深圳市龙岗区坂田街道和磡村二区', null, null, null, null, '2017-08-15 22:51:17');
+INSERT INTO `tbl_order` VALUES ('2', '20170815225120018002', '1', '2017-08-15 22:51:20', '1', '43', '1', '1', '100', null, null, null, null, null, null, null, '10', '20', '陈生', '13600055457', '广东省深圳市龙岗区坂田街道和磡村二区', null, null, null, null, '2017-08-15 22:51:20');
+INSERT INTO `tbl_order` VALUES ('3', '20170815225122810003', '1', '2017-08-15 22:51:22', '1', '43', '1', '1', '100', null, null, null, null, null, null, null, '10', '20', '陈生', '13600055457', '广东省深圳市龙岗区坂田街道和磡村二区', null, null, null, null, '2017-08-15 22:51:22');
 
 -- ----------------------------
 -- Table structure for `tbl_praise`
