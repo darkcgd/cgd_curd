@@ -123,7 +123,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cgd.crud.bean.OrderBean">
+  <insert id="insert"  useGeneratedKeys="true" keyProperty="orderId" parameterType="com.cgd.crud.bean.OrderBean">
     insert into tbl_order (order_id, order_sn, product_id, 
       create_time, order_status, user_id, 
       shop_id, product_count, product_price, 

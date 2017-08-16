@@ -587,16 +587,12 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where product_id = #{productId,jdbcType=INTEGER}
   </update>
-
-  <!--update tbl_product set read_count=read_count+1 where product_id = 1-->
-  <update id="updateCountByPrimaryKey" parameterType="java.lang.Integer">
+  <update id="updateCountByPrimaryKey" parameterType="java.lang.Integer" >
     update tbl_product set read_count=read_count+1
     where product_id = #{productId,jdbcType=INTEGER}
   </update>
-  <!--update tbl_product set read_count=read_count+1 where product_id = 1-->
-  <update id="updateCountTo0ByPrimaryKey" parameterType="java.lang.Integer">
+  <update id="updateCountTo0ByPrimaryKey" parameterType="java.lang.Integer" >
     update tbl_product set read_count=1
     where product_id = #{productId,jdbcType=INTEGER}
   </update>
-
 </mapper>

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -56,6 +57,9 @@ public class BaseUtil {
 
     public static boolean isNotEmpty(Integer str) {
         return ((str != null) && (str != 0));
+    }
+    public static boolean isNotEmpty(Date date) {
+        return (date != null);
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.cgd.crud.bean;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class ProductBean {
@@ -23,11 +24,11 @@ public class ProductBean {
 
     private String title;
 
-    private Long buyPrice;
+    private BigDecimal buyPrice;
 
-    private Long originalPrice;
+    private BigDecimal originalPrice;
 
-    private Long nowPrice;
+    private BigDecimal nowPrice;
 
     private Integer discount;
 
@@ -131,27 +132,27 @@ public class ProductBean {
         this.title = title == null ? null : title.trim();
     }
 
-    public Long getBuyPrice() {
+    public BigDecimal getBuyPrice() {
         return buyPrice;
     }
 
-    public void setBuyPrice(Long buyPrice) {
+    public void setBuyPrice(BigDecimal buyPrice) {
         this.buyPrice = buyPrice;
     }
 
-    public Long getOriginalPrice() {
+    public BigDecimal getOriginalPrice() {
         return originalPrice;
     }
 
-    public void setOriginalPrice(Long originalPrice) {
+    public void setOriginalPrice(BigDecimal originalPrice) {
         this.originalPrice = originalPrice;
     }
 
-    public Long getNowPrice() {
+    public BigDecimal getNowPrice() {
         return nowPrice;
     }
 
-    public void setNowPrice(Long nowPrice) {
+    public void setNowPrice(BigDecimal nowPrice) {
         this.nowPrice = nowPrice;
     }
 

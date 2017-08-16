@@ -1,5 +1,6 @@
 package com.cgd.crud.test;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -103,9 +104,9 @@ public class MapperTest {
 			productBean.setImage3("https://img.alicdn.com/imgextra/i4/50675334/TB2_BPqaIPRfKJjSZFOXXbKEVXa_!!50675334.jpg");
 			productBean.setImage4("https://img.alicdn.com/imgextra/i4/50675334/TB2_BPqaIPRfKJjSZFOXXbKEVXa_!!50675334.jpg");
 			productBean.setTitle("夏天家2017夏季小黑裙新款女韩版系带收腰a字短裙v领连衣裙子显瘦");
-			productBean.setBuyPrice(36l);
-			productBean.setOriginalPrice(115l);
-			productBean.setNowPrice(69l);
+			productBean.setBuyPrice(new BigDecimal("90.02"));
+			productBean.setOriginalPrice(new BigDecimal("150.32"));
+			productBean.setNowPrice(new BigDecimal("252.67"));
 			productBean.setDiscount(65);
 			productBean.setProductTagId(1);
 			productBean.setCategoryId(1);

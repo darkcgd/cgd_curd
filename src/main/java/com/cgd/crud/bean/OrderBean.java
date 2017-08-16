@@ -1,5 +1,6 @@
 package com.cgd.crud.bean;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class OrderBean {
@@ -19,7 +20,7 @@ public class OrderBean {
 
     private Integer productCount;
 
-    private Long productPrice;
+    private BigDecimal productPrice;
 
     private Integer payMethod;
 
@@ -33,11 +34,11 @@ public class OrderBean {
 
     private Integer isReturn;
 
-    private Long payMoney;
+    private BigDecimal payMoney;
 
-    private Long logisticsPrice;
+    private BigDecimal logisticsPrice;
 
-    private Long discountPrice;
+    private BigDecimal discountPrice;
 
     private String reciverName;
 
@@ -119,11 +120,11 @@ public class OrderBean {
         this.productCount = productCount;
     }
 
-    public Long getProductPrice() {
+    public BigDecimal getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(Long productPrice) {
+    public void setProductPrice(BigDecimal productPrice) {
         this.productPrice = productPrice;
     }
 
@@ -175,27 +176,27 @@ public class OrderBean {
         this.isReturn = isReturn;
     }
 
-    public Long getPayMoney() {
+    public BigDecimal getPayMoney() {
         return payMoney;
     }
 
-    public void setPayMoney(Long payMoney) {
+    public void setPayMoney(BigDecimal payMoney) {
         this.payMoney = payMoney;
     }
 
-    public Long getLogisticsPrice() {
+    public BigDecimal getLogisticsPrice() {
         return logisticsPrice;
     }
 
-    public void setLogisticsPrice(Long logisticsPrice) {
+    public void setLogisticsPrice(BigDecimal logisticsPrice) {
         this.logisticsPrice = logisticsPrice;
     }
 
-    public Long getDiscountPrice() {
+    public BigDecimal getDiscountPrice() {
         return discountPrice;
     }
 
-    public void setDiscountPrice(Long discountPrice) {
+    public void setDiscountPrice(BigDecimal discountPrice) {
         this.discountPrice = discountPrice;
     }
 

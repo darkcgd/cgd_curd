@@ -6,6 +6,7 @@ import com.cgd.crud.bean.MsgSimple;
 import com.cgd.crud.bean.ProductBean;
 import com.cgd.crud.bean.User;
 import com.cgd.crud.service.CommonService;
+import com.cgd.crud.service.OrderService;
 import com.cgd.crud.service.ProductService;
 import com.cgd.crud.util.AbDateUtil;
 import com.cgd.crud.util.BaseUtil;
@@ -28,6 +29,8 @@ public class ProductController extends BaseController{
 	ProductService productService;
 	@Autowired
 	CommonService commonService;
+	@Autowired
+	OrderService orderService;
 
 
 	@ResponseBody
@@ -45,6 +48,7 @@ public class ProductController extends BaseController{
 			long collectCount = commonService.getCollectCount(1, productId);
 			long praiseCount = commonService.getPraiseCount(1, productId);
 			long productCommentCount = commonService.getProductCommentCount(1, productId);
+			long saleCount = orderService.getOrderCount(productId);
 			Map<String,Object> map = new HashMap<>();
 			List<String> imageStr=setProductImage(productBean);
 			map.put("productId", productId);
@@ -65,6 +69,7 @@ public class ProductController extends BaseController{
 			map.put("collectCount", collectCount);
 			map.put("praiseCount", praiseCount);
 			map.put("commentCount", productCommentCount);
+			map.put("saleCount", saleCount);
 			productBeanResults.add(map);
 		}
 		data.put("list", productBeanResults);
@@ -85,6 +90,7 @@ public class ProductController extends BaseController{
 			long collectCount = commonService.getCollectCount(1, productId);
 			long praiseCount = commonService.getPraiseCount(1, productId);
 			long productCommentCount = commonService.getProductCommentCount(1, productId);
+			long saleCount = orderService.getOrderCount(productId);
 			List<String> imageStr=setProductImage(productDetail);
 
 			MsgBean msg = MsgBean.success("获取成功");
@@ -107,6 +113,7 @@ public class ProductController extends BaseController{
 			data.put("collectCount", collectCount);
 			data.put("praiseCount", praiseCount);
 			data.put("commentCount", productCommentCount);
+			data.put("saleCount", saleCount);
 			if(productDetail.getReadCount()==null){
 				productService.updateReadCountTo0(productId);
 				data.put("readCount", 1);

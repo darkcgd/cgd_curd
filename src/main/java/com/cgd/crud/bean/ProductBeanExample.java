@@ -1,5 +1,6 @@
 package com.cgd.crud.bean;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -805,52 +806,52 @@ public class ProductBeanExample {
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceEqualTo(Long value) {
+        public Criteria andBuyPriceEqualTo(BigDecimal value) {
             addCriterion("buy_price =", value, "buyPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceNotEqualTo(Long value) {
+        public Criteria andBuyPriceNotEqualTo(BigDecimal value) {
             addCriterion("buy_price <>", value, "buyPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceGreaterThan(Long value) {
+        public Criteria andBuyPriceGreaterThan(BigDecimal value) {
             addCriterion("buy_price >", value, "buyPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceGreaterThanOrEqualTo(Long value) {
+        public Criteria andBuyPriceGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("buy_price >=", value, "buyPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceLessThan(Long value) {
+        public Criteria andBuyPriceLessThan(BigDecimal value) {
             addCriterion("buy_price <", value, "buyPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceLessThanOrEqualTo(Long value) {
+        public Criteria andBuyPriceLessThanOrEqualTo(BigDecimal value) {
             addCriterion("buy_price <=", value, "buyPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceIn(List<Long> values) {
+        public Criteria andBuyPriceIn(List<BigDecimal> values) {
             addCriterion("buy_price in", values, "buyPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceNotIn(List<Long> values) {
+        public Criteria andBuyPriceNotIn(List<BigDecimal> values) {
             addCriterion("buy_price not in", values, "buyPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceBetween(Long value1, Long value2) {
+        public Criteria andBuyPriceBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("buy_price between", value1, value2, "buyPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceNotBetween(Long value1, Long value2) {
+        public Criteria andBuyPriceNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("buy_price not between", value1, value2, "buyPrice");
             return (Criteria) this;
         }
@@ -865,52 +866,52 @@ public class ProductBeanExample {
             return (Criteria) this;
         }
 
-        public Criteria andOriginalPriceEqualTo(Long value) {
+        public Criteria andOriginalPriceEqualTo(BigDecimal value) {
             addCriterion("original_price =", value, "originalPrice");
             return (Criteria) this;
         }
 
-        public Criteria andOriginalPriceNotEqualTo(Long value) {
+        public Criteria andOriginalPriceNotEqualTo(BigDecimal value) {
             addCriterion("original_price <>", value, "originalPrice");
             return (Criteria) this;
         }
 
-        public Criteria andOriginalPriceGreaterThan(Long value) {
+        public Criteria andOriginalPriceGreaterThan(BigDecimal value) {
             addCriterion("original_price >", value, "originalPrice");
             return (Criteria) this;
         }
 
-        public Criteria andOriginalPriceGreaterThanOrEqualTo(Long value) {
+        public Criteria andOriginalPriceGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("original_price >=", value, "originalPrice");
             return (Criteria) this;
         }
 
-        public Criteria andOriginalPriceLessThan(Long value) {
+        public Criteria andOriginalPriceLessThan(BigDecimal value) {
             addCriterion("original_price <", value, "originalPrice");
             return (Criteria) this;
         }
 
-        public Criteria andOriginalPriceLessThanOrEqualTo(Long value) {
+        public Criteria andOriginalPriceLessThanOrEqualTo(BigDecimal value) {
             addCriterion("original_price <=", value, "originalPrice");
             return (Criteria) this;
         }
 
-        public Criteria andOriginalPriceIn(List<Long> values) {
+        public Criteria andOriginalPriceIn(List<BigDecimal> values) {
             addCriterion("original_price in", values, "originalPrice");
             return (Criteria) this;
         }
 
-        public Criteria andOriginalPriceNotIn(List<Long> values) {
+        public Criteria andOriginalPriceNotIn(List<BigDecimal> values) {
             addCriterion("original_price not in", values, "originalPrice");
             return (Criteria) this;
         }
 
-        public Criteria andOriginalPriceBetween(Long value1, Long value2) {
+        public Criteria andOriginalPriceBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("original_price between", value1, value2, "originalPrice");
             return (Criteria) this;
         }
 
-        public Criteria andOriginalPriceNotBetween(Long value1, Long value2) {
+        public Criteria andOriginalPriceNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("original_price not between", value1, value2, "originalPrice");
             return (Criteria) this;
         }
@@ -925,52 +926,52 @@ public class ProductBeanExample {
             return (Criteria) this;
         }
 
-        public Criteria andNowPriceEqualTo(Long value) {
+        public Criteria andNowPriceEqualTo(BigDecimal value) {
             addCriterion("now_price =", value, "nowPrice");
             return (Criteria) this;
         }
 
-        public Criteria andNowPriceNotEqualTo(Long value) {
+        public Criteria andNowPriceNotEqualTo(BigDecimal value) {
             addCriterion("now_price <>", value, "nowPrice");
             return (Criteria) this;
         }
 
-        public Criteria andNowPriceGreaterThan(Long value) {
+        public Criteria andNowPriceGreaterThan(BigDecimal value) {
             addCriterion("now_price >", value, "nowPrice");
             return (Criteria) this;
         }
 
-        public Criteria andNowPriceGreaterThanOrEqualTo(Long value) {
+        public Criteria andNowPriceGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("now_price >=", value, "nowPrice");
             return (Criteria) this;
         }
 
-        public Criteria andNowPriceLessThan(Long value) {
+        public Criteria andNowPriceLessThan(BigDecimal value) {
             addCriterion("now_price <", value, "nowPrice");
             return (Criteria) this;
         }
 
-        public Criteria andNowPriceLessThanOrEqualTo(Long value) {
+        public Criteria andNowPriceLessThanOrEqualTo(BigDecimal value) {
             addCriterion("now_price <=", value, "nowPrice");
             return (Criteria) this;
         }
 
-        public Criteria andNowPriceIn(List<Long> values) {
+        public Criteria andNowPriceIn(List<BigDecimal> values) {
             addCriterion("now_price in", values, "nowPrice");
             return (Criteria) this;
         }
 
-        public Criteria andNowPriceNotIn(List<Long> values) {
+        public Criteria andNowPriceNotIn(List<BigDecimal> values) {
             addCriterion("now_price not in", values, "nowPrice");
             return (Criteria) this;
         }
 
-        public Criteria andNowPriceBetween(Long value1, Long value2) {
+        public Criteria andNowPriceBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("now_price between", value1, value2, "nowPrice");
             return (Criteria) this;
         }
 
-        public Criteria andNowPriceNotBetween(Long value1, Long value2) {
+        public Criteria andNowPriceNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("now_price not between", value1, value2, "nowPrice");
             return (Criteria) this;
         }

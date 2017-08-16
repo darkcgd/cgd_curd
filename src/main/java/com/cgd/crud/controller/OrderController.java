@@ -5,6 +5,7 @@ import com.cgd.crud.bean.MsgBean;
 import com.cgd.crud.bean.MsgSimple;
 import com.cgd.crud.bean.OrderBean;
 import com.cgd.crud.service.OrderService;
+import com.cgd.crud.util.AbDateUtil;
 import com.cgd.crud.util.BaseUtil;
 import com.cgd.crud.util.Constant;
 import com.cgd.crud.util.OrderNumberGenerator;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.validation.Valid;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -43,7 +45,47 @@ public class OrderController extends BaseController{
 		MsgBean msg = MsgBean.success("获取成功");
 		Map<String, Object> data = msg.getData();
 		handlerPageInfo(data,new PageInfo(info, pagerSize));
-		data.put("list", info);
+
+		List<Map<String,Object>> orderBeanResults=new ArrayList<>();
+		for (OrderBean orderBean:info) {
+			Map<String,Object> map = new HashMap<>();
+			map.put("orderId", orderBean.getOrderId());
+			map.put("orderSn", orderBean.getOrderSn());
+			map.put("productId", orderBean.getProductId());
+			map.put("orderStatus", orderBean.getOrderStatus());
+			map.put("userId", orderBean.getUserId());
+			map.put("shopId", orderBean.getShopId());
+			map.put("productCount", orderBean.getProductCount());
+			map.put("productPrice", orderBean.getProductPrice());
+			map.put("payMethod", orderBean.getPayMethod());
+			map.put("paySn", orderBean.getPaySn());
+			if(orderBean.getIsReturn()==null||orderBean.getIsReturn()==0){
+				map.put("isReturn", 0);
+			}else{
+				map.put("isReturn", 1);
+			}
+			map.put("payMoney", orderBean.getPayMoney());
+			if(orderBean.getLogisticsPrice()==null||orderBean.getLogisticsPrice().doubleValue()==0){
+				map.put("logisticsPrice", 0);
+			}else{
+				map.put("logisticsPrice", orderBean.getLogisticsPrice().doubleValue());
+			}
+			map.put("discountPrice", orderBean.getDiscountPrice());
+			map.put("reciverName", orderBean.getReciverName());
+			map.put("reciverPhone", orderBean.getReciverPhone());
+			map.put("reciverAddr", orderBean.getReciverAddr());
+			map.put("senderId", orderBean.getSenderId());
+			map.put("logisticsSn", orderBean.getLogisticsSn());
+			map.put("remark", orderBean.getRemark());
+			handlerDateToStr(map,"createTime",orderBean.getCreateTime(),AbDateUtil.dateFormatYMDHMS);
+			handlerDateToStr(map,"payTime",orderBean.getPayTime(),AbDateUtil.dateFormatYMDHMS);
+			handlerDateToStr(map,"confirmTime",orderBean.getConfirmTime(),AbDateUtil.dateFormatYMDHMS);
+			handlerDateToStr(map,"cancelTime",orderBean.getCancelTime(),AbDateUtil.dateFormatYMDHMS);
+			handlerDateToStr(map,"sendTime",orderBean.getSendTime(),AbDateUtil.dateFormatYMDHMS);
+			handlerDateToStr(map,"updateTime",orderBean.getUpdateTime(),AbDateUtil.dateFormatYMDHMS);
+			orderBeanResults.add(map);
+		}
+		data.put("list", orderBeanResults);
 		return msg;
 	}
 
@@ -66,9 +108,9 @@ public class OrderController extends BaseController{
 			Integer userId = orderBean.getUserId();//全局拦截器已拦截处理
 			Integer shopId = orderBean.getShopId();
 			Integer productCount = orderBean.getProductCount();
-			Long productPrice = orderBean.getProductPrice();
-			Long logisticsPrice = orderBean.getLogisticsPrice();
-			Long discountPrice = orderBean.getDiscountPrice();
+			BigDecimal productPrice = orderBean.getProductPrice();
+			BigDecimal logisticsPrice = orderBean.getLogisticsPrice();
+			BigDecimal discountPrice = orderBean.getDiscountPrice();
 			String reciverName = orderBean.getReciverName();
 			String reciverPhone = orderBean.getReciverPhone();
 			String reciverAddr = orderBean.getReciverAddr();
@@ -82,13 +124,13 @@ public class OrderController extends BaseController{
 			if (BaseUtil.isEmpty(productCount)) {
 				return MsgSimple.fail("需要传productCount参数");
 			}
-			if (productPrice == null || productPrice < 0) {
+			if (productPrice == null) {
 				return MsgSimple.fail("需要传productPrice参数");
 			}
-			if (logisticsPrice == null || logisticsPrice < 0) {
+			if (logisticsPrice == null) {
 				return MsgSimple.fail("需要传logisticsPrice参数");
 			}
-			if (discountPrice == null || discountPrice < 0) {
+			if (discountPrice == null) {
 				return MsgSimple.fail("需要传discountPrice参数");
 			}
 			if (BaseUtil.isEmpty(reciverName)) {
@@ -119,7 +161,11 @@ public class OrderController extends BaseController{
 			} else {
 				orderBean.setOrderSn(orderSn);
 				orderService.createOrder(orderBean);
-				return MsgSimple.success("创建订单成功");
+				MsgBean msg = MsgBean.success("创建订单成功");
+				Map<String, Object> data = msg.getData();
+				data.put("orderId", orderBean.getOrderId());
+				data.put("orderSn", orderBean.getOrderSn());
+				return msg;
 			}
 		}
 	}
