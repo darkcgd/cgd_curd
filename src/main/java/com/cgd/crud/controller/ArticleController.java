@@ -68,7 +68,7 @@ public class ArticleController extends BaseController{
             if(userId!=null){
                 CollectBean collectDetail = articleService.getCollectDetail(id,userId);
                 if(collectDetail!=null){
-                    Integer isCancel = collectDetail.getIsCancel();//1代表收藏 0代表未收藏(取消收藏)
+                    Integer isCancel = collectDetail.getIsCollect();//1代表收藏 0代表未收藏(取消收藏)
                     if(isCancel==null){
                         isCancel=0;
                     }

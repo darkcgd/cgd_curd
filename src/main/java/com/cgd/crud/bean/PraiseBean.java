@@ -11,7 +11,7 @@ public class PraiseBean {
 
     private Integer userId;
 
-    private Integer isCancel;
+    private Integer isPraise;
 
     private Date createTime;
 
@@ -51,12 +51,12 @@ public class PraiseBean {
         this.userId = userId;
     }
 
-    public Integer getIsCancel() {
-        return isCancel;
+    public Integer getIsPraise() {
+        return isPraise;
     }
 
-    public void setIsCancel(Integer isCancel) {
-        this.isCancel = isCancel;
+    public void setIsPraise(Integer isPraise) {
+        this.isPraise = isPraise;
     }
 
     public Date getCreateTime() {

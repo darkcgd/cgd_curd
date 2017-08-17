@@ -37,4 +37,6 @@ public interface ProductBeanMapper {
     void updateCountByPrimaryKey(Integer productId);
 
     void updateCountTo0ByPrimaryKey(Integer productId);
+
+    List<ProductBean> selectProductListBySql(@Param("userId") Integer userId);
 }

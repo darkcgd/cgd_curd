@@ -59,7 +59,7 @@
      <!--指定联合查询出的User字段的封装-->
     <association javaType="com.cgd.crud.bean.User" property="user">
     	<id column="user_id" property="userId" />
-    	<id column="user_name" property="userName" />
+    	<result column="user_name" property="userName" />
     	<result column="head_url" property="headUrl" />
     </association>
   </resultMap>
@@ -147,7 +147,6 @@
     <if test="orderStatus!=null and orderStatus>0">
       and order_status= #{orderStatus}
     </if>
-
   </select>
 
   <select id="selectByExample" parameterType="com.cgd.crud.bean.OrderBeanExample" resultMap="BaseResultMap">

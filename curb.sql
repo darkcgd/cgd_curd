@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-08-16 21:46:11
+Date: 2017-08-17 22:07:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -128,7 +128,7 @@ CREATE TABLE `tbl_collect` (
   `target_id` int(11) DEFAULT NULL,
   `target_type` int(11) DEFAULT NULL COMMENT '1代表收藏商品,2代表收藏(关注)商家',
   `user_id` int(11) DEFAULT NULL,
-  `is_cancel` int(1) DEFAULT NULL COMMENT '1代表收藏 0代表未收藏(取消收藏)',
+  `is_collect` int(1) DEFAULT NULL COMMENT '1代表收藏 0代表未收藏(取消收藏)',
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `remark` varchar(255) DEFAULT NULL,
@@ -1349,7 +1349,7 @@ CREATE TABLE `tbl_praise` (
   `target_id` int(11) DEFAULT NULL,
   `target_type` int(11) DEFAULT NULL COMMENT '1代表点赞商品,2代表点赞商家',
   `user_id` int(11) DEFAULT NULL,
-  `is_cancel` int(1) DEFAULT NULL COMMENT '1代表收藏 0代表未收藏(取消收藏)',
+  `is_praise` int(1) DEFAULT NULL COMMENT '1代表收藏 0代表未收藏(取消收藏)',
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `remark` varchar(255) DEFAULT NULL,
@@ -1362,10 +1362,9 @@ CREATE TABLE `tbl_praise` (
 INSERT INTO `tbl_praise` VALUES ('5', '1', '2', '43', '0', '2017-08-13 20:15:26', '2017-08-13 20:15:38', null);
 INSERT INTO `tbl_praise` VALUES ('6', '2', '2', '45', '1', '2017-08-13 21:25:12', '2017-08-13 21:25:12', null);
 INSERT INTO `tbl_praise` VALUES ('7', '1', '2', '45', '1', '2017-08-13 21:25:15', '2017-08-13 21:25:15', null);
-INSERT INTO `tbl_praise` VALUES ('8', '2', '1', '45', '1', '2017-08-13 21:25:23', '2017-08-13 21:25:23', null);
-INSERT INTO `tbl_praise` VALUES ('9', '1', '1', '45', '1', '2017-08-13 21:25:27', '2017-08-13 21:25:27', null);
+INSERT INTO `tbl_praise` VALUES ('8', '2', '1', '43', '1', '2017-08-13 21:25:23', '2017-08-13 21:25:23', null);
 INSERT INTO `tbl_praise` VALUES ('10', '1', '1', '47', '1', '2017-08-13 21:25:45', '2017-08-13 21:25:45', null);
-INSERT INTO `tbl_praise` VALUES ('11', '2', '1', '47', '1', '2017-08-13 21:25:48', '2017-08-13 21:25:48', null);
+INSERT INTO `tbl_praise` VALUES ('11', '1', '1', '43', '1', '2017-08-13 21:25:48', '2017-08-13 21:25:48', null);
 INSERT INTO `tbl_praise` VALUES ('12', '1', '2', '47', '1', '2017-08-13 21:25:54', '2017-08-13 21:25:54', null);
 INSERT INTO `tbl_praise` VALUES ('13', '2', '2', '47', '1', '2017-08-13 21:25:57', '2017-08-13 21:25:57', null);
 
@@ -1404,7 +1403,7 @@ CREATE TABLE `tbl_product` (
 -- ----------------------------
 -- Records of tbl_product
 -- ----------------------------
-INSERT INTO `tbl_product` VALUES ('1', '夏天家2017夏季小黑裙新款女韩版系带收腰a字短裙v领连衣裙子显瘦', '1', 'https://img.alicdn.com/imgextra/i1/50675334/TB2qBwtuctnpuFjSZFKXXalFFXa_!!50675334.jpg', 'https://img.alicdn.com/imgextra/i4/50675334/TB2_BPqaIPRfKJjSZFOXXbKEVXa_!!50675334.jpg', 'https://img.alicdn.com/imgextra/i2/50675334/TB2Bi3sumVmpuFjSZFFXXcZApXa_!!50675334.jpg', 'https://img.alicdn.com/imgextra/i1/50675334/TB2qBHSohRDOuFjSZFzXXcIipXa_!!50675334.jpg', 'https://img.alicdn.com/imgextra/i4/50675334/TB28S3WuctnpuFjSZFvXXbcTpXa_!!50675334.jpg', null, '夏天家2017夏季小黑裙新款女韩版系带收腰a字短裙v领连衣裙子显瘦', '36.00', '115.00', '69.00', '65', '1', '2', '作为一款裙装，小黑裙在服装界的重要性相当于法国娇兰在香水界的地位， 她经历了数十年，它成功出现在了各个女性的衣橱里。 无论是上班还是度假、工作还是休闲， 优雅百搭的黑裙子总是能够演绎出恰到好处的风格。 更重要的是，黑色百搭又显身材！', '0', '1', '作为一款裙装，小黑裙在服装界的重要性相当于法国娇兰在香水界的地位， 她经历了数十年，它成功出现在了各个女性的衣橱里。 无论是上班还是度假、工作还是休闲， 优雅百搭的黑裙子总是能够演绎出恰到好处的风格。 更重要的是，黑色百搭又显身材！', null, '2', '2017-08-13 19:03:53', '2017-08-13 19:03:56');
+INSERT INTO `tbl_product` VALUES ('1', '夏天家2017夏季小黑裙新款女韩版系带收腰a字短裙v领连衣裙子显瘦', '1', 'https://img.alicdn.com/imgextra/i1/50675334/TB2qBwtuctnpuFjSZFKXXalFFXa_!!50675334.jpg', 'https://img.alicdn.com/imgextra/i4/50675334/TB2_BPqaIPRfKJjSZFOXXbKEVXa_!!50675334.jpg', 'https://img.alicdn.com/imgextra/i2/50675334/TB2Bi3sumVmpuFjSZFFXXcZApXa_!!50675334.jpg', 'https://img.alicdn.com/imgextra/i1/50675334/TB2qBHSohRDOuFjSZFzXXcIipXa_!!50675334.jpg', 'https://img.alicdn.com/imgextra/i4/50675334/TB28S3WuctnpuFjSZFvXXbcTpXa_!!50675334.jpg', null, '夏天家2017夏季小黑裙新款女韩版系带收腰a字短裙v领连衣裙子显瘦', '36.00', '115.00', '69.00', '65', '1', '2', '作为一款裙装，小黑裙在服装界的重要性相当于法国娇兰在香水界的地位， 她经历了数十年，它成功出现在了各个女性的衣橱里。 无论是上班还是度假、工作还是休闲， 优雅百搭的黑裙子总是能够演绎出恰到好处的风格。 更重要的是，黑色百搭又显身材！', '0', '1', '作为一款裙装，小黑裙在服装界的重要性相当于法国娇兰在香水界的地位， 她经历了数十年，它成功出现在了各个女性的衣橱里。 无论是上班还是度假、工作还是休闲， 优雅百搭的黑裙子总是能够演绎出恰到好处的风格。 更重要的是，黑色百搭又显身材！', null, '11', '2017-08-13 19:03:53', '2017-08-13 19:03:56');
 INSERT INTO `tbl_product` VALUES ('2', '珂莱蒂尔正品新款秋冬印花休闲显瘦无袖高腰打底连衣裙', '2', 'https://gdp.alicdn.com/imgextra/i4/692195348/TB26Pz0atmgF1Jjy0FaXXX5jpXa_!!692195348.jpg', 'https://img.alicdn.com/imgextra/i4/692195348/TB2C3p6yrBmpuFjSZFAXXaQ0pXa_!!692195348.jpg', 'https://img.alicdn.com/imgextra/i2/692195348/TB29uE8yohnpuFjSZFpXXcpuXXa_!!692195348.jpg', 'https://img.alicdn.com/imgextra/i4/692195348/TB2NlsFdA7myKJjSZFzXXXgDpXa_!!692195348.jpg', 'https://img.alicdn.com/imgextra/i2/692195348/TB2S1wLubXlpuFjSszfXXcSGXXa_!!692195348.jpg', 'https://img.alicdn.com/imgextra/i4/692195348/TB2n3kDbkUkyKJjy1zjXXX1wFXa_!!692195348.jpg', '珂莱蒂尔正品新款秋冬印花休闲显瘦无袖高腰打底连衣裙', '500.00', '3287.00', '1972.00', '60', '2', '2', '品牌旗舰,正品特惠,限时特价中,让您省钱也省心', '0', '2', '品牌旗舰,正品特惠,限时特价中,让您省钱也省心', null, '3', '2017-08-13 21:06:41', '2017-08-13 21:06:44');
 
 -- ----------------------------

@@ -51,7 +51,6 @@
 		<table tableName="tbl_tag" domainObjectName="TagBean"></table>
 		<table tableName="tbl_status" domainObjectName="StatusBean"></table>
 		<table tableName="tbl_collect" domainObjectName="CollectBean"></table>
-		<table tableName="tbl_collect" domainObjectName="CollectBean"></table>
 		<table tableName="tbl_order" domainObjectName="OrderBean"></table>
 		<table tableName="tbl_praise" domainObjectName="PraiseBean"></table>
 		<table tableName="tbl_product" domainObjectName="ProductBean"></table>
@@ -61,6 +60,6 @@
 		<table tableName="tbl_shop" domainObjectName="ShopBean"></table>
 		<table tableName="tbl_shop_grade" domainObjectName="ShopGradeBean"></table>
 		-->
-		<table tableName="tbl_product" domainObjectName="ProductBean"></table>
+		<table tableName="tbl_praise" domainObjectName="PraiseBean"></table>
 	</context>
 </generatorConfiguration>

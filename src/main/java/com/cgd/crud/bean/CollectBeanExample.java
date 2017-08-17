@@ -345,63 +345,63 @@ public class CollectBeanExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsCancelIsNull() {
-            addCriterion("is_cancel is null");
+        public Criteria andIsCollectIsNull() {
+            addCriterion("is_collect is null");
             return (Criteria) this;
         }
 
-        public Criteria andIsCancelIsNotNull() {
-            addCriterion("is_cancel is not null");
+        public Criteria andIsCollectIsNotNull() {
+            addCriterion("is_collect is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIsCancelEqualTo(Integer value) {
-            addCriterion("is_cancel =", value, "isCancel");
+        public Criteria andIsCollectEqualTo(Integer value) {
+            addCriterion("is_collect =", value, "isCollect");
             return (Criteria) this;
         }
 
-        public Criteria andIsCancelNotEqualTo(Integer value) {
-            addCriterion("is_cancel <>", value, "isCancel");
+        public Criteria andIsCollectNotEqualTo(Integer value) {
+            addCriterion("is_collect <>", value, "isCollect");
             return (Criteria) this;
         }
 
-        public Criteria andIsCancelGreaterThan(Integer value) {
-            addCriterion("is_cancel >", value, "isCancel");
+        public Criteria andIsCollectGreaterThan(Integer value) {
+            addCriterion("is_collect >", value, "isCollect");
             return (Criteria) this;
         }
 
-        public Criteria andIsCancelGreaterThanOrEqualTo(Integer value) {
-            addCriterion("is_cancel >=", value, "isCancel");
+        public Criteria andIsCollectGreaterThanOrEqualTo(Integer value) {
+            addCriterion("is_collect >=", value, "isCollect");
             return (Criteria) this;
         }
 
-        public Criteria andIsCancelLessThan(Integer value) {
-            addCriterion("is_cancel <", value, "isCancel");
+        public Criteria andIsCollectLessThan(Integer value) {
+            addCriterion("is_collect <", value, "isCollect");
             return (Criteria) this;
         }
 
-        public Criteria andIsCancelLessThanOrEqualTo(Integer value) {
-            addCriterion("is_cancel <=", value, "isCancel");
+        public Criteria andIsCollectLessThanOrEqualTo(Integer value) {
+            addCriterion("is_collect <=", value, "isCollect");
             return (Criteria) this;
         }
 
-        public Criteria andIsCancelIn(List<Integer> values) {
-            addCriterion("is_cancel in", values, "isCancel");
+        public Criteria andIsCollectIn(List<Integer> values) {
+            addCriterion("is_collect in", values, "isCollect");
             return (Criteria) this;
         }
 
-        public Criteria andIsCancelNotIn(List<Integer> values) {
-            addCriterion("is_cancel not in", values, "isCancel");
+        public Criteria andIsCollectNotIn(List<Integer> values) {
+            addCriterion("is_collect not in", values, "isCollect");
             return (Criteria) this;
         }
 
-        public Criteria andIsCancelBetween(Integer value1, Integer value2) {
-            addCriterion("is_cancel between", value1, value2, "isCancel");
+        public Criteria andIsCollectBetween(Integer value1, Integer value2) {
+            addCriterion("is_collect between", value1, value2, "isCollect");
             return (Criteria) this;
         }
 
-        public Criteria andIsCancelNotBetween(Integer value1, Integer value2) {
-            addCriterion("is_cancel not between", value1, value2, "isCancel");
+        public Criteria andIsCollectNotBetween(Integer value1, Integer value2) {
+            addCriterion("is_collect not between", value1, value2, "isCollect");
             return (Criteria) this;
         }
 

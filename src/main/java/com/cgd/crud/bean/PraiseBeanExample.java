@@ -345,63 +345,63 @@ public class PraiseBeanExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsCancelIsNull() {
-            addCriterion("is_cancel is null");
+        public Criteria andIsPraiseIsNull() {
+            addCriterion("is_praise is null");
             return (Criteria) this;
         }
 
-        public Criteria andIsCancelIsNotNull() {
-            addCriterion("is_cancel is not null");
+        public Criteria andIsPraiseIsNotNull() {
+            addCriterion("is_praise is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIsCancelEqualTo(Integer value) {
-            addCriterion("is_cancel =", value, "isCancel");
+        public Criteria andIsPraiseEqualTo(Integer value) {
+            addCriterion("is_praise =", value, "isPraise");
             return (Criteria) this;
         }
 
-        public Criteria andIsCancelNotEqualTo(Integer value) {
-            addCriterion("is_cancel <>", value, "isCancel");
+        public Criteria andIsPraiseNotEqualTo(Integer value) {
+            addCriterion("is_praise <>", value, "isPraise");
             return (Criteria) this;
         }
 
-        public Criteria andIsCancelGreaterThan(Integer value) {
-            addCriterion("is_cancel >", value, "isCancel");
+        public Criteria andIsPraiseGreaterThan(Integer value) {
+            addCriterion("is_praise >", value, "isPraise");
             return (Criteria) this;
         }
 
-        public Criteria andIsCancelGreaterThanOrEqualTo(Integer value) {
-            addCriterion("is_cancel >=", value, "isCancel");
+        public Criteria andIsPraiseGreaterThanOrEqualTo(Integer value) {
+            addCriterion("is_praise >=", value, "isPraise");
             return (Criteria) this;
         }
 
-        public Criteria andIsCancelLessThan(Integer value) {
-            addCriterion("is_cancel <", value, "isCancel");
+        public Criteria andIsPraiseLessThan(Integer value) {
+            addCriterion("is_praise <", value, "isPraise");
             return (Criteria) this;
         }
 
-        public Criteria andIsCancelLessThanOrEqualTo(Integer value) {
-            addCriterion("is_cancel <=", value, "isCancel");
+        public Criteria andIsPraiseLessThanOrEqualTo(Integer value) {
+            addCriterion("is_praise <=", value, "isPraise");
             return (Criteria) this;
         }
 
-        public Criteria andIsCancelIn(List<Integer> values) {
-            addCriterion("is_cancel in", values, "isCancel");
+        public Criteria andIsPraiseIn(List<Integer> values) {
+            addCriterion("is_praise in", values, "isPraise");
             return (Criteria) this;
         }
 
-        public Criteria andIsCancelNotIn(List<Integer> values) {
-            addCriterion("is_cancel not in", values, "isCancel");
+        public Criteria andIsPraiseNotIn(List<Integer> values) {
+            addCriterion("is_praise not in", values, "isPraise");
             return (Criteria) this;
         }
 
-        public Criteria andIsCancelBetween(Integer value1, Integer value2) {
-            addCriterion("is_cancel between", value1, value2, "isCancel");
+        public Criteria andIsPraiseBetween(Integer value1, Integer value2) {
+            addCriterion("is_praise between", value1, value2, "isPraise");
             return (Criteria) this;
         }
 
-        public Criteria andIsCancelNotBetween(Integer value1, Integer value2) {
-            addCriterion("is_cancel not between", value1, value2, "isCancel");
+        public Criteria andIsPraiseNotBetween(Integer value1, Integer value2) {
+            addCriterion("is_praise not between", value1, value2, "isPraise");
             return (Criteria) this;
         }
 

@@ -28,6 +28,13 @@ public class ProductService {
 		return productBeanMapper.selectByExample(productBeanExample);
 	}
 
+	public List<ProductBean> getProductListBySql(Integer userId) {
+		if(userId!=null&&userId>0){
+			return productBeanMapper.selectProductListBySql(userId);
+		}
+		return getProductList();
+	}
+
 	public ProductBean getProductDetail(Integer productId) {
 		return productBeanMapper.selectByPrimaryKey(productId);
 	}

@@ -6,7 +6,7 @@
     <result column="target_id" jdbcType="INTEGER" property="targetId" />
     <result column="target_type" jdbcType="INTEGER" property="targetType" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="is_cancel" jdbcType="INTEGER" property="isCancel" />
+    <result column="is_praise" jdbcType="INTEGER" property="isPraise" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
@@ -70,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    praise_id, target_id, target_type, user_id, is_cancel, create_time, update_time, 
+    praise_id, target_id, target_type, user_id, is_praise, create_time, update_time, 
     remark
   </sql>
   <select id="selectByExample" parameterType="com.cgd.crud.bean.PraiseBeanExample" resultMap="BaseResultMap">
@@ -105,10 +105,10 @@
   </delete>
   <insert id="insert" parameterType="com.cgd.crud.bean.PraiseBean">
     insert into tbl_praise (praise_id, target_id, target_type, 
-      user_id, is_cancel, create_time, 
+      user_id, is_praise, create_time, 
       update_time, remark)
     values (#{praiseId,jdbcType=INTEGER}, #{targetId,jdbcType=INTEGER}, #{targetType,jdbcType=INTEGER}, 
-      #{userId,jdbcType=INTEGER}, #{isCancel,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{userId,jdbcType=INTEGER}, #{isPraise,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cgd.crud.bean.PraiseBean">
@@ -126,8 +126,8 @@
       <if test="userId != null">
         user_id,
       </if>
-      <if test="isCancel != null">
-        is_cancel,
+      <if test="isPraise != null">
+        is_praise,
       </if>
       <if test="createTime != null">
         create_time,
@@ -152,8 +152,8 @@
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="isCancel != null">
-        #{isCancel,jdbcType=INTEGER},
+      <if test="isPraise != null">
+        #{isPraise,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -187,8 +187,8 @@
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=INTEGER},
       </if>
-      <if test="record.isCancel != null">
-        is_cancel = #{record.isCancel,jdbcType=INTEGER},
+      <if test="record.isPraise != null">
+        is_praise = #{record.isPraise,jdbcType=INTEGER},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -210,7 +210,7 @@
       target_id = #{record.targetId,jdbcType=INTEGER},
       target_type = #{record.targetType,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
-      is_cancel = #{record.isCancel,jdbcType=INTEGER},
+      is_praise = #{record.isPraise,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       remark = #{record.remark,jdbcType=VARCHAR}
@@ -230,8 +230,8 @@
       <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="isCancel != null">
-        is_cancel = #{isCancel,jdbcType=INTEGER},
+      <if test="isPraise != null">
+        is_praise = #{isPraise,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -250,7 +250,7 @@
     set target_id = #{targetId,jdbcType=INTEGER},
       target_type = #{targetType,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=INTEGER},
-      is_cancel = #{isCancel,jdbcType=INTEGER},
+      is_praise = #{isPraise,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       remark = #{remark,jdbcType=VARCHAR}

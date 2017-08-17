@@ -11,7 +11,7 @@ public class CollectBean {
 
     private Integer userId;
 
-    private Integer isCancel;
+    private Integer isCollect;
 
     private Date createTime;
 
@@ -51,12 +51,12 @@ public class CollectBean {
         this.userId = userId;
     }
 
-    public Integer getIsCancel() {
-        return isCancel;
+    public Integer getIsCollect() {
+        return isCollect;
     }
 
-    public void setIsCancel(Integer isCancel) {
-        this.isCancel = isCancel;
+    public void setIsCollect(Integer isCollect) {
+        this.isCollect = isCollect;
     }
 
     public Date getCreateTime() {

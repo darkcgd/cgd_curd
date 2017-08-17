@@ -52,6 +52,26 @@ public class ProductBean {
 
     private String graphicDetail;
 
+    private CollectBean collectBean;
+
+    private PraiseBean praiseBean;
+
+    public CollectBean getCollectBean() {
+        return collectBean;
+    }
+
+    public void setCollectBean(CollectBean collectBean) {
+        this.collectBean = collectBean;
+    }
+
+    public PraiseBean getPraiseBean() {
+        return praiseBean;
+    }
+
+    public void setPraiseBean(PraiseBean praiseBean) {
+        this.praiseBean = praiseBean;
+    }
+
     public Integer getProductId() {
         return productId;
     }

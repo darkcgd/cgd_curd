@@ -1,13 +1,11 @@
 package com.cgd.crud.controller;
 
 import com.cgd.crud.base.BaseController;
-import com.cgd.crud.bean.MsgBean;
-import com.cgd.crud.bean.MsgSimple;
-import com.cgd.crud.bean.ProductBean;
-import com.cgd.crud.bean.User;
+import com.cgd.crud.bean.*;
 import com.cgd.crud.service.CommonService;
 import com.cgd.crud.service.OrderService;
 import com.cgd.crud.service.ProductService;
+import com.cgd.crud.service.TokenService;
 import com.cgd.crud.util.AbDateUtil;
 import com.cgd.crud.util.BaseUtil;
 import com.cgd.crud.util.Constant;
@@ -31,14 +29,34 @@ public class ProductController extends BaseController{
 	CommonService commonService;
 	@Autowired
 	OrderService orderService;
+	@Autowired
+	TokenService tokenService;
 
 
 	@ResponseBody
 	@RequestMapping(value="/getProductList",method=RequestMethod.GET)
-	public MsgBean getProductList(@RequestParam(value = "pagerNumber", defaultValue = ""+ Constant.DefaultPagerNumber) Integer pagerNumber,
-								  @RequestParam(value = "pagerSize", defaultValue = ""+Constant.DefaultPagerSize) Integer pagerSize){
+	public MsgBean getProductList(
+			@RequestParam(value = "userId", required=false) Integer userId,
+			@RequestParam(value = "token", required=false) String token,
+			@RequestParam(value = "pagerNumber", defaultValue = ""+ Constant.DefaultPagerNumber) Integer pagerNumber,
+			@RequestParam(value = "pagerSize", defaultValue = ""+Constant.DefaultPagerSize) Integer pagerSize){
 		PageHelper.startPage(pagerNumber, pagerSize);
-		List<ProductBean> info = productService.getProductList();
+
+		boolean isVaild=false;
+		if(userId!=null&&token!=null){
+			TokenBean tokenBean = tokenService.getToken(userId);
+			if(tokenBean!=null){
+				String saveToken = tokenBean.getToken();
+				if(saveToken!=null&&saveToken.equals(token)){
+					isVaild=true;
+				}
+			}
+		}
+		if(!isVaild){
+			userId=null;//如果验证userId和token不通过,则把userId置为null
+		}
+		List<ProductBean> info = productService.getProductListBySql(userId);
+
 		MsgBean msg = MsgBean.success("获取成功");
 		Map<String, Object> data = msg.getData();
 		handlerPageInfo(data,new PageInfo(info, pagerSize));
@@ -70,6 +88,18 @@ public class ProductController extends BaseController{
 			map.put("praiseCount", praiseCount);
 			map.put("commentCount", productCommentCount);
 			map.put("saleCount", saleCount);
+			CollectBean collectBean = productBean.getCollectBean();
+			PraiseBean praiseBean = productBean.getPraiseBean();
+			if(collectBean!=null&&collectBean.getIsCollect()==1){
+				map.put("isCollect",true);
+			}else{
+				map.put("isCollect",false);
+			}
+			if(praiseBean!=null&&praiseBean.getIsPraise()==1){
+				map.put("isPraise",true);
+			}else{
+				map.put("isPraise",false);
+			}
 			productBeanResults.add(map);
 		}
 		data.put("list", productBeanResults);
@@ -78,7 +108,10 @@ public class ProductController extends BaseController{
 
 	@ResponseBody
 	@RequestMapping(value="/getProductDetail",method=RequestMethod.GET)
-	public Object getProductDetail(@RequestParam(value = "productId", required=false) Integer productId){
+	public Object getProductDetail(
+			@RequestParam(value = "userId", required=false) Integer userId,
+			@RequestParam(value = "token", required=false) String token,
+			@RequestParam(value = "productId", required=false) Integer productId){
 		if(BaseUtil.isEmpty(productId)){
 			return MsgSimple.fail("需要传productId参数");
 		}
@@ -86,6 +119,19 @@ public class ProductController extends BaseController{
 		if(productDetail!=null){
 			//插入阅读量
 			productService.updateReadCount(productId);
+
+			boolean isCollect = false;
+			boolean isPraise = false;
+			if(userId!=null&&token!=null){
+				TokenBean tokenBean = tokenService.getToken(userId);
+				if(tokenBean!=null){
+					String saveToken = tokenBean.getToken();
+					if(saveToken!=null&&saveToken.equals(token)){
+						 isCollect = commonService.isCollect(userId, 1, productId);
+						 isPraise = commonService.isPraise(userId, 1, productId);
+					}
+				}
+			}
 
 			long collectCount = commonService.getCollectCount(1, productId);
 			long praiseCount = commonService.getPraiseCount(1, productId);
@@ -114,6 +160,8 @@ public class ProductController extends BaseController{
 			data.put("praiseCount", praiseCount);
 			data.put("commentCount", productCommentCount);
 			data.put("saleCount", saleCount);
+			data.put("isCollect", isCollect);
+			data.put("isPraise", isPraise);
 			if(productDetail.getReadCount()==null){
 				productService.updateReadCountTo0(productId);
 				data.put("readCount", 1);

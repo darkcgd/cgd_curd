@@ -26,6 +26,39 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+  <resultMap id="SelectListResultMap" type="com.cgd.crud.bean.ProductBean">
+    <id column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="product_code" jdbcType="VARCHAR" property="productCode" />
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="image1" jdbcType="VARCHAR" property="image1" />
+    <result column="image2" jdbcType="VARCHAR" property="image2" />
+    <result column="image3" jdbcType="VARCHAR" property="image3" />
+    <result column="image4" jdbcType="VARCHAR" property="image4" />
+    <result column="image5" jdbcType="VARCHAR" property="image5" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="buy_price" jdbcType="DECIMAL" property="buyPrice" />
+    <result column="original_price" jdbcType="DECIMAL" property="originalPrice" />
+    <result column="now_price" jdbcType="DECIMAL" property="nowPrice" />
+    <result column="discount" jdbcType="INTEGER" property="discount" />
+    <result column="product_tag_id" jdbcType="INTEGER" property="productTagId" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="is_sale" jdbcType="INTEGER" property="isSale" />
+    <result column="shop_id" jdbcType="INTEGER" property="shopId" />
+    <result column="summary" jdbcType="VARCHAR" property="summary" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="read_count" jdbcType="INTEGER" property="readCount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <association javaType="com.cgd.crud.bean.CollectBean" property="collectBean">
+      <id column="collect_id" property="collectId" />
+      <result column="is_collect" property="isCollect" />
+    </association>
+    <association javaType="com.cgd.crud.bean.PraiseBean" property="praiseBean">
+      <id column="praise_id" property="praiseId" />
+      <result column="is_praise" property="isPraise" />
+    </association>
+  </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.cgd.crud.bean.ProductBean">
     <result column="graphic_detail" jdbcType="LONGVARCHAR" property="graphicDetail" />
   </resultMap>
@@ -92,6 +125,22 @@
     title, buy_price, original_price, now_price, discount, product_tag_id, category_id, 
     is_sale, shop_id, summary, remark, read_count, create_time, update_time
   </sql>
+  <!-- 查询订单信息信息同时带个人信息 -->
+  <select id="selectProductListBySql" parameterType="map" resultMap="SelectListResultMap">
+    select p.*,
+    c.is_collect,
+    a.is_praise
+    from  tbl_product AS p
+    left join tbl_collect AS c on p.product_id=c.target_id and c.target_type=1
+    <if test="userId!=null and userId>0">
+      and c.user_id=#{userId}
+    </if>
+    left join tbl_praise AS a on p.product_id=a.target_id and a.target_type=1
+    <if test="userId!=null and userId>0">
+      and a.user_id=#{userId}
+    </if>
+  </select>
+
   <sql id="Blob_Column_List">
     graphic_detail
   </sql>

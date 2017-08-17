@@ -33,18 +33,17 @@ public class CommonService {
 		criteria.andTargetTypeEqualTo(collectType);
 		criteria.andTargetIdEqualTo(targetId);
 		criteria.andUserIdEqualTo(userId);
-		criteria.andIsCancelEqualTo(1);
 		List<CollectBean> collectBeans = collectBeanMapper.selectByExample(example);
 		if(collectBeans!=null&&collectBeans.size()>0){//说明之前已经收藏了,需判断isCancel字段 ,需执行改 操作
 			CollectBean collectBean = collectBeans.get(0);
 			collectBean.setUpdateTime(new Date());
-			Integer isCancel = collectBean.getIsCancel();
-			if(isCancel==null||isCancel==0){
-				collectBean.setIsCancel(1);
+			Integer isCollect = collectBean.getIsCollect();
+			if(isCollect==null||isCollect==0){
+				collectBean.setIsCollect(1);
 				collectBeanMapper.updateByExample(collectBean,example);
 				flag=1;
 			}else{
-				collectBean.setIsCancel(0);
+				collectBean.setIsCollect(0);
 				collectBeanMapper.updateByExample(collectBean,example);
 			}
 		}else{//说明之前未收藏过,需执行增 操作
@@ -52,7 +51,7 @@ public class CommonService {
 			collectBean.setTargetType(collectType);
 			collectBean.setTargetId(targetId);
 			collectBean.setUserId(userId);
-			collectBean.setIsCancel(1);
+			collectBean.setIsCollect(1);
 			collectBean.setCreateTime(new Date());
 			collectBean.setUpdateTime(new Date());
 			collectBeanMapper.insert(collectBean);
@@ -75,18 +74,17 @@ public class CommonService {
 		criteria.andTargetTypeEqualTo(collectType);
 		criteria.andTargetIdEqualTo(targetId);
 		criteria.andUserIdEqualTo(userId);
-		criteria.andIsCancelEqualTo(1);
 		List<PraiseBean> praiseBeans = praiseBeanMapper.selectByExample(example);
 		if(praiseBeans!=null&&praiseBeans.size()>0){//说明之前已经收藏了,需判断isCancel字段 ,需执行改 操作
 			PraiseBean praiseBean = praiseBeans.get(0);
 			praiseBean.setUpdateTime(new Date());
-			Integer isCancel = praiseBean.getIsCancel();
+			Integer isCancel = praiseBean.getIsPraise();
 			if(isCancel==null||isCancel==0){
-				praiseBean.setIsCancel(1);
+				praiseBean.setIsPraise(1);
 				praiseBeanMapper.updateByExample(praiseBean,example);
 				flag=1;
 			}else{
-				praiseBean.setIsCancel(0);
+				praiseBean.setIsPraise(0);
 				praiseBeanMapper.updateByExample(praiseBean,example);
 			}
 		}else{//说明之前未收藏过,需执行增 操作
@@ -94,7 +92,7 @@ public class CommonService {
 			praiseBean.setTargetType(collectType);
 			praiseBean.setTargetId(targetId);
 			praiseBean.setUserId(userId);
-			praiseBean.setIsCancel(1);
+			praiseBean.setIsPraise(1);
 			praiseBean.setCreateTime(new Date());
 			praiseBean.setUpdateTime(new Date());
 			praiseBeanMapper.insert(praiseBean);
@@ -116,6 +114,7 @@ public class CommonService {
 		CollectBeanExample.Criteria criteria=example.createCriteria();
 		criteria.andTargetTypeEqualTo(collectType);
 		criteria.andTargetIdEqualTo(targetId);
+		criteria.andIsCollectEqualTo(1);
 		count = collectBeanMapper.countByExample(example);
 		if(count<0){
 			count=0;
@@ -135,6 +134,7 @@ public class CommonService {
 		PraiseBeanExample.Criteria criteria=example.createCriteria();
 		criteria.andTargetTypeEqualTo(praiseType);
 		criteria.andTargetIdEqualTo(targetId);
+		criteria.andIsPraiseEqualTo(1);
 		count = praiseBeanMapper.countByExample(example);
 		if(count<0){
 			count=0;
@@ -176,6 +176,50 @@ public class CommonService {
 			count=0;
 		}
 		return count;
+	}
+
+	/**
+	 * 是否被收藏
+	 * @param userId 用户id
+	 * @param targetType 1代表商品 2代表其他
+	 * @param targetId
+	 * @return
+	 */
+	public boolean isCollect(Integer userId,Integer targetType, Integer targetId){
+		CollectBeanExample example=new CollectBeanExample();
+		//通过Criteria构造查询条件
+		CollectBeanExample.Criteria criteria=example.createCriteria();
+		criteria.andUserIdEqualTo(userId);
+		criteria.andTargetTypeEqualTo(1);
+		criteria.andTargetIdEqualTo(targetId);
+		criteria.andIsCollectEqualTo(1);
+		List<CollectBean> collectBeans = collectBeanMapper.selectByExample(example);
+		if(collectBeans!=null&&collectBeans.size()>0){
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * 是否被点赞
+	 * @param userId 用户id
+	 * @param targetType 1代表商品 2代表其他
+	 * @param targetId
+	 * @return
+	 */
+	public boolean isPraise(Integer userId,Integer targetType, Integer targetId){
+		PraiseBeanExample example=new PraiseBeanExample();
+		//通过Criteria构造查询条件
+		PraiseBeanExample.Criteria criteria=example.createCriteria();
+		criteria.andUserIdEqualTo(userId);
+		criteria.andTargetTypeEqualTo(1);
+		criteria.andTargetIdEqualTo(targetId);
+		criteria.andIsPraiseEqualTo(1);
+		List<PraiseBean> praiseBeans = praiseBeanMapper.selectByExample(example);
+		if(praiseBeans!=null&&praiseBeans.size()>0){
+			return true;
+		}
+		return false;
 	}
 
 }
