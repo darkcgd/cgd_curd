@@ -25,9 +25,34 @@ public class OrderService {
 	/**
 	 * 获取订单列表数据
 	 * @return
+	 * @param userId
+	 * @param orderStatus //1待付款2待发货3发货中4待评价5已完成6已取消7已删除
 	 */
-	public List<OrderBean> getOrderList() {
-		return orderBeanMapper.selectByExample(null);
+	public List<OrderBean> getOrderList(Integer userId, Integer orderStatus) {
+		OrderBeanExample example=new OrderBeanExample();
+		OrderBeanExample.Criteria criteria=example.createCriteria();
+		criteria.andUserIdEqualTo(userId);
+		if(orderStatus!=null&&orderStatus>0){
+			criteria.andUserIdEqualTo(orderStatus);
+		}
+		return orderBeanMapper.selectByExample(example);
+	}
+
+	/***
+	 *
+	 * @param userId
+	 * @param orderStatus //1待付款2待发货3发货中4待评价5已完成6已取消7已删除
+	 * @return
+	 */
+	public List<OrderBean> getOrderListWithOtherInfo(Integer userId,Integer orderStatus) {
+		/*OrderBeanExample example=new OrderBeanExample();
+		OrderBeanExample.Criteria criteria=example.createCriteria();
+		criteria.andUserIdEqualTo(userId);
+		if(orderStatus!=null&&orderStatus>0){
+			criteria.andUserIdEqualTo(orderStatus);
+		}
+		return orderBeanMapper.selectByExampleOtherInfo(example);*/
+		return orderBeanMapper.selectByExampleOtherInfo(userId,orderStatus);
 	}
 
 

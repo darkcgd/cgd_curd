@@ -4,6 +4,7 @@ import com.cgd.crud.base.BaseController;
 import com.cgd.crud.bean.MsgBean;
 import com.cgd.crud.bean.MsgSimple;
 import com.cgd.crud.bean.OrderBean;
+import com.cgd.crud.bean.User;
 import com.cgd.crud.service.OrderService;
 import com.cgd.crud.util.AbDateUtil;
 import com.cgd.crud.util.BaseUtil;
@@ -38,10 +39,13 @@ public class OrderController extends BaseController{
 
 	@ResponseBody
 	@RequestMapping(value="order/getOrderList",method=RequestMethod.GET)
-	public MsgBean getOrdertList(@RequestParam(value = "pagerNumber", defaultValue = ""+ Constant.DefaultPagerNumber) Integer pagerNumber,
+	public MsgBean getOrdertList(@RequestParam(value = "userId") Integer userId,
+								 @RequestParam(value = "orderStatus", required=false) Integer orderStatus,
+								 @RequestParam(value = "pagerNumber", defaultValue = ""+ Constant.DefaultPagerNumber) Integer pagerNumber,
 								 @RequestParam(value = "pagerSize", defaultValue = ""+Constant.DefaultPagerSize) Integer pagerSize){
 		PageHelper.startPage(pagerNumber, pagerSize);
-		List<OrderBean> info = orderService.getOrderList();
+		////1待付款2待发货3发货中4待评价5已完成6已取消7已删除
+		List<OrderBean> info = orderService.getOrderListWithOtherInfo(userId,orderStatus);
 		MsgBean msg = MsgBean.success("获取成功");
 		Map<String, Object> data = msg.getData();
 		handlerPageInfo(data,new PageInfo(info, pagerSize));
@@ -77,6 +81,16 @@ public class OrderController extends BaseController{
 			map.put("senderId", orderBean.getSenderId());
 			map.put("logisticsSn", orderBean.getLogisticsSn());
 			map.put("remark", orderBean.getRemark());
+
+			User user = orderBean.getUser();
+			if(user==null){
+				map.put("userName",null);
+				map.put("userHeadUrl",null);
+			}else{
+				map.put("userName",user.getUserName());
+				map.put("userHeadUrl",user.getHeadUrl());
+			}
+
 			handlerDateToStr(map,"createTime",orderBean.getCreateTime(),AbDateUtil.dateFormatYMDHMS);
 			handlerDateToStr(map,"payTime",orderBean.getPayTime(),AbDateUtil.dateFormatYMDHMS);
 			handlerDateToStr(map,"confirmTime",orderBean.getConfirmTime(),AbDateUtil.dateFormatYMDHMS);
@@ -91,7 +105,7 @@ public class OrderController extends BaseController{
 
 	@ResponseBody
 	@RequestMapping(value="order/createOrder",method=RequestMethod.GET)
-	public Object getOrdertList(@Valid OrderBean orderBean, BindingResult result){
+	public Object createOrder(@Valid OrderBean orderBean, BindingResult result){
 		if(result.hasErrors()){
 			//校验失败，应该返回失败，在模态框中显示校验失败的错误信息
 			Map<String, Object> map = new HashMap<>();

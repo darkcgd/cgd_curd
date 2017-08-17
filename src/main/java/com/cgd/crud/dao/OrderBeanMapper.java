@@ -4,6 +4,7 @@ import com.cgd.crud.bean.OrderBean;
 import com.cgd.crud.bean.OrderBeanExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface OrderBeanMapper {
     long countByExample(OrderBeanExample example);
@@ -27,4 +28,6 @@ public interface OrderBeanMapper {
     int updateByPrimaryKeySelective(OrderBean record);
 
     int updateByPrimaryKey(OrderBean record);
+
+    List<OrderBean> selectByExampleOtherInfo(@Param("userId") Integer userId, @Param("orderStatus")Integer orderStatus);
 }
