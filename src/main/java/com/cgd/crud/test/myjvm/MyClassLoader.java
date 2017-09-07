@@ -1,19 +1,10 @@
 package com.cgd.crud.test.myjvm;
 
-<<<<<<< HEAD
+
+import java.io.*;
 /**
  * Created by szmg on 17/8/21.
  */
-public class MyClassLoader extends ClassLoader{
-
-    @Override
-    protected Class<?> findClass(String name) throws ClassNotFoundException {
-
-        return super.findClass(name);
-    }
-=======
-import java.io.*;
-
 public class MyClassLoader extends ClassLoader{
 
     private String root;
@@ -73,5 +64,4 @@ public class MyClassLoader extends ClassLoader{
         }
     }
 
->>>>>>> e585611758257882fb3978d317667679259f9e1a
 }
