@@ -87,16 +87,148 @@
 
 
             </div>
-            <div class="col-xs-10 col-md-11 col-md-11">
-                <ul class="nav nav-tabs nav-justified"  style="background:#D3EFCC;padding-top: 10px;padding-bottom: 10px;padding-left: 20px">
-                        <li id="li_day1" role="presentation" onclick="clickLi(id)"><a href="#">明天</a></li>
-                        <li id="li_day2" role="presentation" onclick="clickLi(id)"  class="active"><a href="#">今天(8月9日)</a></li>
-                        <li id="li_day3" role="presentation"  onclick="clickLi(id)"><a href="#">昨天</a></li>
-                        <li id="li_day4" role="presentation" onclick="clickLi(id)"><a href="#">8月7日</a></li>
-                        <li id="li_day5" role="presentation" onclick="clickLi(id)"><a href="#">8月6日</a></li>
-                        <li id="li_day6" role="presentation" onclick="clickLi(id)"><a href="#">8月5日</a></li>
-                    </ul>
-                </ul>
+            <div class="col-xs-10 col-md-11" style="margin-top: 10px;">
+                <div>
+                    <button id="bt_add_product" type="button" class="btn btn-primary" onclick="clickProductMenu(id)">添加商品</button>
+                    <button id="bt_product_oprate" type="button" class="btn btn-default" onclick="clickProductMenu(id)">商品操作</button>
+                </div>
+
+                <%--商品名称
+                商品标题(可不填)
+                成本价
+                原价
+                折扣
+                售价(由折扣所得)
+                商品编码(可不填)
+                商品分类
+                商品标签
+                logo
+                图片(最多4张)
+                富文本
+                是否上架
+                 简介(可不填)
+                --%>
+                <div class="container-fluid" style="margin-top:20px;">
+                    <div class="row" >
+                        <div class="col-md-6">
+                            <form class="form-horizontal" id="formAddQianggoubiao">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">商品名称</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="qianngouName" class="form-control"
+                                               id="input_name" placeholder="商品名称,例如小米6（2499/2899）"> <span
+                                            class="help-block"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">商品标题</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="qianngouName" class="form-control"
+                                               id="input_title" placeholder="可不填"> <span
+                                            class="help-block"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">成本价(进货价)</label>
+                                    <div class="col-md-3">
+                                        <input type="text" name="qianngouName" class="form-control"
+                                               id="input_buy_price" placeholder="如36"> <span
+                                            class="help-block"></span>
+                                    </div>
+
+                                    <label class="col-md-2 control-label">原价</label>
+                                    <div class="col-md-3">
+                                        <input type="text" name="qianngouName" class="form-control"
+                                               id="input_original_price" placeholder="如100"> <span
+                                            class="help-block"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">折扣</label>
+                                    <div class="col-md-3">
+                                        <input type="text" name="qianngouName" class="form-control"
+                                               id="input_discount" placeholder="如6.5"> <span
+                                            class="help-block"></span>
+                                    </div>
+
+                                    <label class="col-md-2 control-label">售价</label>
+                                    <div class="col-md-3">
+                                        <input type="text" name="qianngouName" class="form-control"
+                                               id="input_now_price1" placeholder="如65"> <span
+                                            class="help-block"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">商品分类</label>
+                                    <div class="col-md-3">
+                                        <!-- 提交品牌id即可 -->
+                                        <select id="select_brand" class="form-control" name="qianggouBrandId"></select>
+                                    </div>
+                                    <label class="col-md-2 control-label">商品标签</label>
+                                    <div class="col-md-3">
+                                        <!-- 提交平台id即可 -->
+                                        <select id="select_platform" class="form-control" name="qianggouPlatformId"></select>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Logo</label>
+                                    <div class="col-md-8">
+                                        <div class="col-md-8">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">商品封面</label>
+                                    <div class="col-md-8">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">上架</label>
+                                    <div class="col-md-8">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">简介</label>
+                                    <div class="col-md-8">
+                                        <textarea id="input_url" class="col-sm-12" rows="5" name="directeUrl" placeholder="商品简介"></textarea>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">富文本</label>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <button id="btn_save" class="btn btn-lg btn-primary btn-block"
+                                            type="submit">确定添加</button>
+                                </div>
+                                <span id="span_status" style="color: green;"></span>
+                            </form>
+
+                        </div>
+                        <div class="col-md-6" style="background: #00be67">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">富文本</label>
+                            </div>
+
+                            <div class="form-group">
+                                <button id="btn_save1" class="btn btn-lg btn-primary btn-block"
+                                        type="submit">确定添加</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -119,6 +251,16 @@
     clickMenu("#div_message");
     clickMenu("#div_setting");
 
+    function clickProductMenu(id){
+        $("#bt_add_product").removeClass("btn-primary");
+        $("#bt_product_oprate").removeClass("btn-primary");
+
+        $("#"+id).addClass("btn-primary");
+
+        window.event.returnValue = false;
+    }
+
+
     function clickMenu(ele){
         $(ele).click(function() {
             if(ele=="#div_main"){
@@ -136,6 +278,14 @@
             }
             window.event.returnValue = false;
         })
+    }
+
+
+    function clickLi(id){
+        $("#li_day1").removeClass("active");
+        $("#li_day2").removeClass("active");
+
+        $("#"+id).addClass("active");
     }
 
 
