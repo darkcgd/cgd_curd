@@ -1,5 +1,6 @@
 package com.cgd.crud.test.myjvm;
 
+<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,4 +19,14 @@ public class Test {
         int aa= a.hashCode() >>> 16;
         System.out.println(i+":::"+aa);
     }
+=======
+import java.util.ArrayList;
+import java.util.List;
+
+public class Test {
+    public static void main(String[] args) {
+        List list=new ArrayList();
+    }
+
+>>>>>>> e585611758257882fb3978d317667679259f9e1a
 }
