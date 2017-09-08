@@ -3,6 +3,7 @@ package com.cgd.crud.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,9 +21,9 @@ public class FileController {
      * @return
      * @throws IOException
      */
-    @RequestMapping(value="/upload",method= RequestMethod.POST)
+    @RequestMapping(value="/upload",method= {RequestMethod.POST, RequestMethod.GET })
     @ResponseBody
-    public String upload(MultipartFile file, HttpServletRequest request) throws IOException {
+    public String upload(@RequestParam(value = "file")MultipartFile file, HttpServletRequest request) throws IOException {
         String path = request.getSession().getServletContext().getRealPath("upload");
         String fileName = file.getOriginalFilename();
         File dir = new File(path,fileName);

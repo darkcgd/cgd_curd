@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.cgd.crud.util.Constant" %><%--
   Created by IntelliJ IDEA.
   User: szmg
   Date: 17/9/7
@@ -12,6 +12,9 @@
     <%
         pageContext.setAttribute("APP_PATH", request.getContextPath());
     %>
+
+    <% pageContext.setAttribute("BASE_URL", Constant.BASE_URL); %>
+
     <!-- web路径：
     不以/开始的相对路径，找资源，以当前资源的路径为基准，经常容易出问题。
     以/开始的相对路径，找资源，以服务器的路径为标准(http://localhost:3306)；需要加上项目名
@@ -176,25 +179,18 @@
                                 </div>
 
 
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label">Logo</label>
-                                    <div class="col-md-8">
-                                        <div class="col-md-8">
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label">商品封面</label>
-                                    <div class="col-md-8">
-                                    </div>
-                                </div>
 
                                 <div class="form-group">
                                     <label class="col-md-2 control-label">上架</label>
-                                    <div class="col-md-8">
-                                    </div>
+                                        <div class="checkbox">
+                                            <label >是否上架</label>
+                                                <input type="checkbox" style="margin-left: 10px" value="remember-me">
+
+                                        </div>
                                 </div>
+
+
 
                                 <div class="form-group">
                                     <label class="col-md-2 control-label">简介</label>
@@ -204,31 +200,45 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label">富文本</label>
 
-                                </div>
 
-                                <div class="form-group">
-                                    <button id="btn_save" class="btn btn-lg btn-primary btn-block"
-                                            type="submit">确定添加</button>
-                                </div>
-                                <span id="span_status" style="color: green;"></span>
                             </form>
 
                         </div>
-                        <div class="col-md-6" style="background: #00be67">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-md-2 control-label">富文本</label>
+                                <label class="col-md-12 control-label">Logo</label>
+                                <div class="col-md-12">
+                                        <form  enctype="multipart/form-data">
+                                            <div class="row">
+                                                <input id="file" type="file" name="file" width="120px">
+                                                <input type="submit" value="上传" onclick="return doUpload()" style="margin-top: 10px">
+                                            </div>
+                                        </form>
+                                </div>
                             </div>
 
                             <div class="form-group">
-                                <button id="btn_save1" class="btn btn-lg btn-primary btn-block"
-                                        type="submit">确定添加</button>
+                                <label class="col-md-12 control-label">商品封面(可上传4张)</label>
+                                <div class="col-md-12">
+                                    <form action="${BASE_URL}file/upload" method="post" enctype="multipart/form-data">
+                                        <div class="row">
+                                            <input type="file" name="file" width="120px">
+                                            <input type="submit" value="上传" style="margin-top: 10px">
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+                <div class="col-md-offset-3 col-md-6" style="margin-top: 30px">
+                    <button id="btn_save" class="btn btn-lg btn-primary btn-block"
+                            type="submit">确定添加</button>
+                </div>
+                <span id="span_status" style="color: green;"></span>
 
             </div>
         </div>
@@ -281,11 +291,26 @@
     }
 
 
-    function clickLi(id){
-        $("#li_day1").removeClass("active");
-        $("#li_day2").removeClass("active");
-
-        $("#"+id).addClass("active");
+    function doUpload(){
+        var fileName = $("#file").val();
+        var formData = new FormData();
+        formData.append("file",fileName);//这里是要上传的文件，其他属性也是append
+        $.ajaxFileUpload({
+            type:"POST",
+            url:"${BASE_URL}file/upload",
+            data:formData,
+            fileElementId:"file",
+            dataType:"text",
+            processData:false,
+            success:function(data){
+                //成功
+                console.log("成功:"+data)
+            },
+            error:function(){
+                //错误
+                console.log("错误")
+            }
+        });
     }
 
 

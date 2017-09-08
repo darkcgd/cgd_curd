@@ -48,4 +48,14 @@
     <filter-name>HiddenHttpMethodFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+
+
+  <!--获取根目录 在项目中有时候我们需要记录日志或者上传图片，需要知道项目的具体路径，如果项目中使用了spring，那么获得到项目跟路径很简单，只需要在web.xml中添加listener配置-->
+  <context-param>
+    <param-name>webAppRootKey</param-name>
+    <param-value>dark.webapp</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
+  </listener>
 </web-app>

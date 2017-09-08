@@ -1,16 +1,11 @@
 package com.cgd.crud.test.myspring;
 
-import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader;
-import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by szmg on 17/8/31.
