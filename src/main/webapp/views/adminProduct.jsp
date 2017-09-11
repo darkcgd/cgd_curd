@@ -21,6 +21,7 @@
             http://localhost:3306/crud
      -->
     <script type="text/javascript" src="${APP_PATH }/static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="${APP_PATH }/static/js/jquery.lazyload.js"></script>
     <script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script src="${APP_PATH }/static/js/util.js"></script>
     <link href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -160,7 +161,7 @@
                                     <label class="col-md-2 control-label">售价</label>
                                     <div class="col-md-3">
                                         <input type="text" name="qianngouName" class="form-control"
-                                               id="input_now_price1" placeholder="如65"> <span
+                                               id="input_now_price" placeholder="如65"> <span
                                             class="help-block"></span>
                                     </div>
                                 </div>
@@ -169,12 +170,12 @@
                                     <label class="col-md-2 control-label">商品分类</label>
                                     <div class="col-md-3">
                                         <!-- 提交品牌id即可 -->
-                                        <select id="select_brand" class="form-control" name="qianggouBrandId"></select>
+                                        <select id="select_category" class="form-control" name="qianggouBrandId"></select>
                                     </div>
                                     <label class="col-md-2 control-label">商品标签</label>
                                     <div class="col-md-3">
                                         <!-- 提交平台id即可 -->
-                                        <select id="select_platform" class="form-control" name="qianggouPlatformId"></select>
+                                        <select id="select_tag" class="form-control" name="qianggouPlatformId"></select>
                                     </div>
                                 </div>
 
@@ -183,11 +184,11 @@
 
                                 <div class="form-group">
                                     <label class="col-md-2 control-label">上架</label>
-                                        <div class="checkbox">
-                                            <label >是否上架</label>
-                                                <input type="checkbox" style="margin-left: 10px" value="remember-me">
+                                    <div class="checkbox">
+                                        <label >是否上架</label>
+                                        <input id="select_xiajia" type="checkbox" style="margin-left: 10px" value="remember-me">
 
-                                        </div>
+                                    </div>
                                 </div>
 
 
@@ -195,7 +196,7 @@
                                 <div class="form-group">
                                     <label class="col-md-2 control-label">简介</label>
                                     <div class="col-md-8">
-                                        <textarea id="input_url" class="col-sm-12" rows="5" name="directeUrl" placeholder="商品简介"></textarea>
+                                        <textarea id="input_summary" class="col-sm-12" rows="5" name="directeUrl" placeholder="商品简介"></textarea>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
@@ -209,42 +210,68 @@
                             <div class="form-group">
                                 <label class="col-md-12 control-label">Logo</label>
                                 <div class="col-md-12">
-                                        <form  enctype="multipart/form-data">
+                                    <div class="col-md-4">
+                                        <form class="form form-horizontal" action=""  method="post"  id="form_upload">
                                             <div class="row">
-                                                <input id="file" type="file" name="file" width="120px">
-                                                <input type="submit" value="上传" onclick="return doUpload()" style="margin-top: 10px">
+                                                <input type="file" class="input-text"  width="120px" id="file_upload" name="file">
+                                                <input type="submit" value="上传" style="margin-top: 10px" onclick="doUpload()">
                                             </div>
                                         </form>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="col-md-2">
+                                            <a id="a_upload" class="thumbnail hide"><img id="img_upload" class="img-rounded" src="${APP_PATH }/static/image/bg_default_add_image.png"
+                                                                                         alt="logo" width="100px" height="100px"/></a>
+                                        </div>
+
+                                    </div>
+
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <label class="col-md-12 control-label">商品封面(可上传4张)</label>
                                 <div class="col-md-12">
-                                    <form action="${BASE_URL}file/upload" method="post" enctype="multipart/form-data">
-                                        <div class="row">
-                                            <input type="file" name="file" width="120px">
-                                            <input type="submit" value="上传" style="margin-top: 10px">
+                                    <div class="col-md-4">
+                                        <form class="form form-horizontal" action=""  method="post"  id="form_upload_multipart_file">
+                                            <div class="row">
+                                                <input id="file_upload_multipart_file" type="file" name="file" multiple="multiple"  width="120px">
+                                                <input type="submit" value="上传" style="margin-top: 10px" onclick="doUploadMultipartFile()">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="col-md-2">
+                                            <a id="a_upload0" class="thumbnail hide"><img id="img_upload0" class="img-rounded" src="${APP_PATH }/static/image/bg_default_add_image.png"
+                                                                                          alt="logo" width="100px" height="100px"/></a>
                                         </div>
-                                    </form>
+                                        <div class="col-md-2">
+                                            <a id="a_upload1" class="thumbnail hide"><img id="img_upload1" class="img-rounded" src="${APP_PATH }/static/image/bg_default_add_image.png"
+                                                                                          alt="logo" width="100px" height="100px"/></a>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <a id="a_upload2" class="thumbnail hide"><img id="img_upload2" class="img-rounded" src="${APP_PATH }/static/image/bg_default_add_image.png"
+                                                                                          alt="logo" width="100px" height="100px"/></a>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <a id="a_upload3" class="thumbnail hide"><img id="img_upload3" class="img-rounded" src="${APP_PATH }/static/image/bg_default_add_image.png"
+                                                                                          alt="logo" width="100px" height="100px"/></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
+                    <div class="col-md-offset-3 col-md-6" style="margin-top: 30px">
+                        <button id="btn_add" class="btn btn-lg btn-primary btn-block"
+                                type="submit" onclick="doSubmit()">确定添加</button>
+                    </div>
+                    <span id="span_status" style="color: green;"></span>
+
                 </div>
-
-
-                <div class="col-md-offset-3 col-md-6" style="margin-top: 30px">
-                    <button id="btn_save" class="btn btn-lg btn-primary btn-block"
-                            type="submit">确定添加</button>
-                </div>
-                <span id="span_status" style="color: green;"></span>
-
             </div>
         </div>
-
-
-
     </div>
 </div>
 
@@ -253,6 +280,10 @@
     $(document).ready(function() {
 
     });
+
+    getCategory("#select_category");
+    getTag("#select_tag");
+
 
     clickMenu("#div_main");
     clickMenu("#div_product");
@@ -290,28 +321,180 @@
         })
     }
 
-
+    var logo;
     function doUpload(){
-        var fileName = $("#file").val();
-        var formData = new FormData();
-        formData.append("file",fileName);//这里是要上传的文件，其他属性也是append
-        $.ajaxFileUpload({
-            type:"POST",
-            url:"${BASE_URL}file/upload",
-            data:formData,
-            fileElementId:"file",
-            dataType:"text",
-            processData:false,
-            success:function(data){
-                //成功
-                console.log("成功:"+data)
-            },
-            error:function(){
-                //错误
-                console.log("错误")
+        window.event.returnValue = false;
+        if ($('#file_upload').val() == null || $('#file_upload').val() == '') {
+            alert('请选择文件上传');
+        } else {
+            var formData = new FormData($("#form_upload")[0]);
+            $.ajax({
+                url: '${BASE_URL}file/upload?a=Math.random();',
+                type: 'POST',
+                data: formData,
+                async: false,
+                contentType: false,
+                processData: false,
+                success: function (result) {
+                    logo=result.data.image;
+                    var imageSource='${BASE_URL}'+logo;
+                    $('#img_upload').attr('src', imageSource);
+                    $("#a_upload").removeClass("hide");
+                    $("#a_upload").addClass("show");
+
+                },
+                error: function (data) {
+                    var obj=data;
+                    alert(obj);
+                    window.event.returnValue = false;
+                }
+
+
+            });
+        }
+    }
+
+
+    var image1;
+    var image2;
+    var image3;
+    var image4;
+    function doUploadMultipartFile() {
+        window.event.returnValue = false;
+        if ($('#file_upload_multipart_file').val() == null || $('#file_upload_multipart_file').val() == '') {
+            alert('请选择文件上传');
+        } else {
+            var formData = new FormData($("#form_upload_multipart_file")[0]);
+            $.ajax({
+                url: '${BASE_URL}file/uploadMultipartFile',
+                type: 'POST',
+                data: formData,
+                async: false,
+                contentType: false,
+                processData: false,
+                success: function (result) {
+                    var obj=result.data.imageList;
+                    if(obj!=undefined&&obj.length>0){
+                        for (var i=0;i<obj.length;i++){
+                            if(obj[i]!=undefined){
+                                if(i==0){
+                                    image1=obj[i];
+                                }else if(i==1){
+                                    image2=obj[i];
+                                }else if(i==2){
+                                    image3=obj[i];
+                                }else if(i==3){
+                                    image4=obj[i];
+                                }
+                                var imageSource='${BASE_URL}'+obj[i];
+                                $('#img_upload'+i).attr('src', imageSource);
+                                $("#a_upload"+i).removeClass("hide");
+                                $("#a_upload"+i).addClass("show");
+                            }
+                        }
+
+                    }
+
+
+                },
+                error: function (data) {
+                    alert(data)
+                }
+            });
+        }
+    }
+
+
+
+    function doSubmit(){
+        doAddproduct(); //添加商品
+
+    }
+
+    function doAddproduct(){
+
+
+        $("#btn_add").blur(); //去除焦点
+        //1、拿到要校验的数据，使用正则表达式
+        var product_name = $("#input_name").val();
+        var title = $("#input_title").val();
+        var buy_price = $("#input_buy_price").val();
+        var original_price = $("#input_original_price").val();
+        var discount = $("#input_discount").val();
+        var now_price = $("#input_now_price").val();
+        var category_id = $("#select_category").val();
+        var product_tag_id = $("#select_tag").val();
+
+        var is_sale;
+        if($('#select_xiajia').is(':checked')) {
+            is_sale=1;
+        }else{
+            is_sale=0;
+        }
+        var summary = $("#input_summary").val();
+
+        if(title==undefined||title==""){
+            title=product_name;
+        }
+
+        var shop_id=1;
+        var product_code=2003;
+        var graphic_detail=summary;
+
+        var params = $("#formAddQianggoubiao").serialize();
+        //alert(params);
+        //2、发送ajax请求保存抢购信息
+        $.ajax({
+            url : "${APP_PATH}/qianggoubiao/save",
+            type : "GET",
+            data : params,
+            success : function(result) {
+                var code = result.code;
+                if (code != 100) {
+                    $("#span_status").addClass("glyphicon glyphicon-remove");
+                    $("#span_status").text(result.msg);
+                    $.session.clear();
+                } else {
+                    $("#span_status").addClass("glyphicon glyphicon-ok");
+                    $("#span_status").text(result.msg);
+                }
             }
         });
+
+        window.event.returnValue = false;
     }
+
+
+    function getCategory(ele) {
+        //清空之前下拉列表的值
+        $(ele).empty();
+        $.ajax({
+            url:"${APP_PATH}/getAllProductCategoryList",
+            type:"GET",
+            success:function(result){
+                //显示部门信息在下拉列表中
+                $.each(result.data.list,function(){
+                    var optionEle = $("<option></option>").append(this.categoryName).attr("value",this.categoryId);
+                    optionEle.appendTo(ele);
+                });
+            }
+        });
+    };
+    function getTag(ele) {
+        //清空之前下拉列表的值
+        $(ele).empty();
+        $.ajax({
+            url:"${APP_PATH}/getAllProductTagList",
+            type:"GET",
+            success:function(result){
+                //显示部门信息在下拉列表中
+                $.each(result.data.list,function(){
+                    var optionEle = $("<option></option>").append(this.tagName).attr("value",this.tagId);
+                    optionEle.appendTo(ele);
+                });
+            }
+        });
+    };
 
 
 

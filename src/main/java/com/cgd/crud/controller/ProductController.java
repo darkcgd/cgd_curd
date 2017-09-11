@@ -13,11 +13,14 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.validation.Valid;
 import java.util.*;
 
 @Controller
@@ -31,6 +34,32 @@ public class ProductController extends BaseController{
 	OrderService orderService;
 	@Autowired
 	TokenService tokenService;
+
+
+	/**
+	 * @return
+	 */
+	@RequestMapping(value="/save",method=RequestMethod.GET)
+	@ResponseBody
+	public MsgBean addProduct(@Valid ProductBean data, BindingResult result){
+		if(result.hasErrors()){
+			//校验失败，应该返回失败，在模态框中显示校验失败的错误信息
+			Map<String, Object> map = new HashMap<>();
+			List<FieldError> errors = result.getFieldErrors();
+			for (FieldError fieldError : errors) {
+				System.out.println("错误的字段名："+fieldError.getField());
+				System.out.println("错误信息："+fieldError.getDefaultMessage());
+				map.put(fieldError.getField(), fieldError.getDefaultMessage());
+			}
+			return MsgBean.fail().add("errorFields", map);
+		}else{
+			if(data!=null){
+				productService.addProduct(data);
+				return MsgBean.success("添加成功");
+			}
+			return MsgBean.success("添加失败");
+		}
+	}
 
 
 	@ResponseBody
