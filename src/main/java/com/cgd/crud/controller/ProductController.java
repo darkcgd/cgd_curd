@@ -39,7 +39,7 @@ public class ProductController extends BaseController{
 	/**
 	 * @return
 	 */
-	@RequestMapping(value="/save",method=RequestMethod.GET)
+	@RequestMapping(value="/addProduct",method=RequestMethod.GET)
 	@ResponseBody
 	public MsgBean addProduct(@Valid ProductBean data, BindingResult result){
 		if(result.hasErrors()){
