@@ -267,10 +267,57 @@
                         <button id="btn_add" class="btn btn-lg btn-primary btn-block"
                                 type="submit" onclick="doSubmit()">确定添加</button>
                         <div class="col-md-offset-6 col-md-6" style="margin-top: 50px">
-                        <span id="span_status" style="color: green;"></span>
-                    </div>
+                            <span id="span_status" style="color: green;"></span>
+                        </div>
                     </div>
 
+
+                </div>
+
+
+                <!-- 商品操作  搭建显示页面 -->
+                <div id="div_oprate_product" class="container-fluid" style="display: none">
+                    <!-- 按钮 -->
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-8">
+                            <button class="btn btn-primary" id="emp_add_modal_btn">新增</button>
+                            <button class="btn btn-danger" id="emp_delete_all_btn">删除</button>
+                        </div>
+                    </div>
+                    <!-- 显示表格数据 -->
+                    <div class="row">
+                        <div class="col-md-10">
+                            <table class="table table-hover" id="product_table">
+                                <thead>
+                                <tr>
+                                    <th style='vertical-align: middle;text-align: center;'>
+                                        <input type="checkbox" id="check_all"/>
+                                    </th>
+                                    <th style='vertical-align: middle;text-align: center;'>序号</th>
+                                    <th style='vertical-align: middle;text-align: center;'>商品信息</th>
+                                    <th style='vertical-align: middle;text-align: center;'>成本价</th>
+                                    <th style='vertical-align: middle;text-align: center;'>原价</th>
+                                    <th style='vertical-align: middle;text-align: center;'>现价</th>
+                                    <th style='vertical-align: middle;text-align: center;'>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody >
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                    <!-- 显示分页信息 -->
+                    <div class="row">
+                        <!--分页文字信息  -->
+                        <div class="col-md-6" id="page_info_area"></div>
+                        <!-- 分页条信息 -->
+                        <div class="col-md-6" id="page_nav_area">
+
+                        </div>
+                    </div>
 
                 </div>
 
@@ -281,6 +328,8 @@
 </div>
 
 <script type="text/javascript">
+    var pagerNumber=1;
+
     //ajax提交
     $(function(){
         getCategory("#select_category");
@@ -299,7 +348,6 @@
         inputCount("#input_discount");
         inputCount("#input_now_price");
 
-
         setListener();
 
     });
@@ -313,13 +361,17 @@
 
         if(id=="bt_add_product"){
             $("#div_add_product").show();
+            $("#div_oprate_product").hide();
         }else{
             $("#div_add_product").hide();
+            $("#div_oprate_product").show();
+            getProductList(pagerNumber);
         }
 
 
         window.event.returnValue = false;
     }
+
 
 
     function clickMenu(ele){
@@ -340,6 +392,76 @@
             window.event.returnValue = false;
         })
     }
+
+
+
+    function getProductList(pagerNumber){
+        $.ajax({
+            url:"${APP_PATH}/getProductList",
+            //默认显示10条数据
+            data:"pagerNumber="+pagerNumber+"&pagerSize=10",
+            type:"GET",
+            success:function(result){
+                //console.log(result);
+                //1、解析并显示员工数据
+                showProductList(result);
+                //2、解析并显示分页信息
+                build_page_info(result);
+                //3、解析显示分页条数据
+                build_page_nav(result);
+            }
+        });
+    }
+
+    function showProductList(result) {
+        //清空table表格
+        $("#product_table tbody").empty();
+        var productList = result.data.list;
+        $.each(productList,function(index,item){
+            var checkBoxTd = $("<td style='vertical-align: middle;text-align: center;'><input type='checkbox' class='check_item'/></td>");
+            var productIdTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append(item.productId);
+
+
+            var imageTd = "<img src='"+item.logo+"' class='img-rounded img-responsive' style='width: 50px;height: 50px;'>";
+            var nameTd =$("<h5></h5>").append(item.productName);
+            var titleTd =$("<small></small>").append(item.title);
+
+            var imageDivTd =$("<div style='vertical-align: middle;background: #232323'></div>").append(imageTd).addClass("col-md-1");
+            var divTd =$("<div></div>").append(nameTd).append(titleTd).addClass("col-md-11");
+            var productNameTd = $("<td style='vertical-align: middle;background: red'></td>").append(imageDivTd).append(divTd);
+
+
+            var buyPriceTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append("￥"+item.buyPrice);
+            var originalPriceTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append("￥"+item.originalPrice);
+            var nowPriceTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append(item.nowPrice);
+            /**
+             <button class="">
+             <span class="" aria-hidden="true"></span>
+             编辑
+             </button>
+             */
+            var editBtn = $("<button></button>").addClass("btn btn-primary btn-sm edit_btn")
+                .append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
+            //为编辑按钮添加一个自定义的属性，来表示当前员工id
+            editBtn.attr("edit-id",item.empId);
+            var delBtn =  $("<button></button>").addClass("btn btn-danger btn-sm delete_btn")
+                .append($("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除");
+            //为删除按钮添加一个自定义的属性来表示当前删除的员工id
+            delBtn.attr("del-id",item.empId);
+            var btnTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append(editBtn).append(" ").append(delBtn);
+            //var delBtn =
+            //append方法执行完成以后还是返回原来的元素
+            $("<tr></tr>").append(checkBoxTd)
+                .append(productIdTd)
+                .append(productNameTd)
+                .append(buyPriceTd)
+                .append(originalPriceTd)
+                .append(nowPriceTd)
+                .append(btnTd)
+                .appendTo("#product_table tbody");//添加到哪里
+        });
+    };
+
 
     var logo;
     function doUpload(){

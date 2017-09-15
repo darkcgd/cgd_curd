@@ -10,8 +10,20 @@ import java.util.UUID;
 
 public class TestJavaMethod {
 	public static void main(String[] args) {
-		testToken();
+		testTime();
+		//testToken();
 		//testDate();
+	}
+
+	private static void testTime() {
+		String timestr="7250";
+		long a = Long.parseLong(timestr);
+		long hour=a/3600;    //!小时
+		long minute=a%3600/60+hour*60;  //!分钟
+		long second=a%60;        //!秒
+		System.out.println(hour+":"+minute+":"+second);
+
+
 	}
 
 
