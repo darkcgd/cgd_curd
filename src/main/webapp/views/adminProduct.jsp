@@ -30,8 +30,24 @@
 </head>
 <body>
 
-
-
+<div class="modal fade" id="div_delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">温馨提示</h4>
+            </div>
+            <div class="modal-body">
+                <h4>是否删除</h4>
+                <p></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="emp_update_btn">确定删除</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div>
     <div class="container-fluid" >
@@ -324,8 +340,15 @@
             </div>
 
         </div>
+
+
+
+
     </div>
+
+
 </div>
+
 
 <script type="text/javascript">
     var pagerNumber=1;
@@ -406,9 +429,9 @@
                 //1、解析并显示员工数据
                 showProductList(result);
                 //2、解析并显示分页信息
-                build_page_info(result);
+                //build_page_info(result);
                 //3、解析显示分页条数据
-                build_page_nav(result);
+                //build_page_nav(result);
             }
         });
     }
@@ -422,18 +445,18 @@
             var productIdTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append(item.productId);
 
 
-            var imageTd = "<img src='"+item.logo+"' class='img-rounded img-responsive' style='width: 50px;height: 50px;'>";
+            var imageTd = "<img src='"+item.logo+"' class='img-rounded img-responsive center-block' style='width: 50px;height: 50px;'>";
             var nameTd =$("<h5></h5>").append(item.productName);
             var titleTd =$("<small></small>").append(item.title);
 
-            var imageDivTd =$("<div style='vertical-align: middle;background: #232323'></div>").append(imageTd).addClass("col-md-1");
+            var imageDivTd =$("<div style='vertical-align: middle;text-align: center;'></div>").append(imageTd).addClass("col-md-1");
             var divTd =$("<div></div>").append(nameTd).append(titleTd).addClass("col-md-11");
-            var productNameTd = $("<td style='vertical-align: middle;background: red'></td>").append(imageDivTd).append(divTd);
+            var productNameTd = $("<td style='vertical-align: middle;'></td>").append(imageDivTd).append(divTd);
 
 
             var buyPriceTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append("￥"+item.buyPrice);
             var originalPriceTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append("￥"+item.originalPrice);
-            var nowPriceTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append(item.nowPrice);
+            var nowPriceTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append("￥"+item.nowPrice);
             /**
              <button class="">
              <span class="" aria-hidden="true"></span>
@@ -443,11 +466,11 @@
             var editBtn = $("<button></button>").addClass("btn btn-primary btn-sm edit_btn")
                 .append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
             //为编辑按钮添加一个自定义的属性，来表示当前员工id
-            editBtn.attr("edit-id",item.empId);
+            editBtn.attr("edit-id",item.productId);
             var delBtn =  $("<button></button>").addClass("btn btn-danger btn-sm delete_btn")
                 .append($("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除");
             //为删除按钮添加一个自定义的属性来表示当前删除的员工id
-            delBtn.attr("del-id",item.empId);
+            delBtn.attr("del-id",item.productId);
             var btnTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append(editBtn).append(" ").append(delBtn);
             //var delBtn =
             //append方法执行完成以后还是返回原来的元素
@@ -621,6 +644,23 @@
 
         window.event.returnValue = false;
     }
+
+    //1、我们是按钮创建之前就绑定了click，所以绑定不上。
+    //1）、可以在创建按钮的时候绑定。    2）、绑定点击.live()
+    //jquery新版没有live，使用on进行替代
+    $(document).on("click",".delete_btn",function(){
+        //1、查出商品信息
+        //getProductDetail($(this).attr("edit-id"));
+
+        //3、把商品的id传递给模态框的更新按钮
+        $("#btn_confirm_delete").attr("edit-id",$(this).attr("edit-id"));
+        $("#div_delete_modal").modal('show')
+    });
+
+    //点击更新，更新员工信息
+    $("#btn_confirm_delete").click(function(){
+        $("#div_delete_modal").modal("hide");
+    });
 
 
     function getCategory(ele) {
