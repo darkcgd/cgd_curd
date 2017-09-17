@@ -214,7 +214,7 @@
 		function build_emps_table(result){
 			//清空table表格
 			$("#emps_table tbody").empty();
-			var emps = result.extend.pageInfo.list;
+			var emps = result.data.pageInfo.list;
 			$.each(emps,function(index,item){
 				var checkBoxTd = $("<td><input type='checkbox' class='check_item'/></td>");
 				var empIdTd = $("<td></td>").append(item.empId);
@@ -252,11 +252,11 @@
 		//解析显示分页信息
 		function build_page_info(result){
 			$("#page_info_area").empty();
-			$("#page_info_area").append("当前"+result.extend.pageInfo.pageNum+"页,总"+
-					result.extend.pageInfo.pages+"页,总"+
-					result.extend.pageInfo.total+"条记录");
-			totalRecord = result.extend.pageInfo.total;
-			currentPage = result.extend.pageInfo.pageNum;
+			$("#page_info_area").append("当前"+result.data.pageInfo.pageNum+"页,总"+
+					result.data.pageInfo.pages+"页,总"+
+					result.data.pageInfo.total+"条记录");
+			totalRecord = result.data.pageInfo.total;
+			currentPage = result.data.pageInfo.pageNum;
 		}
 		//解析显示分页条，点击分页要能去下一页....
 		function build_page_nav(result){
@@ -267,7 +267,7 @@
 			//构建元素
 			var firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href","#"));
 			var prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;"));
-			if(result.extend.pageInfo.hasPreviousPage == false){
+			if(result.data.pageInfo.hasPreviousPage == false){
 				firstPageLi.addClass("disabled");
 				prePageLi.addClass("disabled");
 			}else{
@@ -276,7 +276,7 @@
 					to_page(1);
 				});
 				prePageLi.click(function(){
-					to_page(result.extend.pageInfo.pageNum -1);
+					to_page(result.data.pageInfo.pageNum -1);
 				});
 			}
 			
@@ -284,15 +284,15 @@
 			
 			var nextPageLi = $("<li></li>").append($("<a></a>").append("&raquo;"));
 			var lastPageLi = $("<li></li>").append($("<a></a>").append("末页").attr("href","#"));
-			if(result.extend.pageInfo.hasNextPage == false){
+			if(result.data.pageInfo.hasNextPage == false){
 				nextPageLi.addClass("disabled");
 				lastPageLi.addClass("disabled");
 			}else{
 				nextPageLi.click(function(){
-					to_page(result.extend.pageInfo.pageNum +1);
+					to_page(result.data.pageInfo.pageNum +1);
 				});
 				lastPageLi.click(function(){
-					to_page(result.extend.pageInfo.pages);
+					to_page(result.data.pageInfo.pages);
 				});
 			}
 			
@@ -301,10 +301,10 @@
 			//添加首页和前一页 的提示
 			ul.append(firstPageLi).append(prePageLi);
 			//1,2，3遍历给ul中添加页码提示
-			$.each(result.extend.pageInfo.navigatepageNums,function(index,item){
+			$.each(result.data.pageInfo.navigatepageNums,function(index,item){
 				
 				var numLi = $("<li></li>").append($("<a></a>").append(item));
-				if(result.extend.pageInfo.pageNum == item){
+				if(result.data.pageInfo.pageNum == item){
 					numLi.addClass("active");
 				}
 				numLi.click(function(){
@@ -355,11 +355,11 @@
 				type:"GET",
 				success:function(result){
 					//{"code":100,"msg":"处理成功！",
-						//"extend":{"depts":[{"deptId":1,"deptName":"开发部"},{"deptId":2,"deptName":"测试部"}]}}
+						//"data":{"depts":[{"deptId":1,"deptName":"开发部"},{"deptId":2,"deptName":"测试部"}]}}
 					//console.log(result);
 					//显示部门信息在下拉列表中
 					//$("#empAddModal select").append("")
-					$.each(result.extend.depts,function(){
+					$.each(result.data.depts,function(){
 						var optionEle = $("<option></option>").append(this.deptName).attr("value",this.deptId);
 						optionEle.appendTo(ele);
 					});
@@ -424,7 +424,7 @@
 						show_validate_msg("#empName_add_input","success","用户名可用");
 						$("#emp_save_btn").attr("ajax-va","success");
 					}else{
-						show_validate_msg("#empName_add_input","error",result.extend.va_msg);
+						show_validate_msg("#empName_add_input","error",result.data.va_msg);
 						$("#emp_save_btn").attr("ajax-va","error");
 					}
 				}
@@ -462,13 +462,13 @@
 						//显示失败信息
 						//console.log(result);
 						//有哪个字段的错误信息就显示哪个字段的；
-						if(undefined != result.extend.errorFields.email){
+						if(undefined != result.data.errorFields.email){
 							//显示邮箱错误信息
-							show_validate_msg("#email_add_input", "error", result.extend.errorFields.email);
+							show_validate_msg("#email_add_input", "error", result.data.errorFields.email);
 						}
-						if(undefined != result.extend.errorFields.empName){
+						if(undefined != result.data.errorFields.empName){
 							//显示员工名字的错误信息
-							show_validate_msg("#empName_add_input", "error", result.extend.errorFields.empName);
+							show_validate_msg("#empName_add_input", "error", result.data.errorFields.empName);
 						}
 					}
 				}
@@ -500,7 +500,7 @@
 				type:"GET",
 				success:function(result){
 					//console.log(result);
-					var empData = result.extend.emp;
+					var empData = result.data.emp;
 					$("#empName_update_static").text(empData.empName);
 					$("#email_update_input").val(empData.email);
 					$("#empUpdateModal input[name=gender]").val([empData.gender]);

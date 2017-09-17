@@ -192,7 +192,7 @@ public class EmployeeController {
 		// 这不是一个分页查询
 		// 引入PageHelper分页插件
 		// 在查询之前只需要调用，传入页码，以及每页的大小
-		PageHelper.startPage(pn, 5);
+		PageHelper.startPage(pn, 10);
 		// startPage后面紧跟的这个查询就是一个分页查询
 		List<Employee> emps = employeeService.getAll();
 		// 使用pageInfo包装查询后的结果，只需要将pageInfo交给页面就行了。
@@ -206,7 +206,7 @@ public class EmployeeController {
 	 * 
 	 * @return
 	 */
-	// @RequestMapping("/emps")
+	 //@RequestMapping("/emps")
 	public String getEmps(
 			@RequestParam(value = "pn", defaultValue = "1") Integer pn,
 			Model model) {

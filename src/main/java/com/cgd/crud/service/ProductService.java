@@ -16,6 +16,18 @@ public class ProductService {
 	
 	@Autowired
 	ProductBeanMapper productBeanMapper;
+
+	/**
+	 * 抢购信息保存
+	 * @param data
+	 */
+	public void addProduct(ProductBean data) {
+		data.setCreateTime(new Date());
+		data.setUpdateTime(new Date());
+		productBeanMapper.insert(data);
+	}
+
+
 	/**
 	 * 获取商品列表数据
 	 * @return
