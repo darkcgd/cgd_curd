@@ -69,6 +69,28 @@ public class ProductController extends BaseController{
 			@RequestParam(value = "token", required=false) String token,
 			@RequestParam(value = "pagerNumber", defaultValue = ""+ Constant.DefaultPagerNumber) Integer pagerNumber,
 			@RequestParam(value = "pagerSize", defaultValue = ""+Constant.DefaultPagerSize) Integer pagerSize){
+		return getProductListMethod(userId,token,pagerNumber,pagerSize,1);
+	}
+
+	@ResponseBody
+	@RequestMapping(value="/getAdminProductList",method=RequestMethod.GET)
+	public MsgBean getAdminProductList(
+			@RequestParam(value = "userId", required=false) Integer userId,
+			@RequestParam(value = "token", required=false) String token,
+			@RequestParam(value = "pagerNumber", defaultValue = ""+ Constant.DefaultPagerNumber) Integer pagerNumber,
+			@RequestParam(value = "pagerSize", defaultValue = ""+Constant.DefaultPagerSize) Integer pagerSize){
+		return getProductListMethod(userId,token,pagerNumber,pagerSize,0);
+	}
+
+	/**
+	 * @param userId
+	 * @param token
+	 * @param pagerNumber
+	 * @param pagerSize
+	 * @param type 0代表admin 1代表是普通用户 用于区分是否返回isSale==1 的数据
+	 * @return
+	 */
+	private MsgBean getProductListMethod(Integer userId,String token,Integer pagerNumber,Integer pagerSize,int type){
 		PageHelper.startPage(pagerNumber, pagerSize);
 
 		boolean isVaild=false;
@@ -84,7 +106,7 @@ public class ProductController extends BaseController{
 		if(!isVaild){
 			userId=null;//如果验证userId和token不通过,则把userId置为null
 		}
-		List<ProductBean> info = productService.getProductListBySql(userId);
+		List<ProductBean> info = productService.getProductListBySql(userId,type);
 
 		MsgBean msg = MsgBean.success("获取成功");
 		Map<String, Object> data = msg.getData();
@@ -134,6 +156,7 @@ public class ProductController extends BaseController{
 		data.put("list", productBeanResults);
 		return msg;
 	}
+
 
 	@ResponseBody
 	@RequestMapping(value="/getProductDetail",method=RequestMethod.GET)

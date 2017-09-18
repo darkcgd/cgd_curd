@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 public class ProductService {
-	
+
 	@Autowired
 	ProductBeanMapper productBeanMapper;
 
@@ -30,21 +30,24 @@ public class ProductService {
 
 	/**
 	 * 获取商品列表数据
+	 *  @param type 0代表admin 1代表是普通用户 用于区分是否返回isSale==1 的数据
 	 * @return
 	 */
-	public List<ProductBean> getProductList() {
+	public List<ProductBean> getProductList(int type) {
 		ProductBeanExample productBeanExample=new ProductBeanExample();
-		//通过Criteria构造查询条件
-		ProductBeanExample.Criteria criteria=productBeanExample.createCriteria();
-		criteria.andIsSaleEqualTo(0);
+		if(type==1){
+//通过Criteria构造查询条件
+			ProductBeanExample.Criteria criteria=productBeanExample.createCriteria();
+			criteria.andIsSaleEqualTo(0);
+		}
 		return productBeanMapper.selectByExample(productBeanExample);
 	}
 
-	public List<ProductBean> getProductListBySql(Integer userId) {
+	public List<ProductBean> getProductListBySql(Integer userId,int type) {
 		if(userId!=null&&userId>0){
 			return productBeanMapper.selectProductListBySql(userId);
 		}
-		return getProductList();
+		return getProductList(type);
 	}
 
 	public ProductBean getProductDetail(Integer productId) {

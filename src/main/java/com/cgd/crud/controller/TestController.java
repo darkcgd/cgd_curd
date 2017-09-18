@@ -28,7 +28,7 @@ public class TestController extends BaseController{
 	public MsgBean getProductList(@RequestParam(value = "pagerNumber", defaultValue = ""+ Constant.DefaultPagerNumber) Integer pagerNumber,
 								  @RequestParam(value = "pagerSize", defaultValue = ""+Constant.DefaultPagerSize) Integer pagerSize){
 		PageHelper.startPage(pagerNumber, pagerSize);
-		List<ProductBean> info = productService.getProductList();
+		List<ProductBean> info = productService.getProductList(0);
 		MsgBean msg = MsgBean.success("获取成功");
 		Map<String, Object> data = msg.getData();
 		handlerPageInfo(data,new PageInfo(info, pagerSize));

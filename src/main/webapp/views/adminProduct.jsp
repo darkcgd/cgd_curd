@@ -30,6 +30,157 @@
 </head>
 <body>
 
+<div class="modal fade" id="div_edit_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"> 修改商品</h4>
+            </div>
+            <div class="modal-body">
+                <div id="div_update_product" class="container-fluid" style="margin-top:20px;">
+                    <div class="row" >
+                        <div class="col-md-12">
+                            <form class="form-horizontal" id="form_update_product">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">商品名称</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="productName" class="form-control"
+                                               id="input_update_name" placeholder="商品名称,例如小米6（2499/2899）"> <span
+                                            class="help-block"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">商品标题</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="title" class="form-control"
+                                               id="input_update_title" placeholder="可不填"> <span
+                                            class="help-block"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">成本价(进货价)</label>
+                                    <div class="col-md-3">
+                                        <input type="text" name="buyPrice" class="form-control"
+                                               id="input_update_buy_price" placeholder="如36"> <span
+                                            class="help-block"></span>
+                                    </div>
+
+                                    <label class="col-md-2 control-label">原价</label>
+                                    <div class="col-md-3">
+                                        <input type="text" name="originalPrice" class="form-control"
+                                               id="input_update_original_price" placeholder="如100"> <span
+                                            class="help-block"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">折扣</label>
+                                    <div class="col-md-3">
+                                        <input type="text" name="discount" class="form-control"
+                                               id="input_update_discount" placeholder="6.5折即填65"> <span
+                                            class="help-block"></span>
+                                    </div>
+
+                                    <label class="col-md-2 control-label">售价</label>
+                                    <div class="col-md-3">
+                                        <input type="text" name="nowPrice" class="form-control"
+                                               id="input_update_now_price" placeholder="如65"> <span
+                                            class="help-block"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">商品分类</label>
+                                    <div class="col-md-3">
+                                        <!-- 提交品牌id即可 -->
+                                        <select id="select_update_category" class="form-control" name="categoryId"></select>
+                                    </div>
+                                    <label class="col-md-2 control-label">商品标签</label>
+                                    <div class="col-md-3">
+                                        <!-- 提交平台id即可 -->
+                                        <select id="select_update_tag" class="form-control" name="productTagId"></select>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">上架</label>
+                                    <div class="checkbox">
+                                        <label >是否上架</label>
+                                        <input id="select_update_xiajia" type="checkbox" style="margin-left: 10px" value="remember-me">
+
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">简介</label>
+                                    <div class="col-md-8">
+                                        <textarea id="input_update_summary" class="col-sm-12" rows="5" name="summary" placeholder="商品简介"></textarea>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <div>
+                                            <!-- 点击图片添加文件方式 -->
+                                            <button id="btn_edit_update_logo" type="button" class="btn btn-primary" onclick="getElementById('input_file').click()">点此添加logo</button>
+                                            <input type="file" name="image" style="opacity:0;filter:alpha(opacity=0);" id="input_file"/>
+                                        </div>
+                                        <img id="img_edit_logo" src="http://f7-preview.awardspace.com/zjmainstay.co.cc/jQueryExample/jquery_upload_image/files/addfile.jpg"
+                                             width="160px" height="80px">
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <div>
+                                            <!-- 点击图片添加文件方式 -->
+                                            <button id="btn_edit_update_image" type="button" class="btn btn-primary" onclick="getElementById('input_multipart_file').click()">点此添加商品封面(可上传4张)</button>
+                                            <input type="file" multiple="multiple" name="image" style="opacity:0;filter:alpha(opacity=0);" id="input_multipart_file"/>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-2">
+                                                <img id="img_update_upload0" class="img-rounded" src="${APP_PATH }/static/image/bg_default_add_image.png"  style="display: none"
+                                                     alt="logo" width="100px" height="80px"/>
+                                            </div>
+                                            <div class="col-md-2" style="margin-left: 30px">
+                                                <img id="img_update_upload1" class="img-rounded" src="${APP_PATH }/static/image/bg_default_add_image.png"  style="display: none"
+                                                     alt="logo" width="100px" height="80px"/>
+                                            </div>
+                                            <div class="col-md-2" style="margin-left: 30px">
+                                                <img id="img_update_upload2" class="img-rounded" src="${APP_PATH }/static/image/bg_default_add_image.png"  style="display: none"
+                                                     alt="logo" width="100px" height="80px"/>
+                                            </div>
+                                            <div class="col-md-2" style="margin-left: 30px">
+                                                <img id="img_update_upload3" class="img-rounded" src="${APP_PATH }/static/image/bg_default_add_image.png"  style="display: none"
+                                                     alt="logo" width="100px" height="80px"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="btn_modal_edit">确定更新</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="div_delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -43,7 +194,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="emp_update_btn">确定删除</button>
+                <button type="button" class="btn btn-primary" id="btn_modal_del">确定删除</button>
             </div>
         </div>
     </div>
@@ -51,7 +202,6 @@
 
 <div>
     <div class="container-fluid" >
-        <!-- Stack the columns on mobile by making one full-width and the other half-width -->
         <div class="row" style="background: #1A7CAF;padding-top: 10px;padding-bottom: 10px;padding-left: 30px">
             <div class="col-xs-3 col-md-6"><span style="color:#ffffff;font-size: 20px">后台管理系统</span></div>
             <div class="pull-right">
@@ -224,55 +374,32 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-md-12 control-label">Logo</label>
-                                <div class="col-md-12">
-                                    <div class="col-md-4">
-                                        <form class="form form-horizontal" action=""  method="post"  id="form_upload">
-                                            <div class="row">
-                                                <input type="file" class="input-text"  width="120px" id="file_upload" name="file">
-                                                <input type="submit" value="上传" style="margin-top: 10px" onclick="doUpload()">
-                                            </div>
-                                        </form>
+                                <div class="col-lg-12">
+                                    <div>
+                                        <!-- 点击图片添加文件方式 -->
+                                        <button id="btn_add_logo" type="button" class="btn btn-primary" onclick="getElementById('input_file_add').click()">点此添加logo</button>
+                                        <input type="file" name="file" style="opacity:0;filter:alpha(opacity=0);" id="input_file_add"/>
                                     </div>
-                                    <div class="col-md-8">
-                                        <div class="col-md-2">
-                                            <a id="a_upload" class="thumbnail hide"><img id="img_upload" class="img-rounded" src="${APP_PATH }/static/image/bg_default_add_image.png"
-                                                                                         alt="logo" width="100px" height="100px"/></a>
-                                        </div>
-
-                                    </div>
-
+                                    <img id="img_add_logo" class="img-rounded" src="${APP_PATH }/static/image/bg_default_add_image.png"
+                                         width="120px" height="80px">
                                 </div>
+
                             </div>
                             <div class="form-group">
-                                <label class="col-md-12 control-label">商品封面(可上传4张)</label>
-                                <div class="col-md-12">
-                                    <div class="col-md-4">
-                                        <form class="form form-horizontal" action=""  method="post"  id="form_upload_multipart_file">
-                                            <div class="row">
-                                                <input id="file_upload_multipart_file" type="file" name="file" multiple="multiple"  width="120px">
-                                                <input type="submit" value="上传" style="margin-top: 10px" onclick="doUploadMultipartFile()">
-                                            </div>
-                                        </form>
+                                <div class="col-lg-12"  style="margin-top: 20px">
+                                    <div>
+                                        <!-- 点击图片添加文件方式 -->
+                                        <button id="btn_add_image" type="button" class="btn btn-primary" onclick="getElementById('input_multipart_file_add').click()">点此添加商品封面(可上传4张)</button>
+                                        <input type="file" multiple="multiple" name="file" style="opacity:0;filter:alpha(opacity=0);" id="input_multipart_file_add"/>
                                     </div>
-                                    <div class="col-md-8">
-                                        <div class="col-md-2">
-                                            <a id="a_upload0" class="thumbnail hide"><img id="img_upload0" class="img-rounded" src="${APP_PATH }/static/image/bg_default_add_image.png"
-                                                                                          alt="logo" width="100px" height="100px"/></a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a id="a_upload1" class="thumbnail hide"><img id="img_upload1" class="img-rounded" src="${APP_PATH }/static/image/bg_default_add_image.png"
-                                                                                          alt="logo" width="100px" height="100px"/></a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a id="a_upload2" class="thumbnail hide"><img id="img_upload2" class="img-rounded" src="${APP_PATH }/static/image/bg_default_add_image.png"
-                                                                                          alt="logo" width="100px" height="100px"/></a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a id="a_upload3" class="thumbnail hide"><img id="img_upload3" class="img-rounded" src="${APP_PATH }/static/image/bg_default_add_image.png"
-                                                                                          alt="logo" width="100px" height="100px"/></a>
-                                        </div>
-                                    </div>
+                                    <img id="img_add_upload0" class="img-rounded" src="${APP_PATH }/static/image/bg_default_add_image.png"  style="display: none"
+                                         alt="logo" width="120px" height="80px" style="margin: 4px"/>
+                                    <img id="img_add_upload1" class="img-rounded" src="${APP_PATH }/static/image/bg_default_add_image.png"  style="display: none"
+                                         alt="logo" width="120px" height="80px" style="margin: 4px"/>
+                                    <img id="img_add_upload2" class="img-rounded" src="${APP_PATH }/static/image/bg_default_add_image.png"  style="display: none"
+                                         alt="logo" width="120px" height="80px" style="margin: 4px"/>
+                                    <img id="img_add_upload3" class="img-rounded" src="${APP_PATH }/static/image/bg_default_add_image.png"  style="display: none"
+                                         alt="logo" width="120px" height="80px" style="margin: 4px"/>
                                 </div>
                             </div>
                         </div>
@@ -314,6 +441,7 @@
                                     <th style='vertical-align: middle;text-align: center;'>成本价</th>
                                     <th style='vertical-align: middle;text-align: center;'>原价</th>
                                     <th style='vertical-align: middle;text-align: center;'>现价</th>
+                                    <th style='vertical-align: middle;text-align: center;'>是否上架</th>
                                     <th style='vertical-align: middle;text-align: center;'>操作</th>
                                 </tr>
                                 </thead>
@@ -420,7 +548,7 @@
 
     function getProductList(pagerNumber){
         $.ajax({
-            url:"${APP_PATH}/getProductList",
+            url:"${APP_PATH}/getAdminProductList",
             //默认显示10条数据
             data:"pagerNumber="+pagerNumber+"&pagerSize=10",
             type:"GET",
@@ -457,6 +585,8 @@
             var buyPriceTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append("￥"+item.buyPrice);
             var originalPriceTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append("￥"+item.originalPrice);
             var nowPriceTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append("￥"+item.nowPrice);
+
+            var isSaleTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append(item.isSale==0?"否":"是");
             /**
              <button class="">
              <span class="" aria-hidden="true"></span>
@@ -480,10 +610,82 @@
                 .append(buyPriceTd)
                 .append(originalPriceTd)
                 .append(nowPriceTd)
+                .append(isSaleTd)
                 .append(btnTd)
                 .appendTo("#product_table tbody");//添加到哪里
         });
     };
+
+
+    $("#input_file").change(function(){
+        $("#btn_edit_update_logo").blur(); //去除焦点
+        //创建FormData对象
+        var data = new FormData();
+        var objUrl = getObjectURL(this.files[0]) ; //获取图片的路径，该路径不是图片在本地的路径
+        if (objUrl) {
+            $("#img_edit_logo").attr("src", objUrl) ; //将图片路径存入src中，显示出图片
+            window.event.returnValue = false;
+        }
+
+    });
+    $("#input_multipart_file").change(function(){
+        $("#btn_edit_update_image").blur(); //去除焦点
+        //创建FormData对象
+        var data = new FormData();
+        $.each($('#input_multipart_file')[0].files, function(i, file) {
+            var objUrl = getObjectURL(file) ; //获取图片的路径，该路径不是图片在本地的路径
+            if (objUrl) {
+                $("#img_update_upload"+i).attr("src", objUrl) ; //将图片路径存入src中，显示出图片
+                $("#img_update_upload"+i).removeClass("hide");
+                $("#img_update_upload"+i).addClass("show");
+                window.event.returnValue = false;
+            }
+        });
+    });
+    $("#input_file_add").change(function(){
+        $("#btn_add_logo").blur(); //去除焦点
+        //创建FormData对象
+        var data = new FormData();
+        var objUrl = getObjectURL(this.files[0]) ; //获取图片的路径，该路径不是图片在本地的路径
+        if (objUrl) {
+            $("#img_add_logo").attr("src", objUrl) ; //将图片路径存入src中，显示出图片
+            window.event.returnValue = false;
+        }
+
+    });
+    $("#input_multipart_file_add").change(function(){
+        $("#btn_add_image").blur(); //去除焦点
+        //创建FormData对象
+        var data = new FormData();
+        if($('#input_multipart_file_add')[0].files.length>=1){
+            $("#img_add_upload0").hide();
+            $("#img_add_upload1").hide();
+            $("#img_add_upload2").hide();
+            $("#img_add_upload3").hide();
+        }
+
+        $.each($('#input_multipart_file_add')[0].files, function(i, file) {
+            var objUrl = getObjectURL(file) ; //获取图片的路径，该路径不是图片在本地的路径
+            if (objUrl) {
+                $("#img_add_upload"+i).attr("src", objUrl) ; //将图片路径存入src中，显示出图片
+                $("#img_add_upload"+i).show();
+                window.event.returnValue = false;
+            }
+        });
+    });
+
+    //建立一個可存取到該file的url
+    function getObjectURL(file) {
+        var url = null ;
+        if (window.createObjectURL!=undefined) { // basic
+            url = window.createObjectURL(file) ;
+        } else if (window.URL!=undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file) ;
+        } else if (window.webkitURL!=undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file) ;
+        }
+        return url ;
+    }
 
 
     var logo;
@@ -653,13 +855,27 @@
         //getProductDetail($(this).attr("edit-id"));
 
         //3、把商品的id传递给模态框的更新按钮
-        $("#btn_confirm_delete").attr("edit-id",$(this).attr("edit-id"));
+        $("#btn_modal_del").attr("edit-id",$(this).attr("edit-id"));
         $("#div_delete_modal").modal('show')
     });
 
     //点击更新，更新员工信息
-    $("#btn_confirm_delete").click(function(){
+    $("#btn_modal_del").click(function(){
         $("#div_delete_modal").modal("hide");
+    });
+
+    $(document).on("click",".edit_btn",function(){
+        //1、查出商品信息
+        //getProductDetail($(this).attr("edit-id"));
+
+        //3、把商品的id传递给模态框的更新按钮
+        $("#btn_modal_edit").attr("edit-id",$(this).attr("edit-id"));
+        $("#div_edit_modal").modal('show')
+    });
+
+    //点击更新，更新员工信息
+    $("#btn_modal_edit").click(function(){
+        $("#div_edit_modal").modal("hide");
     });
 
 
