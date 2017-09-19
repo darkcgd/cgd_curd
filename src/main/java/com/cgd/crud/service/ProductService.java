@@ -76,5 +76,11 @@ public class ProductService {
 		 */
 		productBeanMapper.updateCountTo0ByPrimaryKey(productId);
 	}
+	/**
+	 * 删除商品
+	 */
+	public void doDeleteProductById(Integer productId){
+		productBeanMapper.deleteByPrimaryKey(productId);
+	}
 
 }

@@ -10,9 +10,17 @@ import java.util.UUID;
 
 public class TestJavaMethod {
 	public static void main(String[] args) {
-		testTime();
+		testStr();
+		//testTime();
 		//testToken();
 		//testDate();
+	}
+
+	private static void testStr() {
+		String content="这是一段关于小程序的关键字高亮的文本";
+		while (true){
+
+		}
 	}
 
 	private static void testTime() {
