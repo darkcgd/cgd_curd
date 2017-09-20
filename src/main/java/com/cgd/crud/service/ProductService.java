@@ -35,11 +35,13 @@ public class ProductService {
 	 */
 	public List<ProductBean> getProductList(int type) {
 		ProductBeanExample productBeanExample=new ProductBeanExample();
+		ProductBeanExample.Criteria criteria=productBeanExample.createCriteria();
 		if(type==1){
 //通过Criteria构造查询条件
-			ProductBeanExample.Criteria criteria=productBeanExample.createCriteria();
-			criteria.andIsSaleEqualTo(0);
+			criteria.andIsSaleEqualTo(1);////1上架0下架
 		}
+		productBeanExample.setOrderByClause("create_time desc,product_id desc");//asc 顺序 desc 倒叙
+		productBeanExample.setDistinct(true);
 		return productBeanMapper.selectByExample(productBeanExample);
 	}
 
@@ -81,6 +83,22 @@ public class ProductService {
 	 */
 	public void doDeleteProductById(Integer productId){
 		productBeanMapper.deleteByPrimaryKey(productId);
+	}
+	/**
+	 * 批量删除商品
+	 */
+	public void doDeleteProductByIds(List<Integer> productIds){
+		ProductBeanExample productBeanExample=new ProductBeanExample();
+		ProductBeanExample.Criteria criteria=productBeanExample.createCriteria();
+		//delete from xxx where product_id in(1,2,3)
+		criteria.andProductIdIn(productIds);
+		productBeanMapper.deleteByExample(productBeanExample);
+	}
+	/**
+	 * 更新商品
+	 */
+	public void doUpdateProductById(ProductBean data){
+		productBeanMapper.updateByPrimaryKeySelective(data);
 	}
 
 }

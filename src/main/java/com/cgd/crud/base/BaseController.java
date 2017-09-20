@@ -19,8 +19,26 @@ public class BaseController {
 			data.put("pagerNumber", page.getPageNum());
 			data.put("pagerSize", page.getPageSize());
 			data.put("totalCount", page.getTotal());
+			data.put("totalPage", page.getPages());
 			data.put("isLastPage", page.isIsLastPage());
 			data.put("isFirstPage", page.isIsFirstPage());
+		}
+	}
+
+	/**
+	 *  分页时处理返回页码数据
+	 * @param data 封装返回数据的map
+	 * @param page 页码数据
+	 */
+	public void handlerPageInfoAdmin(Map<String, Object> data,PageInfo page){
+		if(page.getList().size()>0){
+			data.put("pagerNumber", page.getPageNum());
+			data.put("pagerSize", page.getPageSize());
+			data.put("totalCount", page.getTotal());
+			data.put("totalPage", page.getPages());
+			data.put("isLastPage", page.isIsLastPage());
+			data.put("isFirstPage", page.isIsFirstPage());
+			data.put("navigatepageNums", page.getNavigatepageNums());
 		}
 	}
 

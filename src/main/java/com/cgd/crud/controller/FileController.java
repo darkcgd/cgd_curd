@@ -2,6 +2,7 @@ package com.cgd.crud.controller;
 
 import com.cgd.crud.bean.MsgBean;
 import com.cgd.crud.util.AbDateUtil;
+import com.cgd.crud.util.AbFileUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,7 +36,7 @@ public class FileController {
         String path = request.getSession().getServletContext().getRealPath("upload");
         String fileName = file.getOriginalFilename();
 
-        String fileNamePath = getFilePath(path,fileName);
+        String fileNamePath = AbFileUtil.getFilePath(path,fileName);
 
         File filePath = new File(path + fileNamePath);
 
@@ -61,7 +62,7 @@ public class FileController {
             String path = request.getSession().getServletContext().getRealPath("upload");
             String fileName = multipartFile.getOriginalFilename();
 
-            String fileNamePath = getFilePath(path,fileName);
+            String fileNamePath = AbFileUtil.getFilePath(path,fileName);
 
             File filePath = new File(path + fileNamePath);
 
@@ -78,32 +79,6 @@ public class FileController {
         data.put("imageList", list);
         return msg;
     }
-
-
-    private String getFilePath(String baseFolder,String sourceFileName) {
-        Date nowDate=new Date();
-        // yyyy/MM/dd
-        String fileFolder = File.separator + AbDateUtil.getStringByFormat(nowDate,"yyyy") + File.separator + AbDateUtil.getStringByFormat(nowDate,"MM") + File.separator
-                + AbDateUtil.getStringByFormat(nowDate,"dd");
-        File file = new File(baseFolder + fileFolder);
-        if (!file.isDirectory()) {
-            // 如果目录不存在，则创建目录
-            file.mkdirs();
-        }
-        // 生成新的文件名
-        String fileName = AbDateUtil.getStringByFormat(nowDate,"yyyyMMddhhmmssSSSS") + UUID.randomUUID().toString().substring(0,5)+ getExtName(sourceFileName, '.');
-        return fileFolder + File.separator + fileName;
-    }
-
-
-
-    private static String getExtName(String s, char split) {
-        int i = s.indexOf(split);
-        int leg = s.length();
-        return (i > 0 ? (i + 1) == leg ? " " : s.substring(i, s.length()) : " ");
-    }
-
-
 
 
     /**

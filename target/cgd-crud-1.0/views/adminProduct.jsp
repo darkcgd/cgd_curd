@@ -24,6 +24,10 @@
     <script type="text/javascript" src="${APP_PATH }/static/js/jquery.lazyload.js"></script>
     <script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script src="${APP_PATH }/static/js/util.js"></script>
+    <script src="http://bootboxjs.com/bootbox.js"></script>
+    <%--https://github.com/nakupanda/bootstrap3-dialog--%>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css" rel="stylesheet">
     <link href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="${APP_PATH }/static/css/base.css" rel="stylesheet">
 
@@ -112,7 +116,7 @@
                                     <label class="col-md-2 control-label">上架</label>
                                     <div class="checkbox">
                                         <label >是否上架</label>
-                                        <input id="select_update_xiajia" type="checkbox" style="margin-left: 10px" value="remember-me">
+                                        <input id="select_update_xiajia" type="checkbox" style="margin-left: 10px">
 
                                     </div>
                                 </div>
@@ -130,10 +134,10 @@
                                     <div class="col-lg-12">
                                         <div>
                                             <!-- 点击图片添加文件方式 -->
-                                            <button id="btn_edit_update_logo" type="button" class="btn btn-primary" onclick="getElementById('input_file').click()">点此添加logo</button>
-                                            <input type="file" name="image" style="opacity:0;filter:alpha(opacity=0);" id="input_file"/>
+                                            <button id="btn_edit_update_logo" type="button" class="btn btn-primary" onclick="getElementById('input_file').click()">点此修改logo</button>
+                                            <input type="file" name="file" style="opacity:0;filter:alpha(opacity=0);" id="input_file"/>
                                         </div>
-                                        <img id="img_edit_logo" src="http://f7-preview.awardspace.com/zjmainstay.co.cc/jQueryExample/jquery_upload_image/files/addfile.jpg"
+                                        <img id="img_edit_logo" src="${APP_PATH }/static/image/bg_default_add_image.png" style="display: none"
                                              width="160px" height="80px">
                                     </div>
 
@@ -142,31 +146,21 @@
                                     <div class="col-lg-12">
                                         <div>
                                             <!-- 点击图片添加文件方式 -->
-                                            <button id="btn_edit_update_image" type="button" class="btn btn-primary" onclick="getElementById('input_multipart_file').click()">点此添加商品封面(可上传4张)</button>
-                                            <input type="file" multiple="multiple" name="image" style="opacity:0;filter:alpha(opacity=0);" id="input_multipart_file"/>
+                                            <button id="btn_edit_update_image" type="button" class="btn btn-primary" onclick="getElementById('input_multipart_file').click()">点此修改商品封面(可上传5张)</button>
+                                            <input type="file" multiple="multiple" name="multipartFile" style="opacity:0;filter:alpha(opacity=0);" id="input_multipart_file"/>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-2">
                                                 <img id="img_update_upload0" class="img-rounded" src="${APP_PATH }/static/image/bg_default_add_image.png"  style="display: none"
-                                                     alt="logo" width="100px" height="80px"/>
-                                            </div>
-                                            <div class="col-md-2" style="margin-left: 30px">
+                                                     alt="logo" width="100px" height="80px" style="margin: 4px"/>
                                                 <img id="img_update_upload1" class="img-rounded" src="${APP_PATH }/static/image/bg_default_add_image.png"  style="display: none"
-                                                     alt="logo" width="100px" height="80px"/>
-                                            </div>
-                                            <div class="col-md-2" style="margin-left: 30px">
+                                                     alt="logo" width="100px" height="80px" style="margin: 4px"/>
                                                 <img id="img_update_upload2" class="img-rounded" src="${APP_PATH }/static/image/bg_default_add_image.png"  style="display: none"
-                                                     alt="logo" width="100px" height="80px"/>
-                                            </div>
-                                            <div class="col-md-2" style="margin-left: 30px">
+                                                     alt="logo" width="100px" height="80px" style="margin: 4px"/>
                                                 <img id="img_update_upload3" class="img-rounded" src="${APP_PATH }/static/image/bg_default_add_image.png"  style="display: none"
-                                                     alt="logo" width="100px" height="80px"/>
-                                            </div>
-                                        </div>
+                                                     alt="logo" width="100px" height="80px" style="margin: 4px"/>
+                                                <img id="img_update_upload4" class="img-rounded" src="${APP_PATH }/static/image/bg_default_add_image.png"  style="display: none"
+                                                     alt="logo" width="100px" height="80px" style="margin: 4px"/>
                                     </div>
                                 </div>
-
-
                             </form>
 
                         </div>
@@ -176,7 +170,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="btn_modal_edit">确定更新</button>
+                <button type="button" class="btn btn-primary" id="btn_modal_edit">确定修改</button>
             </div>
         </div>
     </div>
@@ -382,7 +376,7 @@
 
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-lg-12"  style="margin-top: 20px">
+                                        <div class="col-lg-12">
                                             <div>
                                                 <!-- 点击图片添加文件方式 -->
                                                 <button id="btn_add_image" type="button" class="btn btn-primary" onclick="getElementById('input_multipart_file_add').click()">点此添加商品封面(可上传5张)</button>
@@ -423,10 +417,9 @@
                 <!-- 商品操作  搭建显示页面 -->
                 <div id="div_oprate_product" class="container-fluid" style="display: none">
                     <!-- 按钮 -->
-                    <div class="row">
-                        <div class="col-md-4 col-md-offset-8">
-                            <button class="btn btn-primary" id="emp_add_modal_btn">新增</button>
-                            <button class="btn btn-danger" id="emp_delete_all_btn">删除</button>
+                    <div class="row" style="margin-top: 10px">
+                        <div class="col-md-4">
+                            <button class="btn btn-danger" id="btn_delete_all"><span class="glyphicon glyphicon-trash" style="margin-right: 6px"></span>删除</button>
                         </div>
                     </div>
                     <!-- 显示表格数据 -->
@@ -482,6 +475,7 @@
 
 <script type="text/javascript">
     var pagerNumber=1;
+    var totalRecord;
 
     //ajax提交
     $(function(){
@@ -556,12 +550,12 @@
             type:"GET",
             success:function(result){
                 //console.log(result);
-                //1、解析并显示员工数据
+                //1、解析并显示商品列表数据
                 showProductList(result);
                 //2、解析并显示分页信息
-                //build_page_info(result);
+                build_page_info(result);
                 //3、解析显示分页条数据
-                //build_page_nav(result);
+                build_page_nav(result);
             }
         });
     }
@@ -588,7 +582,7 @@
             var originalPriceTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append("￥"+item.originalPrice);
             var nowPriceTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append("￥"+item.nowPrice);
 
-            var isSaleTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append(item.isSale==0?"否":"是");
+            var isSaleTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append(item.isSale==1?"是":"否");
             /**
              <button class="">
              <span class="" aria-hidden="true"></span>
@@ -597,11 +591,11 @@
              */
             var editBtn = $("<button></button>").addClass("btn btn-primary btn-sm edit_btn")
                 .append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
-            //为编辑按钮添加一个自定义的属性，来表示当前员工id
+            //为编辑按钮添加一个自定义的属性，来表示当前商品id
             editBtn.attr("productId",item.productId);
             var delBtn =  $("<button></button>").addClass("btn btn-danger btn-sm delete_btn")
                 .append($("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除");
-            //为删除按钮添加一个自定义的属性来表示当前删除的员工id
+            //为删除按钮添加一个自定义的属性来表示当前删除的商品id
             delBtn.attr("productId",item.productId);
             var btnTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append(editBtn).append(" ").append(delBtn);
             //var delBtn =
@@ -619,27 +613,175 @@
     };
 
 
+    //解析显示分页信息
+    function build_page_info(result){
+        $("#page_info_area").empty();
+        $("#page_info_area").append("当前"+result.data.pagerNumber+"页,总"+
+            result.data.totalPage+"页,总"+
+            result.data.totalCount+"条记录");
+        totalRecord = result.data.totalPage;
+        pagerNumber = result.data.pagerNumber;
+    }
+
+    //解析显示分页条，点击分页要能去下一页....
+    function build_page_nav(result){
+        //page_nav_area
+        $("#page_nav_area").empty();
+        var ul = $("<ul></ul>").addClass("pagination");
+
+        //构建元素
+        var firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href","#"));
+        var prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;"));
+        if(result.data.isFirstPage == true){
+            firstPageLi.addClass("disabled");
+            prePageLi.addClass("disabled");
+        }else{
+            //为元素添加点击翻页的事件
+            firstPageLi.click(function(){
+                getProductList(1)
+            });
+            prePageLi.click(function(){
+                getProductList(result.data.pagerNumber -1)
+            });
+        }
+
+
+
+        var nextPageLi = $("<li></li>").append($("<a></a>").append("&raquo;"));
+        var lastPageLi = $("<li></li>").append($("<a></a>").append("末页").attr("href","#"));
+        if(result.data.isLastPage == true){
+            nextPageLi.addClass("disabled");
+            lastPageLi.addClass("disabled");
+        }else{
+            nextPageLi.click(function(){
+                getProductList(result.data.pagerNumber +1);
+            });
+            lastPageLi.click(function(){
+                getProductList(result.data.totalPage);
+            });
+        }
+
+
+
+        //添加首页和前一页 的提示
+        ul.append(firstPageLi).append(prePageLi);
+        //1,2，3遍历给ul中添加页码提示
+        $.each(result.data.navigatepageNums,function(index,item){
+
+            var numLi = $("<li></li>").append($("<a></a>").append(item));
+            if(result.data.pagerNumber == item){
+                numLi.addClass("active");
+            }
+            numLi.click(function(){
+                getProductList(item);
+            });
+            ul.append(numLi);
+        });
+        //添加下一页和末页 的提示
+        ul.append(nextPageLi).append(lastPageLi);
+
+        //把ul加入到nav
+        var navEle = $("<nav></nav>").append(ul);
+        navEle.appendTo("#page_nav_area");
+    }
+
+
+    //完成全选/全不选功能
+    $("#check_all").click(function(){
+        //attr获取checked是undefined;
+        //我们这些dom原生的属性；attr获取自定义属性的值；
+        //prop修改和读取dom原生属性的值
+        $(".check_item").prop("checked",$(this).prop("checked"));
+    });
+
+    //check_item
+    $(document).on("click",".check_item",function(){
+        //判断当前选择中的元素是否5个
+        var flag = $(".check_item:checked").length==$(".check_item").length;
+        $("#check_all").prop("checked",flag);
+    });
+
+    //点击全部删除，就批量删除
+    $("#btn_delete_all").click(function(){
+         //$("#btn_delete_all").blur(); //去除焦点
+        var del_idstr = "";
+        $.each($(".check_item:checked"),function(){
+            del_idstr += $(this).parents("tr").find("td:eq(1)").text()+",";
+        });
+        if(del_idstr==''){
+            //https://github.com/nakupanda/bootstrap3-dialog
+            showDialog("请至少选择一条数据");
+            return;
+        }
+        var checkedLength=$(".check_item:checked").length;
+        BootstrapDialog.show({
+            type:  BootstrapDialog.TYPE_PRIMARY,
+            title: '提示',
+            message: "确定删除选中的"+checkedLength+"条数据吗？",
+            buttons: [{
+                label: '再想想',
+                action: function(dialogRef){
+                    dialogRef.close();
+                }
+            },{
+                icon: 'glyphicon glyphicon-send',
+                label: '确定',
+                cssClass: 'btn-primary',
+                autospin: true,
+                action: function(dialogRef){
+                    dialogRef.enableButtons(false);
+                    dialogRef.setClosable(false);
+                    dialogRef.getModalBody().html('删除中...');
+
+                    //发送ajax请求删除
+                    $.ajax({
+                        url:"${APP_PATH}/doDeleteProductByIds?ids="+del_idstr,
+                        type:"DELETE",
+                        success:function(result){
+                            dialogRef.close();
+                            //回到当前页面
+                            getProductList(pagerNumber);
+                            $("#check_all").prop("checked",false);
+
+                        },
+                        error: function (data) {
+                            showDialog("删除失败!");
+                        }
+                    });
+                }
+            }
+            ]
+        });
+
+    });
+
+
     $("#input_file").change(function(){
         $("#btn_edit_update_logo").blur(); //去除焦点
         //创建FormData对象
-        var data = new FormData();
         var objUrl = getObjectURL(this.files[0]) ; //获取图片的路径，该路径不是图片在本地的路径
         if (objUrl) {
             $("#img_edit_logo").attr("src", objUrl) ; //将图片路径存入src中，显示出图片
+            $("#img_edit_logo").show();
             window.event.returnValue = false;
         }
 
     });
     $("#input_multipart_file").change(function(){
         $("#btn_edit_update_image").blur(); //去除焦点
+        if($('#input_multipart_file')[0].files.length>=1){
+            $("#img_update_upload0").hide();
+            $("#img_update_upload1").hide();
+            $("#img_update_upload2").hide();
+            $("#img_update_upload3").hide();
+            $("#img_update_upload4").hide();
+        }
         //创建FormData对象
-        var data = new FormData();
         $.each($('#input_multipart_file')[0].files, function(i, file) {
             var objUrl = getObjectURL(file) ; //获取图片的路径，该路径不是图片在本地的路径
             if (objUrl) {
                 $("#img_update_upload"+i).attr("src", objUrl) ; //将图片路径存入src中，显示出图片
-                $("#img_update_upload"+i).removeClass("hide");
-                $("#img_update_upload"+i).addClass("show");
+                $("#img_update_upload"+i).show();
                 window.event.returnValue = false;
             }
         });
@@ -647,7 +789,6 @@
     $("#input_file_add").change(function(){
         $("#btn_add_logo").blur(); //去除焦点
         //创建FormData对象
-        var data = new FormData();
         var objUrl = getObjectURL(this.files[0]) ; //获取图片的路径，该路径不是图片在本地的路径
         if (objUrl) {
             $("#img_add_logo").attr("src", objUrl) ; //将图片路径存入src中，显示出图片
@@ -659,7 +800,6 @@
     $("#input_multipart_file_add").change(function(){
         $("#btn_add_image").blur(); //去除焦点
         //创建FormData对象
-        var data = new FormData();
         if($('#input_multipart_file_add')[0].files.length>=1){
             $("#img_add_upload0").hide();
             $("#img_add_upload1").hide();
@@ -695,7 +835,7 @@
     function doUpload(){
         window.event.returnValue = false;
         if ($('#file_upload').val() == null || $('#file_upload').val() == '') {
-            alert('请选择文件上传');
+            showDialog('请选择文件上传');
         } else {
             var formData = new FormData($("#form_upload")[0]);
             $.ajax({
@@ -715,7 +855,7 @@
                 },
                 error: function (data) {
                     var obj=data;
-                    alert(obj);
+                    showDialog(obj);
                     window.event.returnValue = false;
                 }
 
@@ -732,7 +872,7 @@
     function doUploadMultipartFile() {
         window.event.returnValue = false;
         if ($('#file_upload_multipart_file').val() == null || $('#file_upload_multipart_file').val() == '') {
-            alert('请选择文件上传');
+            showDialog('请选择文件上传');
         } else {
             var formData = new FormData($("#form_upload_multipart_file")[0]);
             $.ajax({
@@ -768,7 +908,7 @@
 
                 },
                 error: function (data) {
-                    alert(data)
+                    showDialog("上传失败")
                 }
             });
         }
@@ -804,12 +944,12 @@
         var graphic_detail=summary;
 
         if(logo==undefined){
-            alert("请上传logo");
+     showDialog("请上传logo");
             return;
         }
 
         var params = $("#form_add_product").serialize();
-        alert(params);
+     showDialog(params);
         params+=("&logo="+logo);
         if(image1!=undefined){
             params+=("&image1="+image1);
@@ -829,7 +969,7 @@
             params+=("&isSale="+0);
         }
 
-        alert(params);
+     showDialog(params);
         //2、发送ajax请求保存抢购信息
         $.ajax({
             url : "${APP_PATH}/addProduct",
@@ -879,17 +1019,13 @@
                 if (code != 100) {
                     $("#span_status").addClass("glyphicon glyphicon-remove");
                     $("#span_status").text(result.msg);
-                    $.session.clear();
                 } else {
                     $("#span_status").addClass("glyphicon glyphicon-ok");
                     $("#span_status").text(result.msg);
-
-                    $("form_add_product").reset();
-
                 }
             },
             error : function(e) {
-                alert("添加失败!");
+                showDialog("添加失败");
             }
         });
 
@@ -900,31 +1036,89 @@
     //1）、可以在创建按钮的时候绑定。    2）、绑定点击.live()
     //jquery新版没有live，使用on进行替代
     $(document).on("click",".delete_btn",function(){
-        //1、查出商品信息
-        //getProductDetail($(this).attr("productId"));
         var productId=$(this).attr("productId");
-        //3、把商品的id传递给模态框的更新按钮
-        $("#btn_modal_del").attr("productId",productId);
-        $("#div_delete_modal").modal('show')
+        BootstrapDialog.show({
+            type:  BootstrapDialog.TYPE_PRIMARY,
+            title: '提示',
+            message: "确定删除吗？",
+            buttons: [{
+                label: '再想想',
+                action: function(dialogRef){
+                    dialogRef.close();
+                }
+            },{
+                icon: 'glyphicon glyphicon-send',
+                label: '确定',
+                cssClass: 'btn-primary',
+                autospin: true,
+                action: function(dialogRef){
+                    dialogRef.enableButtons(false);
+                    dialogRef.setClosable(false);
+                    dialogRef.getModalBody().html('删除中...');
+                    doDeleteProduct(productId,dialogRef);
+                }
+            }
+            ]
+        });
+
+
     });
 
-    //点击更新，更新员工信息
+    //点击修改，修改商品列表信息
     $("#btn_modal_del").click(function(){
         $("#div_delete_modal").modal("hide");
     });
 
     $(document).on("click",".edit_btn",function(){
-        //1、查出商品信息
-        //getProductDetail($(this).attr("productId"));
+        //1、查出分类信息，并显示列表
+        getCategory("#select_update_category");
+        //2、查出标签信息，并显示列表
+        getTag("#select_update_tag");
 
-        //3、把商品的id传递给模态框的更新按钮
+        //2、查出商品信息，显示商品信息
+        getProductDetail($(this).attr("productId"));
+
+        //3、把商品的id传递给模态框的修改按钮
         $("#btn_modal_edit").attr("productId",$(this).attr("productId"));
         $("#div_edit_modal").modal('show')
     });
 
-    //点击更新，更新员工信息
+    //点击修改，修改商品信息
     $("#btn_modal_edit").click(function(){
-        $("#div_edit_modal").modal("hide");
+        $("#btn_modal_edit").blur(); //去除焦点
+        var summary = $("#input_update_summary").val();
+        var formData = new FormData(document.getElementById("form_update_product"));//表单id
+        if($('#select_update_xiajia').is(':checked')) {
+            formData.append("isSale", 1);
+        }else{
+            formData.append("isSale", 0);
+        }
+        formData.append("productId", $("#btn_modal_edit").attr("productId"));
+        formData.append("shopId", 1);
+        formData.append("productCode", 2003);
+        formData.append("graphicDetail", summary);
+        $.ajax({
+            url : "${APP_PATH}/doUpdateProduct",
+            type : "POST",
+            data : formData,
+            async : false,
+            cache : false,
+            contentType : false,
+            processData : false,
+            success : function(result) {
+                var code = result.code;
+                if (code != 100) {
+
+                } else {
+                    $("#div_edit_modal").modal("hide");
+                    getProductList(pagerNumber);
+                }
+
+            },
+            error : function(e) {
+                showDialog("修改失败");
+            }
+        });
     });
 
 
@@ -934,15 +1128,54 @@
         doDeleteProduct(productId);
     });
 
-    function doDeleteProduct(id){
+    function doDeleteProduct(id,dialogRef){
         $.ajax({
             url:"${APP_PATH}/doDeleteProductById?productId="+id,
             type:"GET",
             success:function(result){
                 if(result.code==100){
+                    dialogRef.close();
                     getProductList(pagerNumber);
                 }else{
-                    alert("删除失败");
+                    showDialog("删除失败");
+                }
+            }
+        });
+    }
+
+    function getProductDetail(id){
+        $.ajax({
+            url:"${APP_PATH}/getProductDetail?productId="+id,
+            type:"GET",
+            success:function(result){
+                if(result.code==100){
+                    var data=result.data;
+                    $("#input_update_name").val(data.productName);
+                    $("#input_update_title").val(data.title);
+                    $("#input_update_buy_price").val(data.buyPrice);
+                    $("#input_update_original_price").val(data.originalPrice);
+                    $("#input_update_discount").val(data.discount);
+                    $("#input_update_now_price").val(data.nowPrice);
+                    $("#select_update_category").append(this.categoryName).val(data.categoryId);
+                    $("#select_update_tag").append(this.tagName).val(data.productTagId);
+                    $("#input_update_summary").val(data.summary);
+
+                    //1上架0下架
+                    $("#select_update_xiajia").prop("checked",data.isSale==1?true:false);//全选
+                    //$("#select_update_xiajia").prop("checked",'true');//全选
+
+                    $("#img_edit_logo").attr("src", '${BASE_URL}'+data.logo) ; //将图片路径存入src中，显示出图片
+                    $("#img_edit_logo").show();
+
+                    if(data.image.length>0){
+                        $.each(data.image, function(i, imageStr) {
+                            $("#img_update_upload"+i).attr("src", '${BASE_URL}'+imageStr) ; //将图片路径存入src中，显示出图片
+                            $("#img_update_upload"+i).show();
+                            window.event.returnValue = false;
+                        });
+                    }
+                }else{
+                    showDialog("查询商品失败");
                 }
             }
         });
@@ -1023,6 +1256,23 @@
             if(buy_price!=""&&original_price!=""&&discount!=""){
                 $("#input_now_price").val(original_price*discount/10)
             }
+        });
+    }
+
+    function showDialog(msg) {
+        BootstrapDialog.show({
+            type:  BootstrapDialog.TYPE_PRIMARY,
+            title: '提示',
+            message: msg,
+            closable: true,
+            closeByBackdrop: true,
+            closeByKeyboard: true,
+            buttons: [{
+                label: '知道了',
+                action: function(dialogRef){
+                    dialogRef.close();
+                }
+            }]
         });
     }
 

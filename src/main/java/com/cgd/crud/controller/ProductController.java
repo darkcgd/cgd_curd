@@ -2,11 +2,9 @@ package com.cgd.crud.controller;
 
 import com.cgd.crud.base.BaseController;
 import com.cgd.crud.bean.*;
-import com.cgd.crud.service.CommonService;
-import com.cgd.crud.service.OrderService;
-import com.cgd.crud.service.ProductService;
-import com.cgd.crud.service.TokenService;
+import com.cgd.crud.service.*;
 import com.cgd.crud.util.AbDateUtil;
+import com.cgd.crud.util.AbFileUtil;
 import com.cgd.crud.util.BaseUtil;
 import com.cgd.crud.util.Constant;
 import com.github.pagehelper.PageHelper;
@@ -38,7 +36,10 @@ public class ProductController extends BaseController{
 	OrderService orderService;
 	@Autowired
 	TokenService tokenService;
-
+	@Autowired
+	ProductCategoryService productCategoryService;
+	@Autowired
+	ProductTagService productTagService;
 
 	/**
 	 * @return
@@ -75,17 +76,18 @@ public class ProductController extends BaseController{
 		if(file!=null&&data!=null&&request!=null){
 			String path = request.getSession().getServletContext().getRealPath("upload");
 			String fileName = file.getOriginalFilename();
+			if(BaseUtil.isNotEmpty(fileName)){
+				String fileNamePath = AbFileUtil.getFilePath(path,fileName);
 
-			String fileNamePath = getFilePath(path,fileName);
+				File filePath = new File(path + fileNamePath);
 
-			File filePath = new File(path + fileNamePath);
-
-			if(!filePath.exists()){
-				filePath.mkdirs();
+				if(!filePath.exists()){
+					filePath.mkdirs();
+				}
+				//MultipartFile自带的解析方法
+				file.transferTo(filePath);
+				data.setLogo("upload"+fileNamePath);
 			}
-			//MultipartFile自带的解析方法
-			file.transferTo(filePath);
-			data.setLogo("upload"+fileNamePath);
 		}
 	}
 	private void saveFileImage(MultipartFile[] file,ProductBean data, HttpServletRequest request)  throws IOException {
@@ -95,53 +97,33 @@ public class ProductController extends BaseController{
 				multipartFile = file[i];
 				String path = request.getSession().getServletContext().getRealPath("upload");
 				String fileName = multipartFile.getOriginalFilename();
-				String name = multipartFile.getName();
-				String fileNamePath = getFilePath(path,fileName);
+				if(BaseUtil.isNotEmpty(fileName)){
+					String fileNamePath = AbFileUtil.getFilePath(path,fileName);
 
-				File filePath = new File(path + fileNamePath);
+					File filePath = new File(path + fileNamePath);
 
-				if(!filePath.exists()){
-					filePath.mkdirs();
-				}
-				//MultipartFile自带的解析方法
-				multipartFile.transferTo(filePath);
-				if(i==0){
-					data.setImage1("upload"+fileNamePath);
-				}else if(i==1){
-					data.setImage2("upload"+fileNamePath);
-				}else if(i==2){
-					data.setImage3("upload"+fileNamePath);
-				}else if(i==3){
-					data.setImage4("upload"+fileNamePath);
-				}else if(i==4){
-					data.setImage5("upload"+fileNamePath);
+					if(!filePath.exists()){
+						filePath.mkdirs();
+					}
+					//MultipartFile自带的解析方法
+					multipartFile.transferTo(filePath);
+					if(i==0){
+						data.setImage1("upload"+fileNamePath);
+					}else if(i==1){
+						data.setImage2("upload"+fileNamePath);
+					}else if(i==2){
+						data.setImage3("upload"+fileNamePath);
+					}else if(i==3){
+						data.setImage4("upload"+fileNamePath);
+					}else if(i==4){
+						data.setImage5("upload"+fileNamePath);
+					}
 				}
 			}
 		}
 	}
 
-	private String getFilePath(String baseFolder,String sourceFileName) {
-		Date nowDate=new Date();
-		// yyyy/MM/dd
-		String fileFolder = File.separator + AbDateUtil.getStringByFormat(nowDate,"yyyy") + File.separator + AbDateUtil.getStringByFormat(nowDate,"MM") + File.separator
-				+ AbDateUtil.getStringByFormat(nowDate,"dd");
-		File file = new File(baseFolder + fileFolder);
-		if (!file.isDirectory()) {
-			// 如果目录不存在，则创建目录
-			file.mkdirs();
-		}
-		// 生成新的文件名
-		String fileName = AbDateUtil.getStringByFormat(nowDate,"yyyyMMddhhmmssSSSS") + UUID.randomUUID().toString().substring(0,5)+ getExtName(sourceFileName, '.');
-		return fileFolder + File.separator + fileName;
-	}
 
-
-
-	private static String getExtName(String s, char split) {
-		int i = s.indexOf(split);
-		int leg = s.length();
-		return (i > 0 ? (i + 1) == leg ? " " : s.substring(i, s.length()) : " ");
-	}
 
 
 	@ResponseBody
@@ -192,7 +174,11 @@ public class ProductController extends BaseController{
 
 		MsgBean msg = MsgBean.success("获取成功");
 		Map<String, Object> data = msg.getData();
-		handlerPageInfo(data,new PageInfo(info, pagerSize));
+		if(type==0){
+			handlerPageInfoAdmin(data,new PageInfo(info, pagerSize));
+		}else{
+			handlerPageInfo(data,new PageInfo(info, pagerSize));
+		}
 		List<Map<String,Object>> productBeanResults=new ArrayList<>();
 		for (ProductBean productBean:info) {
 			Integer productId = productBean.getProductId();
@@ -286,8 +272,9 @@ public class ProductController extends BaseController{
 			data.put("nowPrice", productDetail.getNowPrice());
 			data.put("discount", productDetail.getDiscount());
 			data.put("productTagId", productDetail.getProductTagId());
+			data.put("categoryId", productDetail.getCategoryId());
 			data.put("graphicDetail", productDetail.getGraphicDetail());
-			data.put("isSale", productDetail.getIsSale());
+			data.put("isSale", productDetail.getIsSale()==null?0:productDetail.getIsSale());//1上架0下架
 			data.put("shopId", productDetail.getShopId());
 			data.put("summary", productDetail.getSummary());
 			data.put("collectCount", collectCount);
@@ -302,6 +289,19 @@ public class ProductController extends BaseController{
 			}else{
 				data.put("readCount", productDetail.getReadCount()+1);
 			}
+			if(BaseUtil.isNotEmpty(productDetail.getCategoryId())){
+				ProductCategoryBean productCategory = productCategoryService.getProductCategoryById(productDetail.getCategoryId());
+				if(productCategory!=null){
+					data.put("categoryName", productCategory.getCategoryName());
+				}
+			}
+			if(BaseUtil.isNotEmpty(productDetail.getCategoryId())){
+				ProductTagBean productTag = productTagService.getProductTagById(productDetail.getProductTagId());
+				if(productTag!=null){
+					data.put("tagName", productTag.getTagName());
+				}
+			}
+
 			return msg;
 		}else{
 			return MsgBean.fail("查询不到该商品");
@@ -339,5 +339,43 @@ public class ProductController extends BaseController{
 		productService.doDeleteProductById(productId);
 		return MsgSimple.success("删除成功");
 	}
+
+	@ResponseBody
+	@RequestMapping(value="/doDeleteProductByIds",method=RequestMethod.DELETE)
+	public Object doDeleteProductByIds(@RequestParam(value = "ids", required=false) Integer[] ids){
+		if(ids==null&&ids.length<1){
+			return MsgSimple.fail("至少需要传一个productId");
+		}
+		productService.doDeleteProductByIds(Arrays.asList(ids));
+		return MsgSimple.success("删除成功");
+	}
+
+	@ResponseBody
+	@RequestMapping("/doUpdateProduct")
+	public Object doUpdateProduct(@Valid ProductBean data, BindingResult result,@RequestParam(value = "file")MultipartFile file,
+								  @RequestParam("multipartFile") MultipartFile[] multipartFile, HttpServletRequest request) throws IOException {
+		if(result.hasErrors()){
+			//校验失败，应该返回失败，在模态框中显示校验失败的错误信息
+			Map<String, Object> map = new HashMap<>();
+			List<FieldError> errors = result.getFieldErrors();
+			for (FieldError fieldError : errors) {
+				System.out.println("错误的字段名："+fieldError.getField());
+				System.out.println("错误信息："+fieldError.getDefaultMessage());
+				map.put(fieldError.getField(), fieldError.getDefaultMessage());
+			}
+			return MsgBean.fail().add("errorFields", map);
+		}else{
+			saveFileLogo(file,data,request);
+			saveFileImage(multipartFile,data,request);
+			if(BaseUtil.isEmpty(data.getProductId())){
+				return MsgSimple.fail("需要传productId参数");
+			}
+			productService.doUpdateProductById(data);
+			return MsgSimple.success("修改成功");
+		}
+
+	}
+
+
 
 }

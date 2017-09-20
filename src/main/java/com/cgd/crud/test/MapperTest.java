@@ -94,7 +94,7 @@ public class MapperTest {
 		}
 		System.out.println("批量完成");*/
 		ProductBeanMapper mapper = sqlSession.getMapper(ProductBeanMapper.class);
-		for(int i = 0;i<100000;i++){
+		for(int i = 0;i<100;i++){
 			ProductBean productBean = new ProductBean();
 			productBean.setProductName("夏天家2017夏季小黑裙新款女韩版系带收腰a字短裙v领连衣裙子显瘦");
 			productBean.setProductCode((i+10)+"");
