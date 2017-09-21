@@ -27,7 +27,7 @@
     <script src="${APP_PATH }/js/util.js"></script>
     <script src="${APP_PATH }/static/js/custom-dialog.js"></script>
     <link href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${APP_PATH }/static/css/base.css" rel="stylesheet">
+    <link href="${APP_PATH }/css/base.css" rel="stylesheet">
 
 </head>
 <body>
@@ -478,7 +478,7 @@
     $(function(){
         var isLogin=$.session.get('isLogin');
         if(isLogin){
-            $("#span_user_name").text($.session.get('userName')==undefined?"admin":$.session.get('userName'));
+            $("#span_user_name").text($.session.get('shopName')==undefined?"admin":$.session.get('shopName'));
             getCategory("#select_category");
             getTag("#select_tag");
 

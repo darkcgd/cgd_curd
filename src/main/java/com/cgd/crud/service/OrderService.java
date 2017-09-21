@@ -40,16 +40,16 @@ public class OrderService {
 
 	/***
 	 *
-	 * @param userId
+	 * @param id
 	 * @param orderStatus //1待付款2待发货3发货中4待评价5已完成6已取消7已删除
-	 * @param type 0代表admin 1代表是普通用户 用于区分是否返回 订单的数据
+	 * @param type 0代表普通用户 1代表是商家 用于区分是否返回 商家或者普通用户的订单的数据
 	 * @return
 	 */
-	public List<OrderBean> getOrderListWithOtherInfo(Integer userId,Integer orderStatus,int type) {
-		if(type==0){
-			return orderBeanMapper.selectByExampleShopOtherInfo(userId,orderStatus);
+	public List<OrderBean> getOrderListWithOtherInfo(Integer id,Integer orderStatus,int type) {
+		if(type==1){
+			return orderBeanMapper.selectByExampleShopOtherInfo(id,orderStatus);
 		}
-		return orderBeanMapper.selectByExampleOtherInfo(userId,orderStatus);
+		return orderBeanMapper.selectByExampleOtherInfo(id,orderStatus);
 	}
 
 

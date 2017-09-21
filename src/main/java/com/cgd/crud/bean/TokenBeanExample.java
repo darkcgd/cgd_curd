@@ -224,6 +224,7 @@ public class TokenBeanExample {
             addCriterion("user_id not between", value1, value2, "userId");
             return (Criteria) this;
         }
+
         public Criteria andUserTypeIsNull() {
             addCriterion("user_type is null");
             return (Criteria) this;

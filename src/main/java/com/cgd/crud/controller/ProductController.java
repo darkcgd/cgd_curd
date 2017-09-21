@@ -44,7 +44,7 @@ public class ProductController extends BaseController{
 	/**
 	 * @return
 	 */
-	@RequestMapping("/addProduct")
+	@RequestMapping("/shop/addProduct")
 	@ResponseBody
 	public MsgBean addProduct(@Valid ProductBean data, BindingResult result,@RequestParam(value = "file")MultipartFile file,
 							  @RequestParam("multipartFile") MultipartFile[] multipartFile, HttpServletRequest request) throws IOException {
@@ -137,7 +137,7 @@ public class ProductController extends BaseController{
 	}
 
 	@ResponseBody
-	@RequestMapping(value="/getAdminProductList",method=RequestMethod.GET)
+	@RequestMapping(value="/shop/getProductList",method=RequestMethod.GET)
 	public MsgBean getAdminProductList(
 			@RequestParam(value = "userId", required=false) Integer userId,
 			@RequestParam(value = "token", required=false) String token,
@@ -331,7 +331,7 @@ public class ProductController extends BaseController{
 
 
 	@ResponseBody
-	@RequestMapping(value="/doDeleteProductById",method=RequestMethod.GET)
+	@RequestMapping(value="/shop/doDeleteProductById",method=RequestMethod.GET)
 	public Object doDeleteProductById(@RequestParam(value = "productId", required=false) Integer productId){
 		if(BaseUtil.isEmpty(productId)){
 			return MsgSimple.fail("需要传productId参数");
@@ -341,7 +341,7 @@ public class ProductController extends BaseController{
 	}
 
 	@ResponseBody
-	@RequestMapping(value="/doDeleteProductByIds",method=RequestMethod.DELETE)
+	@RequestMapping(value="/shop/doDeleteProductByIds",method=RequestMethod.DELETE)
 	public Object doDeleteProductByIds(@RequestParam(value = "ids", required=false) Integer[] ids){
 		if(ids==null&&ids.length<1){
 			return MsgSimple.fail("至少需要传一个productId");
@@ -351,7 +351,7 @@ public class ProductController extends BaseController{
 	}
 
 	@ResponseBody
-	@RequestMapping("/doUpdateProduct")
+	@RequestMapping("/shop/doUpdateProduct")
 	public Object doUpdateProduct(@Valid ProductBean data, BindingResult result,@RequestParam(value = "file")MultipartFile file,
 								  @RequestParam("multipartFile") MultipartFile[] multipartFile, HttpServletRequest request) throws IOException {
 		if(result.hasErrors()){

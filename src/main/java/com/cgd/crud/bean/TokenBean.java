@@ -6,6 +6,7 @@ public class TokenBean {
     private Integer id;
 
     private Integer userId;
+
     private Integer userType;
 
     private String token;

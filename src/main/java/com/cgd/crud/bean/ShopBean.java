@@ -6,6 +6,7 @@ public class ShopBean {
     private Integer shopId;
 
     private String shopName;
+
     private String pwd;
 
     private String headUrl;
@@ -39,27 +40,14 @@ public class ShopBean {
     private Date createTime;
 
     private Date updateTime;
-    private Date lastLoginTime;
 
     private String summary;
 
     private String remark;
 
-    public String getPwd() {
-        return pwd;
-    }
+    private Date lastLoginTime;
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
-    }
-
-    public Date getLastLoginTime() {
-        return lastLoginTime;
-    }
-
-    public void setLastLoginTime(Date lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
-    }
+    private Integer userType;
 
     public Integer getShopId() {
         return shopId;
@@ -75,6 +63,14 @@ public class ShopBean {
 
     public void setShopName(String shopName) {
         this.shopName = shopName == null ? null : shopName.trim();
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd == null ? null : pwd.trim();
     }
 
     public String getHeadUrl() {
@@ -219,5 +215,21 @@ public class ShopBean {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
+    public Integer getUserType() {
+        return userType;
+    }
+
+    public void setUserType(Integer userType) {
+        this.userType = userType;
     }
 }

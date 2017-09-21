@@ -40,7 +40,7 @@ public class UserController {
 	 *
 	 * @return
 	 */
-	@RequestMapping(value="user/regist",method=RequestMethod.GET)
+	@RequestMapping(value="/userRegist",method=RequestMethod.GET)
 	@ResponseBody
 	public MsgBean regist(@Valid User user, BindingResult result){
 		if(result.hasErrors()){
@@ -82,7 +82,7 @@ public class UserController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping("/user/login")
+	@RequestMapping("/userLogin")
 	public Object login(@RequestParam(value = "name", required=false)String name, @RequestParam(value = "pwd", required=false)String pwd){
 		if(BaseUtil.isEmpty(name)){
 			return MsgSimple.fail("需要传name参数");
@@ -132,7 +132,7 @@ public class UserController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/admin/getUserInfo",method=RequestMethod.GET)
+	@RequestMapping(value="/user/getUserInfo",method=RequestMethod.GET)
 	public MsgBean getUserInfo(@RequestParam(value = "userId", required=false) Integer userId, HttpServletRequest request){
 		if(BaseUtil.isEmpty(userId)){
 			MsgBean msg = MsgBean.fail("需要传userId参数");
@@ -192,7 +192,7 @@ public class UserController {
 	 * 修改用户信息(头像,昵称,性别,年龄,生日,手机号码)
 	 */
 	@ResponseBody
-	@RequestMapping(value="/admin/updateUserInfo",method=RequestMethod.GET)
+	@RequestMapping(value="/user/updateUserInfo",method=RequestMethod.GET)
 	public Object updateUserInfo(@Valid User user, BindingResult result){
 		if(result.hasErrors()){
 			//校验失败，应该返回失败，在模态框中显示校验失败的错误信息
@@ -215,7 +215,7 @@ public class UserController {
 	 * 修改密码
 	 */
 	@ResponseBody
-	@RequestMapping(value="/admin/updatePwd",method=RequestMethod.GET)
+	@RequestMapping(value="/user/updatePwd",method=RequestMethod.GET)
 	public MsgSimple updatePwd(@RequestParam(value = "userId", required=false) Integer userId,
 							   @RequestParam(value = "oldPwd", required=false) String oldPwd,
 							   @RequestParam(value = "newPwd", required=false) String newPwd){

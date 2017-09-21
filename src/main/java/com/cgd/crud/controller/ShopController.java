@@ -83,7 +83,7 @@ public class ShopController extends BaseController{
 
 
 	@ResponseBody
-	@RequestMapping("/shop/login")
+	@RequestMapping("/shopLogin")
 	public Object shopLogin(@RequestParam(value = "name", required=false)String name, @RequestParam(value = "pwd", required=false)String pwd){
 		if(BaseUtil.isEmpty(name)){
 			return MsgSimple.fail("需要传name参数");

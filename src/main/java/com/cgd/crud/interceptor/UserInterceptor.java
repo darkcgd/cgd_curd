@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cgd.crud.bean.TokenBean;
+import com.cgd.crud.service.ShopService;
 import com.cgd.crud.service.TokenService;
 import com.cgd.crud.service.UserService;
 import com.cgd.crud.util.BaseUtil;
@@ -28,6 +29,8 @@ public class UserInterceptor implements HandlerInterceptor{
 	TokenService tokenService;
 	@Autowired
 	UserService userService;
+	@Autowired
+	ShopService shopService;
 
 	/**
 	 * preHandle方法是进行处理器拦截用的，顾名思义，该方法将在Controller处理之前进行调用，SpringMVC中的Interceptor拦截器是链式的，可以同时存在 
@@ -39,33 +42,65 @@ public class UserInterceptor implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)throws Exception {
 		String msgFail = "登录信息失效,请重新登录!";
-		String userIdStr = request.getParameter(Constant.USER_ID);
+		String requestUrl = request.getServletPath();
 		String requestToken = request.getParameter(Constant.TOKEN);
-		if(BaseUtil.isEmpty(userIdStr)){
-			msgFail="需要传userId参数";
+		String idStr=null;
+		if(requestUrl.contains("/user/")){
+			idStr = request.getParameter(Constant.USER_ID);
+		}else if(requestUrl.contains("/shop/")){
+			idStr = request.getParameter(Constant.SHOP_ID);
+		}
+
+		if(BaseUtil.isEmpty(idStr)){
+			if(requestUrl.contains("/user/")){
+				msgFail="需要传userId参数";
+			}else if(requestUrl.contains("/shop/")){
+				msgFail="需要传shopId参数";
+			}
 		}else{
-			Integer userId = Integer.parseInt(userIdStr);
-			if(userService.getUserById(userId)==null){
-				msgFail="该用户不存在";
-			}else{
-				if(BaseUtil.isNotEmpty(requestToken)){
-					TokenBean tokenBean = tokenService.getToken(userId,0);
-					if(tokenBean!=null){
-						String saveToken = tokenBean.getToken();
-						if(BaseUtil.isNotEmpty(saveToken)&&requestToken.equals(saveToken)){
-							return true;
+			Integer id = Integer.parseInt(idStr);
+			if(requestUrl.contains("/user/")){
+				if(userService.getUserById(id)==null){
+					msgFail="该用户不存在";
+				}else{
+					if(BaseUtil.isNotEmpty(requestToken)){
+						TokenBean tokenBean = tokenService.getToken(id,0);
+						if(tokenBean!=null){
+							String saveToken = tokenBean.getToken();
+							if(BaseUtil.isNotEmpty(saveToken)&&requestToken.equals(saveToken)){
+								return true;
+							}else{
+								msgFail="登录信息失效,请重新登录";
+							}
 						}else{
 							msgFail="登录信息失效,请重新登录";
 						}
 					}else{
-						msgFail="登录信息失效,请重新登录";
+						msgFail="需要传token参数";
 					}
+				}
+			}else if(requestUrl.contains("/shop/")){
+				if(shopService.getShopById(id)==null){
+					msgFail="该商家不存在";
 				}else{
-					msgFail="需要传token参数";
+					if(BaseUtil.isNotEmpty(requestToken)){
+						TokenBean tokenBean = tokenService.getToken(id,1);
+						if(tokenBean!=null){
+							String saveToken = tokenBean.getToken();
+							if(BaseUtil.isNotEmpty(saveToken)&&requestToken.equals(saveToken)){
+								return true;
+							}else{
+								msgFail="登录信息失效,请重新登录";
+							}
+						}else{
+							msgFail="登录信息失效,请重新登录";
+						}
+					}else{
+						msgFail="需要传token参数";
+					}
 				}
 			}
 		}
-		
 		ObjectMapper mapper = new ObjectMapper(); //转换器
 		//测试01：对象--json
 		String json=mapper.writeValueAsString(new MsgBean().fail(msgFail)); //将对象转换成json

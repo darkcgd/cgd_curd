@@ -24,7 +24,7 @@
     <script src="${APP_PATH }/js/jquerysession.js"></script>
     <script src="${APP_PATH }/static/js/custom-dialog.js"></script>
     <link href="${APP_PATH}/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="<%=request.getContextPath()%>/css/base.css" rel="stylesheet" type="text/css">
+    <link href="${APP_PATH}/css/base.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -139,7 +139,7 @@
     $(function(){
         var isLogin=$.session.get('isLogin');
         if(isLogin){
-            $("#span_user_name").text($.session.get('userName')==undefined?"admin":$.session.get('userName'));
+            $("#span_user_name").text($.session.get('shopName')==undefined?"admin":$.session.get('shopName'));
             clickMenu("#div_main");
             clickMenu("#div_product");
             clickMenu("#div_order");

@@ -71,6 +71,11 @@ public class TokenService {
 
 		if(tokenBeans!=null&&tokenBeans.size()>0){//说明之前已经存在该token信息,现在需要修改
 			TokenBean tokenBean = tokenBeans.get(0);
+			Integer saveUserType = tokenBean.getUserType();
+			if(BaseUtil.isEmpty(saveUserType)){
+				tokenBean.setUserType(userType);
+			}
+
 			tokenBean.setToken(md5Str);
 			Date date = new Date();
 			long time = date.getTime();
@@ -83,6 +88,7 @@ public class TokenService {
 		}else{//说明之前未存在该token信息,需执行增 操作
 			TokenBean tokenBean=new TokenBean();
 			tokenBean.setUserId(userId);
+			tokenBean.setUserType(userType);
 			tokenBean.setToken(md5Str);
 			Date date = new Date();
 			long time = date.getTime();

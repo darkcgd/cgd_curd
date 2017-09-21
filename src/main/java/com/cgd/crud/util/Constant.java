@@ -11,5 +11,6 @@ public class Constant {
 	public final static String BASE_IMG_URL="cgd_curd/image/";
 
 	public final static String USER_ID="userId";
+	public final static String SHOP_ID="shopId";
 	public final static String TOKEN="token";
 }

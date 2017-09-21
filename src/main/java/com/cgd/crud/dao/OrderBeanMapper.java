@@ -31,5 +31,5 @@ public interface OrderBeanMapper {
 
     List<OrderBean> selectByExampleOtherInfo(@Param("userId") Integer userId, @Param("orderStatus")Integer orderStatus);
 
-    List<OrderBean> selectByExampleShopOtherInfo(@Param("userId") Integer userId, @Param("orderStatus")Integer orderStatus);
+    List<OrderBean> selectByExampleShopOtherInfo(@Param("shopId") Integer shopId, @Param("orderStatus")Integer orderStatus);
 }

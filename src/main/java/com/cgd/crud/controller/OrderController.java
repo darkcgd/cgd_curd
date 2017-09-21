@@ -38,40 +38,40 @@ public class OrderController extends BaseController{
 	OrderService orderService;
 
 	@ResponseBody
-	@RequestMapping(value="order/getOrderList",method=RequestMethod.GET)
+	@RequestMapping(value="user/getOrderList",method=RequestMethod.GET)
 	public MsgBean getOrdertList(@RequestParam(value = "userId") Integer userId,
 								 @RequestParam(value = "orderStatus", required=false) Integer orderStatus,
 								 @RequestParam(value = "pagerNumber", defaultValue = ""+ Constant.DefaultPagerNumber) Integer pagerNumber,
 								 @RequestParam(value = "pagerSize", defaultValue = ""+Constant.DefaultPagerSize) Integer pagerSize){
-		return getProductListMethod(userId,orderStatus,pagerNumber,pagerSize,1);
+		return getOrderListMethod(userId,orderStatus,pagerNumber,pagerSize,0);
 	}
 
 	@ResponseBody
-	@RequestMapping(value="order/getAdminOrderList",method=RequestMethod.GET)
-	public MsgBean getAdminOrdertList(@RequestParam(value = "userId") Integer userId,
+	@RequestMapping(value="shop/getOrderList",method=RequestMethod.GET)
+	public MsgBean getAdminOrdertList(@RequestParam(value = "shopId") Integer shopId,
 								 @RequestParam(value = "orderStatus", required=false) Integer orderStatus,
 								 @RequestParam(value = "pagerNumber", defaultValue = ""+ Constant.DefaultPagerNumber) Integer pagerNumber,
 								 @RequestParam(value = "pagerSize", defaultValue = ""+Constant.DefaultPagerSize) Integer pagerSize){
 
-		return getProductListMethod(userId,orderStatus,pagerNumber,pagerSize,0);
+		return getOrderListMethod(shopId,orderStatus,pagerNumber,pagerSize,1);
 	}
 
 	/**
 	 *
-	 * @param userId
+	 * @param id
 	 * @param orderStatus
 	 * @param pagerNumber
 	 * @param pagerSize
-	 * @param type 0代表admin 1代表是普通用户 用于区分是否返回 订单的数据
+	 * @param type 0代表普通用户 1代表是商家 用于区分是否返回 商家或者普通用户的订单的数据
 	 * @return
 	 */
-	private MsgBean getProductListMethod(Integer userId,Integer orderStatus,Integer pagerNumber,Integer pagerSize,int type){
+	private MsgBean getOrderListMethod(Integer id,Integer orderStatus,Integer pagerNumber,Integer pagerSize,int type){
 		PageHelper.startPage(pagerNumber, pagerSize);
 		////1待付款2待发货3发货中4待评价5已完成6已取消7已删除
-		List<OrderBean> info = orderService.getOrderListWithOtherInfo(userId,orderStatus,type);
+		List<OrderBean> info = orderService.getOrderListWithOtherInfo(id,orderStatus,type);
 		MsgBean msg = MsgBean.success("获取成功");
 		Map<String, Object> data = msg.getData();
-		if(type==0){
+		if(type==1){
 			handlerPageInfoAdmin(data,new PageInfo(info, pagerSize));
 		}else{
 			handlerPageInfo(data,new PageInfo(info, pagerSize));

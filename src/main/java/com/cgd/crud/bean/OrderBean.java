@@ -58,6 +58,16 @@ public class OrderBean {
 
     private User user;
 
+    private ShopBean shopBean;
+
+    public ShopBean getShopBean() {
+        return shopBean;
+    }
+
+    public void setShopBean(ShopBean shopBean) {
+        this.shopBean = shopBean;
+    }
+
     public User getUser() {
         return user;
     }

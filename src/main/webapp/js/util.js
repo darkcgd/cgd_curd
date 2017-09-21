@@ -1,13 +1,16 @@
 //接口地址
-var GET_ADMIN_PRODUCT_LIST = "/getAdminProductList";
-var DO_DELETE_PRODUCT_BY_IDS = "/doDeleteProductByIds";
-var ADD_PRODUCT = "/addProduct";
-var DO_UPDATE_PRODUCT = "/doUpdateProduct";
-var DO_DELETE_PRODUCT_BY_ID = "/doDeleteProductById";
+var GET_ADMIN_PRODUCT_LIST = "/shop/getProductList";
+var DO_DELETE_PRODUCT_BY_IDS = "/shop/doDeleteProductByIds";
+var ADD_PRODUCT = "/shop/addProduct";
+var DO_UPDATE_PRODUCT = "/shop/doUpdateProduct";
+var DO_DELETE_PRODUCT_BY_ID = "/shop/doDeleteProductById";
 var GET_PRODUCT_DETAIL = "/getProductDetail";
 var GET_ALL_PRODUCT_CATEGORY_LIST = "/getAllProductCategoryList";
 var GET_ALL_PRODUCT_TAG_LIST = "/getAllProductTagList";
-var GET_ORDER_LIST = "/getOrderList";
+var GET_ORDER_LIST = "/shop/getOrderList";
+var DO_SHOP_LOGIN = "/shopLogin";
+var DO_USER_REGIST = "/userRegist";
+var DO_USER_LOGIN = "/userLogin";
 
 
 

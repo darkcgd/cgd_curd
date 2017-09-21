@@ -3,6 +3,7 @@ package com.cgd.crud.service;
 import com.cgd.crud.bean.*;
 import com.cgd.crud.dao.ProductTagBeanMapper;
 import com.cgd.crud.dao.ShopBeanMapper;
+import com.cgd.crud.util.BaseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +39,19 @@ public class ShopService {
 			return null;
 		}
     }
+
+	/***
+	 * 根据商家id查询商家
+	 * @param shopId
+	 * @return
+	 */
+	public ShopBean getShopById(Integer shopId) {
+		if(BaseUtil.isNotEmpty(shopId)){
+			return shopBeanMapper.selectByPrimaryKey(shopId);
+		}
+		return null;
+	}
+
 
 	/**
 	 * 修改商家信息(头像,昵称,性别,年龄,手机号码,更新时间,最后登陆时间等)
