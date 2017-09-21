@@ -39,7 +39,6 @@
 	<!-- 第三步：注册处理器映射器/处理器适配器 ，添加conversion-service属性
     <mvc:annotation-driven conversion-service="conversionService"/>-->
 
-
 	<!-- 两个标准配置 -->
 	<!-- 将springMVC 不能处理的请求交给tomcat -->
 	<mvc:default-servlet-handler />
@@ -54,6 +53,7 @@
 		<!-- <bean class="com.cgd.crud.interceptor.UserInterceptor"/> -->
 		<mvc:interceptor>
 			<mvc:mapping path="/admin/*"/>
+			<mvc:mapping path="/user/*"/>
 			<mvc:mapping path="/order/*"/>
 			<!-- 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 -->
 			<bean class="com.cgd.crud.interceptor.UserInterceptor"/>

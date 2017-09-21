@@ -148,6 +148,20 @@
       and order_status= #{orderStatus}
     </if>
   </select>
+  <!-- 查询订单信息信息同时带个人信息 -->
+  <select id="selectByExampleShopOtherInfo" parameterType="map" resultMap="WithOtherInfoResultMap">
+   select o.order_id, o.order_sn, o.product_id, o.create_time, o.order_status, o.user_id, o.shop_id, o.product_count,
+    o.product_price, o.pay_method, o.pay_sn, o.pay_time, o.confirm_time, o.cancel_time, o.is_return,
+    o.pay_money, o.logistics_price, o.discount_price, o.reciver_name, o.reciver_phone, o.reciver_addr,
+    o.send_time, o.sender_id, o.logistics_sn, o.remark, o.update_time,
+    u.user_name,u.head_url
+	from  tbl_order AS o
+    left join tbl_shop AS s on o.shop_id=s.shop_id
+    where o.shop_id=#{userId}
+    <if test="orderStatus!=null and orderStatus>0">
+      and order_status= #{orderStatus}
+    </if>
+  </select>
 
   <select id="selectByExample" parameterType="com.cgd.crud.bean.OrderBeanExample" resultMap="BaseResultMap">
     select

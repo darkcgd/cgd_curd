@@ -17,8 +17,10 @@
      -->
 	<script type="text/javascript" src="${APP_PATH }/static/js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="${APP_PATH }/static/js/util.js"></script>
+	<script src="${APP_PATH }/js/jquerysession.js"></script>
+
 	<link href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
-	<link href="${APP_PATH }/static/css/login.css" rel="stylesheet">
+	<link href="${APP_PATH }/css/login.css" rel="stylesheet">
 	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${APP_PATH }/static/js/des3/tripledes2.js"></script>
 	<script type="text/javascript" src="${APP_PATH }/static/js/des3/cipher-core.js"></script>
@@ -63,40 +65,30 @@
 	</div>
 </div>
 <script type="text/javascript">
-    /* $("#btn_login").bind("click", function() {
-             if($("#div_confirm_pwd").is(":hidden")){
-                   $("#div_confirm_pwd").show();    //如果元素为隐藏,则将它显现
-            }else{
-                  $("#div_confirm_pwd").hide();     //如果元素为显现,则将其隐藏
-            }
 
-             alert($("#formUserRegistOrLogin form").serialize());
-
-            window.event.returnValue=false;
-            //$("#btn_login").blur(); //去除焦点
-        }); */
-
-    $(document).ready(function() {
-        var isLogin = getCookie('isLogin');
-        if (isLogin) {
-            window.location.href = "addqianggoubiao.jsp";
-            window.event.returnValue = false;
-        }
+    $(function(){
+		/* var isLogin =  $.session.get('isLogin');
+		 if (isLogin) {
+		 window.location.href = "admin.jsp";
+		 window.event.returnValue = false;
+		 }*/
     });
 
     //ajax提交
     $("#btn_login").click(function() {
-        var isLogin = getCookie('isLogin');
-        if (isLogin) {
-            window.location.href = "addqianggoubiao.jsp";
-            window.event.returnValue = false;
-        } else {
-            if ($("#div_confirm_pwd").is(":hidden")) {
-                doLogin(); //如果元素为隐藏,则登录
-            } else {
-                doRegist(); //如果元素为显现,则注册
-            }
-        }
+        doLogin(); //如果元素为隐藏,则登录
+
+		/*var isLogin =  $.session.get('isLogin');
+		 if (isLogin) {
+		 window.location.href = "admin.jsp";
+		 window.event.returnValue = false;
+		 } else {
+		 if ($("#div_confirm_pwd").is(":hidden")) {
+		 doLogin(); //如果元素为隐藏,则登录
+		 } else {
+		 doRegist(); //如果元素为显现,则注册
+		 }
+		 }*/
     })
 
     function doLogin() {
@@ -133,17 +125,19 @@
 
         /**
          {
-         "code": 100,
-         "msg": "登录成功",
-         "data": {
-         "user_sex": null,
-         "user_email": null,
-         "user_id": 29,
-         "user_name": "dark_cgd",
-         "user_phone": null,
-         "user_token": null
-         }
-         }
+  "code": 100,
+  "msg": "登录成功",
+  "data": {
+    "phone": null,
+    "sex": 1,
+    "name": "cyx123",
+    "headUrl": null,
+    "userId": 47,
+    "age": 22,
+    "email": null,
+    "token": "8759401F6C20B8179EC337C6DEE3A620"
+  }
+}
          */
 
         //2、发送ajax请求保存员工
@@ -156,22 +150,21 @@
                 if (code != 100) {
                     $("#span_status").addClass("has-error");
                     $("#span_status").text(result.msg);
-                    removeCookie('isLogin');
+                    $.session.remove('isLogin');
                 } else {
                     $("#span_status").addClass("has-success");
                     $("#span_status").text(result.msg);
                     var msg = result.msg;
                     var data = result.data;
-                    var userId = data.user_id;
-                    var userName = data.user_name;
+                    var userId = data.userId;
+                    var userName = data.name;
+                    var token = data.token;
+                    $.session.set('userId', userId);
+                    $.session.set('userName', userName);
+                    $.session.set('isLogin', true);
+                    $.session.set('token', token);
 
-                    setCookie('userId', userId)
-                    setCookie('userName', userName)
-                    setCookie('isLogin', true)
-
-                    //window.location.href="views/imageTest.jsp?userid="+data.user_id+"&username="+data.user_name;
-                    window.location.href = "addqianggoubiao.jsp";
-                    //window.event.returnValue=false;
+                    window.location.href = "admin.jsp";
 
                 }
             }
@@ -250,7 +243,7 @@
                 if (code != 100) {
                     $("#span_status").addClass("has-error");
                     $("#span_status").text(result.msg);
-                    removeCookie('isLogin');
+                    $.session.remove('isLogin');
                 } else {
                     $("#span_status").addClass("has-success");
                     $("#span_status").text(result.msg);
@@ -259,12 +252,12 @@
                     var userId = data.user_id;
                     var userName = data.user_name;
 
-                    setCookie('userId', userId)
-                    setCookie('userName', userName)
-                    setCookie('isLogin', true)
+                    $.session.set('userId', userId)
+                    $.session.set('userName', userName)
+                    $.session.set('isLogin', true)
 
                     //window.location.href="views/imageTest.jsp?userid="+data.user_id+"&username="+data.user_name;
-                    window.location.href = "addqianggoubiao.jsp";
+                    window.location.href = "admin.jsp";
                     //window.event.returnValue=false;
 
                 }

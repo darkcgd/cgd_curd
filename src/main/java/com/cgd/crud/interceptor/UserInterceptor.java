@@ -49,7 +49,7 @@ public class UserInterceptor implements HandlerInterceptor{
 				msgFail="该用户不存在";
 			}else{
 				if(BaseUtil.isNotEmpty(requestToken)){
-					TokenBean tokenBean = tokenService.getToken(userId);
+					TokenBean tokenBean = tokenService.getToken(userId,0);
 					if(tokenBean!=null){
 						String saveToken = tokenBean.getToken();
 						if(BaseUtil.isNotEmpty(saveToken)&&requestToken.equals(saveToken)){

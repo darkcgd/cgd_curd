@@ -20,6 +20,7 @@
     <script type="text/javascript" src="${APP_PATH }/static/js/jquery-3.2.1.min.js"></script>
     <script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script src="${APP_PATH }/static/js/util.js"></script>
+    <script src="${APP_PATH }/js/jquerysession.js"></script>
     <link href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="${APP_PATH }/static/css/base.css" rel="stylesheet">
 
@@ -42,7 +43,7 @@
                     <span class="glyphicon glyphicon-comment" style="color: #FFFFFF"></span> <span style="color: #FFFFFF">消息</span> <span class="badge" style="background: #FFFFFF;color: #FF0000">20</span>
                 </button>
                 <button type="button" class="btn btn-default btn-sm" style="background: #3B99CB;margin-right: 20px">
-                    <span class="glyphicon glyphicon-user" style="color: #FFFFFF"></span> <span style="color: #FFFFFF;margin-right: 10px">Dark</span><span class="caret"></span>
+                    <span class="glyphicon glyphicon-user" style="color: #FFFFFF"></span> <span id="span_user_name" style="color: #FFFFFF;margin-right: 10px"></span><span class="caret"></span>
                 </button>
             </div>
         </div>
@@ -98,9 +99,13 @@
 </div>
 
 <script type="text/javascript">
-    //ajax提交
-    $(document).ready(function() {
-
+    $(function(){
+        var isLogin=$.session.get('isLogin');
+        if(isLogin){
+            $("#span_user_name").text($.session.get('userName')==undefined?"admin":$.session.get('userName'));
+        }else{
+            window.location.href = "login.jsp";
+        }
     });
 
     clickMenu("#div_main");

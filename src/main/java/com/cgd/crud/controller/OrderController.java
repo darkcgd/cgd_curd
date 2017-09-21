@@ -43,12 +43,39 @@ public class OrderController extends BaseController{
 								 @RequestParam(value = "orderStatus", required=false) Integer orderStatus,
 								 @RequestParam(value = "pagerNumber", defaultValue = ""+ Constant.DefaultPagerNumber) Integer pagerNumber,
 								 @RequestParam(value = "pagerSize", defaultValue = ""+Constant.DefaultPagerSize) Integer pagerSize){
+		return getProductListMethod(userId,orderStatus,pagerNumber,pagerSize,1);
+	}
+
+	@ResponseBody
+	@RequestMapping(value="order/getAdminOrderList",method=RequestMethod.GET)
+	public MsgBean getAdminOrdertList(@RequestParam(value = "userId") Integer userId,
+								 @RequestParam(value = "orderStatus", required=false) Integer orderStatus,
+								 @RequestParam(value = "pagerNumber", defaultValue = ""+ Constant.DefaultPagerNumber) Integer pagerNumber,
+								 @RequestParam(value = "pagerSize", defaultValue = ""+Constant.DefaultPagerSize) Integer pagerSize){
+
+		return getProductListMethod(userId,orderStatus,pagerNumber,pagerSize,0);
+	}
+
+	/**
+	 *
+	 * @param userId
+	 * @param orderStatus
+	 * @param pagerNumber
+	 * @param pagerSize
+	 * @param type 0代表admin 1代表是普通用户 用于区分是否返回 订单的数据
+	 * @return
+	 */
+	private MsgBean getProductListMethod(Integer userId,Integer orderStatus,Integer pagerNumber,Integer pagerSize,int type){
 		PageHelper.startPage(pagerNumber, pagerSize);
 		////1待付款2待发货3发货中4待评价5已完成6已取消7已删除
-		List<OrderBean> info = orderService.getOrderListWithOtherInfo(userId,orderStatus);
+		List<OrderBean> info = orderService.getOrderListWithOtherInfo(userId,orderStatus,type);
 		MsgBean msg = MsgBean.success("获取成功");
 		Map<String, Object> data = msg.getData();
-		handlerPageInfo(data,new PageInfo(info, pagerSize));
+		if(type==0){
+			handlerPageInfoAdmin(data,new PageInfo(info, pagerSize));
+		}else{
+			handlerPageInfo(data,new PageInfo(info, pagerSize));
+		}
 
 		List<Map<String,Object>> orderBeanResults=new ArrayList<>();
 		for (OrderBean orderBean:info) {
@@ -102,6 +129,7 @@ public class OrderController extends BaseController{
 		data.put("list", orderBeanResults);
 		return msg;
 	}
+
 
 	@ResponseBody
 	@RequestMapping(value="order/createOrder",method=RequestMethod.GET)

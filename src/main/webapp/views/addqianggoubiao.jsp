@@ -18,7 +18,7 @@
 	<script type="text/javascript" src="${APP_PATH }/static/js/util.js"></script>
 	<script type="text/javascript" src="${APP_PATH }/static/js/jquery.datetimepicker.full.js"></script>
 	<link href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
-	<link href="${APP_PATH }/static/css/login.css" rel="stylesheet">
+	<link href="${APP_PATH }/css/login.css" rel="stylesheet">
 	<link href="${APP_PATH }/static/css/jquery.datetimepicker.css" rel="stylesheet">
 	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>

@@ -23,11 +23,9 @@
     <script type="text/javascript" src="${APP_PATH }/static/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="${APP_PATH }/static/js/jquery.lazyload.js"></script>
     <script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-    <script src="${APP_PATH }/static/js/util.js"></script>
-    <script src="http://bootboxjs.com/bootbox.js"></script>
-    <%--https://github.com/nakupanda/bootstrap3-dialog--%>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css" rel="stylesheet">
+    <script src="${APP_PATH }/js/jquerysession.js"></script>
+    <script src="${APP_PATH }/js/util.js"></script>
+    <script src="${APP_PATH }/static/js/custom-dialog.js"></script>
     <link href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="${APP_PATH }/static/css/base.css" rel="stylesheet">
 
@@ -206,7 +204,7 @@
                     <span class="glyphicon glyphicon-comment" style="color: #FFFFFF"></span> <span style="color: #FFFFFF">消息</span> <span class="badge" style="background: #FFFFFF;color: #FF0000">20</span>
                 </button>
                 <button type="button" class="btn btn-default btn-sm" style="background: #3B99CB;margin-right: 20px">
-                    <span class="glyphicon glyphicon-user" style="color: #FFFFFF"></span> <span style="color: #FFFFFF;margin-right: 10px">Dark</span><span class="caret"></span>
+                    <span class="glyphicon glyphicon-user" style="color: #FFFFFF"></span> <span id="span_user_name" style="color: #FFFFFF;margin-right: 10px"></span><span class="caret"></span>
                 </button>
             </div>
         </div>
@@ -426,7 +424,7 @@
                     <div class="row">
                         <div class="col-md-10">
                             <table class="table table-hover" id="product_table">
-                                <thead>
+                                <thead >
                                 <tr>
                                     <th style='vertical-align: middle;text-align: center;'>
                                         <input type="checkbox" id="check_all"/>
@@ -440,7 +438,7 @@
                                     <th style='vertical-align: middle;text-align: center;'>操作</th>
                                 </tr>
                                 </thead>
-                                <tbody >
+                                <tbody>
 
                                 </tbody>
                             </table>
@@ -477,26 +475,30 @@
     var pagerNumber=1;
     var totalRecord;
 
-    //ajax提交
     $(function(){
-        getCategory("#select_category");
-        getTag("#select_tag");
+        var isLogin=$.session.get('isLogin');
+        if(isLogin){
+            $("#span_user_name").text($.session.get('userName')==undefined?"admin":$.session.get('userName'));
+            getCategory("#select_category");
+            getTag("#select_tag");
 
 
-        clickMenu("#div_main");
-        clickMenu("#div_product");
-        clickMenu("#div_order");
-        clickMenu("#div_user");
-        clickMenu("#div_message");
-        clickMenu("#div_setting");
+            clickMenu("#div_main");
+            clickMenu("#div_product");
+            clickMenu("#div_order");
+            clickMenu("#div_user");
+            clickMenu("#div_message");
+            clickMenu("#div_setting");
 
-        inputCount("#input_buy_price");
-        inputCount("#input_original_price");
-        inputCount("#input_discount");
-        inputCount("#input_now_price");
+            inputCount("#input_buy_price");
+            inputCount("#input_original_price");
+            inputCount("#input_discount");
+            inputCount("#input_now_price");
 
-        setListener();
-
+            setListener();
+        }else{
+            window.location.href = "login.jsp";
+        }
     });
 
     function clickProductMenu(id){
@@ -544,7 +546,7 @@
 
     function getProductList(pagerNumber){
         $.ajax({
-            url:"${APP_PATH}/getAdminProductList",
+            url:"${APP_PATH}"+GET_ADMIN_PRODUCT_LIST,
             //默认显示10条数据
             data:"pagerNumber="+pagerNumber+"&pagerSize=10",
             type:"GET",
@@ -735,7 +737,7 @@
 
                     //发送ajax请求删除
                     $.ajax({
-                        url:"${APP_PATH}/doDeleteProductByIds?ids="+del_idstr,
+                        url:"${APP_PATH}"+DO_DELETE_PRODUCT_BY_IDS+"?ids="+del_idstr,
                         type:"DELETE",
                         success:function(result){
                             dialogRef.close();
@@ -972,7 +974,7 @@
      showDialog(params);
         //2、发送ajax请求保存抢购信息
         $.ajax({
-            url : "${APP_PATH}/addProduct",
+            url : "<%--${APP_PATH}--%>/addProduct",
             type : "GET",
             data : params,
             success : function(result) {
@@ -1003,11 +1005,11 @@
         }else{
             formData.append("isSale", 0);
         }
-        formData.append("shopId", 1);
+        formData.append("shopId",  $.session.get('userId'));
         formData.append("productCode", 2003);
         formData.append("graphicDetail", summary);
         $.ajax({
-            url : "${APP_PATH}/addProduct",
+            url : "${APP_PATH}"+ADD_PRODUCT,
             type : "POST",
             data : formData,
             async : false,
@@ -1098,7 +1100,7 @@
         formData.append("productCode", 2003);
         formData.append("graphicDetail", summary);
         $.ajax({
-            url : "${APP_PATH}/doUpdateProduct",
+            url : "${APP_PATH}"+DO_UPDATE_PRODUCT,
             type : "POST",
             data : formData,
             async : false,
@@ -1130,7 +1132,7 @@
 
     function doDeleteProduct(id,dialogRef){
         $.ajax({
-            url:"${APP_PATH}/doDeleteProductById?productId="+id,
+            url:"${APP_PATH}"+DO_DELETE_PRODUCT_BY_ID+"?productId="+id,
             type:"GET",
             success:function(result){
                 if(result.code==100){
@@ -1145,7 +1147,7 @@
 
     function getProductDetail(id){
         $.ajax({
-            url:"${APP_PATH}/getProductDetail?productId="+id,
+            url:"${APP_PATH}"+GET_PRODUCT_DETAIL+"?productId="+id,
             type:"GET",
             success:function(result){
                 if(result.code==100){
@@ -1188,7 +1190,7 @@
         //清空之前下拉列表的值
         $(ele).empty();
         $.ajax({
-            url:"${APP_PATH}/getAllProductCategoryList",
+            url:"${APP_PATH}"+GET_ALL_PRODUCT_CATEGORY_LIST,
             type:"GET",
             success:function(result){
                 //显示部门信息在下拉列表中
@@ -1203,7 +1205,7 @@
         //清空之前下拉列表的值
         $(ele).empty();
         $.ajax({
-            url:"${APP_PATH}/getAllProductTagList",
+            url:"${APP_PATH}"+GET_ALL_PRODUCT_TAG_LIST,
             type:"GET",
             success:function(result){
                 //显示部门信息在下拉列表中
@@ -1259,22 +1261,7 @@
         });
     }
 
-    function showDialog(msg) {
-        BootstrapDialog.show({
-            type:  BootstrapDialog.TYPE_PRIMARY,
-            title: '提示',
-            message: msg,
-            closable: true,
-            closeByBackdrop: true,
-            closeByKeyboard: true,
-            buttons: [{
-                label: '知道了',
-                action: function(dialogRef){
-                    dialogRef.close();
-                }
-            }]
-        });
-    }
+
 
 
 

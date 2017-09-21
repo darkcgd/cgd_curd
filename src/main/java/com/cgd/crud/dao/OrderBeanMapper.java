@@ -30,4 +30,6 @@ public interface OrderBeanMapper {
     int updateByPrimaryKey(OrderBean record);
 
     List<OrderBean> selectByExampleOtherInfo(@Param("userId") Integer userId, @Param("orderStatus")Integer orderStatus);
+
+    List<OrderBean> selectByExampleShopOtherInfo(@Param("userId") Integer userId, @Param("orderStatus")Integer orderStatus);
 }

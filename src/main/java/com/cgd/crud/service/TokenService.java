@@ -21,14 +21,18 @@ public class TokenService {
 	/**
 	 * 获取token
 	 * @param userId
+	 * @param userType 0代表普通用户 1代表商家
 	 * @return
 	 */
-	public TokenBean getToken(Integer userId) {
+	public TokenBean getToken(Integer userId,Integer userType) {
 		TokenBeanExample example=new TokenBeanExample();
 		//通过Criteria构造查询条件
 		TokenBeanExample.Criteria criteria=example.createCriteria();
 		if(BaseUtil.isNotEmpty(userId)){
 			criteria.andUserIdEqualTo(userId);
+		}
+		if(BaseUtil.isNotEmpty(userType)){
+			criteria.andUserTypeEqualTo(userType);
 		}
 
 		criteria.andExpireTimeGreaterThanOrEqualTo(new Date());//过期时间大于等于现在时间
@@ -41,12 +45,21 @@ public class TokenService {
 		return null;
 	}
 
-	public String generateToken(Integer userId) {
+	/**
+	 *
+	 * @param userId
+	 * @param userType 0代表普通用户 1代表商家
+	 * @return
+	 */
+	public String generateToken(Integer userId,Integer userType) {
 		TokenBeanExample example=new TokenBeanExample();
 		//通过Criteria构造查询条件
 		TokenBeanExample.Criteria criteria=example.createCriteria();
 		if(BaseUtil.isNotEmpty(userId)){
 			criteria.andUserIdEqualTo(userId);
+		}
+		if(BaseUtil.isNotEmpty(userType)){
+			criteria.andUserTypeEqualTo(userType);
 		}
 
 		List<TokenBean> tokenBeans = tokenBeanMapper.selectByExample(example);

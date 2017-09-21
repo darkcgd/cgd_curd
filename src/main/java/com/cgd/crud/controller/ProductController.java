@@ -159,7 +159,7 @@ public class ProductController extends BaseController{
 
 		boolean isVaild=false;
 		if(userId!=null&&token!=null){
-			TokenBean tokenBean = tokenService.getToken(userId);
+			TokenBean tokenBean = tokenService.getToken(userId,0);
 			if(tokenBean!=null){
 				String saveToken = tokenBean.getToken();
 				if(saveToken!=null&&saveToken.equals(token)){
@@ -243,7 +243,7 @@ public class ProductController extends BaseController{
 			boolean isCollect = false;
 			boolean isPraise = false;
 			if(userId!=null&&token!=null){
-				TokenBean tokenBean = tokenService.getToken(userId);
+				TokenBean tokenBean = tokenService.getToken(userId,0);
 				if(tokenBean!=null){
 					String saveToken = tokenBean.getToken();
 					if(saveToken!=null&&saveToken.equals(token)){

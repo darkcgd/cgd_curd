@@ -6,6 +6,7 @@ public class TokenBean {
     private Integer id;
 
     private Integer userId;
+    private Integer userType;
 
     private String token;
 
@@ -27,6 +28,14 @@ public class TokenBean {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Integer getUserType() {
+        return userType;
+    }
+
+    public void setUserType(Integer userType) {
+        this.userType = userType;
     }
 
     public String getToken() {

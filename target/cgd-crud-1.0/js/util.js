@@ -1,8 +1,16 @@
-//通用接口地址设置
-var port = "http://siqi.ilikedh.com/guide/";
-function getPort(){
-    return port;
-}
+//接口地址
+var GET_ADMIN_PRODUCT_LIST = "/getAdminProductList";
+var DO_DELETE_PRODUCT_BY_IDS = "/doDeleteProductByIds";
+var ADD_PRODUCT = "/addProduct";
+var DO_UPDATE_PRODUCT = "/doUpdateProduct";
+var DO_DELETE_PRODUCT_BY_ID = "/doDeleteProductById";
+var GET_PRODUCT_DETAIL = "/getProductDetail";
+var GET_ALL_PRODUCT_CATEGORY_LIST = "/getAllProductCategoryList";
+var GET_ALL_PRODUCT_TAG_LIST = "/getAllProductTagList";
+var GET_ORDER_LIST = "/getOrderList";
+
+
+
 
 
 /*
