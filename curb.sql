@@ -11,7 +11,7 @@
  Target Server Version : 50711
  File Encoding         : utf-8
 
- Date: 09/21/2017 18:28:25 PM
+ Date: 09/21/2017 18:36:33 PM
 */
 
 SET NAMES utf8;
@@ -450,10 +450,10 @@ DROP TABLE IF EXISTS `tbl_token`;
 CREATE TABLE `tbl_token` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
+  `user_type` int(11) DEFAULT NULL COMMENT '0代表普通用户 1代表商家',
   `token` varchar(255) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `expire_time` datetime DEFAULT NULL,
-  `user_type` int(11) DEFAULT NULL COMMENT '0代表普通用户 1代表商家',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
@@ -461,7 +461,7 @@ CREATE TABLE `tbl_token` (
 --  Records of `tbl_token`
 -- ----------------------------
 BEGIN;
-INSERT INTO `tbl_token` VALUES ('1', '43', '8359D64698D674AE828F0A915C2F72E3', '2017-08-13 16:18:02', '2017-10-20 16:18:02', null), ('2', '46', '9926A23F82BDC7ACCD9D74125EF73A7F', '2017-08-13 16:19:14', '2017-08-20 16:19:14', null), ('3', '45', '71FE757D5F0E5361B75C1AE886C74E65', '2017-08-13 16:19:55', '2017-08-20 16:19:55', null), ('4', '47', '0007AEC91EAFF66BC80908763361136D', '2017-09-21 17:24:23', '2017-09-28 17:24:23', null);
+INSERT INTO `tbl_token` VALUES ('1', '43', null, '8359D64698D674AE828F0A915C2F72E3', '2017-08-13 16:18:02', '2017-10-20 16:18:02'), ('2', '46', null, '9926A23F82BDC7ACCD9D74125EF73A7F', '2017-08-13 16:19:14', '2017-08-20 16:19:14'), ('3', '45', null, '71FE757D5F0E5361B75C1AE886C74E65', '2017-08-13 16:19:55', '2017-08-20 16:19:55'), ('4', '47', null, '0007AEC91EAFF66BC80908763361136D', '2017-09-21 17:24:23', '2017-09-28 17:24:23');
 COMMIT;
 
 -- ----------------------------
