@@ -6,6 +6,7 @@ public class ShopBean {
     private Integer shopId;
 
     private String shopName;
+    private String pwd;
 
     private String headUrl;
 
@@ -38,10 +39,27 @@ public class ShopBean {
     private Date createTime;
 
     private Date updateTime;
+    private Date lastLoginTime;
 
     private String summary;
 
     private String remark;
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
 
     public Integer getShopId() {
         return shopId;

@@ -11,7 +11,7 @@
  Target Server Version : 50711
  File Encoding         : utf-8
 
- Date: 09/21/2017 17:27:54 PM
+ Date: 09/21/2017 18:28:25 PM
 */
 
 SET NAMES utf8;
@@ -351,6 +351,7 @@ DROP TABLE IF EXISTS `tbl_shop`;
 CREATE TABLE `tbl_shop` (
   `shop_id` int(11) NOT NULL AUTO_INCREMENT,
   `shop_name` varchar(255) DEFAULT NULL,
+  `pwd` varchar(255) DEFAULT NULL,
   `head_url` varchar(255) DEFAULT NULL,
   `logo` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
@@ -369,7 +370,8 @@ CREATE TABLE `tbl_shop` (
   `update_time` datetime DEFAULT NULL,
   `summary` varchar(255) DEFAULT NULL,
   `remark` varchar(255) DEFAULT NULL,
-  `pwd` varchar(255) DEFAULT NULL,
+  `last_login_time` datetime DEFAULT NULL,
+  `user_type` int(11) DEFAULT NULL,
   PRIMARY KEY (`shop_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
@@ -377,7 +379,7 @@ CREATE TABLE `tbl_shop` (
 --  Records of `tbl_shop`
 -- ----------------------------
 BEGIN;
-INSERT INTO `tbl_shop` VALUES ('1', '我的小城迷你店', 'https://img.alicdn.com/imgextra/i3/99404200/TB2976tXXgkyKJjSspiXXcwBpXa_!!99404200.jpg', 'https://img.alicdn.com/tps/TB1W_vlJFXXXXXxXXXXXXXXXXXX-150-45.png', '13600055457', '0668-7579000', '1', '中国', '广东', '深圳', '龙岗', '坂田', '和磡', '20号604', null, null, '2017-08-13 18:50:47', '2017-08-13 18:50:50', null, null, null), ('2', '浪漫满店', 'https://gdp.alicdn.com/imgextra/i1/692195348/TB2VfZaz0BopuFjSZPcXXc9EpXa_!!692195348.jpg', 'https://gdp.alicdn.com/imgextra/i1/692195348/TB2VfZaz0BopuFjSZPcXXc9EpXa_!!692195348.jpg', '13428281907', '0750-32659874', '2', '中国', '广东', '深圳', '福田', '莲花', '中和', '30号203', null, null, '2017-08-13 21:09:09', '2017-08-13 21:09:12', '品牌旗舰,正品特惠,限时特价中,让您省钱也省心', null, null);
+INSERT INTO `tbl_shop` VALUES ('1', '我的小城迷你店', null, 'https://img.alicdn.com/imgextra/i3/99404200/TB2976tXXgkyKJjSspiXXcwBpXa_!!99404200.jpg', 'https://img.alicdn.com/tps/TB1W_vlJFXXXXXxXXXXXXXXXXXX-150-45.png', '13600055457', '0668-7579000', '1', '中国', '广东', '深圳', '龙岗', '坂田', '和磡', '20号604', null, null, '2017-08-13 18:50:47', '2017-08-13 18:50:50', null, null, null, null), ('2', '浪漫满店', null, 'https://gdp.alicdn.com/imgextra/i1/692195348/TB2VfZaz0BopuFjSZPcXXc9EpXa_!!692195348.jpg', 'https://gdp.alicdn.com/imgextra/i1/692195348/TB2VfZaz0BopuFjSZPcXXc9EpXa_!!692195348.jpg', '13428281907', '0750-32659874', '2', '中国', '广东', '深圳', '福田', '莲花', '中和', '30号203', null, null, '2017-08-13 21:09:09', '2017-08-13 21:09:12', '品牌旗舰,正品特惠,限时特价中,让您省钱也省心', null, null, null);
 COMMIT;
 
 -- ----------------------------

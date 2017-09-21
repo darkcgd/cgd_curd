@@ -84,22 +84,6 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping("/user/login")
 	public Object login(@RequestParam(value = "name", required=false)String name, @RequestParam(value = "pwd", required=false)String pwd){
-		return doLoginMethod(name,pwd,0);
-	}
-	@ResponseBody
-	@RequestMapping("/shop/login")
-	public Object shopLogin(@RequestParam(value = "name", required=false)String name, @RequestParam(value = "pwd", required=false)String pwd){
-		return doLoginMethod(name,pwd,1);
-	}
-
-	/**
-	 *
-	 * @param name
-	 * @param pwd
-	 * @param type 0代表普通用户登录 1代表商家
-	 * @return
-	 */
-	public Object doLoginMethod(String name, String pwd,int type){
 		if(BaseUtil.isEmpty(name)){
 			return MsgSimple.fail("需要传name参数");
 		}
@@ -131,7 +115,7 @@ public class UserController {
 				data.put("age", userByName.getAge());
 				data.put("email", userByName.getEmail());
 				data.put("headUrl", userByName.getHeadUrl());
-				data.put("userType", type);
+				data.put("userType", 0);//0代表普通用户登录 1代表商家
 				return msg;
 			}else{
 				return MsgBean.fail("密码错误");

@@ -1,13 +1,11 @@
 package com.cgd.crud.controller;
 
 import com.cgd.crud.base.BaseController;
-import com.cgd.crud.bean.MsgBean;
-import com.cgd.crud.bean.MsgSimple;
-import com.cgd.crud.bean.ProductBean;
-import com.cgd.crud.bean.ShopBean;
+import com.cgd.crud.bean.*;
 import com.cgd.crud.service.CommonService;
 import com.cgd.crud.service.ProductService;
 import com.cgd.crud.service.ShopService;
+import com.cgd.crud.service.TokenService;
 import com.cgd.crud.util.BaseUtil;
 import com.cgd.crud.util.Constant;
 import com.github.pagehelper.PageHelper;
@@ -19,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +28,8 @@ public class ShopController extends BaseController{
 	ShopService shopService;
 	@Autowired
 	CommonService commonService;
+	@Autowired
+	TokenService tokenService;
 
 	@ResponseBody
 	@RequestMapping(value="/getShopList",method=RequestMethod.GET)
@@ -77,6 +78,50 @@ public class ShopController extends BaseController{
 			return msg;
 		}else{
 			return MsgBean.fail("查询不到该商家!");
+		}
+	}
+
+
+	@ResponseBody
+	@RequestMapping("/shop/login")
+	public Object shopLogin(@RequestParam(value = "name", required=false)String name, @RequestParam(value = "pwd", required=false)String pwd){
+		if(BaseUtil.isEmpty(name)){
+			return MsgSimple.fail("需要传name参数");
+		}
+		//先判断用户名是否是合法的表达式;
+		String regx = "(^[a-zA-Z0-9_-]{6,16}$)|(^[\u2E80-\u9FFF]{2,5})";
+		if(!name.matches(regx)){
+			return MsgSimple.fail("用户名必须是6-16位数字和字母的组合或者2-5位中文");
+		}
+		if(BaseUtil.isEmpty(pwd)){
+			return MsgSimple.fail("需要传pwd参数");
+		}
+
+		//数据库用户名重复校验
+		ShopBean shopBean = shopService.getShopByName(name);
+		if(shopBean!=null){
+			if(shopBean.getPwd()!=null&&shopBean.getPwd().equals(pwd)){
+				String token = tokenService.generateToken(shopBean.getShopId(),1);
+
+				shopBean.setLastLoginTime(new Date());
+				shopService.updateShopInfo(shopBean);//更新最后登录时间
+
+				MsgBean msg = MsgBean.success("登录成功");
+				Map<String, Object> data = msg.getData();
+				data.put("shopId", shopBean.getShopId());
+				data.put("shopName", shopBean.getShopName());
+				data.put("token", token);
+				data.put("phone", shopBean.getPhone());
+				data.put("headUrl", shopBean.getHeadUrl());
+				data.put("logo", shopBean.getLogo());
+				data.put("grade", shopBean.getGrade());
+				data.put("userType", 1);
+				return msg;
+			}else{
+				return MsgBean.fail("密码错误");
+			}
+		}else{
+			return MsgBean.fail("用户不存在");
 		}
 	}
 
