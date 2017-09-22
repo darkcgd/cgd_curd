@@ -19,12 +19,15 @@
     以/开始的相对路径，找资源，以服务器的路径为标准(http://localhost:3306)；需要加上项目名
             http://localhost:3306/crud
      -->
+    <link href="${APP_PATH }/css/clock.css" rel="stylesheet">
     <script type="text/javascript" src="${APP_PATH }/static/js/jquery-3.2.1.min.js"></script>
     <script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script src="${APP_PATH }/static/js/util.js"></script>
+    <script src="${APP_PATH }/js/clock.js"></script>
     <script src="${APP_PATH }/js/jquerysession.js"></script>
     <link href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="${APP_PATH }/css/base.css" rel="stylesheet">
+
 
 </head>
 <body>
@@ -131,7 +134,7 @@
                         <div class="col-xs-6 col-md-6" style="height: 300px;background: #f0f0f0;margin-left: 10px;">
                             <div class="row" style="background: #f8f8f8;padding-left: 10px;padding-top: 10px;padding-bottom: 10px">
                                 <a href="#" class="media-left">
-                                    <img src="${APP_PATH }/static/image/home_bt01.png" class="center-block" width="30px" height="30px">
+                                    <img src="${APP_PATH }/static/image/home_bt04.png" class="center-block" width="30px" height="30px">
                                 </a>
                                 <div class="media-body" style="vertical-align: middle">
                                     <h4 class="media-heading">待处理事务</h4>
@@ -141,67 +144,229 @@
                             <div class="row">
                                 <div class="col-xs-3 col-md-6" style="height:80px;">
                                     <div class="row" style="margin-top: 30px;padding-left: 10px;">
-                                    <p class="pull-left" style="margin-top: 6px">待发货订单</p>
-                                        <p class="pull-right" style="padding-right:10px;font-size: 26px;color: red">14条</p>
+                                        <p class="pull-left" style="margin-top: 6px">待发货订单</p>
+                                        <a href="#" class="pull-right" style="padding-right:16px;font-size: 26px;color: red">14条</a>
                                     </div>
-                                    <div style="width:100%;height:1px;background: #c9c9c9"></div>
+                                    <div style="width:100%;height:1px;background: #d8d8d8"></div>
                                 </div>
                                 <div class="col-xs-3 col-md-6">
                                     <div class="row" style="margin-top: 30px;padding-left: 10px;">
                                         <p class="pull-left" style="margin-top: 6px">会员提现</p>
-                                        <p class="pull-right" style="padding-right:10px;font-size: 26px;color: red">2条</p>
+                                        <a href="#" class="pull-right" style="padding-right:16px;font-size: 26px;color: red">2条</a>
                                     </div>
-                                    <div style="width:100%;height:1px;background: #c9c9c9"></div>
+                                    <div style="width:100%;height:1px;background: #d8d8d8"></div>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-xs-3 col-md-6" style="height:80px;">
                                     <div class="row" style="margin-top: 30px;padding-left: 10px;">
-                                        <p class="pull-left" style="margin-top: 6px">待发货订单</p>
-                                        <p class="pull-right" style="padding-right:10px;font-size: 26px;color: red">14条</p>
+                                        <p class="pull-left" style="margin-top: 6px">站内咨询==信</p>
+                                        <a href="#" class="pull-right" style="padding-right:16px;font-size: 26px;color: red">2条</a>
                                     </div>
-                                    <div style="width:100%;height:1px;background: #c9c9c9"></div>
+                                    <div style="width:100%;height:1px;background: #d8d8d8"></div>
                                 </div>
                                 <div class="col-xs-3 col-md-6">
                                     <div class="row" style="margin-top: 30px;padding-left: 10px;">
-                                        <p class="pull-left" style="margin-top: 6px">会员提现</p>
-                                        <p class="pull-right" style="padding-right:10px;font-size: 26px;color: red">2条</p>
+                                        <p class="pull-left" style="margin-top: 6px">商品咨询</p>
+                                        <a href="#" class="pull-right" style="padding-right:16px;font-size: 26px;color: red">2条</a>
                                     </div>
-                                    <div style="width:100%;height:1px;background: #c9c9c9"></div>
+                                    <div style="width:100%;height:1px;background: #d8d8d8"></div>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-xs-3 col-md-6" style="height:80px;">
                                     <div class="row" style="margin-top: 30px;padding-left: 10px;">
-                                        <p class="pull-left" style="margin-top: 6px">待发货订单</p>
-                                        <p class="pull-right" style="padding-right:10px;font-size: 26px;color: red">14条</p>
+                                        <p class="pull-left" style="margin-top: 6px">已达到警戒库存商品</p>
+                                        <a href="#" class="pull-right" style="padding-right:16px;font-size: 26px;color: red">20件</a>
                                     </div>
-                                    <div style="width:100%;height:1px;background: #c9c9c9"></div>
+                                    <div style="width:100%;height:1px;background: #d8d8d8"></div>
                                 </div>
                                 <div class="col-xs-3 col-md-6">
                                     <div class="row" style="margin-top: 30px;padding-left: 10px;">
-                                        <p class="pull-left" style="margin-top: 6px">会员提现</p>
-                                        <p class="pull-right" style="padding-right:10px;font-size: 26px;color: red">2条</p>
+                                        <p class="pull-left" style="margin-top: 6px">意见反馈</p>
+                                        <a href="#" class="pull-right" style="padding-right:16px;font-size: 26px;color: red">5条</a>
                                     </div>
-                                    <div style="width:100%;height:1px;background: #c9c9c9"></div>
+                                    <div style="width:100%;height:1px;background: #d8d8d8"></div>
                                 </div>
                             </div>
 
 
                         </div>
                         <div class="col-xs-6 col-md-3" style="height: 300px;background: #f0f0f0;margin-left: 20px;">
-                            <div class="row" style="margin-left: 40px;margin-top: 20px">
+                            <div class="row" style="background: #f8f8f8;padding-left: 10px;padding-top: 10px;padding-bottom: 10px">
                                 <a href="#" class="media-left">
-                                    <img src="${APP_PATH }/static/image/home_bt03.png" width="120px" height="120px">
+                                    <img src="${APP_PATH }/static/image/home_bt01.png" class="center-block" width="30px" height="30px">
                                 </a>
-                                <div class="media-body" style='vertical-align: middle;'>
-                                    <h1 class="media-heading">261</h1>
-                                    <h5 style="margin-left: 2px">今日新增会员</h5>
+                                <div class="media-body" style="vertical-align: middle">
+                                    <h4 class="media-heading">商城信息统计</h4>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-3 col-md-6" style="height:120px;">
+                                    <div class="row" style="margin-top: 26px;text-align: center">
+                                        <a href="#" style="font-size: 26px;color: #00C5CD">4280位</a>
+                                        <p style="margin-top: 4px">会员总数</p>
+                                    </div>
+                                    <div style="width:100%;height:1px;background: #d8d8d8;margin-top: 10px;"></div>
+                                </div>
+                                <div class="col-xs-3 col-md-6" style="height:120px;">
+                                    <div class="row" style="margin-top: 26px;text-align: center">
+                                        <a href="#" style="font-size: 26px;color: #00C5CD">27492条</a>
+                                        <p style="margin-top: 4px">商品总数</p>
+                                    </div>
+                                    <div style="width:100%;height:1px;background: #d8d8d8;margin-top: 10px;"></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-3 col-md-6" style="height:120px;">
+                                    <div class="row" style="margin-top: 26px;text-align: center">
+                                        <a href="#" style="font-size: 26px;color: #00C5CD">￥355245.78</a>
+                                        <p style="margin-top: 4px">预付款总额</p>
+                                    </div>
+                                    <div style="width:100%;height:1px;background: #d8d8d8;margin-top: 10px;"></div>
+                                </div>
+                                <div class="col-xs-3 col-md-6" style="height:120px;">
+                                    <div class="row" style="margin-top: 26px;text-align: center">
+                                        <a href="#" style="font-size: 26px;color: #00C5CD">￥2365125.63</a>
+                                        <p style="margin-top: 4px">近30天订单金额</p>
+                                    </div>
+                                    <div style="width:100%;height:1px;background: #d8d8d8;margin-top: 10px;"></div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row" style="margin-top: 20px">
+                        <div class="col-xs-6 col-md-6" style="height: 170px;background: #f0f0f0;margin-left: 10px;">
+                            <div class="row" style="background: #f8f8f8;padding-left: 10px;padding-top: 10px;padding-bottom: 10px">
+                                <a href="#" class="media-left">
+                                    <img src="${APP_PATH }/static/image/home_bt04.png" class="center-block" width="30px" height="30px">
+                                </a>
+                                <div class="media-body" style="vertical-align: middle">
+                                    <h4 class="media-heading">运营快捷入口</h4>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-3 col-md-2" style="height:80px;">
+                                    <div class="row" style="margin-top: 30px;text-align: center">
+                                        <a href="#">
+                                            <img src="${APP_PATH }/static/image/home_bt04.png" class="center-block" width="30px" height="30px">
+                                            <p style="margin-top: 10px">会员总数</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3 col-md-2" style="height:80px;">
+                                    <div class="row" style="margin-top: 30px;text-align: center">
+                                        <a href="#">
+                                            <img src="${APP_PATH }/static/image/home_bt04.png" class="center-block" width="30px" height="30px">
+                                            <p style="margin-top: 10px">订单列表</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3 col-md-2" style="height:80px;">
+                                    <div class="row" style="margin-top: 30px;text-align: center">
+                                        <a href="#">
+                                            <img src="${APP_PATH }/static/image/home_bt04.png" class="center-block" width="30px" height="30px">
+                                            <p style="margin-top: 10px">会员管理</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3 col-md-2" style="height:80px;">
+                                    <div class="row" style="margin-top: 30px;text-align: center">
+                                        <a href="#">
+                                            <img src="${APP_PATH }/static/image/home_bt04.png" class="center-block" width="30px" height="30px">
+                                            <p style="margin-top: 10px">会员预存款</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3 col-md-2" style="height:80px;">
+                                    <div class="row" style="margin-top: 30px;text-align: center">
+                                        <a href="#">
+                                            <img src="${APP_PATH }/static/image/home_bt04.png" class="center-block" width="30px" height="30px">
+                                            <p style="margin-top: 10px">网站流量</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3 col-md-2" style="height:80px;">
+                                    <div class="row" style="margin-top: 30px;text-align: center">
+                                        <a href="#">
+                                            <img src="${APP_PATH }/static/image/home_bt04.png" class="center-block" width="30px" height="30px">
+                                            <p style="margin-top: 10px">短信营销</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="margin-top: 70px;height: 130px;text-align: center">
+                                <div class="dowebok">
+                                    <div class="hours"></div>
+                                    <div class="minutes"></div>
+                                    <div class="seconds"></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+                        <div class="col-xs-6 col-md-3" style="height: 300px;background: #f0f0f0;margin-left: 20px;">
+                            <div class="row" style="background: #f8f8f8;padding-left: 10px;padding-top: 10px;padding-bottom: 10px">
+                                <a href="#" class="media-left">
+                                    <img src="${APP_PATH }/static/image/home_bt01.png" class="center-block" width="30px" height="30px">
+                                </a>
+                                <div class="media-body" style="vertical-align: middle">
+                                    <h4 class="media-heading">公告动态</h4>
+                                </div>
+                            </div>
+
+                            <div style="margin-left: 0px;margin-top: 16px">
+                                <a href="#">
+                                    <div class="row" style="margin-top: 3px;padding-left: 10px;">
+                                        <p class="pull-left" style="width: 70%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
+                                            公告标题公告标题公告标题公告标题公告标题公告标题公告标题公告标题</p>
+                                        <p class="pull-right" style="padding-right:16px;font-size: 16px;color: #a4a4a4">2017-09-20</p>
+                                    </div>
+                                </a>
+                                <a href="#">
+                                    <div class="row" style="margin-top: 3px;padding-left: 10px;">
+                                        <p class="pull-left" style="width: 70%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
+                                            公告标题公告标题公告标题公告标题公告标题公告标题公告标题公告标题</p>
+                                        <p class="pull-right" style="padding-right:16px;font-size: 16px;color: #a4a4a4">2017-09-20</p>
+                                    </div>
+                                </a>
+                                <a href="#">
+                                    <div class="row" style="margin-top: 3px;padding-left: 10px;">
+                                        <p class="pull-left" style="width: 70%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
+                                            公告标题公告标题公告标题公告标题公告标题公告标题公告标题公告标题</p>
+                                        <p class="pull-right" style="padding-right:16px;font-size: 16px;color: #a4a4a4">2017-09-20</p>
+                                    </div>
+                                </a>
+                                <a href="#">
+                                    <div class="row" style="margin-top: 3px;padding-left: 10px;">
+                                        <p class="pull-left" style="width: 70%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
+                                            公告标题公告标题公告标题公告标题公告标题公告标题公告标题公告标题</p>
+                                        <p class="pull-right" style="padding-right:16px;font-size: 16px;color: #a4a4a4">2017-09-20</p>
+                                    </div>
+                                </a>
+                                <a href="#">
+                                    <div class="row" style="margin-top: 3px;padding-left: 10px;">
+                                        <p class="pull-left" style="width: 70%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
+                                            公告标题公告标题公告标题公告标题公告标题公告标题公告标题公告标题</p>
+                                        <p class="pull-right" style="padding-right:16px;font-size: 16px;color: #a4a4a4">2017-09-20</p>
+                                    </div>
+                                </a>
+                            </div>
+
+
+                        </div>
+
+
+
                     </div>
 
                 </div>
@@ -219,6 +384,9 @@
         var isLogin=$.session.get('isLogin');
         if(isLogin){
             $("#span_user_name").text($.session.get('shopName')==undefined?"admin":$.session.get('shopName'));
+            $('.dowebok').flipTimer({
+                seconds: true
+            });
         }else{
             window.location.href = "login.jsp";
         }
