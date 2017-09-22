@@ -1,10 +1,7 @@
 package com.cgd.crud.controller;
 
 import com.cgd.crud.base.BaseController;
-import com.cgd.crud.bean.MsgBean;
-import com.cgd.crud.bean.MsgSimple;
-import com.cgd.crud.bean.OrderBean;
-import com.cgd.crud.bean.User;
+import com.cgd.crud.bean.*;
 import com.cgd.crud.service.OrderService;
 import com.cgd.crud.util.AbDateUtil;
 import com.cgd.crud.util.BaseUtil;
@@ -228,6 +225,24 @@ public class OrderController extends BaseController{
 		public String getOrderNum(){
 			return this.orderNum;
 		}
+	}
+
+
+	@ResponseBody
+	@RequestMapping(value="shop/findOrderStatusCount",method=RequestMethod.GET)
+	public MsgBean findOrderStatusCount(@RequestParam(value = "shopId") Integer shopId){
+		OrderStatusCount orderStatusCount = orderService.findOrderStatusCount(shopId);
+		MsgBean msg = MsgBean.success("获取成功");
+		Map<String, Object> data = msg.getData();
+		data.put("total", orderStatusCount.getTotal());
+		data.put("unpayCount", orderStatusCount.getUnpayCount());
+		data.put("unsendCount", orderStatusCount.getUnsendCount());
+		data.put("senddingCount", orderStatusCount.getSenddingCount());
+		data.put("uncommentCount", orderStatusCount.getUncommentCount());
+		data.put("successCount", orderStatusCount.getSuccessCount());
+		data.put("cancelCount", orderStatusCount.getCancelCount());
+		data.put("deleteCount", orderStatusCount.getDeleteCount());
+		return msg;
 	}
 
 }

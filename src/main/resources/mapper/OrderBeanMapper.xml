@@ -97,6 +97,16 @@
     	<result column="head_url" property="headUrl" />
     </association>
   </resultMap>
+  <resultMap id="SelectOrderStatusCount" type="com.cgd.crud.bean.OrderStatusCount">
+    <id column="total" jdbcType="INTEGER" property="total" />
+    <id column="unpay_count" jdbcType="INTEGER" property="unpayCount" />
+    <id column="unsend_count" jdbcType="INTEGER" property="unsendCount" />
+    <id column="sendding_count" jdbcType="INTEGER" property="senddingCount" />
+    <id column="uncomment_count" jdbcType="INTEGER" property="uncommentCount" />
+    <id column="success_count" jdbcType="INTEGER" property="successCount" />
+    <id column="cancel_count" jdbcType="INTEGER" property="cancelCount" />
+    <id column="delete_count" jdbcType="INTEGER" property="deleteCount" />
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -195,6 +205,19 @@
     <if test="orderStatus!=null and orderStatus>0">
       and order_status= #{orderStatus}
     </if>
+  </select>
+
+  <select id="selectOrderStatusCount" parameterType="map" resultMap="SelectOrderStatusCount">
+    select count(1)total
+    ,sum(case when order_status=1 then 1 else 0 end)unpay_count
+    ,sum(case when order_status=2 then 1 else 0 end) unsend_count
+    ,sum(case when order_status=3 then 1 else 0 end) sendding_count
+    ,sum(case when order_status=4 then 1 else 0 end) uncomment_count
+    ,sum(case when order_status=5 then 1 else 0 end) success_count
+    ,sum(case when order_status=6 then 1 else 0 end) cancel_count
+    ,sum(case when order_status=7 then 1 else 0 end) delete_count
+    from tbl_order
+    where shop_id=#{shopId}
   </select>
 
   <select id="selectByExample" parameterType="com.cgd.crud.bean.OrderBeanExample" resultMap="BaseResultMap">

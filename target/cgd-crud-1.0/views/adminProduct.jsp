@@ -548,7 +548,7 @@
         $.ajax({
             url:"${APP_PATH}"+GET_ADMIN_PRODUCT_LIST,
             //默认显示10条数据
-            data:"pagerNumber="+pagerNumber+"&pagerSize=10",
+            data:"pagerNumber="+pagerNumber+"&pagerSize=10&shopId="+$.session.get('shopId')+"&token="+$.session.get('token'),
             type:"GET",
             success:function(result){
                 //console.log(result);
@@ -737,7 +737,7 @@
 
                     //发送ajax请求删除
                     $.ajax({
-                        url:"${APP_PATH}"+DO_DELETE_PRODUCT_BY_IDS+"?ids="+del_idstr,
+                        url:"${APP_PATH}"+DO_DELETE_PRODUCT_BY_IDS+"?ids="+del_idstr+"&shopId="+$.session.get('shopId')+"&token="+$.session.get('token'),
                         type:"DELETE",
                         success:function(result){
                             dialogRef.close();
@@ -1005,7 +1005,8 @@
         }else{
             formData.append("isSale", 0);
         }
-        formData.append("shopId",  $.session.get('userId'));
+        formData.append("shopId",  $.session.get('shopId'));
+        formData.append("token",  $.session.get('token'));
         formData.append("productCode", 2003);
         formData.append("graphicDetail", summary);
         $.ajax({
@@ -1096,7 +1097,8 @@
             formData.append("isSale", 0);
         }
         formData.append("productId", $("#btn_modal_edit").attr("productId"));
-        formData.append("shopId", 1);
+        formData.append("shopId",  $.session.get('shopId'));
+        formData.append("token",  $.session.get('token'));
         formData.append("productCode", 2003);
         formData.append("graphicDetail", summary);
         $.ajax({
@@ -1132,7 +1134,7 @@
 
     function doDeleteProduct(id,dialogRef){
         $.ajax({
-            url:"${APP_PATH}"+DO_DELETE_PRODUCT_BY_ID+"?productId="+id,
+            url:"${APP_PATH}"+DO_DELETE_PRODUCT_BY_ID+"?productId="+id+"&shopId="+$.session.get('shopId')+"&token="+$.session.get('token'),
             type:"GET",
             success:function(result){
                 if(result.code==100){

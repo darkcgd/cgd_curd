@@ -3,6 +3,8 @@ package com.cgd.crud.dao;
 import com.cgd.crud.bean.OrderBean;
 import com.cgd.crud.bean.OrderBeanExample;
 import java.util.List;
+
+import com.cgd.crud.bean.OrderStatusCount;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -32,4 +34,6 @@ public interface OrderBeanMapper {
     List<OrderBean> selectByExampleOtherInfo(@Param("userId") Integer userId, @Param("orderStatus")Integer orderStatus);
 
     List<OrderBean> selectByExampleShopOtherInfo(@Param("shopId") Integer shopId, @Param("orderStatus")Integer orderStatus);
+
+    OrderStatusCount selectOrderStatusCount(@Param("shopId") Integer shopId);
 }

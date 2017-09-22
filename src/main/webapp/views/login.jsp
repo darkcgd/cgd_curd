@@ -16,7 +16,7 @@
             http://localhost:3306/crud
      -->
 	<script type="text/javascript" src="${APP_PATH }/static/js/jquery-3.2.1.min.js"></script>
-	<script type="text/javascript" src="${APP_PATH }/static/js/util.js"></script>
+	<script type="text/javascript" src="${APP_PATH }/js/util.js"></script>
 	<script src="${APP_PATH }/js/jquerysession.js"></script>
 
 	<link href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -39,7 +39,7 @@
 				<div class="form-group">
 					<!-- placeholder="用户名(2-5位中文或者6-16位英文和数字的组合)" placeholder="密码"   placeholder="确认密码"-->
 					<input type="text" class="form-control" id="inputName" name="name"
-						   value="dark_cgd"> <span class="help-block"></span>
+						   value="cyx123"> <span class="help-block"></span>
 				</div>
 				<div class="form-group help">
 					<input type="password" class="form-control" id="inputPassword"
@@ -142,7 +142,7 @@
 
         //2、发送ajax请求保存员工
         $.ajax({
-            url : "${APP_PATH}/login",
+            url : "${APP_PATH}"+DO_SHOP_LOGIN,
             type : "GET",
             data : params,
             success : function(result) {
@@ -156,11 +156,11 @@
                     $("#span_status").text(result.msg);
                     var msg = result.msg;
                     var data = result.data;
-                    var userId = data.userId;
-                    var userName = data.name;
+                    var shopId = data.shopId;
+                    var shopName = data.shopName;
                     var token = data.token;
-                    $.session.set('userId', userId);
-                    $.session.set('userName', userName);
+                    $.session.set('shopId', shopId);
+                    $.session.set('shopName', shopName);
                     $.session.set('isLogin', true);
                     $.session.set('token', token);
 
@@ -235,7 +235,7 @@
 
         //2、发送ajax请求保存员工
         $.ajax({
-            url : "${APP_PATH}/admin/regist",
+            url : "${APP_PATH}"+DO_USER_REGIST,
             type : "GET",
             data : params,
             success : function(result) {
@@ -249,12 +249,13 @@
                     $("#span_status").text(result.msg);
                     var msg = result.msg;
                     var data = result.data;
-                    var userId = data.user_id;
-                    var userName = data.user_name;
-
-                    $.session.set('userId', userId)
-                    $.session.set('userName', userName)
-                    $.session.set('isLogin', true)
+                    var shopId = data.shopId;
+                    var shopName = data.shopName;
+                    var token = data.token;
+                    $.session.set('shopId', shopId);
+                    $.session.set('shopName', shopName);
+                    $.session.set('isLogin', true);
+                    $.session.set('token', token);
 
                     //window.location.href="views/imageTest.jsp?userid="+data.user_id+"&username="+data.user_name;
                     window.location.href = "admin.jsp";

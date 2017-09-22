@@ -90,7 +90,121 @@
 
             </div>
             <div class="col-xs-10 col-md-11">
-                控制台
+                <div class="container-fluid" >
+                    <div class="row" style="margin-top: 20px">
+                        <div class="col-xs-6 col-md-3" style="height: 160px;background: #f0f0f0;margin-left: 10px">
+                            <div class="row" style="margin-left: 40px;margin-top: 20px">
+                                <a href="#" class="media-left">
+                                    <img src="${APP_PATH }/static/image/home_bt01.png" class="center-block" width="120px" height="120px">
+                                </a>
+                                <div class="media-body" style='vertical-align: middle;'>
+                                    <h1 class="media-heading">￥23636</h1>
+                                    <h5 style="margin-left: 10px">今日订单金额</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-md-3" style="height: 160px;background: #f0f0f0;margin-left: 10px">
+                            <div class="row" style="margin-left: 40px;margin-top: 20px">
+                                <a href="#" class="media-left">
+                                    <img src="${APP_PATH }/static/image/home_bt02.png" width="120px" height="120px">
+                                </a>
+                                <div class="media-body" style='vertical-align: middle;'>
+                                    <h1 class="media-heading">10</h1>
+                                    <h5 style="margin-left: 2px">今日订单成交数</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-md-3" style="height: 160px;background: #f0f0f0;margin-left: 10px;">
+                            <div class="row" style="margin-left: 40px;margin-top: 20px">
+                                <a href="#" class="media-left">
+                                    <img src="${APP_PATH }/static/image/home_bt03.png" width="120px" height="120px">
+                                </a>
+                                <div class="media-body" style='vertical-align: middle;'>
+                                    <h1 class="media-heading">261</h1>
+                                    <h5 style="margin-left: 2px">今日新增会员</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 20px">
+                        <div class="col-xs-6 col-md-6" style="height: 300px;background: #f0f0f0;margin-left: 10px;">
+                            <div class="row" style="background: #f8f8f8;padding-left: 10px;padding-top: 10px;padding-bottom: 10px">
+                                <a href="#" class="media-left">
+                                    <img src="${APP_PATH }/static/image/home_bt01.png" class="center-block" width="30px" height="30px">
+                                </a>
+                                <div class="media-body" style="vertical-align: middle">
+                                    <h4 class="media-heading">待处理事务</h4>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-3 col-md-6" style="height:80px;">
+                                    <div class="row" style="margin-top: 30px;padding-left: 10px;">
+                                    <p class="pull-left" style="margin-top: 6px">待发货订单</p>
+                                        <p class="pull-right" style="padding-right:10px;font-size: 26px;color: red">14条</p>
+                                    </div>
+                                    <div style="width:100%;height:1px;background: #c9c9c9"></div>
+                                </div>
+                                <div class="col-xs-3 col-md-6">
+                                    <div class="row" style="margin-top: 30px;padding-left: 10px;">
+                                        <p class="pull-left" style="margin-top: 6px">会员提现</p>
+                                        <p class="pull-right" style="padding-right:10px;font-size: 26px;color: red">2条</p>
+                                    </div>
+                                    <div style="width:100%;height:1px;background: #c9c9c9"></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-3 col-md-6" style="height:80px;">
+                                    <div class="row" style="margin-top: 30px;padding-left: 10px;">
+                                        <p class="pull-left" style="margin-top: 6px">待发货订单</p>
+                                        <p class="pull-right" style="padding-right:10px;font-size: 26px;color: red">14条</p>
+                                    </div>
+                                    <div style="width:100%;height:1px;background: #c9c9c9"></div>
+                                </div>
+                                <div class="col-xs-3 col-md-6">
+                                    <div class="row" style="margin-top: 30px;padding-left: 10px;">
+                                        <p class="pull-left" style="margin-top: 6px">会员提现</p>
+                                        <p class="pull-right" style="padding-right:10px;font-size: 26px;color: red">2条</p>
+                                    </div>
+                                    <div style="width:100%;height:1px;background: #c9c9c9"></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-3 col-md-6" style="height:80px;">
+                                    <div class="row" style="margin-top: 30px;padding-left: 10px;">
+                                        <p class="pull-left" style="margin-top: 6px">待发货订单</p>
+                                        <p class="pull-right" style="padding-right:10px;font-size: 26px;color: red">14条</p>
+                                    </div>
+                                    <div style="width:100%;height:1px;background: #c9c9c9"></div>
+                                </div>
+                                <div class="col-xs-3 col-md-6">
+                                    <div class="row" style="margin-top: 30px;padding-left: 10px;">
+                                        <p class="pull-left" style="margin-top: 6px">会员提现</p>
+                                        <p class="pull-right" style="padding-right:10px;font-size: 26px;color: red">2条</p>
+                                    </div>
+                                    <div style="width:100%;height:1px;background: #c9c9c9"></div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-xs-6 col-md-3" style="height: 300px;background: #f0f0f0;margin-left: 20px;">
+                            <div class="row" style="margin-left: 40px;margin-top: 20px">
+                                <a href="#" class="media-left">
+                                    <img src="${APP_PATH }/static/image/home_bt03.png" width="120px" height="120px">
+                                </a>
+                                <div class="media-body" style='vertical-align: middle;'>
+                                    <h1 class="media-heading">261</h1>
+                                    <h5 style="margin-left: 2px">今日新增会员</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
 

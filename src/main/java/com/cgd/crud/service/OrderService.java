@@ -2,6 +2,7 @@ package com.cgd.crud.service;
 
 import com.cgd.crud.bean.OrderBean;
 import com.cgd.crud.bean.OrderBeanExample;
+import com.cgd.crud.bean.OrderStatusCount;
 import com.cgd.crud.dao.OrderBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,6 +70,10 @@ public class OrderService {
 			count=0;
 		}
 		return count;
+	}
+
+	public OrderStatusCount findOrderStatusCount(Integer shopId){
+		return orderBeanMapper.selectOrderStatusCount(shopId);
 	}
 
 }

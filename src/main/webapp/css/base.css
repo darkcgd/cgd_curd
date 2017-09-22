@@ -73,5 +73,9 @@
     color: white;
     display: none
 }
+.text-red-color{
+    background: red;
+    color: red;
+}
 
 

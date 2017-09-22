@@ -11,6 +11,7 @@ var GET_ORDER_LIST = "/shop/getOrderList";
 var DO_SHOP_LOGIN = "/shopLogin";
 var DO_USER_REGIST = "/userRegist";
 var DO_USER_LOGIN = "/userLogin";
+var GET_ORDER_STATUS_COUNT = "/shop/findOrderStatusCount";
 
 
 
