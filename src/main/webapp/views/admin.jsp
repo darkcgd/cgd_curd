@@ -137,7 +137,7 @@
                                     <img src="${APP_PATH }/static/image/home_bt04.png" class="center-block" width="30px" height="30px">
                                 </a>
                                 <div class="media-body" style="vertical-align: middle">
-                                    <h4 class="media-heading">待处理事务</h4>
+                                    <h4 class="media-heading" style="margin-top: 7px">待处理事务</h4>
                                 </div>
                             </div>
 
@@ -161,7 +161,7 @@
                             <div class="row">
                                 <div class="col-xs-3 col-md-6" style="height:80px;">
                                     <div class="row" style="margin-top: 30px;padding-left: 10px;">
-                                        <p class="pull-left" style="margin-top: 6px">站内咨询==信</p>
+                                        <p class="pull-left" style="margin-top: 6px">站内私信</p>
                                         <a href="#" class="pull-right" style="padding-right:16px;font-size: 26px;color: red">2条</a>
                                     </div>
                                     <div style="width:100%;height:1px;background: #d8d8d8"></div>
@@ -200,7 +200,7 @@
                                     <img src="${APP_PATH }/static/image/home_bt01.png" class="center-block" width="30px" height="30px">
                                 </a>
                                 <div class="media-body" style="vertical-align: middle">
-                                    <h4 class="media-heading">商城信息统计</h4>
+                                    <h4 class="media-heading" style="margin-top: 7px">商城信息统计</h4>
                                 </div>
                             </div>
 
@@ -246,7 +246,7 @@
                                     <img src="${APP_PATH }/static/image/home_bt04.png" class="center-block" width="30px" height="30px">
                                 </a>
                                 <div class="media-body" style="vertical-align: middle">
-                                    <h4 class="media-heading">运营快捷入口</h4>
+                                    <h4 class="media-heading" style="margin-top: 7px">运营快捷入口</h4>
                                 </div>
                             </div>
 
@@ -320,7 +320,7 @@
                                     <img src="${APP_PATH }/static/image/home_bt01.png" class="center-block" width="30px" height="30px">
                                 </a>
                                 <div class="media-body" style="vertical-align: middle">
-                                    <h4 class="media-heading">公告动态</h4>
+                                    <h4 class="media-heading" style="margin-top: 7px">公告动态</h4>
                                 </div>
                             </div>
 

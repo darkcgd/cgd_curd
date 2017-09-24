@@ -10,6 +10,8 @@ public class OrderBean {
 
     private Integer productId;
 
+    private String productName;
+
     private Date createTime;
 
     private Integer orderStatus;
@@ -56,9 +58,9 @@ public class OrderBean {
 
     private Date updateTime;
 
-    private User user;
-
     private ShopBean shopBean;
+
+    private User user;
 
     public ShopBean getShopBean() {
         return shopBean;
@@ -98,6 +100,14 @@ public class OrderBean {
 
     public void setProductId(Integer productId) {
         this.productId = productId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName == null ? null : productName.trim();
     }
 
     public Date getCreateTime() {

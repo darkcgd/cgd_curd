@@ -106,7 +106,11 @@
                 <!-- 显示表格数据 -->
                 <div class="row">
                     <div class="col-md-10" style="margin-top: 20px">
-                        <table class="table table-hover" id="order_table">
+                        <div id="div_no_data" style="height:500px;line-height:500px;display: none;text-align: center;vertical-align: middle">
+                            暂无此类订单
+                        </div>
+
+                        <table class="table table-hover" id="order_table" style="display: none">
                             <thead >
                             <tr>
                                 <th style='vertical-align: middle;text-align: center;'>商品</th>
@@ -163,7 +167,8 @@
             clickMenu("#div_message");
             clickMenu("#div_setting");
 
-            getOrderList(1);
+            pagerNumber=1
+            getOrderList(pagerNumber);
             getOrderStatusCount();
         }else{
             window.location.href = "login.jsp";
@@ -237,11 +242,24 @@
             data:"pagerNumber="+pagerNumber+"&pagerSize=10&shopId="+$.session.get('shopId')+"&token="+$.session.get('token')+"&orderStatus="+orderStatus,
             type:"GET",
             success:function(result){
-                showOrderList(result);
-                //2、解析并显示分页信息
-                build_page_info(result);
-                //3、解析显示分页条数据
-                build_page_nav(result);
+                if(result.code==100){
+                    $("#order_table").show();
+                    $("#div_no_data").hide();
+                    showOrderList(result);
+                    //2、解析并显示分页信息
+                    build_page_info(result);
+                    //3、解析显示分页条数据
+                    build_page_nav(result);
+                }else{
+                    $("#order_table tbody").empty();
+                    $("#page_info_area").empty();
+                    $("#page_nav_area").empty();
+                    $("#order_table").hide();
+                    $("#div_no_data").show();
+                }
+
+
+
             }
         });
     }
@@ -256,7 +274,7 @@
                     var data=result.data;
                     $("#li_status1 a").text(data.total==undefined?"近3个月订单":"近3个月订单("+data.total+")");
                     $("#li_status2 a").text(data.unsendCount==undefined?"待发货":"待发货("+data.unsendCount+")");
-                    $("#li_status3 a").text(data.unpayCount==undefined?"待付款":"待付款("+data.unsendCount+")");
+                    $("#li_status3 a").text(data.unpayCount==undefined?"待付款":"待付款("+data.unpayCount+")");
                     $("#li_status4 a").text(data.senddingCount==undefined?"已发货":"已发货("+data.senddingCount+")");
                     $("#li_status5 a").text(data.cancelCount==undefined?"退款退货":"退款退货("+data.cancelCount+")");
                     $("#li_status6 a").text(data.successCount==undefined?"已完成":"已完成("+data.successCount+")");
@@ -276,7 +294,7 @@
         var orderList = result.data.list;
         $.each(orderList,function(index,item){
             var checkBoxTd = $("<td style='vertical-align: middle;text-align: center;'><input type='checkbox' class='check_item'/></td>");
-            var productNameTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append(item.orderSn);
+            var productNameTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append(item.productName);
             var productPriceTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append("￥"+item.productPrice);
             var productCountTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append(item.productCount);
             var totalPriceTd = $("<td style='vertical-align: middle;text-align: center;'></td>").append("￥"+item.productPrice);
@@ -286,7 +304,7 @@
                     .append(item.orderStatus==undefined?statusAry[0]:statusAry[item.orderStatus]));
 
             (item.orderStatus==1||item.orderStatus==2)?orderStatusTd.css("color","red"):orderStatusTd.css("color","")
-                //.addClass((item.orderStatus==1||item.orderStatus==2)?"text-red-color":"");
+            //.addClass((item.orderStatus==1||item.orderStatus==2)?"text-red-color":"");
 
 
             /**
@@ -321,73 +339,80 @@
     //解析显示分页信息
     function build_page_info(result){
         $("#page_info_area").empty();
-        $("#page_info_area").append("当前"+result.data.pagerNumber+"页,总"+
-            result.data.totalPage+"页,总"+
-            result.data.totalCount+"条记录");
-        totalRecord = result.data.totalPage;
-        pagerNumber = result.data.pagerNumber;
+        if(result.data.list.length>0){
+            $("#page_info_area").append("当前"+result.data.pagerNumber+"页,总"+
+                result.data.totalPage+"页,总"+
+                result.data.totalCount+"条记录");
+            totalRecord = result.data.totalPage;
+            pagerNumber = result.data.pagerNumber;
+        }else{
+            $("#order_table").hide();
+            $("#div_no_data").show();
+        }
     }
 
     //解析显示分页条，点击分页要能去下一页....
     function build_page_nav(result){
         //page_nav_area
         $("#page_nav_area").empty();
-        var ul = $("<ul></ul>").addClass("pagination");
+        if(result.data.list.length>0){
+            var ul = $("<ul></ul>").addClass("pagination");
 
-        //构建元素
-        var firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href","#"));
-        var prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;"));
-        if(result.data.isFirstPage == true){
-            firstPageLi.addClass("disabled");
-            prePageLi.addClass("disabled");
-        }else{
-            //为元素添加点击翻页的事件
-            firstPageLi.click(function(){
-                getOrderList(1,orderStatus)
-            });
-            prePageLi.click(function(){
-                getOrderList(result.data.pagerNumber -1,orderStatus)
-            });
-        }
-
-
-
-        var nextPageLi = $("<li></li>").append($("<a></a>").append("&raquo;"));
-        var lastPageLi = $("<li></li>").append($("<a></a>").append("末页").attr("href","#"));
-        if(result.data.isLastPage == true){
-            nextPageLi.addClass("disabled");
-            lastPageLi.addClass("disabled");
-        }else{
-            nextPageLi.click(function(){
-                getOrderList(result.data.pagerNumber +1,orderStatus);
-            });
-            lastPageLi.click(function(){
-                getOrderList(result.data.totalPage,orderStatus);
-            });
-        }
-
-
-
-        //添加首页和前一页 的提示
-        ul.append(firstPageLi).append(prePageLi);
-        //1,2，3遍历给ul中添加页码提示
-        $.each(result.data.navigatepageNums,function(index,item){
-
-            var numLi = $("<li></li>").append($("<a></a>").append(item));
-            if(result.data.pagerNumber == item){
-                numLi.addClass("active");
+            //构建元素
+            var firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href","#"));
+            var prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;"));
+            if(result.data.isFirstPage == true){
+                firstPageLi.addClass("disabled");
+                prePageLi.addClass("disabled");
+            }else{
+                //为元素添加点击翻页的事件
+                firstPageLi.click(function(){
+                    getOrderList(1,orderStatus)
+                });
+                prePageLi.click(function(){
+                    getOrderList(result.data.pagerNumber -1,orderStatus)
+                });
             }
-            numLi.click(function(){
-                getOrderList(item);
-            });
-            ul.append(numLi);
-        });
-        //添加下一页和末页 的提示
-        ul.append(nextPageLi).append(lastPageLi);
 
-        //把ul加入到nav
-        var navEle = $("<nav></nav>").append(ul);
-        navEle.appendTo("#page_nav_area");
+
+
+            var nextPageLi = $("<li></li>").append($("<a></a>").append("&raquo;"));
+            var lastPageLi = $("<li></li>").append($("<a></a>").append("末页").attr("href","#"));
+            if(result.data.isLastPage == true){
+                nextPageLi.addClass("disabled");
+                lastPageLi.addClass("disabled");
+            }else{
+                nextPageLi.click(function(){
+                    getOrderList(result.data.pagerNumber +1,orderStatus);
+                });
+                lastPageLi.click(function(){
+                    getOrderList(result.data.totalPage,orderStatus);
+                });
+            }
+
+
+
+            //添加首页和前一页 的提示
+            ul.append(firstPageLi).append(prePageLi);
+            //1,2，3遍历给ul中添加页码提示
+            $.each(result.data.navigatepageNums,function(index,item){
+
+                var numLi = $("<li></li>").append($("<a></a>").append(item));
+                if(result.data.pagerNumber == item){
+                    numLi.addClass("active");
+                }
+                numLi.click(function(){
+                    getOrderList(item);
+                });
+                ul.append(numLi);
+            });
+            //添加下一页和末页 的提示
+            ul.append(nextPageLi).append(lastPageLi);
+
+            //把ul加入到nav
+            var navEle = $("<nav></nav>").append(ul);
+            navEle.appendTo("#page_nav_area");
+        }
     }
 
 

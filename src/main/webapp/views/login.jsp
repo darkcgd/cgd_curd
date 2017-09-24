@@ -39,7 +39,7 @@
 				<div class="form-group">
 					<!-- placeholder="用户名(2-5位中文或者6-16位英文和数字的组合)" placeholder="密码"   placeholder="确认密码"-->
 					<input type="text" class="form-control" id="inputName" name="name"
-						   value="cyx123"> <span class="help-block"></span>
+						   value="浪漫满店"> <span class="help-block"></span>
 				</div>
 				<div class="form-group help">
 					<input type="password" class="form-control" id="inputPassword"

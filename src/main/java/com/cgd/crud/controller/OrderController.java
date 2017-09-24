@@ -45,7 +45,7 @@ public class OrderController extends BaseController{
 
 	@ResponseBody
 	@RequestMapping(value="shop/getOrderList",method=RequestMethod.GET)
-	public MsgBean getAdminOrdertList(@RequestParam(value = "shopId") Integer shopId,
+	public MsgBean getShopOrderList(@RequestParam(value = "shopId") Integer shopId,
 								 @RequestParam(value = "orderStatus", required=false) Integer orderStatus,
 								 @RequestParam(value = "pagerNumber", defaultValue = ""+ Constant.DefaultPagerNumber) Integer pagerNumber,
 								 @RequestParam(value = "pagerSize", defaultValue = ""+Constant.DefaultPagerSize) Integer pagerSize){
@@ -80,6 +80,7 @@ public class OrderController extends BaseController{
 			map.put("orderId", orderBean.getOrderId());
 			map.put("orderSn", orderBean.getOrderSn());
 			map.put("productId", orderBean.getProductId());
+			map.put("productName", orderBean.getProductName());
 			map.put("orderStatus", orderBean.getOrderStatus());
 			map.put("userId", orderBean.getUserId());
 			map.put("shopId", orderBean.getShopId());

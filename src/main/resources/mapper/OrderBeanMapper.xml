@@ -5,6 +5,7 @@
     <id column="order_id" jdbcType="INTEGER" property="orderId" />
     <result column="order_sn" jdbcType="VARCHAR" property="orderSn" />
     <result column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
@@ -33,6 +34,7 @@
     <id column="order_id" jdbcType="INTEGER" property="orderId" />
     <result column="order_sn" jdbcType="VARCHAR" property="orderSn" />
     <result column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
@@ -56,17 +58,18 @@
     <result column="logistics_sn" jdbcType="VARCHAR" property="logisticsSn" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-     <!--指定联合查询出的User字段的封装-->
+    <!--指定联合查询出的User字段的封装-->
     <association javaType="com.cgd.crud.bean.User" property="user">
-    	<id column="user_id" property="userId" />
-    	<result column="user_name" property="userName" />
-    	<result column="head_url" property="headUrl" />
+      <id column="user_id" property="userId" />
+      <result column="user_name" property="userName" />
+      <result column="head_url" property="headUrl" />
     </association>
   </resultMap>
   <resultMap id="WithOtherShopInfoResultMap" type="com.cgd.crud.bean.OrderBean">
     <id column="order_id" jdbcType="INTEGER" property="orderId" />
     <result column="order_sn" jdbcType="VARCHAR" property="orderSn" />
     <result column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
@@ -90,11 +93,11 @@
     <result column="logistics_sn" jdbcType="VARCHAR" property="logisticsSn" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-     <!--指定联合查询出的ShopBean字段的封装-->
+    <!--指定联合查询出的ShopBean字段的封装-->
     <association javaType="com.cgd.crud.bean.ShopBean" property="shopBean">
-    	<id column="shop_id" property="shopId" />
-    	<result column="shop_name" property="shopName" />
-    	<result column="head_url" property="headUrl" />
+      <id column="shop_id" property="shopId" />
+      <result column="shop_name" property="shopName" />
+      <result column="head_url" property="headUrl" />
     </association>
   </resultMap>
   <resultMap id="SelectOrderStatusCount" type="com.cgd.crud.bean.OrderStatusCount">
@@ -107,6 +110,9 @@
     <id column="cancel_count" jdbcType="INTEGER" property="cancelCount" />
     <id column="delete_count" jdbcType="INTEGER" property="deleteCount" />
   </resultMap>
+
+
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -166,13 +172,14 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    order_id, order_sn, product_id, create_time, order_status, user_id, shop_id, product_count, 
-    product_price, pay_method, pay_sn, pay_time, confirm_time, cancel_time, is_return, 
-    pay_money, logistics_price, discount_price, reciver_name, reciver_phone, reciver_addr, 
-    send_time, sender_id, logistics_sn, remark, update_time
+    order_id, order_sn, product_id, product_name, create_time, order_status, user_id, 
+    shop_id, product_count, product_price, pay_method, pay_sn, pay_time, confirm_time, 
+    cancel_time, is_return, pay_money, logistics_price, discount_price, reciver_name, 
+    reciver_phone, reciver_addr, send_time, sender_id, logistics_sn, remark, update_time
   </sql>
+
   <sql id="WithOther_info_Column_List">
-    o.order_id, o.order_sn, o.product_id, o.create_time, o.order_status, o.user_id, o.shop_id, o.product_count,
+    o.order_id, o.order_sn, o.product_id, o.product_name, o.create_time, o.order_status, o.user_id, o.shop_id, o.product_count,
     o.product_price, o.pay_method, o.pay_sn, o.pay_time, o.confirm_time, o.cancel_time, o.is_return,
     o.pay_money, o.logistics_price, o.discount_price, o.reciver_name, o.reciver_phone, o.reciver_addr,
     o.send_time, o.sender_id, o.logistics_sn, o.remark, o.update_time,
@@ -180,12 +187,12 @@
   </sql>
   <!-- 查询订单信息信息同时带个人信息 -->
   <select id="selectByExampleOtherInfo" parameterType="map" resultMap="WithOtherInfoResultMap">
-   select o.order_id, o.order_sn, o.product_id, o.create_time, o.order_status, o.user_id, o.shop_id, o.product_count,
+    select o.order_id, o.order_sn, o.product_id o.product_name,, o.create_time, o.order_status, o.user_id, o.shop_id, o.product_count,
     o.product_price, o.pay_method, o.pay_sn, o.pay_time, o.confirm_time, o.cancel_time, o.is_return,
     o.pay_money, o.logistics_price, o.discount_price, o.reciver_name, o.reciver_phone, o.reciver_addr,
     o.send_time, o.sender_id, o.logistics_sn, o.remark, o.update_time,
     u.user_name,u.head_url
-	from  tbl_order AS o
+    from  tbl_order AS o
     left join user AS u on o.user_id=u.user_id
     where o.user_id=#{userId}
     <if test="orderStatus!=null and orderStatus>0">
@@ -194,12 +201,12 @@
   </select>
   <!-- 查询订单信息信息同时带个人信息 -->
   <select id="selectByExampleShopOtherInfo" parameterType="map" resultMap="WithOtherShopInfoResultMap">
-   select o.order_id, o.order_sn, o.product_id, o.create_time, o.order_status, o.user_id, o.shop_id, o.product_count,
+    select o.order_id, o.order_sn, o.product_id, o.product_name, o.create_time, o.order_status, o.user_id, o.shop_id, o.product_count,
     o.product_price, o.pay_method, o.pay_sn, o.pay_time, o.confirm_time, o.cancel_time, o.is_return,
     o.pay_money, o.logistics_price, o.discount_price, o.reciver_name, o.reciver_phone, o.reciver_addr,
     o.send_time, o.sender_id, o.logistics_sn, o.remark, o.update_time,
     s.shop_name,s.head_url
-	from  tbl_order AS o
+    from  tbl_order AS o
     left join tbl_shop AS s on o.shop_id=s.shop_id
     where o.shop_id=#{shopId}
     <if test="orderStatus!=null and orderStatus>0">
@@ -250,25 +257,27 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert"  useGeneratedKeys="true" keyProperty="orderId" parameterType="com.cgd.crud.bean.OrderBean">
+  <insert id="insert" parameterType="com.cgd.crud.bean.OrderBean">
     insert into tbl_order (order_id, order_sn, product_id, 
-      create_time, order_status, user_id, 
-      shop_id, product_count, product_price, 
-      pay_method, pay_sn, pay_time, 
-      confirm_time, cancel_time, is_return, 
-      pay_money, logistics_price, discount_price, 
-      reciver_name, reciver_phone, reciver_addr, 
-      send_time, sender_id, logistics_sn, 
-      remark, update_time)
+      product_name, create_time, order_status, 
+      user_id, shop_id, product_count, 
+      product_price, pay_method, pay_sn, 
+      pay_time, confirm_time, cancel_time, 
+      is_return, pay_money, logistics_price, 
+      discount_price, reciver_name, reciver_phone, 
+      reciver_addr, send_time, sender_id, 
+      logistics_sn, remark, update_time
+      )
     values (#{orderId,jdbcType=INTEGER}, #{orderSn,jdbcType=VARCHAR}, #{productId,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{orderStatus,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
-      #{shopId,jdbcType=INTEGER}, #{productCount,jdbcType=INTEGER}, #{productPrice,jdbcType=DECIMAL}, 
-      #{payMethod,jdbcType=INTEGER}, #{paySn,jdbcType=VARCHAR}, #{payTime,jdbcType=TIMESTAMP}, 
-      #{confirmTime,jdbcType=TIMESTAMP}, #{cancelTime,jdbcType=TIMESTAMP}, #{isReturn,jdbcType=INTEGER}, 
-      #{payMoney,jdbcType=DECIMAL}, #{logisticsPrice,jdbcType=DECIMAL}, #{discountPrice,jdbcType=DECIMAL}, 
-      #{reciverName,jdbcType=VARCHAR}, #{reciverPhone,jdbcType=VARCHAR}, #{reciverAddr,jdbcType=VARCHAR}, 
-      #{sendTime,jdbcType=TIMESTAMP}, #{senderId,jdbcType=INTEGER}, #{logisticsSn,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+      #{productName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{orderStatus,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{productCount,jdbcType=INTEGER}, 
+      #{productPrice,jdbcType=DECIMAL}, #{payMethod,jdbcType=INTEGER}, #{paySn,jdbcType=VARCHAR}, 
+      #{payTime,jdbcType=TIMESTAMP}, #{confirmTime,jdbcType=TIMESTAMP}, #{cancelTime,jdbcType=TIMESTAMP}, 
+      #{isReturn,jdbcType=INTEGER}, #{payMoney,jdbcType=DECIMAL}, #{logisticsPrice,jdbcType=DECIMAL}, 
+      #{discountPrice,jdbcType=DECIMAL}, #{reciverName,jdbcType=VARCHAR}, #{reciverPhone,jdbcType=VARCHAR}, 
+      #{reciverAddr,jdbcType=VARCHAR}, #{sendTime,jdbcType=TIMESTAMP}, #{senderId,jdbcType=INTEGER}, 
+      #{logisticsSn,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.cgd.crud.bean.OrderBean">
     insert into tbl_order
@@ -281,6 +290,9 @@
       </if>
       <if test="productId != null">
         product_id,
+      </if>
+      <if test="productName != null">
+        product_name,
       </if>
       <if test="createTime != null">
         create_time,
@@ -361,6 +373,9 @@
       </if>
       <if test="productId != null">
         #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -451,6 +466,9 @@
       <if test="record.productId != null">
         product_id = #{record.productId,jdbcType=INTEGER},
       </if>
+      <if test="record.productName != null">
+        product_name = #{record.productName,jdbcType=VARCHAR},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -530,6 +548,7 @@
     set order_id = #{record.orderId,jdbcType=INTEGER},
       order_sn = #{record.orderSn,jdbcType=VARCHAR},
       product_id = #{record.productId,jdbcType=INTEGER},
+      product_name = #{record.productName,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       order_status = #{record.orderStatus,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
@@ -565,6 +584,9 @@
       </if>
       <if test="productId != null">
         product_id = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -642,6 +664,7 @@
     update tbl_order
     set order_sn = #{orderSn,jdbcType=VARCHAR},
       product_id = #{productId,jdbcType=INTEGER},
+      product_name = #{productName,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       order_status = #{orderStatus,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=INTEGER},
