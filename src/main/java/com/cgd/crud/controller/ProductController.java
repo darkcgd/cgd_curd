@@ -3,10 +3,7 @@ package com.cgd.crud.controller;
 import com.cgd.crud.base.BaseController;
 import com.cgd.crud.bean.*;
 import com.cgd.crud.service.*;
-import com.cgd.crud.util.AbDateUtil;
-import com.cgd.crud.util.AbFileUtil;
-import com.cgd.crud.util.BaseUtil;
-import com.cgd.crud.util.Constant;
+import com.cgd.crud.util.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
@@ -48,7 +46,6 @@ public class ProductController extends BaseController{
 	@ResponseBody
 	public MsgBean addProduct(@Valid ProductBean data, BindingResult result,@RequestParam(value = "file")MultipartFile file,
 							  @RequestParam("multipartFile") MultipartFile[] multipartFile, HttpServletRequest request) throws IOException {
-
 		saveFileLogo(file,data,request);
 		saveFileImage(multipartFile,data,request);
 
@@ -74,7 +71,8 @@ public class ProductController extends BaseController{
 
 	private void saveFileLogo(MultipartFile file,ProductBean data, HttpServletRequest request)  throws IOException {
 		if(file!=null&&data!=null&&request!=null){
-			String path = request.getSession().getServletContext().getRealPath("upload");
+			String path = UtilPath.getRootPath().replace("target/cgd-crud-1.0/","src/main/webapp/")+"upload";//D:/workspace/cgd-curd/target/cgd-crud-1.0/
+			//String path = request.getSession().getServletContext().getRealPath("upload");
 			String fileName = file.getOriginalFilename();
 			if(BaseUtil.isNotEmpty(fileName)){
 				String fileNamePath = AbFileUtil.getFilePath(path,fileName);
@@ -95,7 +93,8 @@ public class ProductController extends BaseController{
 			MultipartFile multipartFile;
 			for (int i = 0; i < file.length; i++) {
 				multipartFile = file[i];
-				String path = request.getSession().getServletContext().getRealPath("upload");
+				String path = UtilPath.getRootPath().replace("target/cgd-crud-1.0/","src/main/webapp/")+"upload";//D:/workspace/cgd-curd/target/cgd-crud-1.0/
+				//String path = request.getSession().getServletContext().getRealPath("upload");
 				String fileName = multipartFile.getOriginalFilename();
 				if(BaseUtil.isNotEmpty(fileName)){
 					String fileNamePath = AbFileUtil.getFilePath(path,fileName);

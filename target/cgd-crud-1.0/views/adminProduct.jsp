@@ -394,9 +394,6 @@
                                     </div>
                                 </div>
                             </form>
-
-
-
                     </div>
 
 
@@ -974,7 +971,7 @@
      showDialog(params);
         //2、发送ajax请求保存抢购信息
         $.ajax({
-            url : "<%--${APP_PATH}--%>/addProduct",
+            url : "{APP_PATH}/addProduct",
             type : "GET",
             data : params,
             success : function(result) {
